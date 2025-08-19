@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+	<link href="css/plugins/chosen/chosen.css" rel="stylesheet">
+	<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.css">
+</head>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>投入使用项目</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div style="margin-bottom:10px;">
+							<form action="__URL__/index/token/{$token}/" method="post">
+							    <div style="width:100%;">
+									<font style="margin-left:0%;float:left;position:relative;top:9px">项目名称：</font>
+									<input type="" name="keyword" value="{$keyword}" class="form-control" style="width:15%;display:inline;float:left;margin-right:10px">
+									<button class="btn btn-primary btn-sm" style="float:left;margin-right:10px" type="submit">查询</button>
+							    </div>
+							</form>
+                        </div>
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+								<tr>
+									<th width="15%">项目名称</th>
+									<th width="4%">项目类型</th>
+									
+									<th width="6%">验收单</th>
+									<th width="6%">验收照片</th>
+									<th width="6%">决算文件</th>
+									<th width="6%">设计方案</th>
+									<th width="5%">合同下载</th>
+									
+									
+									<th width="7%">项目状态</th>
+									<th width="4%">操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<volist name="list" id="listmenu">
+								<tr >
+									<td>{$listmenu['title']}</td>
+									<td>{$listmenu['floor']}/{$listmenu['floors']}</td>
+									
+									<td>
+										<neq name="listmenu.finish" value="">
+											<volist name="listmenu.finishs" id="finishs">
+											<neq name="finishs" value="">
+											<a href="__URL__/filedown/filename/{$finishs}/filerealname/{$listmenu[finishsfilename][$key]}" style="color:green">{$listmenu[finishsfilename][$key]}</br>
+											</a> 
+											</neq>
+											</volist>
+										</neq>
+									</td>
+									<td>
+										<neq name="listmenu.finishphoto" value="">
+											<volist name="listmenu.finishphotos" id="finishphoto">
+											<neq name="finishphoto" value="">
+											<a href="__URL__/filedown/filename/{$finishphoto}/filerealname/{$finishphoto}" style="color:green">
+											<img src="__PUBLIC__/Uploads/{$finishphoto}" style="height:16px">
+											</a> 
+											</neq>
+											</volist>
+										</neq>
+									</td>
+									<td>
+										<neq name="listmenu.budgetfinal" value="">
+											<volist name="listmenu.budgetsfinal" id="budgetsfinal">
+											<neq name="budgetsfinal" value="">
+											<a href="__URL__/filedown/filename/{$budgetsfinal}/filerealname/{$listmenu[budgetsfinalfilename][$key]}" style="color:green">{$listmenu[budgetsfinalfilename][$key]}</br>
+											</a> 
+											</neq>
+											</volist>
+										</neq>
+									</td>
+									<td>
+									<neq name="listmenu.drawing" value="">
+										<volist name="listmenu.drawings" id="drawings">
+										<neq name="drawings" value="">
+										<a href="__URL__/filedown/filename/{$drawings}/filerealname/{$listmenu[drawingsfilename][$key]}" style="color:green">{$listmenu[drawingsfilename][$key]}</br>
+										</a> 
+										</neq>
+										</volist>
+									</neq>
+									</td>
+									<td>
+									<neq name="listmenu.contract" value="">
+										<volist name="listmenu.contract" id="contract">
+										<neq name="contract" value="">
+										[ 
+										<a href="__URL__/filedown/filename/{$contract}/filerealname/{$listmenu[contractfilename][$key]}" style="color:green">合同下载
+										</a>  ]
+										</neq>
+										</volist>
+									</neq>
+									</td>
+									
+									
+									<td style="color:blue">{$listmenu['activity']}</td>		
+									<td>
+									<a href="__URL__/plmdetail/id/{$listmenu['id']}" class="btn btn-info btn-xs">详情</a> 
+									</td>
+								</tr>
+								</volist>
+							</tbody>
+                        </table>
+						<div class="panelBar"><div class="pagination" targetType="navTab" totalCount="{$totalCount}" numPerPage="{$numPerPage}" pageNumShown="10" currentPage="{$currentPage}">{$page}</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	
+	
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+	<script src="js/plugins/layer/laydate/laydate.js"></script>
+    <script src="js/content.js?v=1.0.0"></script>
+	<script src="js/plugins/iCheck/icheck.min.js"></script>
+    <script>
+		$('.i-checks').iCheck({
+			checkboxClass: 'icheckbox_square-green',
+			radioClass: 'iradio_square-green',
+		});
+    </script>
+	
+	<script>
+		$(document).ready(function () {
+			var table=$('#editable').dataTable();
+		})
+    </script>
+</body>
+</html>

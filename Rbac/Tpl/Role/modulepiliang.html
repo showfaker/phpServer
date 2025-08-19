@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>设置权限</title>
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+	
+	<script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+    <link rel="stylesheet" href="css/main.css">
+	
+	
+	
+</head>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated">
+		
+		<form method="post" action="__URL__/setModulepiliang" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<input type="hidden" name="groupId" value="{$groupId}">
+		<input type="hidden" name="appId" value="{$appId}">
+		<div class="row">
+			
+            <div class="col-lg-12">
+				
+                <div class="ibox float-e-margins">
+					
+                    <div class="ibox-content text-center p-md">
+						<a href="__URL__/index/token/{$token}/" class="btn btn-success btn-sm" style="float:left">返回</a>
+                        <h2><span class="text-navy">角色授权</span>
+						</h2>
+
+                        <p>
+                            被授权角色重新登陆后获得权限
+                        </p>
+						<p>
+                            必须先拥有查看权限，才能设置编辑和审批权限，否则设置无效
+                        </p>
+						<p>
+						<input type="checkbox" id="selectAll1" name="selectAll1">查看选项全选
+						<input type="checkbox" id="selectAll2" name="selectAll2">编辑选项全选
+						<input type="checkbox" id="selectAll3" name="selectAll3">审批选项全选
+						<script>
+						$('input[name="selectAll1"]').on("click",function(){
+							if($(this).is(':checked')){
+								$('input[name="groupModuleId[]"]').each(function(){
+									$(this).prop("checked",true);
+								});
+							}else{
+								$('input[name="groupModuleId[]"]').each(function(){
+									$(this).prop("checked",false);
+								});
+							}
+						});
+						$('input[name="selectAll2"]').on("click",function(){
+							if($(this).is(':checked')){
+								$('input[name="groupModuleIdEdit[]"]').each(function(){
+									$(this).prop("checked",true);
+								});
+							}else{
+								$('input[name="groupModuleIdEdit[]"]').each(function(){
+									$(this).prop("checked",false);
+								});
+							}
+						});
+						$('input[name="selectAll3"]').on("click",function(){
+							if($(this).is(':checked')){
+								$('input[name="groupModuleIdApprove[]"]').each(function(){
+									$(this).prop("checked",true);
+								});
+							}else{
+								$('input[name="groupModuleIdApprove[]"]').each(function(){
+									$(this).prop("checked",false);
+								});
+							}
+						});
+						</script>
+						</p>
+						
+						<p>
+						<button class="btn btn-primary " type="submit"><i class="fa fa-check"></i>&nbsp;提交</button>
+						</p>
+                    </div>
+                </div>
+            </div>
+       
+
+			<div class="col-sm-3">
+				<div class="ibox ">
+					<div class="ibox-title">
+						<h5>我的项目</h5>
+						&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="selectAll1" name="selectAll1_module">查看全选
+						<input type="checkbox" id="selectAll2" name="selectAll2_module">编辑全选
+						<input type="checkbox" id="selectAll3" name="selectAll3_module">审批全选
+					</div>
+					<div class="ibox-content i-checks" style="height:472px">
+						<volist id="item" name="moduleList1">
+							<div style="width:100%;">
+							{$item}&nbsp;&nbsp;&nbsp;&nbsp;
+							<input <?php echo in_array($key, $groupModuleList) ? "checked" : "" ?> type="checkbox" name="groupModuleId[]" value="{$key}"/>查看&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input <?php echo (in_array($key, $groupModuleList)&&($groupModuleListType[$key]==2)) ? "checked" : "" ?> type="checkbox" name="groupModuleIdEdit[]" value="{$key}"/>编辑&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input <?php echo (in_array($key, $groupModuleList)&&($groupModuleListApprove[$key]==3)) ? "checked" : "" ?> type="checkbox" name="groupModuleIdApprove[]" value="{$key}"/>审批
+							</div>
+						</volist>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div class="ibox ">
+					<div class="ibox-title">
+						<h5>我的工作</h5>
+						&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="selectAll1" name="selectAll1_module">查看全选
+						<input type="checkbox" id="selectAll2" name="selectAll2_module">编辑全选
+						<input type="checkbox" id="selectAll3" name="selectAll3_module">审批全选
+					</div>
+					<div class="ibox-content i-checks" style="height:200px">
+						<volist id="item" name="moduleList2">
+							<div style="width:100%;">
+							{$item}&nbsp;&nbsp;&nbsp;&nbsp;
+							<input <?php echo in_array($key, $groupModuleList) ? "checked" : "" ?> type="checkbox" name="groupModuleId[]" value="{$key}"/>查看&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input <?php echo (in_array($key, $groupModuleList)&&($groupModuleListType[$key]==2)) ? "checked" : "" ?> type="checkbox" name="groupModuleIdEdit[]" value="{$key}"/>编辑&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input <?php echo (in_array($key, $groupModuleList)&&($groupModuleListApprove[$key]==3)) ? "checked" : "" ?> type="checkbox" name="groupModuleIdApprove[]" value="{$key}"/>审批
+							</div>
+						</volist>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div class="ibox ">
+					<div class="ibox-title">
+						<h5>施工准备</h5>
+						&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="selectAll1" name="selectAll1_module">查看全选
+						<input type="checkbox" id="selectAll2" name="selectAll2_module">编辑全选
+						<input type="checkbox" id="selectAll3" name="selectAll3_module">审批全选
+					</div>
+					<div class="ibox-content i-checks" style="height:200px">
+						<volist id="item" name="moduleList3">
+							<div style="width:100%;">
+							{$item}&nbsp;&nbsp;&nbsp;&nbsp;
+							<input <?php echo in_array($key, $groupModuleList) ? "checked" : "" ?> type="checkbox" name="groupModuleId[]" value="{$key}"/>查看&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input <?php echo (in_array($key, $groupModuleList)&&($groupModuleListType[$key]==2)) ? "checked" : "" ?> type="checkbox" name="groupModuleIdEdit[]" value="{$key}"/>编辑&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input <?php echo (in_array($key, $groupModuleList)&&($groupModuleListApprove[$key]==3)) ? "checked" : "" ?> type="checkbox" name="groupModuleIdApprove[]" value="{$key}"/>审批
+							</div>
+						</volist>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-sm-3">
+				<div class="ibox ">
+					<div class="ibox-title">
+						<h5>项目开发</h5>
+						&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="selectAll1" name="selectAll1_module">查看全选
+						<input type="checkbox" id="selectAll2" name="selectAll2_module">编辑全选
+						<input type="checkbox" id="selectAll3" name="selectAll3_module">审批全选
+					</div>
+					<div class="ibox-content i-checks" style="height:200px">
+						<volist id="item" name="moduleList4">
+							<div style="width:100%;">
+							{$item}&nbsp;&nbsp;&nbsp;&nbsp;
+							<input <?php echo in_array($key, $groupModuleList) ? "checked" : "" ?> type="checkbox" name="groupModuleId[]" value="{$key}"/>查看&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input <?php echo (in_array($key, $groupModuleList)&&($groupModuleListType[$key]==2)) ? "checked" : "" ?> type="checkbox" name="groupModuleIdEdit[]" value="{$key}"/>编辑&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input <?php echo (in_array($key, $groupModuleList)&&($groupModuleListApprove[$key]==3)) ? "checked" : "" ?> type="checkbox" name="groupModuleIdApprove[]" value="{$key}"/>审批
+							</div>
+						</volist>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-sm-3">
+				<div class="ibox ">
+					<div class="ibox-title">
+						<h5>项目设计</h5>
+						&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="selectAll1" name="selectAll1_module">查看全选
+						<input type="checkbox" id="selectAll2" name="selectAll2_module">编辑全选
+						<input type="checkbox" id="selectAll3" name="selectAll3_module">审批全选
+					</div>
+					<div class="ibox-content i-checks" style="height:200px">
+						<volist id="item" name="moduleList5">
+							<div style="width:100%;">
+							{$item}&nbsp;&nbsp;&nbsp;&nbsp;
+							<input <?php echo in_array($key, $groupModuleList) ? "checked" : "" ?> type="checkbox" name="groupModuleId[]" value="{$key}"/>查看&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input <?php echo (in_array($key, $groupModuleList)&&($groupModuleListType[$key]==2)) ? "checked" : "" ?> type="checkbox" name="groupModuleIdEdit[]" value="{$key}"/>编辑&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input <?php echo (in_array($key, $groupModuleList)&&($groupModuleListApprove[$key]==3)) ? "checked" : "" ?> type="checkbox" name="groupModuleIdApprove[]" value="{$key}"/>审批
+							</div>
+						</volist>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-sm-3">
+				<div class="ibox ">
+					<div class="ibox-title">
+						<h5>项目采购</h5>
+						&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="selectAll1" name="selectAll1_module">查看全选
+						<input type="checkbox" id="selectAll2" name="selectAll2_module">编辑全选
+						<input type="checkbox" id="selectAll3" name="selectAll3_module">审批全选
+					</div>
+					<div class="ibox-content i-checks" style="height:200px">
+						<volist id="item" name="moduleList6">
+							<div style="width:100%;">
+							{$item}&nbsp;&nbsp;&nbsp;&nbsp;
+							<input <?php echo in_array($key, $groupModuleList) ? "checked" : "" ?> type="checkbox" name="groupModuleId[]" value="{$key}"/>查看&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input <?php echo (in_array($key, $groupModuleList)&&($groupModuleListType[$key]==2)) ? "checked" : "" ?> type="checkbox" name="groupModuleIdEdit[]" value="{$key}"/>编辑&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input <?php echo (in_array($key, $groupModuleList)&&($groupModuleListApprove[$key]==3)) ? "checked" : "" ?> type="checkbox" name="groupModuleIdApprove[]" value="{$key}"/>审批
+							</div>
+						</volist>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-sm-3">
+				<div class="ibox ">
+					<div class="ibox-title">
+						<h5>项目施工</h5>
+						&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="selectAll1" name="selectAll1_module">查看全选
+						<input type="checkbox" id="selectAll2" name="selectAll2_module">编辑全选
+						<input type="checkbox" id="selectAll3" name="selectAll3_module">审批全选
+					</div>
+					<div class="ibox-content i-checks" style="height:200px">
+						<volist id="item" name="moduleList7">
+							<div style="width:100%;">
+							{$item}&nbsp;&nbsp;&nbsp;&nbsp;
+							<input <?php echo in_array($key, $groupModuleList) ? "checked" : "" ?> type="checkbox" name="groupModuleId[]" value="{$key}"/>查看&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input <?php echo (in_array($key, $groupModuleList)&&($groupModuleListType[$key]==2)) ? "checked" : "" ?> type="checkbox" name="groupModuleIdEdit[]" value="{$key}"/>编辑&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input <?php echo (in_array($key, $groupModuleList)&&($groupModuleListApprove[$key]==3)) ? "checked" : "" ?> type="checkbox" name="groupModuleIdApprove[]" value="{$key}"/>审批
+							</div>
+						</volist>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div class="ibox ">
+					<div class="ibox-title">
+						<h5>项目验收</h5>
+						&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="selectAll1" name="selectAll1_module">查看全选
+						<input type="checkbox" id="selectAll2" name="selectAll2_module">编辑全选
+						<input type="checkbox" id="selectAll3" name="selectAll3_module">审批全选
+					</div>
+					<div class="ibox-content i-checks" style="height:200px">
+						<volist id="item" name="moduleList8">
+							<div style="width:100%;">
+							{$item}&nbsp;&nbsp;&nbsp;&nbsp;
+							<input <?php echo in_array($key, $groupModuleList) ? "checked" : "" ?> type="checkbox" name="groupModuleId[]" value="{$key}"/>查看&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input <?php echo (in_array($key, $groupModuleList)&&($groupModuleListType[$key]==2)) ? "checked" : "" ?> type="checkbox" name="groupModuleIdEdit[]" value="{$key}"/>编辑&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input <?php echo (in_array($key, $groupModuleList)&&($groupModuleListApprove[$key]==3)) ? "checked" : "" ?> type="checkbox" name="groupModuleIdApprove[]" value="{$key}"/>审批
+							</div>
+						</volist>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div class="ibox ">
+					<div class="ibox-title">
+						<h5>会议管理</h5>
+						&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="selectAll1" name="selectAll1_module">查看全选
+						<input type="checkbox" id="selectAll2" name="selectAll2_module">编辑全选
+						<input type="checkbox" id="selectAll3" name="selectAll3_module">审批全选
+					</div>
+					<div class="ibox-content i-checks" style="height:200px">
+						<volist id="item" name="moduleList9">
+							<div style="width:100%;">
+							{$item}&nbsp;&nbsp;&nbsp;&nbsp;
+							<input <?php echo in_array($key, $groupModuleList) ? "checked" : "" ?> type="checkbox" name="groupModuleId[]" value="{$key}"/>查看&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input <?php echo (in_array($key, $groupModuleList)&&($groupModuleListType[$key]==2)) ? "checked" : "" ?> type="checkbox" name="groupModuleIdEdit[]" value="{$key}"/>编辑&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input <?php echo (in_array($key, $groupModuleList)&&($groupModuleListApprove[$key]==3)) ? "checked" : "" ?> type="checkbox" name="groupModuleIdApprove[]" value="{$key}"/>审批
+							</div>
+						</volist>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<div class="ibox ">
+					<div class="ibox-title">
+						<h5>运营分析</h5>
+						&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="selectAll1" name="selectAll1_module">查看全选
+						<input type="checkbox" id="selectAll2" name="selectAll2_module">编辑全选
+						<input type="checkbox" id="selectAll3" name="selectAll3_module">审批全选
+					</div>
+					<div class="ibox-content i-checks" style="height:200px">
+						<volist id="item" name="moduleList10">
+							<div style="width:100%;">
+							{$item}&nbsp;&nbsp;&nbsp;&nbsp;
+							<input <?php echo in_array($key, $groupModuleList) ? "checked" : "" ?> type="checkbox" name="groupModuleId[]" value="{$key}"/>查看&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input <?php echo (in_array($key, $groupModuleList)&&($groupModuleListType[$key]==2)) ? "checked" : "" ?> type="checkbox" name="groupModuleIdEdit[]" value="{$key}"/>编辑&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input <?php echo (in_array($key, $groupModuleList)&&($groupModuleListApprove[$key]==3)) ? "checked" : "" ?> type="checkbox" name="groupModuleIdApprove[]" value="{$key}"/>审批
+							</div>
+						</volist>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-sm-3">
+				<div class="ibox ">
+					<div class="ibox-title">
+						<h5>报表统计</h5>
+						&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="selectAll1" name="selectAll1_module">查看全选
+						<input type="checkbox" id="selectAll2" name="selectAll2_module">编辑全选
+						<input type="checkbox" id="selectAll3" name="selectAll3_module">审批全选
+					</div>
+					<div class="ibox-content i-checks" style="height:200px">
+						<volist id="item" name="moduleList11">
+							<div style="width:100%;">
+							{$item}&nbsp;&nbsp;&nbsp;&nbsp;
+							<input <?php echo in_array($key, $groupModuleList) ? "checked" : "" ?> type="checkbox" name="groupModuleId[]" value="{$key}"/>查看&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input <?php echo (in_array($key, $groupModuleList)&&($groupModuleListType[$key]==2)) ? "checked" : "" ?> type="checkbox" name="groupModuleIdEdit[]" value="{$key}"/>编辑&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input <?php echo (in_array($key, $groupModuleList)&&($groupModuleListApprove[$key]==3)) ? "checked" : "" ?> type="checkbox" name="groupModuleIdApprove[]" value="{$key}"/>审批
+							</div>
+						</volist>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-sm-3">
+				<div class="ibox ">
+					<div class="ibox-title">
+						<h5>系统配置</h5>
+						&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="selectAll1" name="selectAll1_module">查看全选
+						<input type="checkbox" id="selectAll2" name="selectAll2_module">编辑全选
+						<input type="checkbox" id="selectAll3" name="selectAll3_module">审批全选
+					</div>
+					<div class="ibox-content i-checks" style="height:300px">
+						<volist id="item" name="moduleList12">
+							<div style="width:100%;">
+							{$item}&nbsp;&nbsp;&nbsp;&nbsp;
+							<input <?php echo in_array($key, $groupModuleList) ? "checked" : "" ?> type="checkbox" name="groupModuleId[]" value="{$key}"/>查看&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input <?php echo (in_array($key, $groupModuleList)&&($groupModuleListType[$key]==2)) ? "checked" : "" ?> type="checkbox" name="groupModuleIdEdit[]" value="{$key}"/>编辑&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input <?php echo (in_array($key, $groupModuleList)&&($groupModuleListApprove[$key]==3)) ? "checked" : "" ?> type="checkbox" name="groupModuleIdApprove[]" value="{$key}"/>审批
+							</div>
+						</volist>
+					</div>
+				</div>
+			</div>
+			
+			
+
+
+
+			
+        </div>
+		</form>
+    </div>
+	
+	
+	
+	
+	<script>
+		$('input[name="selectAll1_module"]').on("click",function(){
+			if($(this).is(':checked')){
+				$(this).parent().next().children().each(function(i,n){
+					$(this).children('input[name="groupModuleId[]"]').prop("checked",true);
+				});
+			}else{
+				$(this).parent().next().children().each(function(){
+					$(this).children('input[name="groupModuleId[]"]').prop("checked",false);
+				});
+			}
+		});
+		$('input[name="selectAll2_module"]').on("click",function(){
+			if($(this).is(':checked')){
+				$(this).parent().next().children().each(function(i,n){
+					$(this).children('input[name="groupModuleIdEdit[]"]').prop("checked",true);
+				});
+			}else{
+				$(this).parent().next().children().each(function(){
+					$(this).children('input[name="groupModuleIdEdit[]"]').prop("checked",false);
+				});
+			}
+		});
+		$('input[name="selectAll3_module"]').on("click",function(){
+			if($(this).is(':checked')){
+				$(this).parent().next().children().each(function(i,n){
+					$(this).children('input[name="groupModuleIdApprove[]"]').prop("checked",true);
+				});
+			}else{
+				$(this).parent().next().children().each(function(){
+					$(this).children('input[name="groupModuleIdApprove[]"]').prop("checked",false);
+				});
+			}
+		});
+	</script>
+			
+    <!--
+    <script src="js/content.js?v=1.0.0"></script>
+    <script src="js/plugins/iCheck/icheck.min.js"></script>
+	<script>
+	$(document).ready(function () {
+		$('.i-checks').iCheck({
+			checkboxClass: 'icheckbox_square-green',
+			radioClass: 'iradio_square-green',
+		});
+	});
+	</script>
+	-->
+</body>
+</html>
+
+

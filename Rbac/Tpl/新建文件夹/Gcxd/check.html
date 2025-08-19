@@ -1,0 +1,230 @@
+	<link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <!-- Data Tables -->
+    <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+
+	<link rel="stylesheet" href="css/main.css">
+	
+	<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal">×</button>
+	<h4 class="modal-title">下单表详情</h4>
+	</div>
+
+	<form id="format1" method="post" action="__URL__/tuihuosubmit" enctype="multipart/form-data" class="form-horizontal">    
+		<input type="hidden" name="id" value="{$orderinfo.id}">
+		<div class="modal-body">
+			<div class="form-group">
+				<div class="col-sm-10" style="margin-bottom: 20px;">
+					<label class="col-sm-2 control-label">城市：</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" readonly value="{$info.city}">
+					</div>
+					<label class="col-sm-2 control-label">项目：</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" readonly value="{$info.plm}">
+					</div>
+				</div>
+				<div class="col-sm-10">
+					<label class="col-sm-2 control-label">供应商：</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" readonly value="{$info.supplier}">
+					</div>
+					<label class="col-sm-2 control-label">付款项：</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" readonly value="{$info.name}">
+					</div>
+				</div>
+			</div>
+			<div>
+				<table class="table table-striped table-bordered table-hover " id="editable" width="90%" style="margin:0 auto;">
+					<thead>
+						<tr>
+							<th width="10%">时间节点</th>
+							<th width="10%">金额</th>
+							<th width="20%">备注</th>
+						</tr>
+					</thead>
+					<tbody>
+						<volist name="order_paytime" id="material">
+						<tr id="table-row-0">
+							<td style="text-align: center;">{$material.paytime}</td>
+							<td style="text-align: center;">{$material.pay}</td>
+							<td style="text-align: center;">{$material.remark}</td>
+						</tr>
+						</volist>
+					</tbody>
+				</table>
+				<span style="float:left;width:70px">材料金额：</span><input type="text" readonly class="form-control" style="width:80px;float:left;position:relative;top:-7px" value="{$info.price}">
+				<span style="float:left;width:70px">保证金：</span><input type="text" readonly class="form-control" style="width:80px;float:left;position:relative;top:-7px" value="{$info.baozheng}">
+				<span style="float:left;width:70px;margin-left: 10px;">付款事由：</span><input type="text" readonly class="form-control" style="width:150px;float:left;position:relative;top:-7px" value="{$info.because}">
+				<span style="float:left;width:70px;margin-left: 10px;">备注：</span><input type="text" readonly class="form-control" style="width:150px;float:left;position:relative;top:-7px" value="{$info.remark}">
+			</div>
+		</div>
+			<!-- <div>
+				<table class="table table-striped table-bordered table-hover " id="editable" width="80%" style="margin:0 auto;">
+					<thead>
+						<tr>
+							<th width="10%" class="text-center">审核记录</th>
+							<th width="10%" class="text-center">结果</th>
+						</tr>
+					</thead>
+					<tbody>
+						<eq name="info.department" value="工程配合部">
+						<tr id="table-row-0">
+							<td style="text-align: center;">种发展</td>
+							<td style="text-align: center;">
+								<neq name="info.type" value="0"><i style="color: green;">通过</i></neq>
+								<eq name="info.status" value="-1">
+									<eq name="info.type" value='0'><i style="color: red;">退回</i></eq>
+								</eq>
+							</td>
+						</tr>
+						<tr id="table-row-0">
+							<td style="text-align: center;">周荣</td>
+							<td style="text-align: center;">
+								<eq name="info.type" value="2"><i style="color: green;">通过</i></eq>
+								<eq name="info.status" value="-1">
+									<eq name="info.type" value='1'><i style="color: red;">退回</i></eq>
+								</eq>
+							</td>
+							
+						</tr>
+						</eq>
+						<eq name="info.department" value="专项部">
+						<tr id="table-row-0">
+							<td style="text-align: center;">陶建华</td>
+							<td style="text-align: center;">
+								<neq name="info.type" value="0"><i style="color: green;">通过</i></neq>
+								<eq name="info.status" value="-1">
+									<eq name="info.type" value='0'><i style="color: red;">退回</i></eq>
+								</eq>
+							</td>
+							
+						</tr>
+						<tr id="table-row-0">
+							<td style="text-align: center;">周荣</td>
+							<td style="text-align: center;">
+								<eq name="info.type" value="2"><i style="color: green;">通过</i></eq>
+								<eq name="info.status" value="-1">
+									<eq name="info.type" value='1'><i style="color: red;">退回</i></eq>
+								</eq>
+							</td>
+							
+						</tr>
+						</eq> 
+					</tbody>
+				</table>
+			</div> -->
+		<div class="modal-body">
+			<div class="form-group">
+				<div class="col-sm-12" id="galley">				    
+					<volist name="newname" id="newnamelist">
+					<neq name="newnamelist" value="">
+					<div class="file-box" style="margin:0 auto;">
+						<div class="file">
+							<input type="checkbox" name="del[]" value="{$newnamelist.name}">
+							<!-- <a class="fancybox" href="__PUBLIC__/Uploads/{$newname}" data-fancybox-group="gallery_projectsend" title="{$listmenu['title']}"> -->
+								<eq name='newnamelist.is_pic' value='1'>
+								<img alt="image" class="img-responsive" src="__PUBLIC__/Uploads/{$newnamelist['name']}">
+								</eq>
+								<neq name='newnamelist.is_pic' value='1'>
+								<a href="__PUBLIC__/Uploads/{$newnamelist.name}">附件.{$newnamelist.name|explode='.',###|end}</a>
+								</neq>
+
+							<!-- </a> -->
+						</div>
+                    </div>
+					</neq>	
+					</volist>
+                    				
+				</div>
+			</div>			
+		</div>	
+		<table style="margin:0 auto;width:100%;margin-bottom:28px;">
+		<tr>
+			<td style="border:1px solid #ddd;font-weight:bold;height:45px;with:20%;text-align:center">
+			操作记录
+			</td>
+			<td style="border:1px solid #ddd;line-height:18px;width:78%;text-align:center">
+			<volist name="info.record" id="list">
+			{$list}</br>
+			</volist>
+			</td>
+		</tr>
+		</table>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-sm btn-danger  m-t-n-xs" id="del" title="{$info.id}">删除附件</button>
+			<button type="button" class="btn btn-sm btn-white pull-right m-t-n-xs" data-dismiss="modal" style="margin-left:10px">关闭</button>
+			
+		</div>
+	</form> 
+
+	
+	<script src="js/plugins/jeditable/jquery.jeditable.js"></script>
+    <script src="js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="js/plugins/dataTables/dataTables.bootstrap.js"></script>
+	<script>
+		var table=$('#editable').dataTable();
+    </script>
+
+    <script>
+	  $('#del').click(function () {	
+	  	var arr=[];
+	  	$('input[type="checkbox"]:checked').each(function(i){
+	  		arr.push($(this).val());
+	  	}); 
+	  	arr=arr.join(';');
+	  	console.log(arr);
+	  	if(arr==''){
+	  		alert('没有选择附件.');
+	  	}else{
+        	var id=$(this).attr("title");
+	  		swal({
+				title: "您确定要删除附件吗",
+				text: "成功后将无法恢复操作，请谨慎操作！",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText: "确定",
+				closeOnConfirm: false
+			}, function () {
+				//获取选中的checkbox
+				//发送请求命令			
+				var aj = $.ajax({
+						url:'__URL__/delFile',
+						data:{  
+							arr : arr,
+							id:id
+						},
+						type:'post',  
+						cache:false,  
+						dataType:'json',  
+						success:function(data) {
+							if (data==1) {
+								swal("删除成功！", "请刷新查看结果。", "success");
+								var timmer=setTimeout(function(){
+									location.reload();
+								},600);
+							} else{
+								swal("删除失败！", "请刷新查看结果。", "error");
+								var timmer=setTimeout(function(){
+									location.reload();
+								},600);
+							}
+											
+							
+						}  
+				});
+				
+			});
+	  	}			
+			
+	});
+	
+	</script>
+
+	

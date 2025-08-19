@@ -1,0 +1,86 @@
+<script language="javascript">
+function readmail(id,title,sender){
+	navTab.openTab(id, "__URL__/mail/id/"+id, { title:title, fresh:false, data:{} });
+  }
+</script>
+
+<include file="Public:pagerForm" />
+
+<include file="Public:iframe_top" />
+<div class="pageHeader">
+<form method="post" onsubmit="return navTabSearch(this);" action="__URL__" method="post"><!-- rel="pagerForm"  -->
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li>
+				<label>邮件主题</label>
+				<input type="text" name="title" value=""/>
+			</li>
+			<div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div>
+			<a class="button" href="__URL__/add" target="dialog" data-toggle="modal" data-target="#modal" mask="true" width="755" height="485">写信</a>
+			
+			<!-- 
+			<a class="delete" href="__URL__/delete/id/{sid_sendmail}/navTabId/__MODULE__" target="ajaxTodo" title="你确定要删除吗？" warn="请选择邮件">删除</a>
+			<a class="edit" href="__URL__/emailforward/id/{sid_sendmail}" title="转发邮件" target="dialog" data-toggle="modal" data-target="#modal" mask="true" warn="请选择邮件" width="755" height="485">转发</a>
+			<a title="确实要删除这些邮件吗?" postType="string" target="selectedTodo" rel="ids" href="__URL__/delete" class="delete" warn="请选择邮件">批量删除</a>
+			 -->
+		</ul>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent" >
+	<table class="table table-striped table-bordered table-hover" width="100%" layoutH="137">
+		<thead>
+		<tr>
+			<th width="12%">收件人</th>
+			<th width="18%">日期&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;
+						时间</th>
+			
+			<th width="4%">附件</th>
+			<th width="56%">主题</th>
+			
+			<th width="8%">操作</th>
+		</tr>
+		</thead>
+		<tbody>
+		<volist name="list" id="listmenu">
+                    <!-- <span style="position:absolute" class="demo1" title="{$listmenu['title']}" rightid="{$listmenu['id']}" sender="{$listmenu['sender']}" > -->
+					<tr target="sid_sendmail" rel="{$listmenu['id']}" style="color:black" onDblClick="readmail('{$listmenu['id']}','{$listmenu['title']}',
+				    	'{$listmenu['sender']}');" title="">
+				        <td>{$listmenu['receiver']}</td>
+				        <td>
+				        <!--{$listmenu['create_time']}-->
+				        <?php 
+						if($listmenu['create_time']!=0)
+						echo date('Y-m-d H:i:s',$listmenu['create_time']);?>
+				        </td>
+                        <td>
+                        	<neq name="listmenu.annex" value="">
+                        	<IMG SRC="__PUBLIC__/Images/download.gif" BORDER="0" ALT="有附件">
+                        	</neq>
+                        </td> 
+                        <td>{$listmenu['title']}</td>
+                        <td>
+                            <a href="__URL__/emailforward/id/{$listmenu['id']}" title="转发邮件" target="dialog" data-toggle="modal" data-target="#modal" mask="true" warn="请选择邮件" width="755" height="480" class="btn btn-success btn-xs">转发邮件</a>
+							<!--<a href="#" onClick="reademail({$listmenu['id']})" title="reademail">
+                            <img src="__PUBLIC__/Images/icons/pencil.png" alt="阅读" /></a> -->
+				            <a href="__URL__/delete/id/{$listmenu['id']}/navTabId/__MODULE__" title="确定彻底删除邮件吗？" target="ajaxTodo"  class="btn btn-success btn-xs" />删除</a>
+				        </td>
+				    </tr>
+				    <!-- </span> -->
+			        </volist>
+		</tbody>
+	</table>
+
+	<div class="panelBar" style="height:60px;">
+		<div class="pages">
+			<span></span>
+		</div>
+		<div class="pagination" targetType="navTab" totalCount="{$totalCount}" numPerPage="{$numPerPage}" pageNumShown="10" currentPage="{$currentPage}">{$page}</div>
+	</div>
+
+</div>
+
+
+<include file="Public:iframe_bottom" />

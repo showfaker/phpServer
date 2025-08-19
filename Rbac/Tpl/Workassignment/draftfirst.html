@@ -1,0 +1,90 @@
+<link rel="shortcut icon" href="favicon.ico"> 
+<link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/style.css?v=4.1.0" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+
+<div class="modal-header"  style="text-align: left;">
+	<button type="button" class="close" data-dismiss="modal">×</button>
+	<h4 class="modal-title">高层交办审核</h4>
+</div>
+<form method="post" action="__URL__/dodraftfirst" class="form-horizontal">
+	<div class="modal-body">
+		<input type="hidden" value="{$vo.id}" name="id">
+		<div class="form-group">
+			<label class="col-sm-3 col-xs-3 control-label">所属项目：</label>
+			<div class="col-sm-8 col-xs-8">
+				<input readonly="true" type="text" class="form-control"  value="{$vo.plm}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 col-xs-3 control-label">计划名称：</label>
+			<div class="col-sm-8 col-xs-8">
+				<input readonly="true" type="text" class="form-control" value="{$vo.title}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 col-xs-3 control-label">组织：</label>
+			<div class="col-sm-8 col-xs-8">
+				<input readonly="true" type="text" class="form-control" value="{$vo.organize}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 col-xs-3 control-label">计划期间：</label>
+			<div class="col-sm-8 col-xs-8">
+				<input readonly="true" type="text" class="form-control" value="{$vo.period}">
+			</div>
+		</div>
+		<div class="form-group ">
+			<label class="col-sm-3 col-xs-3 control-label">计划期限：</label>
+			<div class="col-sm-8 col-xs-8">
+				<input readonly="true" type="text" class="form-control" value="{$vo.timebegin} ~ {$vo.timeend}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 col-xs-3 control-label">当前责任：</label>
+			<div class="col-sm-8 col-xs-8">
+				<input readonly="true" type="text" class="form-control"  value="{$vo.current}">
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="col-sm-3 col-xs-3 control-label">计划内容：</label>
+			<div class="col-sm-8 col-xs-8">
+				<textarea readonly type="text" class="form-control" rows="5" cols="48">{$vo.content}</textarea>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 col-xs-3 control-label">审批结果：</label>
+			<div class="col-sm-8 col-xs-8">
+				<select class="form-control" name="result" onchange="setdesign_status(this.value)">
+					<option value="同意" <eq name="vo.result" value="同意">selected</eq>>同意</option>
+					<option value="退回" <eq name="vo.result" value="退回">selected</eq>>退回</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 col-xs-3 control-label">审批意见：</label>
+			<div class="col-sm-8 col-xs-8">
+				<textarea type="text" name="view" id="view" class="form-control" rows="5" cols="48" >{$vo.view}</textarea>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-sm btn-white pull-right m-t-n-xs" data-dismiss="modal" style="margin-left:10px">关闭</button>
+		<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit" id='submit'><strong>确定</strong>
+		</button>
+	</div>
+</form>
+
+<script>
+	function setdesign_status(e){
+		if(e!="同意"){
+			$("#view").attr("required",true);
+		}else{
+			$("#view").attr("required",false);
+		}
+	}
+</script>

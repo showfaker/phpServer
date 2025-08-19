@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=0">
+    
+    <link rel="shortcut icon" href="favicon.ico"> 
+	<link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="__PUBLIC__/dwz/themes/css/core1.css">
+</head>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>项目列表</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div style="margin-bottom:10px;">
+							<form action="__URL__/index/token/{$token}/" method="post">
+								<input type="hidden" name="pageNum" value="1" />
+								<input type="hidden" name="numPerPage" value="${model.numPerPage}" />
+								<input type="hidden" name="orderField" value="${param.orderField}" />
+								<input type="hidden" name="orderDirection" value="${param.orderDirection}" />
+							    <div style="width:100%;margin-bottom:10px" class="input-group">
+									<div class="input-group col-sm-2 col-xs-6" style="float:left;padding-right:20px">
+										<span class="input-group-addon">项目编号</span>
+                                        <input type="text" class="form-control" name="number" value="{$number}">
+                                    </div>
+									
+									<div class="input-group col-sm-2 col-xs-6" style="float:left;padding-right:20px">
+									<span class="input-group-addon">项目名称</span>
+									<input type="" name="title" id="address-search" value="{$title}" class="form-control">
+									<div class="input-group-btn">
+										<ul class="dropdown-menu dropdown-menu-right" role="menu">
+										</ul>
+									</div>
+									</div>
+									
+									<!--
+									<div class="input-group col-sm-2 col-xs-6 hidden-xs" style="float:left;padding-right:20px">
+										<span class="input-group-addon">项目类型</span>
+										<select type="text" class="form-control" name="projecttype">
+										<option value="">全部</option>
+										<option value="分布式光伏发电" <eq name="projecttype" value="分布式光伏发电">selected</eq>>分布式光伏发电</option>
+										<option value="集中式光伏发电" <eq name="projecttype" value="集中式光伏发电">selected</eq>>集中式光伏发电</option>
+										<option value="风力发电" <eq name="projecttype" value="风力发电">selected</eq>>风力发电</option>
+										</select>
+                                    </div>
+									-->
+									
+									<div class="input-group col-sm-2 col-xs-6 hidden-xs" style="float:left;padding-right:20px">
+										<span class="input-group-addon">省公司</span>
+                                        <input type="text" class="form-control" name="owner" value="{$owner}">
+                                    </div>
+									<div class="input-group col-sm-2 col-xs-6 hidden-xs" style="float:left;padding-right:20px">
+										<span class="input-group-addon">地市公司</span>
+                                        <input type="text" class="form-control" name="owner2" value="{$owner2}">
+                                    </div>
+									
+									
+									
+									<div class="input-group col-sm-2 col-xs-6 hidden-xs" style="float:left;padding-right:20px">
+										<span class="input-group-addon">项目状态</span>
+                                        <select type="text" class="form-control" name="status">
+										<option value="">全部</option>
+										<option value="待施工" <eq name="status" value="待施工">selected</eq>>待施工</option>
+										<option value="施工中" <eq name="status" value="施工中">selected</eq>>施工中</option>
+										<option value="已完成" <eq name="status" value="已完成">selected</eq>>已完成</option>
+										<option value="暂停中" <eq name="status" value="暂停中">selected</eq>>暂停中</option>
+										</select>
+                                    </div>
+									
+									
+							    </div>
+								<div style="width:100%;margin-bottom:10px" class="input-group">
+								
+									<div class="input-group col-sm-2 col-xs-6 hidden-xs" style="float:left;padding-right:20px">
+										<span class="input-group-addon">建设类型</span>
+										<select type="text" class="form-control" name="type">
+										<option value="">全部</option>
+										<option value="新建项目" <eq name="type" value="新建项目">selected</eq>>新建项目</option>
+										<option value="扩建项目" <eq name="type" value="扩建项目">selected</eq>>扩建项目</option>
+										<option value="改建项目" <eq name="type" value="改建项目">selected</eq>>改建项目</option>
+										</select>
+                                    </div>
+									
+									<div class="input-group col-sm-2 col-xs-6 hidden-xs" style="float:left;padding-right:20px">
+										<span class="input-group-addon">场站分类</span>
+										<select type="text" class="form-control" name="taketype">
+										<option value="">全部</option>
+										<option value="公交" <eq name="taketype" value="公交">selected</eq>>公交</option>
+										<option value="物流" <eq name="taketype" value="物流">selected</eq>>物流</option>
+										<option value="环卫" <eq name="taketype" value="环卫">selected</eq>>环卫</option>
+										<option value="邮政" <eq name="taketype" value="邮政">selected</eq>>邮政</option>
+										<option value="高速" <eq name="taketype" value="高速">selected</eq>>高速</option>
+										<option value="城市公共" <eq name="taketype" value="城市公共">selected</eq>>城市公共</option>
+										<option value="专用（单位内部）" <eq name="taketype" value="专用（单位内部）">selected</eq>>专用（单位内部）</option>
+										<option value="岸电" <eq name="taketype" value="岸电">selected</eq>>岸电</option>
+										<option value="其他" <eq name="taketype" value="其他">selected</eq>>其他</option>
+										</select>
+                                    </div>
+									
+									<div class="input-group col-sm-2 col-xs-6 hidden-xs" style="float:left;padding-right:20px">
+									<span class="input-group-addon">项目地址</span>
+									<input type="text" class="form-control" name="address" value="{$address}">
+									</div>
+									
+									<button class="btn btn-primary btn-sm" style="float:left;margin-right:10px" type="submit">查询</button>
+									
+							    </div>
+							</form>
+							
+							
+                        </div>
+                        <table class="table table-bordered table-hover">
+							<tbody>
+								
+								<volist name="list" id="listmenu">
+								<thead>
+									<tr>
+										<th width="8%">{$listmenu['title']}</th>
+									</tr>
+								</thead>
+								<tr>
+									<td>
+									<div style="word-wrap:break-word;word-break:break-all;">项目编号：{$listmenu['number']}</div>
+									<div>项目名称：{$listmenu['title']}</div>
+									<div style="word-wrap:break-word;word-break:break-all;">项目类型：{$listmenu['projecttype']}</div>
+									<div>合作模式：{$listmenu['invester']}</div>
+									<!--
+									<div class="hidden-xs">{$listmenu['tech']}</div>
+									<div class="hidden-xs">{$listmenu['tech1']}</div>
+									<div>{$listmenu['hottech']}</div>
+									-->
+									<div class="hidden-xs">项目经理：{$listmenu['projectmanager']}</div>
+									<!--
+									<div class="hidden-xs">{$listmenu['worker']}</div>
+									<div class="hidden-xs">{$listmenu['device']}</div>
+									-->
+									<div class="hidden-xs">监理单位：{$listmenu['companysupervise']}</div>
+									<div class="hidden-xs">项目状态：{$listmenu['design_status']}</div>
+									<div>施工开始：{$listmenu['construction_start']}</div>
+									<div>完工日期：{$listmenu['finishtime']}</div>
+									<div>任务单文件：<neq name="listmenu.taskfile" value="">
+										<volist name="listmenu.taskfile" id="taskfile">
+										<neq name="taskfile" value="">
+										[ 
+										<a href="__URL__/filedown/filename/{$taskfile}/filerealname/{$listmenu[taskfilename][$key]}" style="color:green">{$listmenu[taskfilename][$key]}
+										</a>  ]</br>
+										</neq>
+										</volist>
+									</neq></div>
+									
+									<div>任务单派发时间：<?php 
+										if($listmenu['sendtask_time']!=0)
+											echo date('Y-m-d',$listmenu['sendtask_time']);?></div>
+									<div>专责接收时间：<?php 
+										if($listmenu['sendtask_time_confirm1']!=0)
+											echo date('Y-m-d',$listmenu['sendtask_time_confirm1']);?></div>
+									<div>监理接收时间：<?php 
+										if($listmenu['sendtask_time_confirm2']!=0)
+											echo date('Y-m-d',$listmenu['sendtask_time_confirm2']);?></div>
+									<div>施工接收时间：<?php 
+										if($listmenu['sendtask_time_confirm3']!=0)
+											echo date('Y-m-d',$listmenu['sendtask_time_confirm3']);?></div>
+									<div style="color:blue">
+									项目状态：{$listmenu['design_status']}
+									</div>
+									
+									<div>
+									<a href="__APP__/Secondcheck/draftfirst/id/{$listmenu['id']}/type/2/check/1" data-toggle="modal" data-target="#modal" data-backdrop="static"  target="dialog" class="btn btn-success btn-xs">查看</a> 
+									
+									
+									<eq name="accesstype" value="2">
+									<if condition="($listmenu[sendtask_time_confirm1] eq '') AND ($listmenu['sendtask_time_confirm2'] eq '') AND ($listmenu['sendtask_time_confirm3'] eq '')">
+									<if condition="($_SESSION[dept] eq '省公司') AND ($listmenu['invester'] eq '省投资') ">
+									<a href="__URL__/draftfirst/id/{$listmenu['id']}/type/1" data-toggle="modal" data-target="#modal" data-backdrop="static"  target="dialog" class="btn btn-info btn-xs">设置任务单</a>
+									</if>
+									<if condition="($_SESSION[role1] eq '地市公司专责') AND ($listmenu['invester'] neq '省投资') ">
+									<a href="__URL__/draftfirst/id/{$listmenu['id']}/type/1" data-toggle="modal" data-target="#modal" data-backdrop="static"  target="dialog" class="btn btn-info btn-xs">设置任务单</a>
+									</if>
+									</if>
+									</eq>
+									<!--
+									<a href="__URL__/draftfirst/id/{$listmenu['id']}/type/2" data-toggle="modal" data-target="#modal" data-backdrop="static"  target="dialog" class="btn btn-info btn-xs">过程编辑</a>
+									-->
+									<!--
+									<a href="__APP__/Backmoney/draftfirst/id/{$listmenu['id']}/type/1" data-toggle="modal" data-target="#modal" data-backdrop="static"  target="dialog" class="btn btn-info btn-xs">回款录入</a>
+									-->
+									<!--
+									<eq name="_SESSION[account]" value="admin">
+										<a class="btn btn-danger btn-xs delete" title="{$listmenu.id}">删除</a>
+									</eq>
+									-->
+									
+									<if condition="($_SESSION[dept] eq '省公司') OR ($_SESSION['role1'] eq '地市公司专责') ">
+									<!-- <a href="__URL__/invoice_print/id/{$listmenu['id']}/type/2/check/1" target="_blank" class="btn btn-primary btn-xs">打印工作任务单</a>  -->
+									</if>
+									
+									
+									<eq name="accesstype" value="2">
+									<if condition="($listmenu[sendtask_time_confirm1] eq '') AND ($listmenu['sendtask_time_confirm2'] eq '') AND ($listmenu['sendtask_time_confirm3'] eq '')">
+									<if condition="($_SESSION[dept] eq '省公司') AND ($listmenu['invester'] eq '省投资') ">
+									<neq name="listmenu.settask_time" value="">
+									<!-- <a class="btn btn-warning btn-xs sendtask" title="{$listmenu.id}">派发任务单</a> -->
+									<a href="__URL__/draftfirst/id/{$listmenu['id']}/type/3" data-toggle="modal" data-target="#modal" data-backdrop="static"  target="dialog" class="btn btn-info btn-xs">派发任务单</a>
+									</neq>
+									</if>
+									<if condition="($_SESSION[role1] eq '地市公司专责') AND ($listmenu['invester'] neq '省投资') ">
+									<neq name="listmenu.settask_time" value="">
+									<!-- <a class="btn btn-warning btn-xs sendtask" title="{$listmenu.id}">派发任务单</a> -->
+									<a href="__URL__/draftfirst/id/{$listmenu['id']}/type/3" data-toggle="modal" data-target="#modal" data-backdrop="static"  target="dialog" class="btn btn-info btn-xs">派发任务单</a>
+									</neq>
+									</if>
+									</if>
+									</eq>
+									
+									
+									
+									
+									<if condition="($_SESSION[dept] neq '省公司') AND ($listmenu['invester'] eq '省投资') ">
+									<else />
+									</if>
+									<neq name="listmenu.sendtask_time" value="">
+									<eq name="listmenu.sendtask_time_confirm1" value="">
+									<eq name="_SESSION[role1]" value="地市公司专责">
+									<a class="btn btn-warning btn-xs sendtask_confirm" title="{$listmenu.id}" id="sendtask_confirm1">地市专责确认任务单</a>
+									</eq>
+									</eq>
+									<eq name="listmenu.sendtask_time_confirm2" value="">
+									<eq name="_SESSION[role]" value="监理单位">
+									<a class="btn btn-warning btn-xs sendtask_confirm" title="{$listmenu.id}" id="sendtask_confirm2">监理人员确认任务单</a>
+									</eq>
+									</eq>
+									<eq name="listmenu.sendtask_time_confirm3" value="">
+									<eq name="_SESSION[role]" value="施工单位">
+									<a class="btn btn-warning btn-xs sendtask_confirm" title="{$listmenu.id}" id="sendtask_confirm3">施工人员确认任务单</a>
+									</eq>
+									</eq>
+									</neq>
+									</div>	
+									</td>
+								</tr>
+								</volist>
+							</tbody>
+                        </table>
+						<div class="panelBar"><div class="pagination" targetType="navTab" totalCount="{$totalCount}" numPerPage="{$numPerPage}" pageNumShown="10" currentPage="{$currentPage}">{$page}</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	
+	<div id="modal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-lg">
+		<div class="modal-content">
+		   <div class="modal-header">  
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
+                    <span aria-hidden="true">×</span>  
+                </button>  
+                <h4 class="modal-title" id="myModalLabel">正在加载</h4>  
+            </div>  
+            <div class="modal-body">  
+                <p>正在加载…</p>  
+            </div>  
+            <div class="modal-footer">  
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                <button type="button" class="btn btn-primary">Save</button>  
+            </div>  
+		</div>
+	  </div>
+	</div>
+	
+	
+	<link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+	<script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="js/plugins/jeditable/jquery.jeditable.js"></script>
+    <script src="js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="js/plugins/dataTables/dataTables.bootstrap.js"></script>
+    <script src="js/content.js?v=1.0.0"></script>
+	<script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+	<script src="js/plugins/layer/laydate/laydate.js"></script>
+	<script src="js/plugins/iCheck/icheck.min.js"></script>
+	<script>
+        $(document).ready(function () {
+            //$('.dataTables-example').dataTable();
+            //var oTable = $('#editable').dataTable();
+			$("#modal").on("hidden.bs.modal", function() {
+				$(this).removeData("bs.modal");  
+			});
+        });
+    </script>
+	<script>	
+	$('.delete').click(function () {	
+        id=$(this).attr("title");
+		swal({
+			title: "您确定要删除吗",
+			text: "删除后将无法恢复操作，请谨慎操作！",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			cancelButtonText: "取消",
+			confirmButtonText: "确定",
+			closeOnConfirm: false
+		}, function () {
+			//获取选中的checkbox
+			//发送请求命令			
+			var aj = $.ajax({
+				url:'__URL__/foreverdelete',
+				data:{  
+					id : id
+				},
+				type:'post',  
+				cache:false,  
+				dataType:'json',  
+				success:function(data) {					
+					swal("删除成功！", "请刷新查看结果。", "success");
+					location.href=location.href;
+				}  
+			});
+			
+		});
+	});
+	$('.sendtask').click(function () {	
+        id=$(this).attr("title");		
+		swal({
+			title: "您确定要派发任务单吗",
+			text: "派发任务单后将无法恢复操作，请谨慎操作！",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			confirmButtonText: "派发任务单",
+			closeOnConfirm: false
+		}, function () {
+			//获取选中的checkbox
+			//发送请求命令			
+			var aj = $.ajax({
+				url:'__URL__/sendtask',
+				data:{  
+					id : id
+				},
+				type:'post',  
+				cache:false,  
+				dataType:'json',  
+				success:function(data) {					
+					swal("派发任务单成功！", "请刷新查看结果。", "success");
+					location.href=location.href;
+				}  
+			});
+			
+		});
+	});
+	$('.sendtask_confirm').click(function () {	
+        id=$(this).attr("title");
+		flag=$(this).attr("id");
+		swal({
+			title: "您确定要确认任务单吗",
+			text: "确认任务单后将无法恢复操作，请谨慎操作！",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			confirmButtonText: "确认任务单",
+			closeOnConfirm: false
+		}, function () {
+			//获取选中的checkbox
+			//发送请求命令			
+			var aj = $.ajax({
+				url:'__URL__/sendtask_confirm',
+				data:{  
+					id : id,
+					flag : flag
+				},
+				type:'post',  
+				cache:false,  
+				dataType:'json',  
+				success:function(data) {					
+					swal("确认任务单成功！", "请刷新查看结果。", "success");
+					location.href=location.href;
+				}  
+			});
+			
+		});
+	});
+	</script>
+	
+	
+	
+	<table style="display:none">
+		<tbody>
+		<volist name="allprojects" id="project" key="i">
+			<tr target="sid_obj">
+				<td class="addressvalue" id="{$project.id}">{$project.value}</td>
+			</tr>
+		</volist>
+		</tbody>
+	</table>
+	<script src="js/plugins/suggest/bootstrap-suggest.min.js"></script>
+	<script>
+		var dataarray=[];
+		$(".addressvalue").each(function(i){
+			dataarray[i]={
+				id:this.id,
+				word:$(this).html()
+			};
+		})
+		//data 数据中获取
+		var testdataBsSuggest = $("#address-search").bsSuggest({
+			indexId: 0, //每组数据的第几个数据，作为input输入框的 data-id，设为 -1 且 idField 为空则不设置此值
+			indexKey: 1, //data.value 的第几个数据，作为input输入框的内容
+			data: {
+				'value': dataarray
+			}
+		});
+		
+		$("input#address-search").on("onSetSelectValue", function (event, result) {
+			//console.log(result.id);
+		});
+	</script>
+    
+</body>
+</html>

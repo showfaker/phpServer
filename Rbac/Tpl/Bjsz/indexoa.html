@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+	<link href="css/plugins/chosen/chosen.css" rel="stylesheet">
+	<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.css">
+</head>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated">
+        <div class="row">
+			<form method="post" action="__URL__/insert" class="pageForm required-validate" onsubmit="return validateCallback(this, navTabAjaxDone);">
+			
+	
+            <div class="col-sm-3">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>【开发】预警阈值</h5>
+                    </div>
+                    <div class="ibox-content">
+						
+                        <div class="pageFormContent" layoutH="96">
+							<p>
+								<label style="width:240px;">阈值（百分比差值）：</label>
+								<input name="subtitle1" class="form-control" type="text" size="40" value="{$list[0].subtitle1}"/>
+							</p>
+						</div>
+						
+                    </div>
+                </div>
+            </div>
+			
+			<div class="col-sm-3">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>【设计】预警阈值</h5>
+                    </div>
+                    <div class="ibox-content">
+						
+                        <div class="pageFormContent" layoutH="96">
+							<p>
+								<label style="width:240px;">阈值（百分比差值）：</label>
+								<input name="subtitle2" class="form-control" type="text" size="40" value="{$list[0].subtitle2}"/>
+							</p>
+						</div>
+						
+						
+                    </div>
+                </div>
+            </div>
+		
+			
+		
+			<div class="col-sm-3">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>【采购】预警阈值</h5>
+                    </div>
+                    <div class="ibox-content">
+						
+                        <div class="pageFormContent" layoutH="96">
+							<p>
+								<label style="width:240px;">阈值（百分比差值）：</label>
+								<input name="subtitle3" class="form-control" type="text" size="40" value="{$list[0].subtitle3}"/>
+							</p>
+						</div>
+						
+						
+                    </div>
+                </div>
+            </div>
+			
+			
+			<div class="col-sm-3">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>【施工】预警阈值</h5>
+                    </div>
+                    <div class="ibox-content">
+						
+                        <div class="pageFormContent" layoutH="96">
+							<p>
+								<label style="width:240px;">阈值（百分比差值）：</label>
+								<input name="subtitle4" class="form-control" type="text" size="40" value="{$list[0].subtitle4}"/>
+							</p>
+						</div>
+						
+						
+                    </div>
+                </div>
+            </div>
+			
+			
+			<div style="text-align:center">
+			<button type="submit" class="btn btn-primary" style="margin-right:0px;">确认</button>
+			</div>
+			</form>
+        </div>
+    </div>
+	
+	
+	
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+	<script src="js/plugins/layer/laydate/laydate.js"></script>
+    <script src="js/content.js?v=1.0.0"></script>
+</body>
+</html>
+
+
+<!--<h2 class="contentTitle">信息设置</h2>
+<div class="pageContent">
+	<form method="post" action="__URL__/insert" class="pageForm required-validate" onsubmit="return validateCallback(this, navTabAjaxDone);">
+		<div class="pageFormContent" layoutH="96">
+			<p>
+				<label style="width:80px;">系统名称：</label>
+				<input name="name" class="" type="text" size="40" value="{$list[0].name}" alt="请输入系统名称"/>
+			</p>
+			<p>
+				<label style="width:80px;">系统副标题：</label>
+				<input name="subname" class="" type="text" size="40" value="{$list[0].subname}" alt="请输入系统副标题"/>
+			</p>
+			<p>
+				<label style="width:80px;">单位名称：</label>
+				<input name="title" class="required" type="text" size="40" value="{$list[0].title}" alt="请输入单位名称"/>
+			</p>
+			<p>
+				<label style="width:80px;">单位副标题：</label>
+				<input name="subtitle" class="required" type="text" size="40" value="{$list[0].subtitle}" alt="请输入单位副标题"/>
+			</p>
+			<p>
+				<label style="width:80px;">单位地址：</label>
+				<input name="address" class="" type="text" size="40" value="{$list[0].address}" alt="请输入单位地址"/>	
+			</p>
+			<p>
+				<label style="width:80px;">单位邮箱：</label>
+				<input name="email" class="" type="text" size="40" value="{$list[0].email}" alt="请输入单位邮箱"/>
+			</p>
+			<p style="display:none;">
+				<label style="width:80px;">单位电话：</label>
+				<input name="phone" class="" type="text" size="40" value="{$list[0].phone}" alt="请输入单位电话"/>
+			</p>
+			
+		</div>
+		<div class="formBar">
+			<ul style="margin-right:500px">
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li>
+					<div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div>
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>-->

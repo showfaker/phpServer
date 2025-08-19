@@ -1,0 +1,365 @@
+
+<link rel="shortcut icon" href="favicon.ico"> 
+<link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/style.css?v=4.1.0" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+<link href="css/plugins/chosen/chosen.css" rel="stylesheet">
+
+    
+<div class="modal-header">
+	<h4 class="modal-title">项目基本信息登记表</h4>
+</div>
+<form method="post" action="__URL__/insert/callbackType/closeCurrent/navTabId/Second" ENCTYPE="multipart/form-data" class="form-horizontal">
+<div class="modal-body">
+	
+	<input type="hidden" value="{$orgdata.id}" name="id" id="id">
+	<!--
+	<input type="hidden" value="待签订合同" name="design_status">
+	-->
+	<input type="hidden" value="报价合约洽谈阶段" name="design_status">
+	
+	<table class="drafttable" style="position:relative;top:10px;margin:0 auto;width:100%;margin-bottom:28px">
+		<!--
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">招标编码:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.para1}" class="forminputlarge" name="para1" aria-required="false">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">招标人:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.para2}" class="forminputlarge" name="para2" aria-required="false">
+			</td>
+		</tr>
+		-->
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">项目编号:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.number}" class="forminputlarge" name="para3" aria-required="false" disabled id="number">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">项目名称:</td>
+			<td class="normal" colspan="3">
+			<select type="text" class="chosen-select forminputlarge" name="title" required="true" aria-required="true" onchange="selectTurnToUrl(this)">
+				<option>选择项目</option>
+				<volist name="allprojects" id="project">
+					<option value="{$project.title}" url="{$project.id}" title="{$project.number}">{$project.title}</option>
+				</volist>
+			</select>
+			</td>
+		</tr>
+		<script>
+			function selectTurnToUrl(obj)
+			{
+				var id = $(obj).find("option:selected").attr("url");
+				var number = $(obj).find("option:selected").attr("title");
+				document.getElementById("id").value=id;
+				document.getElementById("number").value=number;
+			}
+		</script>
+		<!--
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">工程性质:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.para5}" class="forminputlarge" name="para5" aria-required="false">
+			</td>
+		</tr>
+		-->
+		<!--
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">招标日期:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.para6}" class="forminputlarge" name="para6" aria-required="false" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" autocomplete="off">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">开标日期:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.para7}" class="forminputlarge" name="para7" aria-required="false" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" autocomplete="off">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">投标保证金（万元）:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.para8}" class="forminputlarge" name="para8" aria-required="false">
+			</td>
+		</tr>
+		-->
+		<!--
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">投标单位:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.para9}" class="forminputlarge" name="para9" aria-required="false">
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px;line-height:22px" rowspan="3">拟任项目主要管理人员</br>（经理、总工、安C）:</td>
+			<td class="normal" colspan="1">
+			经理
+			</td>
+			<td class="normal" colspan="2">
+			<input type="text" value="{$orgdata.para10}" class="forminputlarge" name="para10" aria-required="false">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" colspan="1">
+			总工
+			</td>
+			<td class="normal" colspan="2">
+			<input type="text" value="{$orgdata.para11}" class="forminputlarge" name="para11" aria-required="false">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" colspan="1">
+			安C
+			</td>
+			<td class="normal" colspan="2">
+			<input type="text" value="{$orgdata.para12}" class="forminputlarge" name="para12" aria-required="false">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">我方保证金缴纳至:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.para13}" class="forminputlarge" name="para13" aria-required="false">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">是否退回我方:</td>
+			<td class="normal" colspan="3">
+				<select type="text" class="forminputmedium" name="para14" aria-required="false">
+				<option value="">选择是否退回</option>
+				<option value="是" <eq name="orgdata[para14]" value="是">selected</eq> style="color:green">是</option>
+				<option value="否" <eq name="orgdata[para14]" value="否">selected</eq> style="color:red">否</option>
+				</select>
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">控制价（元）:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.para15}" class="forminputlarge" name="para15" aria-required="false">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">现场下浮率（%）:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.para16}" class="forminputlarge" name="para16" aria-required="false">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">评标基准价（元）:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.para17}" class="forminputlarge" name="para17" aria-required="false">
+			</td>
+		</tr>
+		-->
+		<!--
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">投标价（元）:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.para18}" class="forminputlarge" name="para18" aria-required="false">
+			</td>
+		</tr>
+		-->
+		<!--
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">中标价（元）:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.para19}" class="forminputlarge" name="para19" aria-required="false">
+			</td>
+		</tr>
+		-->
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">中标单位:</td>
+			<td class="normal" colspan="3">
+			<select type="text" class="forminputlarge" name="para20" aria-required="false">
+			<option value="">选择中标单位</option>
+			<volist name="companies" id="company" key="k">
+			<option value="{$company.id}" url="{$company.duty}" title="{$company.director}" <eq name="orgdata[para20]" value="$company.id">selected</eq>>{$company.para1}</option>
+			</volist>
+			</select>
+			</td>
+		</tr>
+		
+		<!--
+		<for start="1" end="6">
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">中标单位:</td>
+			<td class="normal" colspan="3">
+			投标单位:<input type="text" class="forminputmedium x" name="para21[]" aria-required="false">
+			</br>
+			联系人及联系方式:<input type="text" value="{$orgdata[para23][$i-1]}" class="forminputmedium" name="para23[]" aria-required="false"></br>
+			
+			投标价（元）:<input type="text" value="{$orgdata[para27][$i-1]}" class="forminputmedium" name="para27[]" aria-required="false"></br>
+			</td>
+		</tr>
+		</for>
+		-->
+		<script>	
+			$(".x").bind("change",function(){
+				//获取被选中的option的值
+				var value = $(this).val();
+				//获取自定义属性的值
+				var url = $(this).find("option:selected").attr("url");
+				var title = $(this).find("option:selected").attr("title");
+				$(this).next().next().val(url);
+				$(this).next().next().next().next().val(title);
+				
+			});
+		</script>
+		
+		<!--
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">陪标单位:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.para21}" class="forminputlarge" name="para21" aria-required="false">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">保证金接收账号:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.para22}" class="forminputlarge" name="para22" aria-required="false">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">对方联系人及联系方式:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.para23}" class="forminputlarge" name="para23" aria-required="false">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">我司申请打款时间:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.para24}" class="forminputlarge" name="para24" aria-required="false">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">是否退回我司:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.para25}" class="forminputlarge" name="para25" aria-required="false">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">往来金额（万元）:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.para26}" class="forminputlarge" name="para26" aria-required="false">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">投标价（元）:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.para27}" class="forminputlarge" name="para27" aria-required="false">
+			</td>
+		</tr>
+		-->
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<!--
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px" rowspan="2">招投标文件原件存放位置:</td>
+			<td class="normal" colspan="1">
+			招标文件
+			</td>
+			<td class="normal" colspan="2">
+			<input type="text" value="{$orgdata.para28}" class="forminputlarge" name="para28" aria-required="false">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" colspan="1">
+			投标文件
+			</td>
+			<td class="normal" colspan="2">
+			<input type="text" value="{$orgdata.para29}" class="forminputlarge" name="para29" aria-required="false">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">电子版招投标文件存放位置:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.para30}" class="forminputlarge" name="para30" aria-required="false">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">备注:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.para31}" class="forminputlarge" name="para31" aria-required="false">
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">中标通知书打包上传:</td>
+			<td class="normal" colspan="3">
+			<neq name="orgdata.intention" value="">
+				<volist name="orgdata.intention" id="intention">
+				<neq name="intention" value="">
+				 [ 
+				<a href="__URL__/filedown/filename/{$intention}/filerealname/{$orgdata[intentionfilename][$key]}" style="color:green">{$orgdata[intentionfilename][$key]} 
+				</a>  ] 
+				</neq>
+				</volist>
+			</neq>
+			<input type="file" multiple="multiple" class="form-control" name="file[]" style="width:100%">
+			</td>
+		</tr>
+		-->
+		<!--
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">到期提醒时间设置:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.intentiontime}" class="forminputsmall" name="intentiontime">天
+			</td>
+		</tr>
+		-->
+    </table>
+	
+	
+
+</div>
+
+<div class="modal fade" id="loadingModal" data-backdrop="static" data-keyboard="false">
+<div style="width: 200px;height:20px; z-index: 20000; position: absolute; text-align: center; left: 50%; top: 50%;margin-left:-100px;margin-top:-10px">
+<div class="progress progress-striped active" style="margin-bottom: 0;">
+<div class="progress-bar" style="width: 100%;"></div>
+</div>
+<h5 style="color:black"> <strong>正在上传数据...</strong> </h5>
+</div>
+</div>
+
+
+<div class="modal-footer">
+	<neq name="check" value="1">
+	<button type="submit" class="btn btn-danger" onclick="$('#loadingModal').modal('show')">确认提交</button>
+	</neq>
+	<button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+</div>
+</form>
+<!-- Chosen -->
+<script src="js/plugins/chosen/chosen.jquery.js"></script>
+<script src="js/demo/form-advanced-demo.js"></script>
+<!-- Prettyfile -->
+<script src="js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+<script>
+	$('input[type="file"]').prettyFile();
+</script>
+
+<script>
+	$(document).ready(function () {
+		$('.i-checks').iCheck({
+			checkboxClass: 'icheckbox_square-green',
+			radioClass: 'iradio_square-green',
+		});
+	});
+</script>

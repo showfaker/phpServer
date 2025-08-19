@@ -1,0 +1,20 @@
+<?php
+class OfficialrecvdocModel extends CommonModel {
+	// 自动验证设置
+	protected $_validate	 =	 array(
+		//array('number','require','必须填写收文编号！',1),
+		array('receivedept','require','必须填写来文单位！',1),
+		//array('receivenumber','require','必须填写来文文号！',1),
+		array('title','require','必须填写来文标题！',1),
+		//array('keywords','require','必须填写主题词！',1),
+		//array('content','require','必须填写内容必须'),
+		//array('title','','标题已经存在',self::EXISTS_VAILIDATE,'unique',self::MODEL_INSERT),
+		);
+	// 自动填充设置
+	protected $_auto	 =	 array(
+		array('status','1',self::MODEL_INSERT),
+		array('create_time','time',self::MODEL_INSERT,'function'),
+		);
+
+}
+?>

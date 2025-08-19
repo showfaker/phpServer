@@ -1,0 +1,123 @@
+<script type="text/javascript" >
+	function getrootpath() {
+		//获取当前网址，如： http://localhost:8080/ems/Pages/Basic/Person.jsp
+		var curWwwPath = window.document.location.href;
+		//获取主机地址之后的目录，如： /ems/Pages/Basic/Person.jsp
+		var pathName = window.document.location.pathname;
+		var pos = curWwwPath.indexOf(pathName);
+		//获取主机地址，如： http://localhost:8080
+		var localhostPath = curWwwPath.substring(0, pos);
+		//获取带"/"的项目名，如：/ems
+		var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
+		projectName = projectName.replace("/Rbac","");
+		return(localhostPath + projectName);
+	}
+	function selectGroupmulti(arg1,arg2){
+		var rootpath=getrootpath();
+		asyncbox.open({
+			id : "form",
+			title:'',
+			url :rootpath+'/Rbac/index.php?s=/Public/selectmulti/arg1/'+arg1+'/arg2/'+arg2,
+			width : 445,
+			height : 400,
+			//btnsbar : $.btn.ok,
+			callback : function(action){
+				if(action == 'close'){  
+					return;
+				}
+			}
+		});
+	}
+
+	function selectGroup(arg1,arg2){
+		var rootpath=getrootpath();
+		asyncbox.open({
+			id : "form",
+			title:'',
+			url :rootpath+'/Rbac/index.php?s=/Public/select/arg1/'+arg1+'/arg2/'+arg2,
+			width : 445,
+			height : 400,
+			//btnsbar : $.btn.ok,
+			callback : function(action){
+				if(action == 'close'){  
+					return;
+				}
+			}
+			});
+	}
+	function selectWorker(arg1,arg2){
+		var rootpath=getrootpath();
+		asyncbox.open({
+			id : "form",
+			title:'',
+			url :rootpath+'/Rbac/index.php?s=/Public/selectworker/arg1/'+arg1+'/arg2/'+arg2,
+			width : 445,
+			height : 400,
+			//btnsbar : $.btn.ok,
+			callback : function(action){
+				if(action == 'close'){  
+					return;
+				}
+			}
+			});
+	}
+</script>
+<div class="modal-header" style="text-align: left;">
+	<button type="button" class="close" data-dismiss="modal">×</button>
+	<h4 class="modal-title" >更新决议</h4>
+</div>
+<form method="post" action="__URL__/doconduct/rel/jbsxBoxworkassignment/callbackType/closeCurrent" class="form-horizontal" onsubmit="return validateCallback(this, dialogAjaxDone)">
+	<div class="modal-body">
+		<div class="form-group">
+			<label class="col-sm-3 col-xs-3 control-label">所属会议：</label>
+			<div class="col-sm-8 col-xs-8">
+				<input type="text" value="{$meetingassignment.title}" class="form-control" readonly>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 col-xs-3 control-label">会议日期：</label>
+			<div class="col-sm-8 col-xs-8">
+				<input type="text" value="{$meetingassignment.timebegin}" class="form-control" readonly>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 col-xs-3 control-label">应到参会人：</label>
+			<div class="col-sm-8 col-xs-8">
+				<input type="text"  value="{$meetingassignment.attendee}"  class="form-control" readonly placeholder="点击获取人员" >
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-sm-3 col-xs-3 control-label">实际参会人：</label>
+			<div class="col-sm-8 col-xs-8">
+				<input type="text" id="check" name="check" class="form-control" readonly placeholder="点击获取人员" value="{$meetingassignment.partake}"  onclick="selectGroupmulti('check','partake')" >
+				<input type="hidden" id="partake" name="partake" value="{$meetingassignment.partake}"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 col-xs-3 control-label">执行情况：</label>
+			<div class="col-sm-8 col-xs-8">
+				<select name="status" data-placeholder="选择会议执行情况" class="form-control" required>
+					<option value="">请选择会议执行情况</option>
+					<option value="1" <eq name="meetingassignment.status" value="1">selected</eq>>已完成</option>
+					<option value="2" <eq name="meetingassignment.status" value="2">selected</eq>>延期</option>
+					<option value="3" <eq name="meetingassignment.status" value="3">selected</eq>>异常</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 col-xs-3 control-label">会议分析：</label>
+			<div class="col-sm-8 col-xs-8">
+				<textarea class="form-control" name="explain" rows="10" cols="60" tools="simple" upLinkUrl="{editorRoot}upload.php" upLinkExt="zip,rar,doc,docx" upImgUrl="{editorRoot}upload.php"  upImgExt="jpg,jpeg,gif,png">{$meetingassignment.explain}</textarea>
+			</div>
+		</div>
+	<div>
+	<input type="hidden" name="id" value="{$meetingassignment.id}">
+		
+	<div class="modal-footer">
+		<button type="button" class="btn btn-sm btn-white pull-right m-t-n-xs" data-dismiss="modal" style="margin-left:10px">关闭</button>
+		<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit" id='submit'><strong>确定</strong>
+		</button>
+	</div>
+</form>
+

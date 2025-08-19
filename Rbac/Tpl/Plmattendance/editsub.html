@@ -1,0 +1,184 @@
+<link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <!-- Data Tables -->
+    <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="css/plugins/chosen/chosen.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.css">
+	<form id="format1" method="post" action="__URL__/order_update" enctype="multipart/form-data" class="form-horizontal">  
+	<input type="hidden" name="id" value="{$info.id}">  
+		<div class="modal-body" style="padding:0px;margin:0px">
+			<div class="form-group">
+				<div class="col-sm-10" style="margin-bottom: 20px;">
+					<label class="col-sm-2 control-label">城市：</label>
+					<div class="col-sm-4">
+						<input type="text" name="city" class="form-control" readonly="true" value="{$info.city}" >
+					</div>
+					<label class="col-sm-2 control-label">项目：</label>
+					<div class="col-sm-4">
+						<input type="text" name="plm" class="form-control" readonly="true" value="{$info.plm}" >
+					</div>
+				</div>
+				<div class="col-sm-10">
+					<label class="col-sm-2 control-label">供应商：</label>
+					<div class="col-sm-4">
+					    <input type="text" name="supplier" class="form-control" readonly="true" value="{$info.supplier}" >
+					</div>
+					<label class="col-sm-2 control-label">付款项：</label>
+					<div class="col-sm-4">
+					   <input type="text" name="name" class="form-control" readonly="true" value="{$info.name}" >
+					</div>
+				</div>
+			</div>
+			<div class="">
+				<a onclick="fnClickAddRow();" href="javascript:void(0);" class="btn btn-primary ">添加行</a>
+			</div>
+			<div style="height:300px;overflow-y:auto;overflow-x:hidden;">
+			<table class="table table-striped table-bordered table-hover " id="editable">
+				<thead>
+					<tr>
+						<th width="3%">序号</th>
+						<th width="6%">付款时间节点</th>
+						<th width="6%">金额</th>
+						<th width="6%">备注</th>
+						<th width="5%">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<volist name="order_paytime" id="order_paytimelist">
+					<tr id="table-row-0">
+						<td><div style="width:10px;height:10px;border-radius:20px;background-color:#000;"></div></td>
+						<td><input placeholder="请选择时间节点"  value="{$order_paytimelist.paytime}" class="form-control layer-date" name="time[]" value="" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})" size="40%" style="float:left;margin-right:10px"></td> 
+						</td>
+						<td><input type="text" placeholder="价格"  class="form-control price" size="30%" name="price[]" onblur="jisuan()" value="{$order_paytimelist.pay}"></td> 
+						<td><textarea id="" cols="30" rows="1" class="form-control" name="remarks[]">{$order_paytimelist.remark}</textarea>          
+						<td>						
+						<a class="btn btn-danger btn-xs delete" href="javascript:void(0);">删除</a>
+						</td>				
+					</tr>
+					</volist>
+				</tbody>
+			</table>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<span style="float:left">材料总价：</span><input type="text" readonly placeholder="总价自动计算" class="form-control" style="width:150px;float:left;position:relative;top:-7px" name="total" id="price" value='{$info.price}'><span style="float:left;width:20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+			<span style="float:left">保证金：</span><input type="text"  placeholder="保证金" class="form-control" style="width:150px;float:left;position:relative;top:-7px;border-color: green;" name="baozheng" value="{$info.baozheng}"><span style="float:left;width:20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+			<span style="float:left">付款事由：</span><input type="text" placeholder="" class="form-control" style="width:250px;float:left;position:relative;top:-7px;border-color: green;" name="because" id="because" value='{$info.because}'>
+			<span style="float:left;width:20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+			<span style="float:left">备注：</span><input type="text" placeholder="" class="form-control" style="width:250px;float:left;position:relative;top:-7px;border-color: green;" name="remark" id="remark" value='{$info.remark}'>
+			<a href="#" onclick="changeout()" class="btn btn-primary">确认订单</a>
+			<button id="btnclick" class="btn btn-primary hidden"></button>
+		</div>
+	</form>
+	<div id="modal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" style="width:850px;height:600px">
+		<div class="modal-content">
+		   <div class="modal-header">  
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
+                    <span aria-hidden="true">×</span>  
+                </button>  
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>  
+            </div>  
+            <div class="modal-body">  
+                <p>One fine body…</p>  
+            </div>  
+            <div class="modal-footer">  
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                <button type="button" class="btn btn-primary">Save</button>  
+            </div>  
+		</div>
+	  </div>
+	</div>
+    <script src="js/jquery.min.js?v=2.1.4"></script>	
+    <!-- Chosen -->
+    <script src="js/plugins/chosen/chosen.jquery.js"></script>
+    <script src="js/demo/form-advanced-demo.js"></script>
+	<!-- jQuery Validation plugin javascript-->
+    <script src="js/plugins/validate/jquery.validate.min.js"></script>
+    <script src="js/plugins/validate/messages_zh.min.js"></script>
+
+    <script src="js/demo/form-validate-demo.js"></script>
+	<script>
+		var table=$('#editable').dataTable(
+		{
+		   iDisplayLength : 10000
+		}
+		);
+    </script>
+    <script>
+
+        function fnClickAddRow() {
+            $('#editable').dataTable().fnAddData([
+            	'<div style="width:10px;height:10px;border-radius:20px;background-color:#000;"></div>',
+			    '<input type="text" placeholder="请选择时间节点" class="form-control layer-date" name="time[]" value="" style="width:250px;float:left;margin-right:10px"/>',
+				'<input type="text" placeholder="价格" class="form-control price" size="25%" name="price[]" onblur="jisuan()">',
+				'<textarea id="" cols="30" rows="1" class="form-control" name="remarks[]"></textarea>',
+				'<a class="btn btn-danger btn-xs delete" href="javascript:void(0);">删除</a>'
+				]);
+			$('.layer-date').click(function(){
+				laydate({istime: true, format: 'YYYY-MM-DD'});
+			});
+			$('.delete').on('click', function(e) {
+				var table = $('#editable').DataTable();
+				table.row($(this).parents('tr')).remove().draw();
+				jisuan();
+			});
+			$('select').attr('class','form-control');
+        }
+    </script>
+    <script>
+		function jisuan(){
+			var total=0;
+			total=parseFloat(total);
+			$('.price').each(function(i){
+				total=total+parseFloat($(this).val());
+			});
+			$('#price').val(total);
+		}
+		
+	
+    </script>
+   
+	<script>
+	    $("select[name='city']").change(function(){
+		$("#opt").nextAll().remove();
+		var city=$(this).val();
+		var aj = $.ajax({
+				url:'__URL__/ajaxcity',
+				data:{  
+					city : city
+				},
+				type:'post',  
+				cache:false,  
+				dataType:'json',  
+				success:function(data) {
+					if(data!=null){
+						var code="";
+						for(var i=0;i<data.length;i++){
+						code+="<option value='"+data[i]['id']+"'>"+data[i]['title']+"</option>";
+						}
+						$("select[name='plmid']").append(code);
+					}					
+					
+				}  
+			});
+		
+		})
+	
+	</script>
+	<script>
+	 function changeout(){
+	 	var price=$('#price').val();
+	 	if(price==''){
+	 		alert('请填写金额.');
+	 	}else{
+	 		$("#btnclick").click();
+	 	}
+	 }
+	
+	</script>
+
+    

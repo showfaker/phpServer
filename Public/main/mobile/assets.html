@@ -1,0 +1,136 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+	<meta charset="utf-8" /> 
+	<title>RealWorldAdmin - Main Page</title> 
+	<link rel="stylesheet" href="css/main.css" /> 
+	<link rel="stylesheet" href="css/theme2.css" />  
+	<script type="text/javascript" src="js/jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="js/jquery.mobile-1.0a2.min.js"></script> 
+    <script src="js/themeswitcher.js"></script>
+</head> 
+<body> 
+
+<div data-role="page" data-theme="b"> 
+	<div data-role="header">
+		<h1>Assets</h1>
+        <a href="index.html" rel="external">Main Page</a>
+	</div>
+	<div data-role="content"> 
+		 <div data-role="collapsible" data-collapsed="true">
+         	<h3>Browse Directory</h3>
+           
+              <ul id="file-browser" class="filetree">
+                    <li><span class="folder">Word Documents</span>
+                        <ul>
+                            <li><a href="#" class="file-link doc-file">Document 1</a></li>
+                         	<li><a href="#" class="file-link doc-file">Document 2</a></li>
+                            <li><a href="#" class="file-link doc-file">Document 3</a></li> 
+                        </ul>
+                    </li>
+                    <li><span class="folder">Accountant</span>
+                        <ul>
+                            <li><span class="folder">Reports</span>
+                                <ul id="folder21">
+                                    <li><a href="#" class="file-link excel-file">Report 1</a></li>
+                                	<li><a href="#" class="file-link excel-file">Report 2</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#" class="file-link image-file">Report Screenshot</a></li>
+                        </ul>
+                    </li>
+                    <li><span class="folder">Flash Files</span>
+                        <ul>
+                            <li><a href="#" class="file-link flash-file">File 1</a></li>
+                         	<li><a href="#" class="file-link flash-file">File 2</a></li>
+                            <li><a href="#" class="file-link flash-file">File 3</a></li> 
+                        </ul>
+                    </li>
+                </ul>
+           
+         </div>
+         <div data-role="collapsible" data-collapsed="true">
+            <h3>Browse Files</h3>
+ 	        <div data-role="controlgroup" data-type="horizontal">
+            	<a href="#grid-view" data-role="button">Grid View</a>
+            	<a href="#list-view" data-role="button">List view</a>
+            </div>
+        </div>
+         
+	</div> 
+</div> 
+
+<div data-role="page" id="grid-view">
+  <div data-role="header">
+    <h1>Grid View</h1>
+  </div>
+
+  <div data-role="content"> 
+    <ul class="grid-view">
+        <li><img src="images/file.png" class="grid-img" alt="" />File 1</li>
+    	<li><img src="images/file.png" class="grid-img" alt="" />File 2</li>
+        <li><img src="images/file.png" class="grid-img" alt="" />File 3</li>
+        <li><img src="images/file.png" class="grid-img" alt="" />File 4</li>
+    	<li><img src="images/file.png" class="grid-img" alt="" />File 5</li>
+        <li><img src="images/file.png" class="grid-img" alt="" />File 6</li>
+        <li><img src="images/file.png" class="grid-img" alt="" />File 7</li>
+    	<li><img src="images/file.png" class="grid-img" alt="" />File 8</li>
+        <li><img src="images/file.png" class="grid-img" alt="" />File 9</li>
+    </ul>
+  </div>
+</div>
+
+<div data-role="page" id="list-view">
+  <div data-role="header">
+    <h1>List View</h1>
+  </div>
+
+  <div data-role="content"> 
+   <div data-role="controlgroup" data-type="horizontal" style="padding-bottom:8px">
+    <a href="index.html" data-role="button" data-icon="gear">Edit</a>
+    <a href="index.html" data-role="button" data-icon="delete">Delete</a>
+    <a href="index.html" data-role="button" data-icon="plus">Add</a>
+    </div>
+   <ul data-role="listview"> 
+			
+            <li> 
+            	<img src="images/file.png" width="64" height="64" alt="" /> 
+				<h3><a href="#">Very Important File</a></h3> 
+				<p>Description Description Description Description Description  </p> 
+              	
+            </li> 
+			<li> 
+				<img src="images/file.png" width="64" height="64" alt="" /> 
+				<h3><a href="#">Flash Presentation</a></h3> 
+				<p>Description Description Description Description Description </p> 
+			</li> 
+           <li> 
+				<img src="images/file.png" width="64" height="64" alt="" /> 
+				<h3><a href="#">Very Important File</a></h3> 
+				<p>Description Description Description Description Description </p> 
+			</li> 
+			<li> 
+				<img src="images/file.png" width="64" height="64" alt="" /> 
+				<h3><a href="#">Flash Presentation</a></h3> 
+				<p>Description Description Description Description Description </p> 
+			</li> 
+            <li> 
+				<img src="images/file.png" width="64" height="64" alt="" /> 
+				<h3><a href="#">Very Important File</a></h3> 
+				<p>Description Description Description Description Description </p> 
+			</li> 
+			<li> 
+				<img src="images/file.png" width="64" height="64" alt="" /> 
+				<h3><a href="#">Flash Presentation</a></h3> 
+				<p>Description Description Description Description Description </p> 
+			</li> 
+		
+		</ul> 
+  </div>
+</div>
+<div data-role="footer">
+    <h4><a href="index.html" rel="external">Main Page</a></h4>
+</div>
+
+</body> 
+</html> 

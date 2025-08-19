@@ -1,0 +1,51 @@
+<div class="pageContent">
+		<div class="pageFormContent" layoutH="58">
+			<div class="unit" style="font-size:15px;font-weight:600;">基本信息</div>
+			<div class="unit">
+				<label>名称：</label>
+				<input type="text" class="" readonly  size="30" value="{$msgInfo.name}">
+			</div>
+			<div class="unit">
+				<label>数量：</label>
+				<input type="text" class="" readonly  size="30" value="{$msgInfo.count}">
+			</div>
+			<div class="unit">
+				<label>价格：</label>
+				<input type="text" class="" readonly  size="30" value="{$msgInfo.price}">
+			</div>
+			<div class="unit">
+				<label>备注：</label>
+				<textarea class="" readonly name="address" rows="2" cols="35">{$msgInfo.remark}</textarea>
+			</div>
+			
+			<div class="unit" style="font-size:15px;font-weight:600;">审核信息</div>
+			<div class="unit">
+				<label>审核人：</label>
+				<input type="text" class="" readonly  size="30" value="{$msgInfo.approve}">
+			</div>
+			<div class="unit">
+				<label>审核结果：</label>
+				<eq name="msgInfo['status']" value="0"><input type="text" class="" readonly  size="30" value="待审核"></eq>
+				<eq name="msgInfo['status']" value="1"><input type="text" class="" readonly  size="30" value="通过"></eq>
+				<eq name="msgInfo['status']" value="-1"><input type="text" class="" readonly  size="30" value="未通过"></eq>
+			</div>			
+
+			<div class="unit">
+				<label>审核时间：</label>
+				<input type="text" class="" readonly  size="30" value="<?php if ($msgInfo['apvtime']!=0) echo date('Y-m-d H:i',$msgInfo['apvtime']);?>">
+			</div>
+			<div class="unit">
+				<label>审核备注：</label>
+				<textarea class="" readonly name="address" rows="2" cols="35">{$msgInfo.apvremark}</textarea>
+			</div>				
+			
+		</div>
+		<div class="formBar">
+			<ul>
+
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close1" data-dismiss="modal" aria-label="Close">关闭</button></div></div></li>
+			</ul>
+		</div>
+	
+</div>
+

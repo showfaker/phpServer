@@ -1,0 +1,167 @@
+<include file="Public:iframe_top_dialog" />
+
+<link href="__PUBLIC__/asyncbox/skins/ZCMS/asyncbox.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="__PUBLIC__/asyncbox/jQuery.v1.4.2.js"></script>
+<script type="text/javascript" src="__PUBLIC__/asyncbox/AsyncBox.v1.4.5.js"></script>
+<script type="text/javascript" >
+function getrootpath() {
+    //获取当前网址，如： http://localhost:8080/ems/Pages/Basic/Person.jsp
+    var curWwwPath = window.document.location.href;
+    //获取主机地址之后的目录，如： /ems/Pages/Basic/Person.jsp
+    var pathName = window.document.location.pathname;
+    var pos = curWwwPath.indexOf(pathName);
+    //获取主机地址，如： http://localhost:8080
+    var localhostPath = curWwwPath.substring(0, pos);
+    //获取带"/"的项目名，如：/ems
+    var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
+    projectName = projectName.replace("/Rbac","");
+    return(localhostPath + projectName);
+}
+function selectGroupmulti(arg1,arg2)
+{
+	var rootpath=getrootpath();
+	asyncbox.open({
+	id : "form",
+	title:'',
+	url :rootpath+'/Rbac/index.php?s=/Public/selectmulti/arg1/'+arg1+'/arg2/'+arg2,
+	width : 445,
+	height : 400,
+	//btnsbar : $.btn.ok,
+	callback : function(action){         　
+		if(action == 'close'){  
+			return;
+		}
+	}
+	});
+}
+
+function selectGroup(arg1,arg2)
+{
+	var rootpath=getrootpath();
+	asyncbox.open({
+		id : "form",
+		title:'',
+		url :rootpath+'/Rbac/index.php?s=/Public/select/arg1/'+arg1+'/arg2/'+arg2,
+		width : 445,
+		height : 400,
+		//btnsbar : $.btn.ok,
+		callback : function(action){         　
+			if(action == 'close'){  
+				return;
+			}
+		}
+		});
+}
+function selectWorker(arg1,arg2)
+{
+	var rootpath=getrootpath();
+	asyncbox.open({
+		id : "form",
+		title:'',
+		url :rootpath+'/Rbac/index.php?s=/Public/selectworker/arg1/'+arg1+'/arg2/'+arg2,
+		width : 445,
+		height : 400,
+		//btnsbar : $.btn.ok,
+		callback : function(action){         　
+			if(action == 'close'){  
+				return;
+			}
+		}
+		});
+}
+</script>
+
+<link rel="shortcut icon" href="favicon.ico"> 
+<link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<!-- Data Tables -->
+<link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+<link href="css/plugins/chosen/chosen.css" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/style.css?v=4.1.0" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+
+
+<div class="pageContent">
+	
+	<form method="post" action="__URL__/insert/rel/jbsxBoxworkassignment/callbackType/closeCurrent" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+			
+			<div class="form-group col-sm-10">
+					<label class="col-sm-2 control-label">所属项目：</label>
+					<div class="col-sm-4">
+					    <select name="plmid" data-placeholder="选择项目" class="chosen-select" style="width:230px;" tabindex="2">
+							<option value="">请选择项目</option>
+							<volist name="projects" id="project">
+							<option value="{$project.id}" hassubinfo="true">{$project.title}</option>
+							</volist>
+						</select>
+					</div>
+				</div>
+
+			<div class="form-group col-sm-10">
+				<label style="width:120px">&nbsp;&nbsp;&nbsp;&nbsp;任务名称：</label>
+				<input class="form-control" type="text" name="title" size="60" style="width:500px" >
+			</div>
+			
+			<div class="form-group col-sm-10">
+				<label style="width:120px">&nbsp;&nbsp;&nbsp;&nbsp;重要程度：</label>
+				<SELECT class="form-control"  name="important" style="width:500px">
+					<option value="普通">普通</option>
+					<option value="重要">重要</option>
+					<option value="紧急">紧急</option>
+				</SELECT>
+			</div>
+			
+			<div class="form-group col-sm-10">
+				<label style="width:120px">&nbsp;&nbsp;&nbsp;&nbsp;开始时间：</label>
+				<input type="text" name="timebegin" class="form-control" dateFmt="yyyy-MM-dd" readonly="true"  value="<?php echo date('Y-m-d',time());?>" style="width:500px"/>
+			</div>
+			
+			<div class="form-group col-sm-10">
+				<label style="width:120px">&nbsp;&nbsp;&nbsp;&nbsp;完成期限：</label>
+				<input type="text" name="timeend" class="form-control" dateFmt="yyyy-MM-dd" readonly="true"  value="<?php echo date('Y-m-d',time());?>" style="width:500px"/>
+			</div>
+			
+			<div class="form-group col-sm-10">
+				<label style="width:120px">&nbsp;&nbsp;&nbsp;&nbsp;责任员工：</label>
+				<input type="text" id="current" name="current" class="form-control" style="width:454px" readonly placeholder="点击获取人员" onclick="selectGroupmulti('current','pid')" style="width:500px">
+				<input type="hidden" id="pid" name="pid"/>
+	    		</a>
+			</div>
+			
+			<div class="form-group col-sm-10">
+				<label style="width:120px">&nbsp;&nbsp;&nbsp;&nbsp;查看人：</label>
+				<input type="text" id="check" name="check" class="form-control" style="width:454px" readonly placeholder="点击获取人员" onclick="selectGroupmulti('check','checkpid')" style="width:500px">
+				<input type="hidden" id="checkpid" name="checkpid"/>
+	    		</a>
+			</div>
+			
+			<div class="form-group col-sm-10">
+				<label style="width:120px">&nbsp;&nbsp;&nbsp;&nbsp;任务内容：</label>
+				<textarea class="form-control" name="content" rows="12" cols="60" style="width:500px" tools="simple" upLinkUrl="{editorRoot}upload.php" upLinkExt="zip,rar,doc,docx"  
+                        upImgUrl="{editorRoot}upload.php"  upImgExt="jpg,jpeg,gif,png"></textarea>
+			</div>
+			
+		</div>
+		
+			
+		<input type="hidden" name="status" value="1" />
+		<input type="hidden" name="releaser" value="<?php echo $_SESSION['loginUserName'].$_SESSION['number'] ?>">
+		
+		
+		<div>
+			<button type="button" class="btn btn-sm btn-white pull-right m-t-n-xs" data-dismiss="modal" style="margin-left:10px">关闭</button>
+			<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>确定</strong>
+			</button>
+		</div>
+			
+		
+	</form>
+	
+</div>
+<script src="js/jquery.min.js?v=2.1.4"></script>	
+<script src="js/plugins/chosen/chosen.jquery.js"></script>
+<script src="js/demo/form-advanced-demo.js"></script>
+
+<include file="Public:iframe_bottom_dialog" />

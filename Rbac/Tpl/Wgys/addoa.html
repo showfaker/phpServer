@@ -1,0 +1,180 @@
+
+<link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/style.css?v=4.1.0" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+
+<eq name="_SESSION[app]" value="1">
+<style>
+.forminputlarge
+{
+	width:200px;
+}
+</style>
+</eq>
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+	</button>
+	<h4 class="modal-title">项目验收</h4>
+</div>
+<form method="post" action="__URL__/insert/callbackType/closeCurrent/navTabId/Second" ENCTYPE="multipart/form-data" onsubmit="return iframeCallback(this, dialogAjaxDone)">
+<div class="modal-body" id="file-pretty"> 
+	<input type="hidden" value="{$orgdata.id}" name="id">
+	<input type="hidden" value="{$step}" name="step">
+	<div class="form-group">
+		<label style="float:left">项目名称</label>
+		<input type="text" placeholder="" class="form-control" readonly value="{$orgdata['title']}">
+	</div>
+	
+	<eq name="step" value="1">
+	<table class="drafttable" style="position:relative;top:10px;margin:0 auto;width:100%;margin-bottom:28px">
+		<tr>
+			<td class="normal" style="font-weight:normal;height:45px;">项目编码</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.number}" class="forminputlarge" name="para1" aria-required="false" <eq name="_SESSION[app]" value="1">style="width:200px"</eq>>
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:normal;height:45px">项目名称</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.title}" class="forminputlarge" name="para2" aria-required="false" <eq name="_SESSION[app]" value="1">style="width:200px"</eq>>
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:normal;height:45px">开始时间</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.realtimebegin}" class="forminputlarge" name="para3" aria-required="false" <eq name="_SESSION[app]" value="1">style="width:200px"</eq>>
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:normal;height:45px">竣工时间</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.realtimeend}" class="forminputlarge" name="para4" aria-required="false" <eq name="_SESSION[app]" value="1">style="width:200px"</eq>>
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:normal;height:45px;">序号</td>
+			<td class="normal" colspan="2" style="width:200px">验收内容</td>
+			<td class="normal">验收结果（合格/不合格）</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:normal;height:45px">1</td>
+			<td class="normal" colspan="2">验收桩</td>
+			<td class="normal"></td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:normal;height:45px">2</td>
+			<td class="normal" colspan="2">验收箱变</td>
+			<td class="normal"></td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:normal;height:45px">3</td>
+			<td class="normal" colspan="2">验收雨棚</td>
+			<td class="normal"></td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:normal;height:45px"></td>
+			<td class="normal" colspan="2"></td>
+			<td class="normal"></td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:normal;height:45px"></td>
+			<td class="normal" colspan="2"></td>
+			<td class="normal"></td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:normal;height:45px"></td>
+			<td class="normal" colspan="2"></td>
+			<td class="normal"></td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:normal;height:45px"></td>
+			<td class="normal" colspan="2"></td>
+			<td class="normal"></td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:normal;height:45px"></td>
+			<td class="normal" colspan="2"></td>
+			<td class="normal"></td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:normal;height:45px" colspan="2">验收部门：安全质量部</td>
+			<td class="normal" colspan="2">验收人：</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:normal;height:45px" colspan="2">建设部分：建设中心</td>
+			<td class="normal" colspan="2">验收人：</td>
+		</tr>
+		<tr>
+			<td class="normal"  <eq name="_SESSION[app]" value="1">style="font-weight:normal;height:45px;padding-left:100px;padding-top:30px;padding-bottom:30px"</eq>  colspan="4">验收时间：</td>
+		</tr>
+		
+    </table>
+	</eq>
+	
+	<eq name="step" value="0.1">
+	<div class="form-group">
+		<label style="width:100%;text-align:left">监理验收文件</label>
+		<input type="file" multiple="multiple" class="form-control" name="file01[]" style="width:100%">
+	</div>
+	<div class="form-group">
+		<label style="width:100%;text-align:left">自查验收文件</label>
+		<input type="file" multiple="multiple" class="form-control" name="file02[]" style="width:100%">
+	</div>
+	<div class="form-group">
+		<label style="width:100%;text-align:left">整改验收报告</label>
+		<input type="file" multiple="multiple" class="form-control" name="file03[]" style="width:100%">
+	</div>
+	</eq>
+	
+	<eq name="step" value="0.2">
+	<div class="form-group">
+		<label style="width:100%;text-align:left">联合验收多方签字文件</label>
+		<input type="file" multiple="multiple" class="form-control" name="file04[]" style="width:100%">
+	</div>
+	<div class="form-group">
+		<label style="width:100%;text-align:left">工程量三方确认单</label>
+		<input type="file" multiple="multiple" class="form-control" name="file05[]" style="width:100%">
+	</div>
+	</eq>
+	
+	
+	<eq name="step" value="1.5">
+	<div class="form-group">
+		<label style="width:100%;text-align:left">竣工验收文件（验收任务单）</label>
+		<input type="file" multiple="multiple" class="form-control" name="file1[]" style="width:100%">
+	</div>
+	</eq>
+	
+	<eq name="step" value="2">
+	<div class="form-group">
+		<label style="width:100%;text-align:left">项目验收文件（可多选）</label>
+		<input type="file" multiple="multiple" class="form-control" name="file21[]" style="width:100%">
+	</div>
+	<!-- <div class="form-group">
+		<label style="width:100%;text-align:left">项目验收文件（资产移交清册）</label>
+		<input type="file" multiple="multiple" class="form-control" name="file22[]" style="width:100%">
+	</div>
+	<div class="form-group">
+		<label style="width:100%;text-align:left">项目验收文件（竣工图）</label>
+		<input type="file" multiple="multiple" class="form-control" name="file23[]" style="width:100%">
+	</div> -->
+	</eq>
+</div>
+<div class="modal-footer">
+	<button type="submit" class="btn btn-danger">提交</button>
+	<button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+</div>
+
+
+
+</form>
+
+<!-- Prettyfile -->
+<script src="js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+<script>
+	$('input[type="file"]').prettyFile();
+</script>

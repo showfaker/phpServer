@@ -1,0 +1,131 @@
+
+<link rel="shortcut icon" href="favicon.ico"> 
+<link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/style.css?v=4.1.0" rel="stylesheet">
+
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+	</button>
+	<h4 class="modal-title">供应商</h4>
+</div>
+<form method="post" action="__URL__/update/callbackType/closeCurrent/navTabId/Second" ENCTYPE="multipart/form-data" onsubmit="return iframeCallback(this, dialogAjaxDone)">
+<div class="modal-body"> 
+	<input type="hidden" value="{$vo.id}" name="id">
+	<div class="form-group">
+		<label style="float:left">供应商名称</label>
+		<input type="text" placeholder="" class="form-control" name="para1" value="{$vo.para1}">
+	</div>
+	<div class="form-group">
+		<label style="float:left">供应商编码</label>
+		<input type="text" placeholder="" class="form-control" name="para2" value="{$vo.para2}">
+	</div>
+	<div class="form-group">
+		<label style="float:left">物资类别</label>
+		<input type="text" placeholder="" class="form-control" name="para3" value="{$vo.para3}">
+	</div>
+	<div class="form-group">
+		<label style="float:left">联系人</label>
+		<input type="text" placeholder="" class="form-control" name="para4" value="{$vo.para4}">
+	</div>
+	<div class="form-group">
+		<label style="float:left">联系人电话</label>
+		<input type="text" placeholder="" class="form-control" name="para5" value="{$vo.para5}">
+	</div>
+	<div class="form-group">
+		<label style="float:left">营业执照号</label>
+		<input type="text" placeholder="" class="form-control" name="para6" value="{$vo.para6}">
+	</div>
+	<div class="form-group">
+		<label style="float:left">纳税人识别号</label>
+		<input type="text" placeholder="" class="form-control" name="para8" value="{$vo.para8}">
+	</div>
+	<div class="form-group">
+		<label style="float:left">注册资金（万元）</label>
+		<input type="text" placeholder="" class="form-control" name="para9" value="{$vo.para9}">
+	</div>
+	<div class="form-group">
+		<label style="float:left">是否美元</label>
+		<input type="text" placeholder="" class="form-control" name="para10" value="{$vo.para10}">
+	</div>
+	<div class="form-group">
+		<label style="float:left">资质证书</label>
+		<input type="text" placeholder="" class="form-control" name="para11" value="{$vo.para11}">
+	</div>
+	<div class="form-group">
+		<label style="float:left">供应商类型</label>
+		<input type="text" placeholder="" class="form-control" name="para12" value="{$vo.para12}">
+	</div>
+	<div class="form-group">
+		<label style="float:left">是否合格</label>
+		<input type="text" placeholder="" class="form-control" name="para13" value="{$vo.para13}">
+	</div>
+	<div class="form-group">
+		<label style="float:left">引入日期</label>
+		<input type="text" placeholder="" class="form-control" name="para14" value="{$vo.para14}">
+	</div>
+	<div class="form-group">
+		<label style="float:left">开户行</label>
+		<input type="text" placeholder="" class="form-control" name="para15" value="{$vo.para15}">
+	</div>
+	<div class="form-group">
+		<label style="float:left">账号</label>
+		<input type="text" placeholder="" class="form-control" name="para16" value="{$vo.para16}">
+	</div>
+	<div class="form-group">
+		<label style="float:left">法定代表人</label>
+		<input type="text" placeholder="" class="form-control" name="para17" value="{$vo.para17}">
+	</div>
+	<div class="form-group">
+		<label style="float:left">经营地址</label>
+		<input type="text" placeholder="" class="form-control" name="para18" value="{$vo.para18}">
+	</div>
+	<div class="form-group">
+		<label style="float:left">经营范围</label>
+		<input type="text" placeholder="" class="form-control" name="para19" value="{$vo.para19}">
+	</div>
+	<div class="form-group">
+		<label style="float:left">营业执照</label>
+		<neq name="vo.file1array" value="">
+			<volist name="vo.file1array" id="file1">
+			<neq name="file1" value="">
+			<a href="__URL__/filedown/filename/{$file1}/filerealname/{$vo[file1namearray][$key]}" style="color:green"><img src="__PUBLIC__/Uploads/{$file1}" style="height:30px;margin-right:20px">
+			</a> 
+			</neq>
+			</volist>
+		</neq>
+	</div>
+	<div class="form-group">
+		<label style="float:left">开户许可证</label>
+		<neq name="vo.file2array" value="">
+			<volist name="vo.file2array" id="file2">
+			<neq name="file2" value="">
+			<a href="__URL__/filedown/filename/{$file2}/filerealname/{$vo[file2namearray][$key]}" style="color:green"><img src="__PUBLIC__/Uploads/{$file2}" style="height:30px;margin-right:20px">
+			</a> 
+			</neq>
+			</volist>
+		</neq>
+	</div>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+</div>
+</form>
+<script src="js/jquery.min.js?v=2.1.4"></script>
+<script src="js/bootstrap.min.js?v=3.3.6"></script>
+<script src="js/plugins/layer/laydate/laydate.js"></script>
+<script src="js/content.js?v=1.0.0"></script>
+<link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="js/plugins/iCheck/icheck.min.js"></script>
+<script>
+	$(document).ready(function () {
+		$('.i-checks').iCheck({
+			checkboxClass: 'icheckbox_square-green',
+			radioClass: 'iradio_square-green',
+		});
+	});
+</script>

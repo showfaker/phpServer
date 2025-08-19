@@ -1,0 +1,168 @@
+
+<link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/style.css?v=4.1.0" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+<link href="css/plugins/steps/jquery.steps.css" rel="stylesheet">
+
+<!-- Bootstrap-Treeview plugin javascript -->
+<script src="js/plugins/treeview/bootstrap-treeview.js"></script>
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+	</button>
+	<h4 class="modal-title">专项节点</h4>
+</div>
+<form method="post" action="__URL__/insert2/callbackType/closeCurrent/navTabId/Second" ENCTYPE="multipart/form-data" onsubmit="return iframeCallback(this, dialogAjaxDone)">
+<div class="modal-body" id="file-pretty"> 
+	<input type="hidden" value="{$orgdata.id}" name="id">
+	<div class="form-group">
+		<label style="float:left">项目名称</label>
+		<input type="text" placeholder="" class="form-control" readonly value="{$orgdata['title']}">
+	</div>
+	
+	<div id="treeview5" class="test" style="text-align:left"></div>
+	
+	
+	<table class="drafttable" style="position:relative;top:8px;margin:0 auto;width:536px;margin-bottom:28px;display:none">
+		<volist name="$schedules" id="worktype">
+		<tr>
+			
+			<td class="normal area" style="font-weight:bold;height:45px" title="{$worktype.plantimebegin} ~ {$worktype.plantimeend}">{$worktype.worktype}</td>
+			
+			<td class="normal" colspan="3">
+			<volist name="worktype.subworktypes" id="subworktype">
+			<div class="{$worktype.worktype}" title="{$subworktype.plantimebegin} ~ {$subworktype.plantimeend}">
+			<neq name="subworktype.attribute">（{$subworktype.attribute}）</neq>{$subworktype.subworktype}
+			</div>
+			</volist>
+			</td>
+			
+		</tr>
+		</volist>
+	</table>
+
+	<script>
+		$(function () {
+		var data1=new Array();
+		var data2=new Array();
+		var data3=new Array();
+		var data4=new Array();
+		var defaultData=new Array();
+		$(".area").each(function(i){
+			
+			thistitle1=this.innerHTML;
+			data1=new Array();
+			$("."+thistitle1).each(function(j){
+				data1.push({
+					text: $(this).html(),
+					href: '#parent2',
+					tags: [$(this).attr("title")]
+				});
+			})
+			
+			defaultData.push({
+				text: $(this).html(),
+				href: '#parent1',
+				tags: [$(this).attr("title")],
+				nodes:data1
+			});
+		})
+
+
+	   
+		$('#treeview5').treeview({
+			levels: 1,
+			color: "#428bca",
+			expandIcon: 'glyphicon glyphicon-chevron-right',
+			collapseIcon: 'glyphicon glyphicon-chevron-down',
+			nodeIcon: 'glyphicon glyphicon-bookmark',
+			showTags: true,
+			data: defaultData
+		});
+
+		$('#treeview5').on('nodeSelected', function(event, data) {  
+
+			var keyword=data.text;
+			var lng=0;
+			var lat=0;
+			var num=0;
+			
+			map.clearOverlays();//清空原来的标注
+			$(".siteclass").each(function(u){
+				var area=$(this).attr("area");
+				if(area.indexOf(keyword)>=0)
+				{
+					var pt = new BMap.Point($(this).attr("title"),$(this).attr("id"));
+					var online=$(this).attr("name");
+					if(online==1)
+					{
+						var myIcon = new BMap.Icon("__PUBLIC__/Images/4.png", new BMap.Size(36,36));
+					}
+					else
+					{
+						var myIcon = new BMap.Icon("__PUBLIC__/Images/3.png", new BMap.Size(36,36));
+					}
+					var marker = new BMap.Marker(pt,{icon:myIcon});
+					map.addOverlay(marker);
+					//var label = new BMap.Label(this.innerHTML,{offset:new BMap.Size(10,-32)});
+					//marker.setLabel(label);
+					
+					
+					lng+=parseFloat($(this).attr("title"));
+					lat+=parseFloat($(this).attr("id"));
+					num++;
+					
+				}
+			})
+			
+			lngcenter=lng/num;
+			latcenter=lat/num;
+			var point = new BMap.Point(lngcenter,latcenter);
+			if(data.href=="#parent1")
+			{
+				map.centerAndZoom(point, 11);
+			}
+			if(data.href=="#parent2")
+			{
+				map.centerAndZoom(point, 13);
+			}
+			if(data.href=="#parent3")
+			{
+				map.centerAndZoom(point, 18);
+			}
+
+        });  
+
+	});
+
+	</script>	
+	
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+</div>
+
+
+
+</form>
+
+<!-- Steps -->
+<script src="js/plugins/staps/jquery.steps.min.js"></script>
+
+<!-- Jquery Validate -->
+<script src="js/plugins/validate/jquery.validate.min.js"></script>
+<script src="js/plugins/validate/messages_zh.min.js"></script>
+
+
+<script>
+$(document).ready(function () {
+	$("#wizard").steps();
+	$('.i-checks').iCheck({
+		checkboxClass: 'icheckbox_square-green',
+		radioClass: 'iradio_square-green',
+	});
+});
+</script>

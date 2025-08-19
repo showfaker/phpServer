@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">	
+	<link href="__PUBLIC__/dwz/themes/default/style.css" rel="stylesheet" type="text/css" />
+	<link href="__PUBLIC__/dwz/themes/css/core.css" rel="stylesheet" type="text/css" />	
+	<style>
+	html { overflow: scroll; }
+	</style>
+	<script type="text/javascript" src="__PUBLIC__/asyncbox/jQuery.v1.4.2.js"></script>
+<div class="pageContent"> 
+	
+	<div class="pageFormContent" layoutH="56" style="background-color:white;">
+		<!--
+		<div style="position:relative;top:0px;margin:0 auto;font-weight:bold;width:614px;">
+		<div class="unit">
+					<label style="width:55px">申请人:</label>
+					<input type="text" readonly
+					style="font-size:15px;font-weight:bold;color:#8B0000;position:relative;border:0px;border-bottom:1px solid #BBBBBB;height:19px;background:white;" 
+					size="18"  name="name" value="{$vo[user]}">
+
+
+					<label style="position:relative;padding-left:120px;width:65px">申请时间:</label>
+					<input readonly="true" value="<?php echo date('Y-m-d',$vo[create_time]); ?>" class="date" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" dateFmt="yyyy年MM月dd日"  type="text" style="width:95px;position:relative;border:0px;border-bottom:1px solid #BBBBBB;height:19px;background:white;" size="28"  name="time">
+					
+					
+		</div>
+		</div>	
+		-->
+	
+		<div class="" style="margin-left:0px;">
+			<div style="position:relative;top:25px;margin:0 auto;width:620px;border:1px solid #999;padding:1px">
+			<table class="drafttable" style="position:relative;margin:0 auto;width:620px;top:0px">
+			<thead>
+						
+
+
+			<tr>
+				<td class="normal" colspan="4" style="padding-top:8px;font-weight:bold;font-size:20px;letter-spacing:4px;font-family:黑体;color:#323299;height:35px;background-color:#CCFFFF;text-align:center">{$setting.title}
+				</br><span style="float:right;color:#FF6600;font-size:14px;letter-spacing:0px;font-family:黑体;">文档流水号:{$setting.serial}-{$vo.year}-{$vo.serial}</span></td>
+			</tr>	
+			<tr>
+				<td class="normal" colspan="4" style="padding-top:8px;height:35px;text-align:center">
+				<div class="new-comment-content" style="line-height:16px;font-weight:bold;font-size:14px;color:#FF6600;font-family:黑体;">{$setting.subtitle}</div></td>
+			</tr>	
+			<volist name="line" id="line">
+			<neq name="line[1]" value="">
+			<tr>
+				<td class="normal" style="font-weight:bold;height:35px;background-color:#F7F7F7;width:140px;text-align:center;line-height:15px">{$line[0]}<neq name="line.pararequire0" value=""><font style="color:red;"> *</font></neq></td>
+				<td class="normal new-comment-content" colspan="1" style="width:215px;line-height:15px">{$line[value0]}</td>
+				<td class="normal" style="font-weight:bold;height:35px;background-color:#F7F7F7;width:140px;text-align:center;line-height:15px">{$line[1]}<neq name="line.pararequire0" value=""><font style="color:red"> *</font></neq></td>
+				<td class="normal new-comment-content" colspan="1" style="width:215px;line-height:15px">{$line[value1]}</td>
+			</tr>
+			</neq>
+			<eq name="line[1]" value="">
+			<tr>
+				<td class="normal" style="font-weight:bold;height:35px;background-color:#F7F7F7;width:140px;text-align:center;line-height:15px">{$line[0]}<neq name="line.pararequire0" value=""><font style="color:red"> *</font></neq></td>
+				<td class="normal new-comment-content" colspan="3" style="line-height:15px">{$line[value0]}</td>
+			</tr>
+			</eq>
+			</volist>
+			
+			<!--
+			<tr>
+				<td class="normal" style="font-weight:bold;height:85px;background-color:#F7F7F7;width:140px;text-align:center">备注</td>
+				<td class="normal" colspan="3">
+				{$vo.remark}</td>
+			</tr>
+			-->
+			<neq name="setting[annex]" value="">
+			<tr>
+				<td class="normal" style="font-weight:bold;background-color:#F7F7F7;width:140px;text-align:center">附件</td>
+				<td class="normal"  colspan="3">
+				<div class="impBtn  fLeft">文件：<a href="javascript:void(0)" style="color:#323299">{$vo.filerealname0}</a>
+				
+				<neq name="vo.file1" value="">&nbsp;|&nbsp;<a href="javascript:void(0)" style="color:#323299;line-height:20px">{$vo.filerealname1}</a></br></neq>
+				<neq name="vo.file2" value="">&nbsp;|&nbsp;<a href="javascript:void(0)" style="color:#323299;line-height:20px">{$vo.filerealname2}</a></neq>
+				<neq name="vo.file3" value="">&nbsp;|&nbsp;<a href="javascript:void(0)" style="color:#323299;line-height:20px">{$vo.filerealname3}</a></br></neq>
+				<neq name="vo.file4" value="">&nbsp;|&nbsp;<a href="javascript:void(0)" style="color:#323299;line-height:20px">{$vo.filerealname4}</a></neq>
+				<neq name="vo.file5" value="">&nbsp;|&nbsp;<a href="javascript:void(0)" style="color:#323299;line-height:20px">{$vo.filerealname5}</a></br></neq>
+				<neq name="vo.file6" value="">&nbsp;|&nbsp;<a href="javascript:void(0)" style="color:#323299;line-height:20px">{$vo.filerealname6}</a></neq>
+				<neq name="vo.file7" value="">&nbsp;|&nbsp;<a href="javascript:void(0)" style="color:#323299;line-height:20px">{$vo.filerealname7}</a></br></neq>
+				<neq name="vo.file8" value="">&nbsp;|&nbsp;<a href="javascript:void(0)" style="color:#323299;line-height:20px">{$vo.filerealname8}</a></neq>
+				<neq name="vo.file9" value="">&nbsp;|&nbsp;<a href="javascript:void(0)" style="color:#323299;line-height:20px">{$vo.filerealname9}</a></br></neq>
+				
+				<neq name="vo.file10" value="">&nbsp;|&nbsp;<a href="javascript:void(0)" style="color:#323299;line-height:20px">{$vo.filerealname10}</a></br></neq>
+				<neq name="vo.file11" value="">&nbsp;|&nbsp;<a href="javascript:void(0)" style="color:#323299;line-height:20px">{$vo.filerealname11}</a></br></neq>
+				<neq name="vo.file12" value="">&nbsp;|&nbsp;<a href="javascript:void(0)" style="color:#323299;line-height:20px">{$vo.filerealname12}</a></br></neq>
+				<neq name="vo.file13" value="">&nbsp;|&nbsp;<a href="javascript:void(0)" style="color:#323299;line-height:20px">{$vo.filerealname13}</a></br></neq>
+				<neq name="vo.file14" value="">&nbsp;|&nbsp;<a href="javascript:void(0)" style="color:#323299;line-height:20px">{$vo.filerealname14}</a></br></neq>
+				
+				</div>
+				</td>
+			<tr>
+			</neq>
+			
+			<tr>
+				<td class="normal" colspan="4" style="font-weight:bold;height:25px;background-color:#CCFFFF;width:140px;text-align:center">审批意见栏</td>
+			</tr>
+			
+			<for start="0" end="100">
+			<?php if($setting["dept".$i]){?>
+			<tr>
+				<td class="normal" style="font-weight:bold;background-color:#F7F7F7;width:140px;height:65px;text-align:center"><?php echo($setting["dept".$i]);?></td>
+				<td class="normal"  colspan="3" style="line-height:18px;padding-left:10px;color:#323299">
+					<div class='new-comment-content' style="line-height:15px"><?php echo($vo["dept".$i]);?></div>
+				</td>
+			</tr>
+			<?php }?>
+			</for>
+			
+			<script>
+			$(function(){
+				 var element = $("div[class='new-comment-content']");
+				 for(i=0;i<element.length;i++)
+				 {
+					var temp =  element.eq(i).html().replace(/\n/g,'<br>');
+					element.eq(i).html(temp);
+				 }
+				 var element = $("td[class='normal new-comment-content']");
+				 for(i=0;i<element.length;i++)
+				 {
+					var temp =  element.eq(i).html().replace(/\n/g,'<br>');
+					element.eq(i).html(temp);
+				 }
+			});
+			</script>
+			
+			<tr>
+				<td class="normal" style="font-weight:bold;height:85px;background-color:#F7F7F7;width:140px;text-align:center">执行意见签署</td>
+				<td class="normal" colspan="3" style="line-height:18px">
+				{$vo.execute}
+				<neq name="vo.execute_file" value="">执行文件：<a href="__URL__/filedown/file/{$vo.execute_file}/filerealname/{$vo.execute_filerealname}" style="color:#323299">{$vo.execute_filerealname}</a></neq>
+				</td>
+			</tr>    
+			</thead>
+			</table>
+			</div>
+		</div>
+		<div class="" style="margin-left:0px;height:55px;">
+		</div>
+	</div>
+
+
+</div>
+
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+
+
+    <title>H+ 后台主题UI框架 - 树形视图</title>
+
+    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+
+    <link rel="shortcut icon" href="favicon.ico"> 
+	<link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/jsTree/style.min.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/styleold.css?v=4.1.0" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+				
+				
+				<div class="tabs-container">
+                   
+                        <ul class="nav nav-tabs">
+                            <eq name="responseList" value="undefined">
+                            <li class="active"><a data-toggle="tab" href="#tab-8" title="审批流"> 组织结构</a></li>
+							</eq>
+							<neq name="responseList" value="undefined">
+                            <li class="active"><a data-toggle="tab" href="#tab-9" title="正常"> 组织结构</a>
+                            </li>
+							</neq>
+                        </ul>
+                        <div class="tab-content ">
+							<eq name="responseList" value="undefined">
+                            <div id="tab-8" class="tab-pane active" title="审批流">
+                                <div class="panel-body">
+                                    <div class="ibox float-e-margins">
+										<div class="ibox-content">
+											<div id="jstree">
+												<ul>
+													<li class="jstree-open">选择人员
+														<ul>
+															<?php foreach($dept as $deptrow){ ?>
+																<li class="jstree-open"><a href="javascript:"><?php echo $deptrow[name]; ?></a>
+																	<ul>
+																	<?php foreach($user as $row){ if($row[department]==$deptrow[id]){ ?>
+																	<li data-jstree='{"type":"css"}'><a href="javascript:" title="{$row[nickname]}{$row[number]}"><?php echo $row[nickname].'【'.$row[role].'】'; ?></a></li>
+																	<?php }}?>
+																	</ul>
+																</li>
+															<?php }?>
+														</ul>
+													</li>
+												</ul>
+											</div>
+
+										</div>
+									</div>
+                                </div>
+                            </div>
+							</eq>
+							<neq name="responseList" value="undefined">
+                            <div id="tab-9" class="tab-pane active" title="正常">
+                                <div class="panel-body">
+                                    <div class="ibox float-e-margins">
+										<div class="ibox-content">
+											<div id="jstree">
+												<ul>
+													<li class="jstree-open">选择人员
+														<ul>
+															<?php foreach($dept as $deptrow){ ?>
+																<li class="jstree-open"><a href="javascript:"><?php echo $deptrow[name]; ?></a>
+																	<ul>
+																	<?php foreach($user as $row){ if($row[department]==$deptrow[id]){ ?>
+																	<li data-jstree='{"type":"css"}'><a href="javascript:" title="{$row[nickname]}{$row[number]}"><?php echo $row[nickname].'【'.$row[role].'】'; ?></a></li>
+																	<?php }}?>
+																	</ul>
+																</li>
+															<?php }?>
+														</ul>
+													</li>
+												</ul>
+											</div>
+
+										</div>
+									</div>
+                                </div>
+                            </div>
+							</neq>
+                        </div>
+
+                   
+
+                </div>
+			
+                
+
+
+    <!-- 全局js -->
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+
+
+
+    <!-- 自定义js -->
+    <script src="js/content.js?v=1.0.0"></script>
+
+
+    <!-- jsTree plugin javascript -->
+    <script src="js/plugins/jsTree/jstree.min.js"></script>
+
+  
+    <script>
+		var responseList="<?php echo $responseList;?>";
+		var pid1="<?php echo $pid1;?>";
+        $(document).ready(function () {
+            $('#jstree').jstree({
+                'core': {
+                    'check_callback': true,
+					'multiple' :  true,
+					"themes" : {
+						   "theme" : "default" ,
+						   "dots" : true,  
+						   "icons" : true  
+					}
+                },
+                'plugins': ['types', 'dnd',"sort","types","checkbox","themes"],
+                'types': {
+                    'default': {
+                        'icon': 'fa fa-folder'
+                    },
+                    'html': {
+                        'icon': 'fa fa-file-code-o'
+                    }
+                },
+				"checkbox" : {
+                     "keep_selected_style" :  false , //是否默认选中
+                     "three_state" :  true , //父子级别级联选择
+                     "tie_selection" :  false
+                 }
+            });
+        });
+		
+		function bringback()
+		{
+			var receiver="";
+			var receiver1="";
+			var treeNode = $('#jstree').jstree(true).get_checked(true);
+			for(i in treeNode)
+			{
+				if(treeNode[i].text.indexOf("【") != -1)
+				{
+					receiver+=treeNode[i].text+",";
+					receiver1+=treeNode[i].a_attr.title+",";
+				}
+			}
+			if((responseList!="undefined"))
+			{
+				parent.document.getElementById(responseList).value=receiver1;
+				parent.document.getElementById(pid1).value=receiver1;
+				parent.document.getElementById('close').click();
+			}
+			else
+			{
+				//undefined
+				parent.document.getElementById('copydept').value=receiver1;
+				parent.document.getElementById('close').click();
+			}
+		}
+    </script>
+</body>
+
+</html>
+
+
+
+<!-- 
+<div class="pageContent">
+	<div class="pageFormContent" layoutH="58">
+		<ul class="tree expand treeCheck">
+		<?php foreach($dept as $deptrow){ ?>
+			<li><a href="javascript:"><?php echo $deptrow[name]; ?></a>
+				<ul>
+				<?php foreach($user as $row){ if($row[department]==$deptrow[id]){ ?>
+				<li><a href="javascript:" title="{$row[nickname]}{$row[number]}"><?php echo $row[nickname].'【'.$row[role].'】'; ?></a></li>
+				<?php }}?>
+				</ul>
+			</li>
+		<?php }?>
+		</ul>
+	</div>
+	<script>
+	function bringback()
+	{
+		var receiver="";
+		$("li a").each(function(){
+			if($(this).attr("title"))
+			{
+				if($(this).prev().attr("class")=="ckbox checked")
+				{
+					receiver+=$(this).attr("title")+",";
+				}
+			}
+		});
+		$.bringBack({copy:receiver});
+	}
+	</script>
+	<div class="formBar">
+		<ul>
+			<li><div class="button"><div class="buttonContent"><button type="button" onclick="bringback()">确认选择</button></div></div></li>
+			<li><div class="button"><div class="buttonContent"><button class="close1" data-dismiss="modal" type="button">关闭</button></div></div></li>
+		</ul>
+	</div>
+</div> -->

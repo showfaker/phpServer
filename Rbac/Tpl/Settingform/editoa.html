@@ -1,0 +1,113 @@
+<div class="pageContent">
+
+	<script>
+			
+		
+	</script>
+	
+	<form method="post" action="__URL__/update/navTabId/__MODULE__/callbackType/closeCurrent" class="pageForm required-validate" ENCTYPE="multipart/form-data" onsubmit="return validateCallback(this)">
+		<!--<input type="hidden" name="user_id" value="<?php echo $_SESSION[C('USER_AUTH_KEY')] ?>"/>-->
+		<!--<input type="hidden" name="id" value="{$vo.id}" />-->
+		<div class="pageFormContent" style="height:700px">
+
+			<div class="unit">
+				<label style="width:100px">流程标题</label>
+				<input type="text" class="required" required style="width:200px" name="title" value="{$title}" readonly>
+			</div>
+			<div class="unit">
+				<label style="width:100px">数据库表名称</label>
+				<input type="text" class="" style="width:200px" name="tablename" value="{$vo.tablename}" placeholder="">
+			</div>
+			<div class="unit">
+				<label style="width:100px">流水号索引</label>
+				<input type="text" class="required" required style="width:200px" name="serial" value="{$vo.serial}" placeholder="建议为流程标题首字母拼写">
+			</div>
+			<div class="unit">
+				<label style="width:100px">是否有附件</label>
+				<select name="annex" style="width:200px">
+					<option value="" <neq name="vo.annex" value="1">selected</neq>>无</option>
+					<option value="1" <eq name="vo.annex" value="1">selected</eq>>有</option>
+				</select>
+			</div>
+			<div class="unit">
+				<label style="width:100px">副标题</label>
+				<textarea type="text" class="" style="width:500px;height:55px" name="subtitle">{$vo.subtitle}</textarea>
+			</div>
+			
+			<div class="unit" style="color:blue">
+			<label style="width:100px">填写注意</label>
+			<div style="float:left;line-height:18px;text-align:left;height:120px">
+			1、请依次顺序填写表格参数，不宜隔行填写；</br>
+			2、请依次顺序填写表格行数，每行最多放置2个参数；</br>
+			3、如果参数选择必填，则实际表单中不填写该参数将无法提交表单；</br>
+			4、填写方式中选择普通，则该参数在表格中以输入框展示，如果选择多行文本输入框，则建议该参数占用一整行；</br>
+			5、如果在列表是否显示中选“是”，则可以在表单列表中显示该参数，方便查看。</br>
+			<font style="font-weight:bold;color:red">6、注意：关键字段的参数序号不可修改！！！</font>
+			</div>
+			</div>
+			<div style="margin-top:20px;width:1580px;overflow-x: scroll;">
+			<for start="0" end="30">
+			<div class="unit">
+				<label style="width:100px">参数{$i+1}</label>
+				<input type="text" class="" style="width:150px" name="para{$i}" value="{$vo.para$i}" >
+				<label style="width:60px">表字段</label>
+				<input type="text" class="" style="width:100px" name="tableparaname{$i}" value="{$vo.tableparaname$i}" >
+				<label style="width:100px">所在表格行数</label>
+				<input type="text" class="" style="width:50px" name="pararow{$i}" value="{$vo.pararow$i}" >
+				<label style="width:50px">必填</label>
+				<select name="pararequire{$i}" style="width:50px">
+					<option value="" <neq name="vo.pararequire$i" value="1">selected</neq>>否</option>
+					<option value="1" <eq name="vo.pararequire$i" value="1">selected</eq>>是</option>
+				</select>
+				<label style="width:80px">填写方式</label>
+				<select name="paratype{$i}" style="width:150px">
+					<option value="0" <in name="vo.paratype$i" value=",0">selected</in>>普通</option>
+					<option value="1" <eq name="vo.paratype$i" value="1">selected</eq>>自动填写姓名</option>
+					<option value="2" <eq name="vo.paratype$i" value="2">selected</eq>>自动填写部门</option>
+					<option value="3" <eq name="vo.paratype$i" value="3">selected</eq>>自动填写日期</option>
+					<option value="4" <eq name="vo.paratype$i" value="4">selected</eq>>部门选择器</option>
+					<option value="5" <eq name="vo.paratype$i" value="5">selected</eq>>日期选择器</option>
+					<option value="7" <eq name="vo.paratype$i" value="7">selected</eq>>职位选择器</option>
+					<option value="9" <eq name="vo.paratype$i" value="9">selected</eq>>性别选择器</option>
+					<option value="11" <eq name="vo.paratype$i" value="11">selected</eq>>多行文本输入框</option>
+					<option value="12" <eq name="vo.paratype$i" value="12">selected</eq>>单人选择器</option>
+					<option value="13" <eq name="vo.paratype$i" value="13">selected</eq>>多人选择器</option>
+					<option value="14" <eq name="vo.paratype$i" value="14">selected</eq>>项目选择器</option>
+					<option value="15" <eq name="vo.paratype$i" value="15">selected</eq>>销售合同选择器</option>
+					<option value="16" <eq name="vo.paratype$i" value="16">selected</eq>>采购合同选择器</option>
+					<option value="17" <eq name="vo.paratype$i" value="17">selected</eq>>客户选择器</option>
+					<option value="10" <eq name="vo.paratype$i" value="10">selected</eq>>自定义选择器</option>
+					<option value="102" <eq name="vo.paratype$i" value="102">selected</eq>>模糊选择器</option>
+					<option value="100" <eq name="vo.paratype$i" value="100">selected</eq>>选择表字段</option>
+					<option value="101" <eq name="vo.paratype$i" value="101">selected</eq>>AJAX</option>
+					
+					<option value="103" <eq name="vo.paratype$i" value="103">selected</eq>>上传附件</option>
+				</select>
+				<input type="text" class="" style="width:189px;" name="paraselect{$i}" value="{$vo.paraselect$i}" placeholder="选择器选项，英文逗号间隔">
+				<input type="text" class="" style="width:229px;" name="effectdisplay{$i}" value="{$vo.effectdisplay$i}" placeholder="影响显示字段">
+				<!-- <input type="text" class="" style="width:80px;" name="paraselect_para{$i}" value="{$vo.paraselect_para$i}" placeholder="选择字段名"> -->
+				<!-- <input type="text" class="" style="width:80px;" name="paraselect_condition{$i}" value="{$vo.paraselect_condition$i}" placeholder="选择固定条件"> -->
+				<label style="width:100px">列表是否显示</label>
+				<select name="paratable{$i}" style="width:50px">
+					<option value="" <neq name="vo.paratable$i" value="1">selected</neq>>否</option>
+					<option value="1" <eq name="vo.paratable$i" value="1">selected</eq>>是</option>
+				</select>
+				<label style="width:60px">是否检索</label>
+				<select name="parasearch{$i}" style="width:50px">
+					<option value="" <neq name="vo.parasearch$i" value="1">selected</neq>>否</option>
+					<option value="1" <eq name="vo.parasearch$i" value="1">selected</eq>>是</option>
+				</select>
+			</div>
+			</for>
+			</div>
+		</div>
+		<div class="formBar">
+			<ul>
+				<li style="margin-left:-800px"><div class="buttonActive"><div class="buttonContent"><button type="submit">确定修改</button></div></div></li>
+				<li style="margin-left:-720px"><div class="button"><div class="buttonContent"><button type="button" class="close1" data-dismiss="modal">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+

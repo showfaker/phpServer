@@ -1,0 +1,52 @@
+
+<div class="modal-header" style="text-align: left;">
+	<button type="button" class="close" data-dismiss="modal">×</button>
+	<h4 class="modal-title" >更新决议</h4>
+</div>
+<form method="post" action="__URL__/doexecute/rel/jbsxBoxworkassignment/callbackType/closeCurrent" class="form-horizontal" onsubmit="return validateCallback(this, dialogAjaxDone)">
+	<div class="modal-body">
+		<div class="form-group">
+			<label class="col-sm-3 col-xs-3 control-label">所属会议：</label>
+			<div class="col-sm-8 col-xs-8">
+				<input type="text" value="{$meetingassignment.title}" class="form-control" readonly>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 col-xs-3 control-label">会议日期：</label>
+			<div class="col-sm-8 col-xs-8">
+				<input type="text" value="{$meetingassignment.timebegin}" class="form-control" readonly>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 col-xs-3 control-label">决议内容：</label>
+			<div class="col-sm-8 col-xs-8">
+				<textarea class="form-control" name="content" rows="3" cols="60" tools="simple" upLinkUrl="{editorRoot}upload.php" upLinkExt="zip,rar,doc,docx" upImgUrl="{editorRoot}upload.php"  upImgExt="jpg,jpeg,gif,png" readonly>{$vo.result}</textarea>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 col-xs-3 control-label">执行状态：</label>
+			<div class="col-sm-8 col-xs-8">
+				<select name="status" data-placeholder="选择决议执行状态" class="form-control" required>
+					<option value="">请选择决议执行状态</option>
+					<option value="1" <eq name="vo.status" value="1">selected</eq>>已完成</option>
+					<option value="2" <eq name="vo.status" value="2">selected</eq>>延期</option>
+					<option value="3" <eq name="vo.status" value="3">selected</eq>>未完成</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 col-xs-3 control-label">执行情况：</label>
+			<div class="col-sm-8 col-xs-8">
+				<textarea class="form-control" name="explain" rows="15" cols="60" tools="simple" upLinkUrl="{editorRoot}upload.php" upLinkExt="zip,rar,doc,docx" upImgUrl="{editorRoot}upload.php"  upImgExt="jpg,jpeg,gif,png">{$vo.explain}</textarea>
+			</div>
+		</div>
+	<div>
+	<input type="hidden" name="id" value="{$vo.id}">
+		
+	<div class="modal-footer">
+		<button type="button" class="btn btn-sm btn-white pull-right m-t-n-xs" data-dismiss="modal" style="margin-left:10px">关闭</button>
+		<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit" id='submit'><strong>确定</strong>
+		</button>
+	</div>
+</form>
+

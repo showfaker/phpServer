@@ -1,0 +1,149 @@
+	<link rel="shortcut icon" href="favicon.ico"> 
+	<link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <!-- Data Tables -->
+    <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="css/plugins/chosen/chosen.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.css">
+	
+
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+		</button>
+		<h4 class="modal-title">上传文件</h4>
+	</div>
+	<form id="format1" method="post" action="__URL__/insert" enctype="multipart/form-data" class="form-horizontal">    
+		<div class="modal-body" style="padding:0px;margin:0px;padding-top:20px">
+			<div class="form-group">
+				<div class="col-sm-10">
+					<label class="col-sm-2 control-label">项目：</label>
+					<div class="col-sm-8">
+					    <select name="plmid" id="plmid_draft" data-placeholder="选择项目" class="chosen-select" style="width:100%;" tabindex="2">
+							<option value="">请选择项目</option>
+							<volist name="projects" id="project">
+							<option value="{$project.id}" hassubinfo="true" <eq name="plmid" value="$project.id">selected</eq>>{$project.title}</option>
+							</volist>
+						</select>
+					</div>
+				</div>
+				
+				<div class="col-sm-10" style="margin-top:20px">
+					<label class="col-sm-2 control-label">文件类型：</label>
+					<div class="col-sm-8">
+						<select type="text" class="form-control" name="type" id="type_draft">
+						<option value="">全部</option>
+						<volist name="classifies" id="classifyvo">
+						<option value="{$classifyvo.name}" <eq name="type" value="$classifyvo.name">selected</eq>>{$classifyvo.name}</option>
+						</volist>
+						</select>
+					</div>
+				</div>
+				
+				
+				<div class="col-sm-10" style="margin-top:20px">
+					<label class="col-sm-2 control-label">文件：</label>
+					<div class="col-sm-8">
+					    <input type="file" class="form-control" id="file_draft" name="file[]" style="width:100%" multiple="multiple">
+					</div>
+				</div>
+				<!--
+				<div class="col-sm-10" style="margin-top:20px">
+					<label class="col-sm-2 control-label">文件名称：</label>
+					<div class="col-sm-4">
+					    <input type="text" name="title" value="" required="" aria-required="true" class="form-control">				
+					</div>
+				</div>
+				-->
+			</div>
+		</div>	
+		<input type="hidden" name="orderid" value="{$check_orderid}">
+		<input type="hidden" name="tj_id" value="{$check_tj_id}">
+		<input type="hidden" value="{$classify}" name="classify">
+		<div class="modal-footer">
+			<button type="button" onclick="changeout(this)" class="btn btn-primary" id="myconfirm">确认提交</button>
+			<button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+			<a id="btnclick" href="" data-toggle="modal" data-target="#modal" data-backdrop="static"  target="dialog"  class="btn btn-primary hidden"></a>
+		</div>
+	</form>
+    <script src="js/jquery.min.js?v=2.1.4"></script>	
+    <!-- Chosen -->
+    <script src="js/plugins/chosen/chosen.jquery.js"></script>
+    <script src="js/demo/form-advanced-demo.js"></script>
+	<!-- jQuery Validation plugin javascript-->
+    <script src="js/plugins/validate/jquery.validate.min.js"></script>
+    <script src="js/plugins/validate/messages_zh.min.js"></script>
+	
+    <script src="js/demo/form-validate-demo.js"></script>
+	
+	<!-- Prettyfile -->
+	<script src="js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+	<script>
+		$('input[type="file"]').prettyFile();
+	</script>
+
+
+ 
+	<!--<script>
+	    $("#sub").click(function(){
+           $("#format1").submit();
+		})
+	</script>-->
+    
+	<script>
+	function changeout(test){
+		//$('#myconfirm').attr('disabled',true);
+		var plmid=$("select[id='plmid_draft']").val();
+		var type=$("select[id='type_draft']").val();
+		var file=$("input[id='file_draft']").val();
+		if((plmid==null)||(plmid==undefined)||(plmid==""))
+		{
+			alert("请选择项目");
+			return false;
+		}
+		if((type==null)||(type==undefined)||(type==""))
+		{
+			alert("请选择文件类型");
+			return false;
+		}
+		if((file==null)||(file==undefined)||(file==""))
+		{
+			alert("请选择文件");
+			return false;
+		}
+		$("#format1").submit();
+	}
+	
+	</script>
+    <script>
+        function find(e){
+        var city=$("select[name='city']").val();
+        // alert(supplier);
+        var number=$(e).prev().val();
+        if($('input[name="tj_id"]').val()>0){
+        	var supplier=$("input[id='para6_0']").val();
+        	$(e).attr("href","__URL__/choice/key/"+e.title+"/city/"+city+"/supplier/"+supplier+"/number/"+number);
+        }else{
+        	$(e).attr("href","__URL__/choice/key/"+e.title+"/city/"+city+"/number/"+number);
+        }		
+		 
+		}
+    	
+	</script>
+	<script>
+        function find1(e){
+        var city=$("select[name='city']").val();
+        // var supplier=$("input[id='para6_0']").val();
+        var name=$(e).prev().val();	
+        // alert(name);	
+		 if($('input[name="tj_id"]').val()>0){
+        	var supplier=$("input[id='para6_0']").val();
+        	$(e).attr("href","__URL__/choice/key/"+e.title+"/city/"+city+"/supplier/"+supplier+"/name/"+name);
+        }else{
+        	$(e).attr("href","__URL__/choice/key/"+e.title+"/city/"+city+"/name/"+name);
+        }	 
+		}
+    	
+	</script>

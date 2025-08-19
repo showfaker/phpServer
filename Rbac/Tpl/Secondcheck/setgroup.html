@@ -1,0 +1,103 @@
+
+<link rel="shortcut icon" href="favicon.ico"> 
+<link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/style.css?v=4.1.0" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+
+    
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+	</button>
+	<h4 class="modal-title">项目基本信息登记表</h4>
+</div>
+<form method="post" action="__URL__/setgroupsubmit/callbackType/closeCurrent/navTabId/Second" ENCTYPE="multipart/form-data" class="form-horizontal" onsubmit="return verify()">
+<div class="modal-body">
+	
+	<input type="hidden" value="{$orgdata.id}" name="id">
+	<input type="hidden" value="{$type}" name="operate_type">
+	<input type="hidden" value="{$highpower}" name="highpower">
+	
+	<table class="drafttable" style="position:relative;top:28px;margin:0 auto;width:100%;margin-bottom:28px">
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">项目编号:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.number}" class="forminputlarge" name="number" required="" aria-required="true" disabled>
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">项目名称:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.title}" class="forminputlarge" name="title" required="" aria-required="true" disabled>
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">所属项目批次:</td>
+			<td class="normal" colspan="3">
+				<select name="groupid" class="form-control" style="width:80%">
+					<option value="">请选择</option>
+					<volist name="secondgroups" id="secondgroup">
+					<option value="{$secondgroup.id}" <eq name="vo.groupid" value="$secondgroup.id">selected</eq>>{$secondgroup.name}</option>
+					</volist>
+				</select>
+			</td>
+		</tr>
+		
+		
+		<eq name="approve" value="1">
+		<input type="hidden" value="1" class="forminputlarge" name="approve">
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">审核结果:</td>
+			<td class="normal" colspan="3">
+			<select class="form-control" name="result" onchange="setdesign_status(this.value)">
+				<option value="同意">同意</option>
+				<option value="退回">退回</option>
+			</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">审核意见:</td>
+			<td class="normal" colspan="3">
+			<textarea type="text" class="form-control" name="suggestion" id="suggestion"></textarea>
+			</td>
+		</tr>
+		</eq>
+    </table>
+	
+	
+
+</div>
+<div class="modal-footer">
+	<neq name="check" value="1">
+	<button type="submit" class="btn btn-danger">提交档案</button>
+	</neq>
+	<button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+</div>
+</form>
+
+<!-- Prettyfile -->
+<script src="js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+<script>
+	$('input[type="file"]').prettyFile();
+</script>
+
+<script>
+	$(document).ready(function () {
+		$('.i-checks').iCheck({
+			checkboxClass: 'icheckbox_square-green',
+			radioClass: 'iradio_square-green',
+		});
+	});
+	function verify()
+	{
+		var value=document.getElementsByName("result")[0].value;
+		var suggestion=document.getElementById("suggestion").value;
+		if((value!="同意")&&(suggestion==""))
+		{
+			alert("拒绝流程时必须填写审核意见");
+			return false;
+		}
+	}
+</script>

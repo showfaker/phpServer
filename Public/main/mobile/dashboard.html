@@ -1,0 +1,365 @@
+
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<meta charset="utf-8" /> 
+	<title>RealWorldAdmin - Dashboard Page</title> 
+	<link rel="stylesheet" href="css/main.css" /> 
+	<link rel="stylesheet" href="css/theme2.css" />  
+	<script type="text/javascript" src="js/jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="js/jquery.mobile-1.0a2.min.js"></script> 
+    <script src="js/themeswitcher.js"></script>
+</head> 
+<body> 
+
+<div data-role="page" data-theme="b" > 
+	<div data-role="header">
+		<h1>Dashboard</h1>
+        <a href="index.html" rel="external">Main Page</a>
+	</div>
+    <div data-role="content"> 
+        <ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b"> 
+            <li data-role="list-divider">Select a widget</li> 
+            <li><a href="#quickannouncement">Quick Announcement</a></li> 
+            <li><a href="#infoblock">Information Block</a></li> 
+            <li><a href="#pendingtasks">Pending Tasks</a><span class="ui-li-count ">18 New</span></li> 
+            <li><a href="#recentproducts">Recent Products</a><span class="ui-li-count ">6 Products</span></li> 
+            <li><a href="#reports">Reports</a></li> 
+            <li><a href="#calendar">Calendar</a></li>
+            <li><a href="#newmembers">New Members</a><span class="ui-li-count ">14 New</span></li>  
+        </ul> 
+    </div>
+     <div data-role="footer">
+        <h4><a href="index.html" rel="external">Main Page</a></h4>
+    </div>
+</div>
+<div data-role="page" id="quickannouncement">
+  <div data-role="header">
+    <h1>Quick Announcement</h1>
+  </div>
+
+  <div data-role="content"> 
+    
+    <form method="post" action="">
+    	      <textarea name="pagetext" id="pagetext" cols="40" rows="10" style="height:150px; width:99%"></textarea>
+        	<input type="submit" class="submit right-aligned ui-corner-all" value="Publish" />
+    </form>
+  </div>
+</div>
+
+<div data-role="page" id="infoblock">
+  <div data-role="header">
+    <h1>Information Block</h1>
+  </div>
+
+  <div data-role="content"> 
+  <p>
+  	Welcome to Real World Admin - an advanced administration interface template to suit all your needs.                        	
+  	Please follow the information blocks throughout site when browsing. They will help you explore all                       	
+    the hidden functions of this beautiful template.                       
+  </p>	
+ 
+  </div>
+</div>
+
+<div data-role="page" id="pendingtasks">
+    <div data-role="header">
+    	<h1>Pending Tasks</h1>
+    </div>
+    <div data-role="content"> 
+        <div data-role="collapsible" data-collapsed="true">
+            
+            <h3>Task 1 <span class="task-icon high-priority">Urgent</span> </h3>
+            <p>
+                
+                Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+                ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+                amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+                odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+            </p>
+        </div>
+         <div data-role="collapsible" data-collapsed="true">
+            <h3>Task 2<span class="task-icon medium-priority">Medium</span></h3>
+            <p>
+                Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+                ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+                amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+                odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+            </p>
+        </div>
+         <div data-role="collapsible" data-collapsed="true">
+            <h3>Task3<span class="task-icon low-priority">Normal</span></h3>
+            <p>
+                Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+                ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+                amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+                odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+            </p>
+        </div>
+         <div data-role="collapsible" data-collapsed="true">
+            <h3>Task 4<span class="task-icon high-priority">Urgent</span></h3>
+            <p>
+                Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
+                ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
+                amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
+                odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
+            </p>
+        </div>
+	</div>
+</div>
+
+<div data-role="page" id="recentproducts"> 
+ 
+	<div data-role="header"> 
+		<h1>Thumbnails</h1> 
+	</div><!-- /header --> 
+ 
+	<div data-role="content"> 
+		
+		<ul data-role="listview"> 
+			<li> 
+				<img src="../images/demo/backpack.png" width="64" height="64" /> 
+				<h3><a href="#.html">New Backpack</a></h3> 
+				<p>Description Description Description Description Description </p> 
+			</li> 
+			<li> 
+				<img src="../images/demo/briefcase.png" width="64" height="64" /> 
+				<h3><a href="#">Stylish Briefcase</a></h3> 
+				<p>Description Description Description Description Description </p> 
+			</li> 
+            	<li> 
+				<img src="../images/demo/purse.png" width="64" height="64" /> 
+				<h3><a href="#">New Backpack</a></h3> 
+				<p>Description Description Description Description Description </p> 
+			</li> 
+			<li> 
+				<img src="../images/demo/sportsbag.png" width="64" height="64" /> 
+				<h3><a href="#">Stylish Briefcase</a></h3> 
+				<p>Description Description Description Description Description </p> 
+			</li> 
+            	<li> 
+				<img src="../images/demo/suitcase.png" width="64" height="64" /> 
+				<h3><a href="#">New Backpack</a></h3> 
+				<p>Description Description Description Description Description </p> 
+			</li> 
+		
+		</ul> 
+	</div><!-- /content --> 
+</div>
+
+<div data-role="page" id="reports">
+    <div data-role="header">
+    	<h1>Sales Report</h1>
+    </div>
+    
+    <div data-role="content"> 
+        <ul class="yAxis">
+        <li>100</li>
+        
+        <li>90</li>
+        <li>80</li>
+        <li>70</li>
+        <li>60</li>
+        <li>50</li>
+        <li>40</li>
+        
+        <li>30</li>
+        <li>20</li>
+        <li>10</li>
+        
+        </ul>
+        <dl id="csschart">
+            
+            <dt>Mon</dt>
+            <dd class="p36"><span><b>36</b></span></dd>
+        
+            <dd class="sub p30" ><span><b>36</b></span></dd>
+            
+            <dt>Tue</dt>
+            <dd class="p45"><span><b>45</b></span></dd>
+            <dd class="sub p35"><span><b>36</b></span></dd>	
+            
+            <dt>Wed</dt>
+            <dd class="p41"><span><b>41</b></span></dd>
+        
+            <dd class="sub p21"><span><b>51</b></span></dd>	
+            
+            <dt>Thu</dt>
+            <dd class="p48"><span><b>48</b></span></dd>
+            <dd class="sub p30" ><span><b>36</b></span></dd>
+            
+            <dt>Fri</dt>
+            <dd class="p55"><span><b>55</b></span></dd>
+        
+            <dd class="sub p15" ><span><b>36</b></span></dd>
+            
+            <dt>Sat</dt>
+            <dd class="p80"><span><b>80</b></span></dd>
+            <dd class="sub p71" ><span><b>36</b></span></dd>
+            
+            <dt>Sun</dt>
+            <dd class="p72"><span><b>72</b></span></dd>
+        
+            <dd class="sub p53" ><span><b>36</b></span></dd>
+            
+            <dt>Mon</dt>
+            <dd class="p71"><span><b>71</b></span></dd>
+            <dd class="sub p37" ><span><b>36</b></span></dd>
+            
+         
+        </dl>
+        <ul class="xAxis">
+            <li>Mon</li>
+            
+            <li>Tue</li>
+            <li>Wed</li>
+            <li>Thu</li>
+            <li>Fri</li>
+            <li>Sat</li>
+            <li>Sun</li>
+            
+         
+        </ul>
+  </div>
+</div>
+
+<div data-role="page" id="calendar">
+    <div data-role="header">
+    	<h1>Calendar</h1>
+    </div>
+    
+    <div data-role="content"> 
+      <table class="calendar-table">
+			<thead>
+				<tr>
+					<th>Mon</th><th>Tue</th><th>Wed</th>
+					<th>Thu</th><th>Fri</th><th>Sat</th>
+					<th>Sun</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="padding" colspan="3"></td>
+					<td> 1</td>
+					<td> 2</td>
+					<td> 3</td>
+					<td> 4</td>
+				</tr>
+				<tr>
+					<td> 5</td>
+					<td> 6</td>
+					<td> 7</td>
+					<td> 8</td>
+					<td class="today"> 9</td>
+					<td>10</td>
+					<td>11</td>
+				</tr>
+				<tr>
+					<td>12</td>
+					<td class="date_has_event">
+						13
+						<div class="events">
+							<ul>
+								<li>
+									<span class="title">Event 1</span>
+									<span class="desc">Lorem ipsum dolor sit amet, consectetu adipisicing elit.</span>
+								</li>
+								<li>
+									<span class="title">Event 2</span>
+									<span class="desc">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
+								</li>
+							</ul>
+						</div>
+					</td>
+					<td>14</td>
+					<td>15</td>
+					<td>16</td>
+					<td>17</td>
+					<td>18</td>
+				</tr>
+				<tr>
+					<td>19</td>
+					<td>20</td>
+					<td>21</td>
+					<td class="date_has_event">
+						22
+						<div class="events">
+							<ul>
+								<li>
+									<span class="title">Event 1</span>
+									<span class="desc">Lorem ipsum dolor sit amet, consectetu adipisicing elit.</span>
+								</li>
+								<li>
+									<span class="title">Event 2</span>
+									<span class="desc">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
+								</li>
+							</ul>
+						</div>
+					</td>
+					<td>23</td>
+					<td>24</td>
+					<td>25</td>
+				</tr>	
+				<tr>
+					<td>26</td>
+					<td>27</td>
+					<td>28</td>
+					<td>29</td>
+					<td>30</td>
+					<td>31</td>
+					<td class="padding"></td>
+				</tr>
+			</tbody>
+			<tfoot>
+            	<tr>
+				<th>Mon</th>
+                <th>Tue</th>
+                <th>Wed</th>
+				<th>Thu</th>
+                <th>Fri</th>
+                <th>Sat</th>
+				<th>Sun</th>
+                </tr>
+			</tfoot>
+		</table>
+    </div>
+</div>
+
+<div data-role="page" id="newmembers">
+    <div data-role="header">
+    	<h1>New Members</h1>
+    </div>
+    
+    <div data-role="content"> 
+       <ul data-role="listview" class="members-list">
+            <li>
+                <img width="48" height="48" src="../images/demo/user1_48.png" alt="" />
+                <h3><a href="#" title="View round">Member 1</a></h3>
+                <p class="member-info">Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet</p><span></span>
+            </li>
+            <li>
+                <img width="48" height="48" src="../images/demo/user3_48.png" alt="" />
+                <h3><a href="#" title="View round">Member 2</a></h3>
+                <p class="member-info">Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet</p><span></span>
+            </li>
+            <li>
+                <img width="48" height="48" src="../images/demo/user4_48.png" alt="" />
+                <h3><a href="#" title="View round">Member 3</a></h3>
+                <p class="member-info">Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet</p><span></span>
+            </li>
+            <li>
+                <img width="48" height="48" src="../images/demo/user6_48.png" alt="" />
+                <h3><a href="#" title="View round">Member 4</a></h3>
+                <p class="member-info">Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet</p><span></span>
+            </li>
+             <li>
+                <img width="48" height="48" src="../images/demo/user7_48.png" alt="" />
+                <h3><a href="#" title="View round">Member 5</a></h3>
+                <p class="member-info">Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet</p><span></span>
+            </li>
+        </ul>	
+    </div>
+</div>
+ 
+</body> 
+</html> 

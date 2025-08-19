@@ -1,0 +1,142 @@
+<div class="modal-header" style="text-align: left;">
+	<button type="button" class="close" data-dismiss="modal">×</button>
+	<h4 class="modal-title" >查看会议计划</h4>
+</div>
+<form method="post"  class="form-horizontal">
+	<div class="modal-body" >
+		<div class="form-group">
+			<label class="col-sm-3 control-label">所属项目：</label>
+			<div class="col-sm-8">
+				<input readonly="true" type="text" class="form-control" value="{$vo.plm}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">主项节点：</label>
+			<div class="col-sm-8">
+				<input readonly="true" type="text" class="form-control" value="{$vo.group}">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-sm-3 control-label">会议分类：</label>
+			<div class="col-sm-8">
+				<input readonly="true" type="text" class="form-control" value="{$vo.type1}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">会议属性：</label>
+			<div class="col-sm-8">
+				<input readonly="true" type="text" class="form-control" value="{$vo.type2}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">会议级别：</label>
+			<div class="col-sm-8">
+				<input readonly="true" type="text" class="form-control" value="{$vo.type3}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">会议名称：</label>
+			<div class="col-sm-8">
+				<input readonly="true" type="text" class="form-control" value="{$vo.title}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">计划开始时间：</label>
+			<div class="col-sm-8">
+				<input readonly="true" type="text" class="form-control" value="{$vo.timebegin}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">计划结束时间：</label>
+			<div class="col-sm-8">
+				<input readonly="true" type="text" class="form-control" value="{$vo.timeend}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">会议周期：</label>
+			<div class="col-sm-8">
+				<select id="circle" name="circle" class="form-control" style="width:120px;float:left" readonly="true">
+					<option value="1"  <eq name="vo.circle" value="1">selected</eq>>每天</option>
+					<option value="2" <eq name="vo.circle" value="2">selected</eq>>每星期</option>
+					<option value="3" <eq name="vo.circle" value="3">selected</eq>>每月</option>
+				</select>
+
+				<div style='float:left;margin-left:20px;'>
+					<!-- 每星期 -->
+					<select name="week" class="form-control cycle2" style='width:100px;float:left;margin-right:20px;<neq name="vo.circle" value="2">display:none;</neq>' readonly="true">
+						<option value="Monday" <eq name="vo.week" value="Monday">selected</eq>>周一</option>
+						<option value="Tuesday" <eq name="vo.week" value="Tuesday">selected</eq>>周二</option>
+						<option value="Wednesday" <eq name="vo.week" value="Wednesday">selected</eq>>周三</option>
+						<option value="Thursday" <eq name="vo.week" value="Thursday">selected</eq>>周四</option>
+						<option value="Friday" <eq name="vo.week" value="Friday">selected</eq>>周五</option>
+						<option value="Saturday" <eq name="vo.week" value="Saturday">selected</eq>>周六</option>
+						<option value="Sunday" <eq name="vo.week" value="Sunday">selected</eq>>周日</option>
+					</select>
+
+					<!-- 每月 -->
+					<input type="number" name="day" max="31" min="1" value="{$vo.day}" class="form-control cycle3" style='width:60px;float:left;<neq name="vo.circle" value="3">display:none;</neq>' readonly="true">
+					<span style='float:left;padding: 6px 12px;<neq name="vo.circle" value="3">display:none;</neq>' class="cycle3">日</span>
+
+					<!-- 每日 -->
+					<input type="number" name="hour" max="23" value="{$vo.hour}" min="0" class="form-control" style="width:60px;float:left" readonly="true">
+					<span style="float:left;padding: 6px 12px;">小时</span>
+					<input type="number" name="minute" max="59" value="{$vo.minute}" min="0" class="form-control" style="width:60px;float:left" readonly="true">
+					<span style="float:left;padding: 6px 12px;">分钟</span>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">会议目标：</label>
+			<div class="col-sm-8">
+				<input readonly="true" type="text" class="form-control" value="{$vo.aim}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">记录人：</label>
+			<div class="col-sm-8">
+				<input readonly="true" type="text" class="form-control" value="{$vo.recorder}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">参会人：</label>
+			<div class="col-sm-8">
+				<input readonly="true" type="text" class="form-control" value="{$vo.attendee}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">议程：</label>
+			<div class="col-sm-8">
+				<textarea class="form-control" name="agenda" id="agenda" rows="12" cols="60" tools="simple" upLinkUrl="{editorRoot}upload.php" upLinkExt="zip,rar,doc,docx" upImgUrl="{editorRoot}upload.php"  upImgExt="jpg,jpeg,gif,png">{$vo.agenda}</textarea>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">上会资料：</label>
+			<div class="col-sm-8">
+				<textarea class="form-control" name="materials" id="materials" rows="12" cols="60" tools="simple" upLinkUrl="{editorRoot}upload.php" upLinkExt="zip,rar,doc,docx" upImgUrl="{editorRoot}upload.php"  upImgExt="jpg,jpeg,gif,png">{$vo.materials}</textarea>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">会议内容：</label>
+			<div class="col-sm-8">
+				<textarea class="form-control" name="content" rows="12" cols="60" tools="simple" upLinkUrl="{editorRoot}upload.php" upLinkExt="zip,rar,doc,docx" upImgUrl="{editorRoot}upload.php"  upImgExt="jpg,jpeg,gif,png">{$vo.content}</textarea>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal-footer">
+		<button type="button" class="btn btn-sm btn-white pull-right m-t-n-xs" data-dismiss="modal" style="margin-left:10px">关闭</button>
+	</div>
+</form>
+
+<script>	
+	$("#circle").change(function(){
+		$(".cycle2").hide();
+		$(".cycle3").hide();
+		if($(this).val() == "3"){
+			$(".cycle3").show();
+		}else if($(this).val() == "2"){
+			$(".cycle2").show();
+		}
+	})
+</script>

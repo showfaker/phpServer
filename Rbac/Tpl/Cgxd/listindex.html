@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+	<link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+	<link href="css/plugins/chosen/chosen.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.css">
+</head>
+<style>
+.chosen-container{float:left;margin-right:10px;}
+</style>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>采购列表</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div style="margin-bottom:10px;height:45px;">
+							<form action="__URL__/index/token/{$token}/tab/2/" method="post">
+							    <div style="width:100%;">
+								
+									<div class="input-group col-sm-2 col-xs-6" style="float:left;padding-right:20px">
+									<span class="input-group-addon">项目名称</span>	
+									<input name="title" value="{$title}" class="form-control" placeholder="项目名称">
+									</div>
+									
+									<eq name="charge" value="1">
+									<div class="input-group col-sm-2 col-xs-6" style="float:left;padding-right:20px">
+									<span class="input-group-addon">采购单号</span>	
+									<input name="number" value="{$number}" class="form-control" placeholder="采购单号">
+									</div>
+									<div class="input-group col-sm-2 col-xs-6" style="float:left;padding-right:20px">
+									<span class="input-group-addon">申请人</span>	
+									<input name="user" value="{$user}" class="form-control" placeholder="申请人">
+									</div>
+									</eq>
+									
+									<div class="input-group col-sm-2 col-xs-6" style="float:left;padding-right:20px">
+									<span class="input-group-addon">供应商：</span>	
+									<input name="supplier" value="{$supplier}" class="form-control" placeholder="供应商">
+									</div>
+									<!--
+									<font style="margin-left:5px;float:left;position:relative;top:9px;">收货时间：</font>	
+									<input style="width:150px;float:left;" name="start" value="{$start}" class="form-control layer-date" placeholder="开始日期" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})">
+									<font style="float:left;position:relative;top:9px;">--至--</font>
+									<input style="width:150px;float:left;" name="end" value="{$end}" class="form-control layer-date" placeholder="结束日期" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})">&nbsp;&nbsp;&nbsp;
+									-->
+									
+									<!--
+									<div class="input-group col-sm-2 col-xs-6" style="float:left;padding-right:20px">
+									<span class="input-group-addon">状态</span>	
+									<select name="zt" data-placeholder="选择状态" class="form-control chosen-select" tabindex="2">
+										<option value="">请选择状态</option>
+										<option value="1" <eq name="zt" value='1'>selected</eq>>可提交</option>
+										<option value="2" <eq name="zt" value='2'>selected</eq>>已通过</option>
+										<option value="3" <eq name="zt" value='3'>selected</eq>>已退回</option>
+									</select>
+									</div>
+									-->
+									<button class="btn btn-primary btn-sm" style="float:left;margin-left:10px;" type="submit">查询</button>
+									<!--
+									<button class="btn btn-warning piliang" style="float:left;margin-right:10px" type="button">批量提交</button>
+									-->
+							    </div>
+							</form>
+                        </div>
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+								<tr>
+									<!--&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn-primary btn btn-xs" id="all_choice" flag="1">全选</button>-->
+									<th width="5%">采购单号</th>
+									<th width="4%">总价</th>
+									<th width="6%">项目名称</th>
+									<th width="6%">充换电设施用途</th>
+									<th width="6%">发货地址</th>
+									<th width="6%">其他</th>
+									<th width="4%">申请人</th>
+									<th width="5%">申请时间</th>
+									<th width="5%">审批状态</th>
+									<th width="5%">验收审批状态</th>
+									<!--
+									<th width="5%">收货人</th>
+									<th width="5%">收货时间</th>
+									
+									<th width="5%">备注</th>
+									-->
+									<th width="12%">操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<volist name="list" id="listmenu">
+								<tr>
+									<td>{$listmenu.ctime|date="Ymd",###}{$listmenu.id}<!--&nbsp;&nbsp;
+									<neq name="listmenu.confirm" value='0'>
+									<eq name='listmenu.submit' value='0'>
+									<input type="checkbox" name='arr[]' value="{$listmenu.id}" title="{$listmenu.price}">
+									</eq>
+									</neq>-->
+									</td>
+									<td>{$listmenu.price}</td>
+									<td>{$listmenu.title}</td>
+									<td>{$listmenu.purpose}</td>
+									<td>{$listmenu.address}</td>
+									<td>{$listmenu.remark}</td>
+									<td>{$listmenu.user}</td>
+									<td><?php 
+											if($listmenu['ctime']!=0)
+											echo date('Y-m-d',$listmenu['ctime']);
+										?>
+									</td>
+									<eq name="listmenu.status" value="0">
+									<td><span class="badge badge-warning">待地市经理审核</span></td>
+									</eq>
+									<eq name="listmenu.status" value="0.1">
+									<td><span class="badge badge-warning">待省公司经理审核</span></td>
+									</eq>
+									<eq name="listmenu.status" value="0.5">
+									<td><span class="badge badge-warning">待省公司负责人审核</span></td>
+									</eq>
+									<eq name="listmenu.status" value="1">
+									<td><span class="badge badge-primary">审核通过</span></td>
+									</eq>
+									<eq name="listmenu.status" value="-1">
+									<td><span class="badge badge-danger">审核退回</span></td>
+									</eq>
+									<!--
+									<td>{$listmenu.shr}</td>
+									<td>{$listmenu.enddate}</td>
+									
+									<td>
+									<eq name="listmenu.confirm" value='0'>
+									<span class="badge">该订单未经确认,请先编辑再提交</span>
+								    </eq>
+									</td>
+									-->
+									<eq name="listmenu.status" value="1">
+									<in name="listmenu.sendstatus" value="0,">
+									<td><span class="badge badge-warning">待供应商接受</span></td>
+									</in>
+									<in name="listmenu.sendstatus" value="0.1">
+									<td><span class="badge badge-warning">待供应商发货</span></td>
+									</in>
+									<in name="listmenu.sendstatus" value="0.2">
+									<td><span class="badge badge-warning">待提交单据</span></td>
+									</in>
+									<eq name="listmenu.sendstatus" value="0.3">
+									<td><span class="badge badge-warning">待地市经理审核</span></td>
+									</eq>
+									<eq name="listmenu.sendstatus" value="0.5">
+									<td><span class="badge badge-warning">待省公司经理审核</span></td>
+									</eq>
+									<eq name="listmenu.sendstatus" value="1">
+									<td><span class="badge badge-primary">审核通过</span></td>
+									</eq>
+									<eq name="listmenu.sendstatus" value="-1">
+									<td><span class="badge badge-danger">审核退回</span></td>
+									</eq>
+									</eq>
+									<neq name="listmenu.status" value="1">
+									<td></td>
+									</neq>
+									
+                                    <td> 
+									
+									<a href="__URL__/check/id/{$listmenu['id']}" data-toggle="modal" data-target="#modal" data-backdrop="static"  target="dialog" class="btn btn-info btn-xs">详情</a>
+									
+									<neq name="_SESSION[role]" value="采购供应商">
+									<in name="listmenu.status" value="0,-1">
+									<neq name="listmenu.djtype" value='1'>
+									<a href="__URL__/edit/id/{$listmenu['id']}/tj_id/{$tj_id}" class="btn btn-primary btn-xs">编辑</a>
+									</neq>
+									</in>
+									
+									<!--
+									<eq name="listmenu.status" value="1">
+									<a href="__URL__/tuihuo/id/{$listmenu['id']}" data-toggle="modal" data-target="#modal" data-backdrop="static"  target="dialog" class="btn btn-info btn-xs">退货</a> 
+									</eq>
+									-->
+									
+									<neq name="listmenu.status" value="1">
+									<!--
+									<a href="__URL__/upload/id/{$listmenu['id']}" data-toggle="modal" data-target="#modal" data-backdrop="static"  target="dialog" class="btn btn-info btn-xs">上传</a>
+									-->
+									<neq name="listmenu.forbid" value="1">
+									<a class="btn btn-danger btn-xs delete" title="{$listmenu.id}">删除</a>
+									</neq>
+									</neq>
+									
+									<eq name="listmenu.status" value="1">
+									<in name='listmenu.sendstatus' value='0.2,-1'>
+									<a href="__URL__/upload/id/{$listmenu['id']}" data-toggle="modal" data-target="#modal" data-backdrop="static"  target="dialog" class="btn btn-info btn-xs">上传</a>
+									</in>
+									</eq>
+									<!--
+									<neq name="listmenu.confirm" value='0'>
+									<eq name='listmenu.submit' value='0'>
+										<a class="btn btn-success btn-xs submit" title="{$listmenu.id}">提交审核</a>
+									</eq>
+								    </neq>
+									-->
+									
+									<eq name="listmenu.status" value='1'>
+									<in name='listmenu.sendstatus' value='0.2,-1'>
+										<a class="btn btn-success btn-xs submit1" title="{$listmenu.id}">提交验收审核</a>
+									</in>
+								    </eq>
+									
+									<eq name="_SESSION[account]" value="admin">
+									<a class="btn btn-danger btn-xs delete" title="{$listmenu.id}">管理员删除</a>
+									</eq>
+									</neq>
+									
+									
+									<eq name="_SESSION[role]" value="采购供应商">
+									<eq name="listmenu.status" value='1'>
+									<in name='listmenu.sendstatus' value='0,'>
+									<a class="btn btn-success btn-xs submit2" title="{$listmenu.id}">接受订单</a>
+									</in>
+									
+									<in name='listmenu.sendstatus' value='0.1'>
+									<a class="btn btn-success btn-xs submit3" title="{$listmenu.id}">确认发货</a>
+									</in>
+									</eq>
+									</eq>
+									</td>								
+								</tr>
+								</volist>
+							</tbody>
+                        </table>
+						{$page}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	
+	<div id="modal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" style="width:1000px;height:600px">
+		<div class="modal-content">
+		   <div class="modal-header">  
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
+                    <span aria-hidden="true">×</span>  
+                </button>  
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>  
+            </div>  
+            <div class="modal-body">  
+                <p>One fine body…</p>  
+            </div>  
+            <div class="modal-footer">  
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                <button type="button" class="btn btn-primary">Save</button>  
+            </div>  
+		</div>
+	  </div>
+	</div>
+	
+	
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+	<script src="js/plugins/layer/laydate/laydate.js"></script>
+    <script src="js/content.js?v=1.0.0"></script>
+	<script src="js/plugins/layer/laydate/laydate.js"></script>
+	<!-- Chosen -->
+    <script src="js/plugins/chosen/chosen.jquery.js"></script>
+    <script src="js/demo/form-advanced-demo.js"></script>
+	<script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+	<link rel="stylesheet" href="__PUBLIC__/lightbox/viewerjs/dist/viewer.css">
+	<script src="__PUBLIC__/lightbox/viewerjs/dist/viewer.js"></script>
+	
+	<script type="text/javascript" src="__PUBLIC__/lightbox/source/jquery.fancybox.js?v=2.1.5"></script>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/lightbox/source/jquery.fancybox.css?v=2.1.5" media="screen" />
+	<script type="text/javascript">
+		$('.fancybox').fancybox();
+	</script>
+	<script>	
+	  $('.delete').click(function () {	  
+        var id=$(this).attr("title");		
+		swal({
+			title: "您确定要删除吗",
+			text: "删除后将无法恢复操作，请谨慎操作！",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			cancelButtonText: "取消",
+			confirmButtonText: "确定",
+			closeOnConfirm: false
+		}, function () {
+			//获取选中的checkbox
+			//发送请求命令			
+			var aj = $.ajax({
+					url:'__URL__/ajaxdelete',
+					data:{  
+						id : id
+					},
+					type:'post',  
+					cache:false,  
+					dataType:'json',  
+					success:function(data) {					
+						swal("删除成功！", "请刷新查看结果。", "success");
+						location.href=location.href;
+					 }  
+			});
+			
+		});
+	});
+	</script>
+
+	<script>	
+	  $('.submit').click(function () {
+        var id=$(this).attr("title");		
+		swal({
+			title: "您确定要提交审核吗",
+			text: "提交后将无法恢复操作，请谨慎操作！",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			cancelButtonText: "取消",
+			confirmButtonText: "确定",
+			closeOnConfirm: false
+		}, function () {
+			//获取选中的checkbox
+			//发送请求命令			
+			var aj = $.ajax({
+					url:'__URL__/ajaxsubmit',
+					data:{  
+						id : id
+					},
+					type:'post',  
+					cache:false,  
+					dataType:'json',  
+					success:function(data) {					
+						swal("提交成功！", "请刷新查看结果。", "success");
+						location.href=location.href;
+					 }  
+			});
+			
+		});
+	});
+	</script>
+	<script>	
+	  $('.submit1').click(function () {
+        var id=$(this).attr("title");		
+		swal({
+			title: "您确定要提交审核吗",
+			text: "提交后将无法恢复操作，请谨慎操作！",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			cancelButtonText: "取消",
+			confirmButtonText: "确定",
+			closeOnConfirm: false
+		}, function () {
+			//获取选中的checkbox
+			//发送请求命令			
+			var aj = $.ajax({
+					url:'__URL__/ajaxsubmit1',
+					data:{  
+						id : id
+					},
+					type:'post',  
+					cache:false,  
+					dataType:'json',  
+					success:function(data) {	
+						if(data==1)
+						{
+							swal("提交成功！", "请刷新查看结果。", "success");
+							location.href=location.href;
+						}
+						else{
+						
+							swal("文件未完成提交！","","error");
+						}
+					 }  
+			});
+			
+		});
+	});
+	</script>
+	<script>	
+	  $('.submit2').click(function () {
+        var id=$(this).attr("title");		
+		swal({
+			title: "您确定要接受订单吗",
+			text: "提交后将无法恢复操作，请谨慎操作！",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			cancelButtonText: "取消",
+			confirmButtonText: "确定",
+			closeOnConfirm: false
+		}, function () {
+			//获取选中的checkbox
+			//发送请求命令			
+			var aj = $.ajax({
+					url:'__URL__/ajaxsubmit2',
+					data:{  
+						id : id
+					},
+					type:'post',  
+					cache:false,  
+					dataType:'json',  
+					success:function(data) {	
+						if(data==1)
+						{
+							swal("提交成功！", "请刷新查看结果。", "success");
+							location.href=location.href;
+						}
+						else{
+						
+							swal("文件未完成提交！","","error");
+						}
+					 }  
+			});
+			
+		});
+	});
+	</script>
+	<script>	
+	  $('.submit3').click(function () {
+        var id=$(this).attr("title");		
+		swal({
+			title: "您确定要确认发货吗",
+			text: "提交后将无法恢复操作，请谨慎操作！",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			cancelButtonText: "取消",
+			confirmButtonText: "确定",
+			closeOnConfirm: false
+		}, function () {
+			//获取选中的checkbox
+			//发送请求命令			
+			var aj = $.ajax({
+					url:'__URL__/ajaxsubmit3',
+					data:{  
+						id : id
+					},
+					type:'post',  
+					cache:false,  
+					dataType:'json',  
+					success:function(data) {	
+						if(data==1)
+						{
+							swal("提交成功！", "请刷新查看结果。", "success");
+							location.href=location.href;
+						}
+						else{
+						
+							swal("文件未完成提交！","","error");
+						}
+					 }  
+			});
+			
+		});
+	});
+	</script>
+	
+	
+	
+	
+	<script>
+	  $('.piliang').click(function () {
+	  	var input=$('input[type="checkbox"]:checked');
+	  	var arr= new Array();
+		var total=0;
+	  	input.each(function(i){
+	  		arr[i]=$(this).val();
+			total+=parseFloat($(this).attr("title"));
+	  	});
+	  	var arrstr='';
+	  	for (var i = 0; i < arr.length; i++) {
+	  		arrstr=arrstr+arr[i]+',';
+	  	}
+		swal({
+			title: "您确定要一次提交所选订单吗?订单总额"+total,
+			text: "操作后无法恢复,请谨慎操作！",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			cancelButtonText: "取消",
+			confirmButtonText: "确定",
+			closeOnConfirm: false
+		}, function () {
+			//获取选中的checkbox
+			//发送请求命令			
+			var aj = $.ajax({
+					url:'__URL__/ajaxsubmit_piliang',
+					data:{  
+						arr : arrstr
+					},
+					type:'post',
+					cache:false,  
+					dataType:'json',  
+					success:function(data) {
+						if(data==1){
+							swal("提交成功！", "请刷新查看结果。", "success");
+							var timer=setTimeout(function(){
+								location.href=location.href;
+							},1500);
+						}
+						if(data==2){
+							
+							swal("提交失败！","未选择单号", "error");
+							var timer=setTimeout(function(){
+								location.href=location.href;
+							},1500);
+							
+						}
+
+					}  
+			});
+			
+		});
+	});
+	</script>
+	
+	
+	<script>
+		var flag=1;
+		$('#all_choice').click(function(){
+			if(flag==1){
+				var choice_total=parseFloat(0);
+				$('input[type="checkbox"]').prop('checked',true);
+				$('input[type="checkbox"]:checked').each(function(){
+					choice_total=choice_total+parseFloat($(this).parents('tr').find('td').eq(3).html());
+				});
+				$('#choice_total').html(choice_total);
+				flag=2;
+			}else{
+				$('input[type="checkbox"]').prop('checked',false);
+				$('#choice_total').html(0);
+				flag=1;
+			}
+			
+		});
+
+		
+	</script>
+	<script>
+		$('input[type="checkbox"]').click(function(){
+			var choice_total=parseFloat(0);
+			$('input[type="checkbox"]:checked').each(function(){
+					choice_total=choice_total+parseFloat($(this).parents('tr').find('td').eq(3).html());
+				});
+			$('#choice_total').html(choice_total);
+		});
+
+	</script>
+    
+</body>
+</html>

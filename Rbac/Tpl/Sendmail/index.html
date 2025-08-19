@@ -1,0 +1,408 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<tagLib name="html" />
+<head>		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Simpla Admin</title>
+		
+        <link rel="stylesheet" href="__PUBLIC__/css/style.css" type="text/css" media="screen" />
+		
+		<link rel="stylesheet" href="__PUBLIC__/css/reset.css" type="text/css" media="screen" />
+		<eq name="_SESSION['skin']" value="3" >
+		<link rel="stylesheet" href="__PUBLIC__/css/classicdownstyle.css" type="text/css" media="screen" />
+		</eq>
+		<neq name="_SESSION['skin']" value="3" >
+		<link rel="stylesheet" href="__PUBLIC__/css/downstyle.css" type="text/css" media="screen" />
+		</neq>
+		<link rel="stylesheet" href="__PUBLIC__/css/invalid.css" type="text/css" media="screen" />	
+		
+		<script type="text/javascript" src="__PUBLIC__/js/Jquery/jquery.js"></script>
+        <script type="text/javascript" src="__PUBLIC__/js/Jquery/JqueryAdapter.js"></script>
+        <script type="text/javascript" src="__PUBLIC__/js/Ajax/ThinkAjaxnotip.js"></script>
+        
+		<script type="text/javascript" src="__PUBLIC__/scripts/simpla.jquery.configuration.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/scripts/facebox.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/scripts/jquery.wysiwyg.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/scripts/jquery.datePicker.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/scripts/jquery.date.js"></script>
+		
+        <load href="__PUBLIC__/js/Form/CheckForm.js" />
+        <load href="__PUBLIC__/js/common.js" />
+        <load href="__PUBLIC__/js/Util/ImageLoader.js" />
+        <script  src="__PUBLIC__/js/jquery-1.3.2.min.js"></script>
+  		<script  src="__PUBLIC__/js/jquery.contextmenu.r2.js"></script>
+<style>
+	  #header {
+	    background-color: #fbfbfb;
+	    margin-bottom:0px;
+	    text-align: left;
+	    font-size: 14px;
+	    padding-top: 12px;
+		padding-right: 160px;
+	    padding-bottom: 12px;
+	    border-bottom: 1px solid #ccc;
+	  }
+	  #header strong {
+	    text-align: right;
+	    width: 89px;
+	    display: inline-block;
+	    *display: inline;
+	    zoom: 1;
+	    color: #807f80;
+	    margin-right: 6px;
+	  } 
+	  #header p {
+	    padding: 0;
+	    margin: 0;
+	    padding-bottom: 3px;
+	  }
+	  #header .from {
+	    font-weight: bold;
+	  }
+</style>        
+     	
+<script language="JavaScript">
+<!--
+//指定当前组模块URL地址 
+var number=0;
+var URL = '__URL__';
+var APP	 =	 '__APP__';
+var PUBLIC = '__PUBLIC__';
+ThinkAjax.image = [	 '__PUBLIC__/Images/loading2.gif', '__PUBLIC__/Images/ok.gif','__PUBLIC__/Images/update.gif' ]
+ImageLoader.add("__PUBLIC__/Images/bgline.gif","__PUBLIC__/Images/bgcolor.gif","__PUBLIC__/Images/titlebg.gif");
+ImageLoader.startLoad();
+//-->
+</script>
+
+<style type="text/css">
+<!--
+.STYLE3 {font-family: Arial, Helvetica, sans-serif}
+-->
+</style>
+	</head>
+  
+<body>
+	<div style="position:absolute;top:-1000px" class="contextMenu" id="myMenu1">
+      <ul>
+        <li id="open"><img src="__PUBLIC__/Images/email/email.png" />&nbsp;&nbsp;打开</li>
+        <!--<li id="email"><img src="__PUBLIC__/Images/email/back.png" />&nbsp;&nbsp;回复</li>-->
+        <li id="save"><img src="__PUBLIC__/Images/email/forward.png" />&nbsp;&nbsp;转发</li>
+        <li id="delete"><img src="__PUBLIC__/Images/email/cross.png" />&nbsp;&nbsp;删除</li>
+      </ul>
+    </div>	
+<div id="body-wrapper"> <!-- Wrapper for the radial gradient background -->
+	  <!-- End #sidebar -->
+		
+<div id="main-content"> <!-- Main Content Section with everything -->
+			
+	<noscript> <!-- Show a notification if the user has disabled javascript -->
+		<div class="notification success png_bg">
+			<div>
+				Javascript is disabled or is not supported by your browser. Please <a href="http://browsehappy.com/" title="Upgrade to a better browser">upgrade</a> your browser or <a href="http://www.google.com/support/bin/answer.py?answer=23852" title="Enable Javascript in your browser">enable</a> Javascript to navigate the interface properly.
+				Download From exet.tk</a>
+			</div>
+		</div>
+	</noscript>
+			
+	<!-- Page Head -->
+	<neq name="_SESSION['skin']" value="3" >
+	<ul class="shortcut-buttons-set">
+    
+   		<li><a class="shortcut-button" href="#" onClick="fristpage()"><span>
+			<img src="__PUBLIC__/Images/icons/comment_48.png" WIDTH="48" HEIGHT="48" alt="发件箱" /><br />
+				发件箱</span></a>
+		</li>
+		<li><a class="shortcut-button" href="#" onClick="add()"><span>
+			<img src="__PUBLIC__/Images/icons/writemail.png" WIDTH="48" HEIGHT="48" alt="写信" /><br />
+				写信</span></a>
+		</li>       		
+        <li><a class="shortcut-button" href="#" onClick="emailforward()"><span>
+			<img src="__PUBLIC__/Images/icons/forward.png" WIDTH="48" HEIGHT="48" alt="转发邮件" /><br />
+				转发邮件</span></a>
+		</li>			            
+        <li><a class="shortcut-button" href="#" onClick="delemail()"><span>
+			<img src="__PUBLIC__/Images/icons/close.png" WIDTH="48" HEIGHT="48" alt="删除邮件" /><br />
+				删除邮件</span></a>
+        </li>
+        <li><a class="shortcut-button" href="#" onClick="showHideSearch()"><span>
+			<img src="__PUBLIC__/Images/icons/clock_48.png" WIDTH="48" HEIGHT="48" alt="邮件查询" /><br />
+				邮件查询</span></a>
+		</li>							
+	</ul><!-- End .shortcut-buttons-set -->
+	</neq>
+	
+			<eq name="_SESSION['skin']" value="3" >
+				<ul class="shortcut-buttons-set">
+    
+   		<li><a class="shortcut-button" href="#" onClick="fristpage()"><span>
+			<img src="__PUBLIC__/Images/icons/comment_48.png" WIDTH="48" HEIGHT="48" alt="发件箱" /><br />
+				发件</span></a>
+		</li>
+		<li><a class="shortcut-button" href="#" onClick="add()"><span>
+			<img src="__PUBLIC__/Images/icons/writemail.png" WIDTH="48" HEIGHT="48" alt="写信" /><br />
+				写信</span></a>
+		</li>       		
+        <li><a class="shortcut-button" href="#" onClick="emailforward()"><span>
+			<img src="__PUBLIC__/Images/icons/forward.png" WIDTH="48" HEIGHT="48" alt="转发邮件" /><br />
+				转发</span></a>
+		</li>			            
+        <li><a class="shortcut-button" href="#" onClick="delemail()"><span>
+			<img src="__PUBLIC__/Images/icons/close.png" WIDTH="48" HEIGHT="48" alt="删除邮件" /><br />
+				删除</span></a>
+        </li>
+        <li><a class="shortcut-button" href="#" onClick="showHideSearch()"><span>
+			<img src="__PUBLIC__/Images/icons/clock_48.png" WIDTH="48" HEIGHT="48" alt="邮件查询" /><br />
+				查询</span></a>
+		</li>							
+	</ul>
+		</eq>		
+	<div class="clear"></div> <!-- End .clear -->
+			
+	<div class="content-box"><!-- Start Content Box -->				
+		<div class="content-box-header">
+			<h3>发件箱</h3>
+
+
+<script language="javascript">
+function readmail(id,title,sender){
+	  if((number>=10)&&(document.getElementById('a'+id).style.display=="none"))
+	  {
+		  alert("最多打开10封邮件");
+		  return;
+	  }
+	  if(document.getElementById('a'+id).style.display=="none")
+	  {
+	  	number++;
+	  }
+	  ThinkAjax.send(URL+'/mail/id/'+id,'&ajax=1');
+	  document.getElementById('a'+id).style.display="block";
+	  document.getElementById("shoujianxiang").className="";
+	  document.getElementById('c'+id).className="current";
+	  $("#tab1").hide();
+	  $('#'+id).show();
+	  //document.getElementById("tab1").className="tab-content";
+	  //document.getElementById("tab2").className="current";
+	  if(sender.indexOf(",")!=-1)
+	  	document.getElementById("headernow").innerHTML=sender.substring(0,sender.indexOf(","))+"来信";
+	  else
+		document.getElementById("headernow").innerHTML=sender+"来信";
+	  document.getElementById('d'+id).style.color="#000000";
+	  /*if(typeof(result) == "undefined") return;
+	 	$('groupName').value=result[0][0];
+	 	$('pid').value=result[0][1];*/
+	 	return;
+  }
+function huifu(id)
+{
+	location.href  = URL+"/reply/id/"+id;
+}
+function zhuanfa(id)
+{
+	location.href  = URL+"/emailforward/id/"+id;
+}
+function closetab(id)
+{
+	  number--;
+	  $('#'+id).hide();
+	  $("#tab1").show();
+	  document.getElementById('a'+id).style.display="none";
+	  document.getElementById(id).className="";
+	  document.getElementById("shoujianxiang").className="current";
+
+}
+function downloadannex(id)
+{
+	location.href = URL+"/filedown/file/"+id;
+}
+function changetitle(title)
+{
+	if(title!="发件箱")
+	{
+		if(title.indexOf(",")!=-1)
+			title = title.substring(0,title.indexOf(","));
+		document.getElementById("headernow").innerHTML=title+"来信";
+	}
+	else
+		document.getElementById("headernow").innerHTML=title;
+}
+</script>					
+			<ul class="content-box-tabs">
+				<li><a href="#tab1" id="shoujianxiang" class="default-tab"  onclick="changetitle('发件箱')">发件箱</a></li> <!-- href must be unique and match the id of target div -->
+				<volist name="list" id="listmenu">
+				<li id="a{$listmenu['id']}" style="display:none;"><a onclick="changetitle('{$listmenu['sender']}')" href="#{$listmenu['id']}" id="c{$listmenu['id']}" style="display:block" >{$listmenu['titlesub']}</a>
+				<b style="visibility:hidden">{$listmenu['titlesub']}&nbsp;</b><img src="__PUBLIC__/Images/close.gif" onclick="closetab('{$listmenu['id']}')" style="position:relative;top:-31px;"  width="10" height="10" alt="关闭" /></li>
+				</volist>
+			</ul>			
+			<div class="clear"></div>
+					
+		</div> <!-- End .content-box-header -->
+				
+		<div class="content-box-content">			
+			<div class="tab-content default-tab" id="tab1">
+                <div class="clear"></div>    
+                <div  id="searchM" class=" none search cBoth" >
+                     <table>
+					 <tfoot>
+						<tr>
+							<td colspan="6">
+                            <form method="post" method='post' action="__URL__">
+								<div class="bulk-actions align-right">		
+								    <span id="key"><input type="text" name="title" title="主题" class="medium" ></span>
+									<input class="button" type="submit" value="查  询" />								
+								</div>
+                            </form>            
+							</td>
+						</tr>
+					</tfoot>
+				</table> 
+                </div>
+  
+                <div class="clear"></div>   
+				
+                <table id="checkList">
+                    <thead>
+					<tr>
+						<th width="2%"><input class="check-all" type="checkbox" /></th>
+					    <th width="12%">收件人</th>
+						<th width="18%">日期&nbsp;&nbsp;&nbsp;
+						&nbsp;&nbsp;时间</th>
+                        <th width="5%">附件</th>
+                        <th width="55%">主题</th>
+						<th width="8%">操作</th>
+				    </tr>
+                    </thead>
+                 
+                    <tbody>
+                    <volist name="list" id="listmenu">
+                    <span style="position:absolute" class="demo1" title="{$listmenu['title']}" rightid="{$listmenu['id']}" sender="{$listmenu['sender']}" >
+					<tr style="color:black" onDblClick="readmail('{$listmenu['id']}','{$listmenu['title']}',
+				    	'{$listmenu['sender']}');" title="">
+                        <td><input type="checkbox" name="key" value="{$listmenu['id']}"></td>
+				        <td>{$listmenu['receiver']}</td>
+				        <td>
+				        <!--{$listmenu['create_time']}-->
+				        <?php 
+						if($listmenu['create_time']!=0)
+						echo date('Y-m-d H:i:s',$listmenu['create_time']);?>
+				        </td>
+                        <td>
+                        	<neq name="listmenu.annex" value="">
+                        	<IMG SRC="__PUBLIC__/Images/download.gif" WIDTH="20" HEIGHT="20" BORDER="0" ALT="有附件">
+                        	</neq>
+                        </td> 
+                        <td>{$listmenu['title']}</td>
+                        <td>
+                            <a href="#" onClick="emailforward({$listmenu['id']})" >
+                            <img src="__PUBLIC__/Images/icons/forward.png" width="20" height="20" alt="转发" /></a>
+                          <!--   <a href="#" onClick="reademail({$listmenu['id']})" title="reademail">
+                            <img src="__PUBLIC__/Images/icons/pencil.png" alt="阅读" /></a> -->
+				            <a href="#" onClick="delemail({$listmenu['id']})">
+                            <img src="__PUBLIC__/Images/icons/close.png" width="20" height="20"  alt="删除" /></a>
+				        </td>
+				    </tr>
+				    </span>
+			        </volist>
+                    </tbody>
+                </table>
+				
+                <table>
+					<tfoot>
+						<tr>
+							<td colspan="6">								
+                                <div class="pagination">{$page}<a href="#">Top</a></div>
+								<div class="clear"></div>
+                                        
+							</td>
+						</tr>
+					</tfoot>
+				</table> 
+							
+			</div> <!-- End #tab1 -->
+					
+		
+    <!-- ----------------------------------------------------------------------------------------------------- -->			
+	<volist name="list" id="listmenu">
+	<eq name="_SESSION['skin']" value="3" >
+	<div style="background-color:#F2F2F2;border: solid 0px #CCCCCC; text-align:center;font-family:Helvetica Neue, Arial, Helvetica, sans-serif; padding: 0px; margin: -10px;" class="tab-content" id="{$listmenu['id']}">
+	</eq>
+	<neq name="_SESSION['skin']" value="3" >
+	<div style="background-color:#F2F2F2;border: solid 0px #CCCCCC; text-align:center;font-family:Helvetica Neue, Arial, Helvetica, sans-serif; padding: 0px; margin: -20px;" class="tab-content" id="{$listmenu['id']}">
+	</neq>
+	<!-- 
+	<div class="cta" align="left" style="background-color:#F2F2F2;font-size:14px;color:#1f1f1f;border-top-width:1px;border-top-style:solid;border-top-color:#DAE3EA;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#DAE3EA;border-left-width:1px;border-left-style:solid;border-left-color:#DDD;border-right-width:1px;border-right-style:solid;border-right-color:#DDD;margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;padding-top:10px;padding-bottom:10px;padding-right:39px;padding-left:31px;text-align:left;">
+ 	-->
+	<!-- </div> -->
+	<div id="header">
+    <!-- <p>
+       <span style="color:#807f80;font-size:15px;font-weight:bold">{$vo.title}</span>
+    </p> 标题-->
+    <!--  <p>
+      <strong>发件人:</strong>
+      <span>{$listmenu['sender']}</span>
+    </p>-->
+    <p>
+      <strong>收件人:</strong>
+      <span class="person-name-full">{$listmenu['receiver']}</span>
+    </p>
+	<p>
+      <strong>抄 &nbsp;&nbsp;送:</strong>
+      <span class="person-name-full">{$listmenu['copy']}</span>
+    </p>
+	<p>
+      <strong>时 &nbsp;&nbsp;间:</strong>
+      <span class="person-name-full"> <?php 
+	  if($vo['create_time']!=0)
+	  echo date('Y-m-d H:i:s',$listmenu['create_time']);?><strong>附件:</strong><a id=pic1 style="cursor:hand" onclick="downloadannex('{$listmenu['annex']}');">{$listmenu['annex']}</a></span>
+    </p>
+    <p>
+      <strong>主 &nbsp;&nbsp;题:</strong>
+      <span class="person-name-full">{$listmenu['title']}</span>
+    </p>
+    <eq name="_SESSION['skin']" value="3" >
+	<input  style="HEIGHT:21px;right:10px;POSITION:absolute;TOP:225px;WIDTH:80px" class="btn4_mouseout" type="button" value="转   发" onClick="zhuanfa('{$listmenu['id']}')" >
+	</eq>
+	<neq name="_SESSION['skin']" value="3" >
+	<input  style="HEIGHT:21px;right:10px;POSITION:absolute;TOP:290px;WIDTH:80px" class="btn4_mouseout" type="button" value="转   发" onClick="zhuanfa('{$listmenu['id']}')" >
+	</neq>
+  </div>
+  <div id="header" align="left"  border="0" style="margin-left:36px;background-color:#F2F2F2;border-top: 0px solid #DDD; border-bottom: 0px solid #DDD;"><!-- width:895px; -->
+	<h3 style="font-family:Helvetica Neue, Arial, Helvetica, sans-serif;font-size:15px;color:#515965;font-weight:normal;margin-top:0;margin-bottom:24px;margin-right:0;margin-left:0;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;line-height:1.6;">
+	<p>{$listmenu['content']}</p>
+	</h3>
+  </div>
+</div>
+	
+</volist>
+	
+					
+		</div> <!-- End .content-box-content -->		
+	</div> <!-- End .content-box -->
+			<div class="clear"></div>	
+<include file="Public:footer" />	
+		</div> <!-- End #main-content -->
+	</div>
+</body>
+<script>
+    //所有class为demo1的span标签都会绑定此右键菜单
+     $('span.demo1').contextMenu('myMenu1', 
+     {
+          bindings: 
+          {
+            'open': function(t) {
+              readmail(t.rightid,t.title,t.sender);
+            },
+            /*'email': function(t) {
+              reply(t.rightid);
+            },*/
+            'save': function(t) {
+              emailforward(t.rightid);
+            },
+            'delete': function(t) {
+              delemail(t.rightid);
+            }
+          }
+
+    });
+ </script>
+</html>

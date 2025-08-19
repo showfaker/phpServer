@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+
+
+    <title>项目查看</title>
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.7" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+
+    <!-- 全局js -->
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.7"></script>
+    <!-- 自定义js -->
+    <script src="js/content.js?v=1.0.0"></script>
+	<script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+	<link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="row">
+	
+	
+
+		
+
+						
+						<div class="row m-b-sm m-t-sm">
+							<div class="col-md-12">
+							<form action="__APP__/Plmmanage/index/" method="post">
+								<div class="input-group">
+									<select name="plmid" class="form-control" style="height:30px">
+									<volist name="list" id="listmenu">
+										<option class="project-title"  <eq name="plmid" value="$listmenu.id">selected</eq> value="{$listmenu.id}">{$listmenu.title}</option>
+									</volist>
+									</select>	
+						
+									<span class="input-group-btn"><button type="submit" class="btn btn-sm btn-primary"> 搜索</button> </span>
+									
+								</div>
+							</form>
+							</div>
+						</div>
+						
+											
+           
+                        
+						<div class="tabs-container">
+								<ul class="nav nav-tabs">
+									<li <notin name="tab" value="2,3,4,5,6,7,8,9,10,11,14"> class="active" </notin>><a  href="__APP__/Xmtj/plmdetail/id/{$plmid}/tab/1/myprojectmanage/1/address/{$address}/plmgroup/{$plmgroup}/token/{$token}">项目信息</a>
+									</li>
+									<li <eq name="tab" value="4"> class="active" </eq>><a  href="__APP__/Xmtj/plmdetail/id/{$plmid}/tab/4/myprojectmanage/1/address/{$address}/plmgroup/{$plmgroup}/token/{$token}">项目计划</a>
+									</li>
+									<li <eq name="tab" value="14"> class="active" </eq>><a  href="__APP__/Xmtj/plmdetail/id/{$plmid}/tab/14/myprojectmanage/1/address/{$address}/plmgroup/{$plmgroup}/token/{$token}">工程量查看</a>
+									</li>
+									<li <eq name="tab" value="2"> class="active" </eq>><a  href="__APP__/Xmtj/plmdetail/id/{$plmid}/tab/2/myprojectmanage/1/address/{$address}/plmgroup/{$plmgroup}/token/{$token}">施工日志</a>
+									</li>
+									<!--
+									<li <eq name="tab" value="3"> class="active" </eq>><a  href="__APP__/Xmtj/plmdetail/id/{$plmid}/tab/3/myprojectmanage/1/address/{$address}/plmgroup/{$plmgroup}">采购日志</a>
+									</li>
+									-->
+									<li <eq name="tab" value="5"> class="active" </eq>><a  href="__APP__/Xmtj/plmdetail/id/{$plmid}/tab/5/myprojectmanage/1/address/{$address}/plmgroup/{$plmgroup}/token/{$token}">专项甘特图</a>
+									</li>
+									<li <eq name="tab" value="6"> class="active" </eq>><a  href="__APP__/Xmtj/plmdetail/id/{$plmid}/tab/6/myprojectmanage/1/address/{$address}/plmgroup/{$plmgroup}/token/{$token}">主项甘特图</a>
+									</li>
+									<li <eq name="tab" value="10"> class="active" </eq>><a  href="__APP__/Xmtj/plmdetail/id/{$plmid}/tab/10/myprojectmanage/1/address/{$address}/plmgroup/{$plmgroup}/token/{$token}">综合甘特图</a>
+									</li>
+									<!--
+									<li <eq name="tab" value="6"> class="active" </eq>><a  href="__APP__/Xmtj/plmdetail/id/{$plmid}/tab/6">材料下单</a>
+									</li>
+									-->
+									<li <eq name="tab" value="9"> class="active" </eq>><a  href="__APP__/Plmfile/indexapp/plmid/{$plmid}/tab/9/check/1/myprojectmanage/1/address/{$address}/plmgroup/{$plmgroup}/token/{$token}">项目文档</a>
+									</li>
+									<li <eq name="tab" value="7"> class="active" </eq>><a  href="__APP__/Xmtj/plmdetail/id/{$plmid}/tab/7/myprojectmanage/1/address/{$address}/plmgroup/{$plmgroup}/token/{$token}">项目流程</a>
+									</li>
+									<!-- <li <eq name="tab" value="8"> class="active" </eq>><a  href="__APP__/Xmtj/plmdetail/id/{$plmid}/tab/8/myprojectmanage/1/address/{$address}/plmgroup/{$plmgroup}/token/{$token}">修改记录</a>
+									</li> -->
+									
+								</ul>
+								<div class="tab-content">
+										<div class="tab-pane active">
+											<div class="panel-body">
+											<notin name="tab" value="2,3,4,5,6,7,8,9,10,11,14"> <include file="../Secondcheck/draftfirst"/> </notin>
+											<eq name="tab" value="2"> <include file="../Xmtj/timeline"/> </eq>
+											<eq name="tab" value="3"> <include file="../Cgxd/listindex2"/> </eq>
+											<eq name="tab" value="4"> <include file="../Xmtj/detail3"/> </eq>
+											<eq name="tab" value="14"> <include file="../Xmtj/listindex14"/> </eq>
+											<eq name="tab" value="5"> <include file="../Index/gante"/> </eq>
+											<eq name="tab" value="6"> <include file="../Index/gantemain"/> </eq>
+											<eq name="tab" value="7"> <include file="../Xmtj/history"/> </eq>
+											<eq name="tab" value="11"> <include file="../Xmtj/plmdiscuss"/> </eq>
+											
+											<eq name="tab" value="8"> <include file="../Secondcheck/plmeditlog"/> </eq>
+											<eq name="tab" value="9"> <include file="../Plmfile/listindexapp"/> </eq>
+											<eq name="tab" value="10"> <include file="../Index/gantesynthetic"/> </eq>
+											</div>
+										</div>
+								</div>
+						</div>
+			   
+                 
+        
+        
+    </div>
+	<div class="gohome"><a class="animated bounceInUp" href="http://{$hostip}/projecttest/Rbac/App/" title="返回首页"><i class="fa fa-home"></i></a></div>
+	
+	
+	<div id="modal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+			   <div class="modal-header">  
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">  
+						<span aria-hidden="true">×</span>  
+					</button>  
+					<h4 class="modal-title" id="myModalLabel">正在加载</h4>  
+				</div>  
+				<div class="modal-body">  
+					<p>正在加载…</p>  
+				</div>  
+				<div class="modal-footer">  
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+					<button type="button" class="btn btn-primary">Save</button>  
+				</div>  
+			</div>
+		</div>
+	</div>
+	<div id="modalposition" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-lg">
+		<div class="modal-content">
+		   <div class="modal-header">  
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
+                    <span aria-hidden="true">×</span>  
+                </button>  
+                <h4 class="modal-title" id="myModalLabel">正在加载</h4>  
+            </div>  
+            <div class="modal-body">  
+                <p>正在加载…</p>  
+            </div>  
+            <div class="modal-footer">  
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                <button type="button" class="btn btn-primary">Save</button>  
+            </div>  
+		</div>
+	  </div>
+	</div>
+	
+    
+    <script>
+        $(document).ready(function () {
+
+            $('#loading-example-btn').click(function () {
+                btn = $(this);
+                simpleLoad(btn, true)
+
+                // Ajax example
+                //                $.ajax().always(function () {
+                //                    simpleLoad($(this), false)
+                //                });
+
+                simpleLoad(btn, false)
+            });
+        });
+
+        function simpleLoad(btn, state) {
+            if (state) {
+                btn.children().addClass('fa-spin');
+                btn.contents().last().replaceWith(" Loading");
+            } else {
+                setTimeout(function () {
+                    btn.children().removeClass('fa-spin');
+                    btn.contents().last().replaceWith(" Refresh");
+                }, 2000);
+            }
+        }
+		
+		
+		
+	$('.delete').click(function () {
+        id=$(this).attr("title");		
+		swal({
+			title: "您确定要删除吗",
+			text: "删除后将无法恢复操作，请谨慎操作！",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			cancelButtonText: "取消",
+			confirmButtonText: "确定",
+			closeOnConfirm: false
+		}, function () {
+			//获取选中的checkbox
+			//发送请求命令			
+			var aj = $.ajax({
+				url:'__URL__/foreverdelete',
+				data:{  
+					id : id
+				},
+				type:'post',  
+				cache:false,  
+				dataType:'json',  
+				success:function(data) {					
+					swal("删除成功！", "请刷新查看结果。", "success");
+					location.href=location.href;
+				}  
+			});
+			
+		});
+	});
+	
+	var currentsupport=0;
+	$('.support').click(function () {
+        currentsupport=$(this).attr("title");		
+		var aj = $.ajax({
+			url:'__URL__/support',
+			data:{  
+				id : currentsupport
+			},
+			type:'post',  
+			cache:false,  
+			dataType:'json',  
+			success:function(data) {
+				document.getElementById("support"+currentsupport).innerHTML=data;
+			}  
+		});
+	});
+    </script>
+</body>
+
+</html>

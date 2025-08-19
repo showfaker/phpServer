@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>{$moduletitle}</title>
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+	<style>
+		/*
+		:last-child,
+		.invoice-table1 tbody > tr > td:nth-child(4),
+		.invoice-table1 tbody > tr > td:nth-child(3),
+		.invoice-table1 tbody > tr > td:nth-child(2) 
+		*/
+		.invoice-table1 tbody > tr > td{
+			text-align: left;
+			border:1px solid #ddd;
+		}
+
+		.invoice-total > tbody > tr > td:first-child {
+			text-align: right;
+		}
+
+		.invoice-total > tbody > tr > td {
+			border: 0 none;
+		}
+
+		.invoice-total > tbody > tr > td:last-child {
+			border-bottom: 1px solid #DDDDDD;
+			text-align: right;
+			width: 15%;
+		}
+	</style>
+</head>
+
+<body class="white-bg">
+    <div class="wrapper wrapper-content"><!--wrapper wrapper-content p-xl-->
+        <div class="" style="width:640px;margin:0 auto"><!--ibox-content p-xl-->
+            <div class="table-responsive m-t">
+				<div style="margin-bottom:10px">
+				附件：工作任务单
+				</div>
+                <table class="table invoice-table1">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div><strong>项目名称</strong>
+                                </div>
+                            </td>
+                            <td colspan="2">{$vo.title}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div><strong>甲方</strong>
+                                </div>
+                            </td>
+                            <td colspan="2">电动汽车服务有限公司</td>
+                        </tr>
+						<tr>
+                            <td>
+                                <div><strong>执行单位（乙方）</strong>
+                                </div>
+                            </td>
+                            <td colspan="2">{$vo.company}</td>
+                        </tr>
+						<tr>
+                            <td>
+                                <div><strong>监理单位</strong>
+                                </div>
+                            </td>
+                            <td colspan="2">{$vo.companysupervise}</td>
+                        </tr>
+						<tr>
+                            <td>
+                                <div><strong>设计单位</strong>
+                                </div>
+                            </td>
+                            <td colspan="2">{$vo.companydesign}</td>
+                        </tr>
+						<tr>
+                            <td colspan="2">
+                                <div><strong>派遣时间：<?php 
+										if($vo['sendtask_time']!=0)
+											echo date('Y-m-d',$vo['sendtask_time']);?></strong></div>
+                            </td>
+                            <td><strong>完成期限：{$vo.predate102}</strong></td>
+                        </tr>
+						<tr>
+                            <td rowspan="2">
+                                <div><strong>服务对象</strong>
+                                </div>
+                            </td>
+                            <td>企业或者单位名称</td>
+							<td>{$vo.client}</td>
+                        </tr>
+						<tr>
+                            <td>负责人及联系方式</td>
+							<td>{$vo.clienttel}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div><strong>工作内容</strong>
+                                </div>
+                            </td>
+                            <td colspan="2" style="height:250px;">
+							<div style="width:300px;height:250px">
+							{$vo.content}
+							
+							<div style="position:absolute;top:550px;margin-left:170px">
+								日期：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日
+							</div>
+							</div>
+							</td>
+                        </tr>
+						<tr>
+                            <td>
+                                <div>
+								<strong>甲方意见</strong>
+                                </div>
+                            </td>
+                            <td colspan="2" style="height:250px">
+							<div style="width:300px;height:250px">
+							<pre style="border:0px;background-color:white">{$vo.clientsuggest}</pre>
+							
+							<div style="position:absolute;top:700px;margin-left:170px">
+								项目负责人：
+								</br></br></br></br>
+								部门负责人：
+							</div>
+							</div>
+							</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /table-responsive -->
+            <!-- <div class="well m-t"><strong>监理单位：</strong> {$vo.companysupervise}
+            </div -->
+			
+			<div style="margin-right:30px;float:right;margin-top:10px;">
+				日期：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日
+			</div>
+        </div>
+
+    </div>
+
+    <!-- 全局js -->
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+
+
+
+    <!-- 自定义js -->
+    <script src="js/content.js?v=1.0.0"></script>
+
+    <script type="text/javascript">
+        //window.print();
+    </script>
+
+
+</body>
+
+</html>

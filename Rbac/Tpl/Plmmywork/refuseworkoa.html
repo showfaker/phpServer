@@ -1,0 +1,50 @@
+<include file="Public:iframe_top_dialog" />
+
+
+<div class="pageContent">
+	
+	<form method="post" action="__URL__/refuse/navTabId/__MODULE__/callbackType/closeCurrent" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="modal-body" layoutH="58" style="background-color:#FFFFFF">
+
+			<div>
+				<label style="text-align:left;width:100%">所属项目：{$vo.plm}</label>
+			</div>
+			<div>
+				<label style="text-align:left;width:100%">任务名称：{$vo.title}</label>
+			</div>
+			<div>
+				<label style="text-align:left;width:100%">当前责任：{$vo.current}</label>
+			</div>
+			<div>
+				<label style="text-align:left;width:100%">经办人：{$vo.user_id}</label>
+			</div>
+			<div class="form-group">
+				<label style="float:left">任务内容：</label>
+				<textarea readonly type="text" class="form-control" rows="2" cols="48" >{$vo.content}</textarea>
+			</div>
+			
+			<div class="form-group">
+				<label style="float:left;color:blue">确定拒绝任务吗？</label>
+				<!-- <input class="required" type="text" name="title" size="60" value="{$vo.title}">-->
+				<!-- <font style="font-weight:bold">{$vo.title}</font> -->
+			</div>
+			
+			<div class="form-group">
+				<label style="float:left">拒绝意见：</label>
+				<textarea class="form-control" type="text" name="view" value="" style="width:350px;height:80px"></textarea>
+				
+			</div>
+			
+			
+		</div>
+		<div  class="modal-footer">
+			<input type="hidden" name="id" value="{$vo.id}">
+			<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit">拒绝任务</button>
+			<button type="button" class="btn btn-sm btn-white pull-right m-t-n-xs" data-dismiss="modal" style="margin-left:10px">关闭</button>
+		</div>
+	</form>
+	
+</div>
+
+
+<include file="Public:iframe_bottom_dialog" />

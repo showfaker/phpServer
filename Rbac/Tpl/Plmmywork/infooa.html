@@ -1,0 +1,72 @@
+<include file="Public:iframe_top_dialog" />
+<div class="modal-header">
+	<h4 class="modal-title">详情</h4>
+</div>
+<div class="pageContent">
+	
+	<form method="post" action="__URL__/update" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="modal-body" layoutH="58" style="background-color:#fff">
+			<div>
+				<label style="text-align:left;width:100%">所属项目：{$vo.plm}</label>
+			</div>
+			<div>
+				<label style="text-align:left;width:100%">任务名称：{$vo.title}</label>
+			</div>
+			
+			<div>
+				<label style="text-align:left;width:100%">重要程度：{$vo.important}</label>
+			</div>
+			<div>
+				<label style="text-align:left;width:100%">委派时间：<?php 
+						if($vo['create_time']!=0)
+						echo date('Y年m月d日 H:i:s',$vo['create_time']);?></label>
+			</div>
+			<div>
+				<label style="text-align:left;width:100%">完成期限：{$vo.timebegin} ~ {$vo.timeend}</label>
+			</div>
+			<div>
+				<label style="text-align:left;width:100%">是否完成：{$vo['status']|workStatus=$vo['id']}</label>
+			</div>
+			<div>
+				<label style="text-align:left;width:100%">完成时间：<?php 
+						if($vo['commit_time']!=0)
+						echo date('Y年m月d日 H:i:s',$vo['commit_time']);?></label>
+			</div>
+			<div>
+				<label style="text-align:left;width:100%">当前责任：{$vo.current}</label>
+			</div>
+			<div>
+				<label style="text-align:left;width:100%">经办人：{$vo.user_id}</label>
+			</div>
+			<div>
+				<label style="text-align:left;width:100%">查看人：{$vo.check}</label>
+			</div>
+			<div class="form-group">
+				<label style="float:left">处理意见：</label>
+				<textarea readonly type="text" class="form-control" rows="2" cols="48">{$vo.view}</textarea>
+			</div>
+			<div class="form-group">
+				<label style="float:left">任务内容：</label>
+				<textarea readonly type="text" class="form-control" rows="2" cols="48" >{$vo.content}</textarea>
+			</div>
+			<div class="form-group">
+				<label style="float:left">任务进程：</label>
+				<textarea readonly type="text" class="form-control" rows="3" cols="48" >{$vo.process}</textarea>
+			</div>
+		</div>
+		<div class="modal-footer">
+				<input type="hidden" name="id" value="{$vo.id}">
+				<eq name="vo.ifcurrent" value="1">
+				<a class="btn btn-white btn-xs" href="__URL__/fill/id/{$vo.id}" target="dialog" mask="true" data-toggle="modal" data-target="#modal1" height="270" width="520"><span style="color:blue">填写纪要</span></a>
+				<a class="btn btn-white btn-xs" href="__URL__/edit/id/{$vo.id}" target="dialog" mask="true" data-toggle="modal" data-target="#modal1" height="270" width="520"><span style="color:orange">转派任务</span></a>
+				<a class="btn btn-white btn-xs"href="__URL__/commit/id/{$vo.id}" target="dialog"  mask="true" data-toggle="modal" data-target="#modal1" height="170" width="520"><span style="color:green">完成任务</span></a>
+				<a class="btn btn-white btn-xs" href="__URL__/refusework/id/{$vo.id}" target="dialog" mask="true" data-toggle="modal" data-target="#modal1" height="170" width="520"><span style="color:red">拒绝任务</span></a>
+				</eq>
+				<button type="button" class="btn btn-sm btn-white pull-right m-t-n-xs btn-xs" data-dismiss="modal" style="margin-top:0px">关闭</button>
+		</div>
+	</form>
+	
+</div>
+
+
+<include file="Public:iframe_bottom_dialog" />

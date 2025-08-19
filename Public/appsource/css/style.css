@@ -1,0 +1,103 @@
+.ui-page-login,
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+
+.mui-content {
+	height: 100%;
+}
+
+.mui-bar-tab .mui-tab-item.mui-active {
+	color: #ffffff;
+	background-color: #0a3f61;
+}
+
+.mui-bar-tab .mui-tab-item {
+	display: table-cell;
+	overflow: hidden;
+	width: 1%;
+	height: 50px;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	color: #ffffff;
+}
+
+.mynav {
+	float: left;
+	width: 33.33%;
+	text-align: center;
+	height: 50px;
+	line-height: 50px;
+	color: #ffffff;
+}
+
+.mynav2 {
+	float: left;
+	width: 50%;
+	text-align: center;
+	height: 34px;
+	line-height: 34px;
+	color: #ffffff;
+}
+
+.mynav3 {
+	float: left;
+	width: 33.33%;
+	text-align: center;
+	height: 34px;
+	line-height: 34px;
+	color: #ffffff;
+}
+
+.myheader {
+	float: left;
+	width: 33.33%;
+	text-align: center;
+	height: 50px;
+	line-height: 50px;
+	color: #ffffff;
+}
+
+.myrow {
+	height: 40px;
+	background-color: #293742;
+	width: 100%;
+}
+
+.mycell {
+	float: left;
+	width: 33.33%;
+	text-align: center;
+	height: 40px;
+	line-height: 40px;
+	color: #ffffff;
+}
+
+.mytable thead th {
+	background-color: #09989c;
+	color: #fff;
+	border-bottom-width: 0;
+}
+.mytable td {
+	color: #ffffff;
+}
+.mytable tr,
+.mytable th {
+	border-width: 1px;
+	border-style: solid;
+	border-color: #09989c;
+}
+.mytable td,
+.mytable th {
+	padding: 5px 10px;
+	font-size: 12px;
+	font-family: Verdana;
+	font-weight: bold;
+}
+
+.clearfloat:after{display:block;clear:both;content:"";visibility:hidden;height:0}

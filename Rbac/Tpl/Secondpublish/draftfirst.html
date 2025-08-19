@@ -1,0 +1,475 @@
+
+<link rel="shortcut icon" href="favicon.ico"> 
+<link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/style.css?v=4.1.0" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+<link href="css/plugins/chosen/chosen.css" rel="stylesheet">
+
+    
+<div class="modal-header">
+	<h4 class="modal-title">项目基本信息登记表</h4>
+</div>
+<form method="post" id="postform" action="__URL__/insert/callbackType/closeCurrent/navTabId/Second" ENCTYPE="multipart/form-data" class="form-horizontal">
+<div class="modal-body">
+	
+	<input type="hidden" value="{$orgdata.id}" name="id" id="id">
+	<input type="hidden" value="施工中" name="design_status">
+	
+	<!--
+	<div style="position:relative;top:0px;margin:0 auto;font-weight:bold;width:820px;">
+			<label>编写人:</label>
+			<eq name="orgdata.name" value="">
+			<input type="text"
+			style="font-size:15px;font-weight:bold;color:#676767;position:relative;border:0px;border-bottom:1px solid #BBBBBB;background:white;height:25px" name="name" value="{$_SESSION[name]}" required="" aria-required="true">
+			</eq>
+			<neq name="orgdata.name" value="">
+			<input type="text"
+			style="font-size:15px;font-weight:bold;color:#676767;position:relative;border:0px;border-bottom:1px solid #BBBBBB;background:white;height:25px" name="name" value="{$orgdata.name}" required="" aria-required="true">
+			</neq>
+			<label style="position:relative;padding-left:60px;">编写日期:</label>
+			<input value="{$orgdata[time]}" type="text" style="position:relative;border:0px;border-bottom:1px solid #BBBBBB;height:25px;background:white;" name="time" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" autocomplete="off" required="" aria-required="true">
+	</div>	
+	-->
+	<table class="drafttable" style="position:relative;top:28px;margin:0 auto;width:100%;margin-bottom:28px">
+	
+	
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">项目编号:</td>
+			<td class="normal" colspan="3">
+			<neq name="orgdata.number" value="">
+			<input type="text" value="{$orgdata.number}" class="forminputlarge" name="number" required="" aria-required="true" disabled>
+			</neq>
+			<eq name="orgdata.number" value="">
+			<input type="text" value="" class="forminputlarge" name="number" required="" aria-required="true" disabled id="number">
+			</eq>
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">项目名称:</td>
+			<td class="normal" colspan="3">
+			<neq name="orgdata.title" value="">
+			<input type="text" value="{$orgdata.title}" class="forminputlarge" name="title" required="" aria-required="true" disabled>
+			</neq>
+			
+			<eq name="orgdata.title" value="">
+			<select type="text" class="chosen-select forminputlarge" name="title" required="" aria-required="true" onchange="selectTurnToUrl(this)">
+				<option>选择项目</option>
+				<volist name="allprojects" id="project">
+					<option value="{$project.title}" url="{$project.id}" title="{$project.number}">{$project.title}</option>
+				</volist>
+			</select>
+			</eq>
+			</td>
+		</tr>
+		<script>
+			function selectTurnToUrl(obj)
+			{
+				var id = $(obj).find("option:selected").attr("url");
+				var number = $(obj).find("option:selected").attr("title");
+				document.getElementById("id").value=id;
+				document.getElementById("number").value=number;
+			}
+		</script>
+		<eq name="type" value="1">
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">施工编号:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.plmnumber}" class="forminputlarge" name="plmnumber" required="" aria-required="true">
+			</td>
+		</tr>
+		<!--
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">技术文档:</td>
+			<td class="normal i-checks" colspan="3">
+			是（<input type="radio" value="是" name="tech" <eq name="orgdata.tech" value="是">checked</eq> required="" aria-required="true">）  
+			否（<input type="radio" value="否" name="tech" <eq name="orgdata.tech" value="否">checked</eq> required="" aria-required="true">） 
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">合同文档:</td>
+			<td class="normal i-checks" colspan="3">
+			是（<input type="radio" value="是" name="tech1" <eq name="orgdata.tech1" value="是">checked</eq> required="" aria-required="true">）  
+			否（<input type="radio" value="否" name="tech1" <eq name="orgdata.tech1" value="否">checked</eq> required="" aria-required="true">） 
+			</td>
+		</tr>
+		-->
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">项目经理:</td>
+			<td class="normal" colspan="3">
+			<select type="text" value="{$orgdata.projectmanager}" class="forminputlarge" name="projectmanager" required="" aria-required="true">
+			<option>选择项目经理</option>
+				<volist name="xiangmujingli" id="xiangmujingli">
+					<option value="{$xiangmujingli.nickname}" url="{$xiangmujingli.id}" title="{$xiangmujingli.nickname}">{$xiangmujingli.nickname}</option>
+				</volist>
+			</select>
+			</td>
+		</tr>
+		</eq>
+		
+		<eq name="type" value="2">
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">人员进场:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.worker}" class="forminputlarge" name="worker" required="" aria-required="true" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" autocomplete="off">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">设备进场:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.device}" class="forminputlarge" name="device" required="" aria-required="true" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" autocomplete="off">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">施工开始:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.construction_start}" class="forminputlarge" name="construction_start" required="" aria-required="true" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" autocomplete="off">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">施工状况:</td>
+			<td class="normal i-checks" colspan="3">
+			待施工（<input type="radio" value="待施工" name="design_status" <eq name="orgdata.design_status" value="待施工">checked</eq> required="" aria-required="true">）  
+			施工中（<input type="radio" value="施工中" name="design_status" <eq name="orgdata.design_status" value="施工中">checked</eq> required="" aria-required="true">） 
+			已完成（<input type="radio" value="已完成" name="design_status" <eq name="orgdata.design_status" value="已完成">checked</eq> required="" aria-required="true">） 
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">施工进度:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.image_progress}" class="forminputlarge" name="image_progress" required="" aria-required="true">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">完工日期:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.finishtime}" class="forminputlarge" name="finishtime" required="" aria-required="true" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" autocomplete="off">
+			</td>
+		</tr>
+		
+		<!--
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">主体工程完成工程量m²:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.settle1}" class="forminputlarge" name="settle1" required="" aria-required="true">
+			</td>
+		</tr>
+		-->
+		
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">计量:</td>
+			<td class="normal i-checks" colspan="3">
+			未计量（<input type="radio" value="未计量" name="settle2" <eq name="orgdata.settle2" value="未计量">checked</eq> required="" aria-required="true">）  
+			计量完成（<input type="radio" value="计量完成" name="settle2" <eq name="orgdata.settle2" value="计量完成">checked</eq> required="" aria-required="true">） 
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">计量完成日期:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.settle2_time}" class="forminputlarge" name="settle2_time" required="" aria-required="true" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" autocomplete="off">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">验收进行情况:</td>
+			<td class="normal i-checks" colspan="3">
+			
+			未验收（<input type="radio" value="未验收" name="settle3" <eq name="orgdata.settle3" value="未验收">checked</eq> required="" aria-required="true">）  
+			交工验收（<input type="radio" value="交工验收" name="settle3" <eq name="orgdata.settle3" value="交工验收">checked</eq> required="" aria-required="true">） 
+			竣工验收（<input type="radio" value="竣工验收" name="settle3" <eq name="orgdata.settle3" value="竣工验收">checked</eq> required="" aria-required="true">） 
+
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">竣工验收日期:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.settle3_time}" class="forminputlarge" name="settle3_time" required="" aria-required="true" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" autocomplete="off">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">结算进行情况:</td>
+			<td class="normal i-checks" colspan="3">
+			未结算（<input type="radio" value="未结算" name="settle4" <eq name="orgdata.settle4" value="未结算">checked</eq> required="" aria-required="true">）  
+			结算进行完成（<input type="radio" value="结算进行完成" name="settle4" <eq name="orgdata.settle4" value="结算进行完成">checked</eq> required="" aria-required="true">） 
+			
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">审计:</td>
+			<td class="normal i-checks" colspan="3">
+			
+			未审计（<input type="radio" value="未审计" name="settle5" <eq name="orgdata.settle5" value="未审计">checked</eq> required="" aria-required="true">）  
+			审计中（<input type="radio" value="审计中" name="settle5" <eq name="orgdata.settle5" value="审计中">checked</eq> required="" aria-required="true">） 
+			完成审计（<input type="radio" value="完成审计" name="settle5" <eq name="orgdata.settle5" value="完成审计">checked</eq> required="" aria-required="true">） 
+		
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">审计完成日期:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.settle_time}" class="forminputlarge" name="settle_time" required="" aria-required="true" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" autocomplete="off">
+			</td>
+		</tr>
+		</eq>
+    </table>
+	
+	
+
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-danger" id="submitbutton">提交项目表</button>
+	<button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+</div>
+</form>
+<!-- Chosen -->
+<script src="js/plugins/chosen/chosen.jquery.js"></script>
+<script src="js/demo/form-advanced-demo.js"></script>
+<!-- Prettyfile -->
+<script src="js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+<script>
+	$('input[type="file"]').prettyFile();
+</script>
+
+<script>
+	$(document).ready(function () {
+		$('.i-checks').iCheck({
+			checkboxClass: 'icheckbox_square-green',
+			radioClass: 'iradio_square-green',
+		});
+	});
+	
+	$("#submitbutton").click(function(){
+		/*
+		title=$('input[name=title]').val();
+		if((title=="")||(title==null)||(title==undefined))
+		{
+			swal("请填写项目名称");
+			return false;
+		}
+		
+	   $.ajax({
+			url:'__URL__/ajax1',
+			type:'post',  
+			data:{'title':title},
+			dataType:'json',  
+			success:function(data) {				
+				if(data==1){
+					
+				}else{
+				   swal("项目名称已经存在！");
+				}
+			 }  
+		});
+		*/
+	
+		/*
+		if((address=="")||(address==null)||(address==undefined))
+		{
+			swal("请确认道路是否为空");
+			return false;
+		}
+		
+		buildingnumber=$('input[name=buildingnumber]').val();
+		if((buildingnumber=="")||(buildingnumber==null)||(buildingnumber==undefined))
+		{
+			swal("请确认路号是否为空");
+			return false;
+		}
+		
+		buildingname=$('input[name=buildingname]').val();
+		if((buildingname=="")||(buildingname==null)||(buildingname==undefined))
+		{
+			swal("请确认建筑名称是否为空");
+			return false;
+		}
+		purpose=$('input[name=purpose]').val();
+		if((purpose=="")||(purpose==null)||(purpose==undefined))
+		{
+			swal("请确认产权证用途是否为空");
+			return false;
+		}
+		floors=$('input[name=floors]').val();
+		if((floors=="")||(floors==null)||(floors==undefined))
+		{
+			swal("请确认总层是否为空");
+			return false;
+		}
+		floor=$('input[name=floor]').val();
+		if((floor=="")||(floor==null)||(floor==undefined))
+		{
+			swal("请确认楼层是否为空");
+			return false;
+		}
+		contractacreage=$('input[name=contractacreage]').val();
+		if((contractacreage=="")||(contractacreage==null)||(contractacreage==undefined))
+		{
+			swal("请确认合同面积是否为空");
+			return false;
+		}
+		useacreage=$('input[name=useacreage]').val();
+		if((useacreage=="")||(useacreage==null)||(useacreage==undefined))
+		{
+			swal("请确认使用面积是否为空");
+			return false;
+		}
+		*/
+		/*
+		plantime=$('input[name=plantime]').val();
+		if((plantime=="")||(plantime==null)||(plantime==undefined))
+		{
+			swal("请确认预计场地交付时间是否为空");
+			return false;
+		}
+		deliver=$('input[name=deliver]:checked').val();
+		if((deliver=="")||(deliver==null)||(deliver==undefined))
+		{
+			swal("请确认约定场地交付状态是否为空");
+			return false;
+		}
+		freebegintime=$('input[name=freebegintime]').val();
+		freeendtime=$('input[name=freeendtime]').val();
+		freemonth=$('input[name=freemonth]').val();
+		if(((freebegintime=="")||(freebegintime==null)||(freebegintime==undefined))||((freeendtime=="")||(freeendtime==null)||(freeendtime==undefined))||((freemonth=="")||(freemonth==null)||(freemonth==undefined)))
+		{
+			swal("请确认约定装修免租期是否为空");
+			return false;
+		}
+		
+		para11=$('input[name="para11"]:checked').val();
+		if((para11=="")||(para11==null)||(para11==undefined))
+		{
+			swal("请确认泳池条件是否为空");
+			return false;
+		}
+		para12=$('input[name=para12]').val();
+		para21=$('input[name=para21]:checked').val();
+		if((para21=="")||(para21==null)||(para21==undefined))
+		{
+			swal("请确认用电条件是否为空");
+			return false;
+		}
+		para22=$('input[name=para22]').val();
+		para31=$('input[name=para31]:checked').val();
+		if((para31=="")||(para31==null)||(para31==undefined))
+		{
+			swal("请确认弱电条件是否为空");
+			return false;
+		}
+		para41=$('input[name=para41]:checked').val();
+		if((para41=="")||(para41==null)||(para41==undefined))
+		{
+			swal("请确认给水条件是否为空");
+			return false;
+		}
+		para42=$('input[name=para42]').val();
+		para51=$('input[name=para51]:checked').val();
+		if((para51=="")||(para51==null)||(para51==undefined))
+		{
+			swal("请确认排水条件是否为空");
+			return false;
+		}
+		para52=$('input[name=para52]').val();
+		para61=$('input[name=para61]:checked').val();
+		if((para61=="")||(para61==null)||(para61==undefined))
+		{
+			swal("请确认燃气条件是否为空");
+			return false;
+		}
+		para62=$('input[name=para62]:checked').val();
+		if((para62=="")||(para62==null)||(para62==undefined))
+		{
+			swal("请确认燃气条件是否为空");
+			return false;
+		}
+		para71=$('input[name=para71]:checked').val();
+		if((para71=="")||(para71==null)||(para71==undefined))
+		{
+			swal("请确认消防条件是否为空");
+			return false;
+		}
+		para81=$('input[name=para81]:checked').val();
+		if((para81=="")||(para81==null)||(para81==undefined))
+		{
+			swal("请确认空调条件是否为空");
+			return false;
+		}
+		para82=$('input[name=para82]').val();
+		para91=$('input[name=para91]:checked').val();
+		if((para91=="")||(para91==null)||(para91==undefined))
+		{
+			swal("请确认设备间条件是否为空");
+			return false;
+		}
+		para92=$('input[name=para92]:checked').val();
+		if((para92=="")||(para92==null)||(para92==undefined))
+		{
+			swal("请确认设备间条件是否为空");
+			return false;
+		}
+		para101=$('input[name=para101]:checked').val();
+		if((para101=="")||(para101==null)||(para101==undefined))
+		{
+			swal("请确认甲方应提供原始图纸及材料条件是否为空");
+			return false;
+		}
+		para111=$('input[name=para111]:checked').val();
+		if((para111=="")||(para111==null)||(para111==undefined))
+		{
+			swal("请确认广告位条件是否为空");
+			return false;
+		}
+		para121=$('input[name=para121]:checked').val();
+		if((para121=="")||(para121==null)||(para121==undefined))
+		{
+			swal("请确认预售点条件是否为空");
+			return false;
+		}
+		para122=$('input[name=para122]:checked').val();
+		if((para122=="")||(para122==null)||(para122==undefined))
+		{
+			swal("请确认预售点条件是否为空");
+			return false;
+		}
+		user1=$('input[name=user1]').val();
+		if((user1=="")||(user1==null)||(user1==undefined))
+		{
+			swal("请确认招商对接人是否为空");
+			return false;
+		}
+		user1tel=$('input[name=user1tel]').val();
+		if((user1tel=="")||(user1tel==null)||(user1tel==undefined))
+		{
+			swal("请确认招商对接人电话是否为空");
+			return false;
+		}
+		user2=$('input[name=user2]').val();
+		if((user2=="")||(user2==null)||(user2==undefined))
+		{
+			swal("请确认工程（物业）对接人是否为空");
+			return false;
+		}
+		user2tel=$('input[name=user2tel]').val();
+		if((user2tel=="")||(user2tel==null)||(user2tel==undefined))
+		{
+			swal("请确认工程（物业）对接人电话是否为空");
+			return false;
+		}
+		*/
+		/*
+		file1=$('input[name=file1]').val();
+		if((file1=="")||(file1==null)||(file1==undefined))
+		{
+			swal("请确认进门位置、整体空间、顶地照片是否为空");
+			return false;
+		}
+		file2=$('input[name=file2]').val();
+		if((file2=="")||(file2==null)||(file2==undefined))
+		{
+			swal("请确认客流动线图照片是否为空");
+			return false;
+		}
+		*/
+		$("#postform").submit();
+	})
+</script>

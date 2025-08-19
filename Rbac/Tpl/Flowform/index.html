@@ -1,0 +1,350 @@
+<neq name="check" value="1">
+<include file="Public:iframe_top" />
+</neq>
+<eq name="check" value="1">
+<include file="Public:iframe_top_nav" />
+</eq>
+
+<neq name="check" value="1">
+<div class="pageHeader" >
+	<form id="pagerForm" onsubmit="return true;" action="__URL__/index/nodename/{$nodename}/moduletitle/{$moduletitle}" method="post">
+	<input type="hidden" name="pageNum" value="1" />
+	<input type="hidden" name="numPerPage" value="${model.numPerPage}" />
+	<input type="hidden" name="orderField" value="${param.orderField}" />
+	<input type="hidden" name="orderDirection" value="${param.orderDirection}" />
+	<input type="hidden" name="searchtitle" value="{$searchtitle}" />
+	<div class="searchBar">
+		<ul class="searchContent">
+			<!-- <li class="col-xs-12">
+				<label>流水查询</label>
+				<input type="text" name="keyword" size="6" value="{$keyword}"/>
+			</li>
+			
+			<li class="hidden-xs">
+				<label>提交时间</label>
+				<input type="text" value="{$timebegin}" class="date" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" name="timebegin">
+				<input type="text" value="{$timeend}" class="date" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" name="timeend">
+			</li>
+			<li class="hidden-xs">			
+				<label>提交人</label>
+				<input type="text" value="{$user}"  name="user" size="6">
+			</li> -->
+			<!-- <li class="hidden-xs">
+				<label>审批状态</label>
+				<select name="approvestatus" class="">
+					<option value="">==请选择==</option>
+					<option value="待审批" <eq name="approvestatus" value="待审批">selected</eq> >待审批</option>
+					<option value="审批中" <eq name="approvestatus" value="审批中">selected</eq> >审批中</option>
+					<option value="退回至申请人" <eq name="approvestatus" value="退回至申请人">selected</eq> >退回至申请人</option>
+					<option value="退回至审批人" <eq name="approvestatus" value="退回至审批人">selected</eq> >退回至审批人</option>
+					<option value="审批完成" <eq name="approvestatus" value="审批完成">selected</eq> >审批完成</option>
+				</select>
+			</li>
+			-->
+			<for start="0" end="30">
+			<neq name="setting.parasearch$i" value="">
+			
+			<notin name="setting.paratype$i" value="3,5">
+			<li class="hidden-xs" style="float:left;">			
+				<label>{$setting.para$i}</label>
+				<input type="text" value="{$parasearch[$i]}"  name="parasearch{$i}" size="6">
+			</li>
+			</notin>
+			<in name="setting.paratype$i" value="3,5">
+			<li class="hidden-xs" style="float:left;">			
+				<label>{$setting.para$i}</label>
+				<input type="text" value="{$timebeginsearch[$i]}" class="date" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" name="timebegin{$i}">
+				<input type="text" value="{$timeendsearch[$i]}" class="date" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" name="timeend{$i}">
+			</li>
+			</in>
+			
+			</neq>
+			</for>
+			
+			
+			<eq name="setting.title" value="税筹合同">
+				<li class="hidden-xs">			
+				<label>状态</label>
+					<select name="status" class="">
+						<option value="">==请选择==</option>
+						<option value="正常" <eq name="status" value="正常">selected</eq> >正常</option>
+						<option value="禁用" <eq name="status" value="禁用">selected</eq> >完结</option>
+					</select>
+				</li>
+			</eq>
+			
+			<div class="buttonActive" style="float:left;"><div class="buttonContent"><button type="submit">查询</button></div></div>
+			<a class="button hidden-xs" href="__URL__/toexcel/nodename/{$nodename}/keyword/{$keyword}/timebegin/{$timebegin}/user/{$user}" target="_blank" title="是要导出这些记录吗?" style="float:right;margin-left:10px"><span>导出EXCEL</span></a>
+			<!-- <a class="button hidden-xs" href="__URL__/find/nodename/{$nodename}" title="参数查询" mask="true" id="findproject" target="dialog" data-toggle="modal" data-target="#bigmodal" height="160" width="660" style="float:right;"><span>参数查询</span></a> -->
+
+			
+			<!-- <neq name="check" value="1">	
+			<a class="button" href="__URL__/draft/nodename/{$nodename}" title="{$setting.title}" rel="{$setting.title}" target="navTab" data-toggle="modal" data-target="#bigmodal" mask="true" height="470" width="730" style="float:left;position:relative;left:30px;text-align:right;"><span>{$setting.title}</span></a>
+			</neq> -->
+			
+			<!--
+			<a class="button" href="__URL__/find" title="搜索号码" rel="findproject" id="findproject" target="dialog" data-toggle="modal" data-target="#bigmodal" height="300" width="580" style="float:right;"><span>号码搜索</span></a>
+			-->
+			</ul>
+	</div>
+	</form>
+</div>
+</neq>
+
+<div class="pageContent">	
+	<neq name="check" value="1">	
+	<div class="panelBar">
+		<ul class="toolBar">
+
+			<li><a class="add" href="__URL__/draft/nodename/{$nodename}" title="{$setting.title}" rel="{$setting.title}" target="navTab" data-toggle="modal" data-target="#bigmodal" mask="true" width="900" height="430" mask="true"><span>{$setting.title}</span></a></li>
+
+		</ul>
+	</div>
+	</neq>
+	<table class="table table-striped table-bordered table-hover" width="100%"  <eq name="check" value="1">layoutH="138"</eq> layoutH="85">
+		<thead>
+			<!-- <eq name="nodename" value="税筹">
+			<tr>
+			<th colspan="6"></th>
+			<th colspan="2" style="text-align:center">增值税</th>
+			<th colspan="2" style="text-align:center">所得税</th>
+			<th colspan="2" style="text-align:center">个税</th>
+			<th colspan="9"></th>
+			</tr>
+			</eq> -->
+			<tr>
+				<!-- <th width="2%"><input type="checkbox" group="ids" class="checkboxCtrl"></th> -->
+				<!-- <th>流水号</th> -->
+				
+				<neq name="setting.paratable0" value=""><th>{$setting.para0}</th></neq>
+				<neq name="setting.paratable1" value=""><th class="hidden-xs">{$setting.para1}</th></neq>
+				<neq name="setting.paratable2" value=""><th class="hidden-xs">{$setting.para2}</th></neq>
+				<neq name="setting.paratable3" value=""><th class="hidden-xs">{$setting.para3}</th></neq>
+				<neq name="setting.paratable4" value=""><th class="hidden-xs">{$setting.para4}</th></neq>
+				<neq name="setting.paratable5" value=""><th class="hidden-xs">{$setting.para5}</th></neq>
+				<neq name="setting.paratable6" value=""><th class="hidden-xs">{$setting.para6}</th></neq>
+				<neq name="setting.paratable7" value=""><th class="hidden-xs">{$setting.para7}</th></neq>
+				<neq name="setting.paratable8" value=""><th class="hidden-xs">{$setting.para8}</th></neq>
+				<neq name="setting.paratable9" value=""><th class="hidden-xs">{$setting.para9}</th></neq>
+				<neq name="setting.paratable10" value=""><th class="hidden-xs">{$setting.para10}</th></neq>
+				<neq name="setting.paratable11" value=""><th class="hidden-xs">{$setting.para11}</th></neq>
+				<neq name="setting.paratable12" value=""><th class="hidden-xs">{$setting.para12}</th></neq>
+				<neq name="setting.paratable13" value=""><th class="hidden-xs">{$setting.para13}</th></neq>
+				<neq name="setting.paratable14" value=""><th class="hidden-xs">{$setting.para14}</th></neq>
+				<neq name="setting.paratable15" value=""><th class="hidden-xs">{$setting.para15}</th></neq>
+				<neq name="setting.paratable16" value=""><th class="hidden-xs">{$setting.para16}</th></neq>
+				<neq name="setting.paratable17" value=""><th class="hidden-xs">{$setting.para17}</th></neq>
+				<neq name="setting.paratable18" value=""><th class="hidden-xs">{$setting.para18}</th></neq>
+				<neq name="setting.paratable19" value=""><th class="hidden-xs">{$setting.para19}</th></neq>
+				<neq name="setting.paratable20" value=""><th class="hidden-xs">{$setting.para20}</th></neq>
+				<neq name="setting.paratable21" value=""><th class="hidden-xs">{$setting.para21}</th></neq>
+				<neq name="setting.paratable22" value=""><th class="hidden-xs">{$setting.para22}</th></neq>
+				<neq name="setting.paratable23" value=""><th class="hidden-xs">{$setting.para23}</th></neq>
+				<neq name="setting.paratable24" value=""><th class="hidden-xs">{$setting.para24}</th></neq>
+				<neq name="setting.paratable25" value=""><th class="hidden-xs">{$setting.para25}</th></neq>
+				<neq name="setting.paratable26" value=""><th class="hidden-xs">{$setting.para26}</th></neq>
+				<neq name="setting.paratable27" value=""><th class="hidden-xs">{$setting.para27}</th></neq>
+				<neq name="setting.paratable28" value=""><th class="hidden-xs">{$setting.para28}</th></neq>
+				<neq name="setting.paratable29" value=""><th class="hidden-xs">{$setting.para29}</th></neq>
+				
+				<eq name="setting.title" value="投资项目">
+				<th>项目余额</th>
+				</eq>
+				
+				
+				<eq name="setting.title" value="税筹合同">
+				<th>公户-剩余</th>
+				<th>私户-剩余</th>
+				<th>票-剩余</th>
+				</eq>
+				
+				<eq name="setting.title" value="借贷设置">
+				<th>已借金额</th>
+				<th>授信金额</th>
+				</eq>
+			
+				<!-- <th>申请人员</th> -->
+				<!-- <th>申请时间</th> -->
+				<neq name="check" value="1">
+				<th>单子操作</th>
+				</neq>
+			</tr>
+		</thead>
+		<tbody>
+			<volist name="list" id="listmenu">
+			<tr <neq name="listmenu.status" value="1">style="color:gray"</neq>>
+				
+				<!-- <td class="checkTd" align="center"><input type="checkbox" name="" value="" id=""></td> -->
+				<!-- <td>{$setting['serial']}-{$listmenu['year']}-{$listmenu['serial']}</td> -->
+				<neq name="setting.paratable0" value=""><td>{$listmenu[$setting[tableparaname0]]}</td></neq>
+				<neq name="setting.paratable1" value=""><td class="hidden-xs">{$listmenu[$setting[tableparaname1]]}</td></neq>
+				<neq name="setting.paratable2" value=""><td class="hidden-xs">{$listmenu[$setting[tableparaname2]]}</td></neq>
+				<neq name="setting.paratable3" value=""><td class="hidden-xs">{$listmenu[$setting[tableparaname3]]}</td></neq>
+				<neq name="setting.paratable4" value=""><td class="hidden-xs">{$listmenu[$setting[tableparaname4]]}</td></neq>
+				<neq name="setting.paratable5" value=""><td class="hidden-xs">{$listmenu[$setting[tableparaname5]]}</td></neq>
+				<neq name="setting.paratable6" value=""><td class="hidden-xs">{$listmenu[$setting[tableparaname6]]}</td></neq>
+				<neq name="setting.paratable7" value=""><td class="hidden-xs">{$listmenu[$setting[tableparaname7]]}</td></neq>
+				<neq name="setting.paratable8" value=""><td class="hidden-xs">{$listmenu[$setting[tableparaname8]]}</td></neq>
+				<neq name="setting.paratable9" value=""><td class="hidden-xs">{$listmenu[$setting[tableparaname9]]}</td></neq>
+				<neq name="setting.paratable10" value=""><td class="hidden-xs">{$listmenu[$setting[tableparaname10]]}</td></neq>
+				<neq name="setting.paratable11" value=""><td class="hidden-xs">{$listmenu[$setting[tableparaname11]]}</td></neq>
+				<neq name="setting.paratable12" value=""><td class="hidden-xs">{$listmenu[$setting[tableparaname12]]}</td></neq>
+				<neq name="setting.paratable13" value=""><td class="hidden-xs">{$listmenu[$setting[tableparaname13]]}</td></neq>
+				<neq name="setting.paratable14" value=""><td class="hidden-xs">{$listmenu[$setting[tableparaname14]]}</td></neq>
+				<neq name="setting.paratable15" value=""><td class="hidden-xs">{$listmenu[$setting[tableparaname15]]}</td></neq>
+				<neq name="setting.paratable16" value=""><td class="hidden-xs">{$listmenu[$setting[tableparaname16]]}</td></neq>
+				<neq name="setting.paratable17" value=""><td class="hidden-xs">{$listmenu[$setting[tableparaname17]]}</td></neq>
+				<neq name="setting.paratable18" value=""><td class="hidden-xs">{$listmenu[$setting[tableparaname18]]}</td></neq>
+				<neq name="setting.paratable19" value=""><td class="hidden-xs">{$listmenu[$setting[tableparaname19]]}</td></neq>
+				<neq name="setting.paratable20" value=""><td class="hidden-xs">{$listmenu[$setting[tableparaname20]]}</td></neq>
+				<neq name="setting.paratable21" value=""><td class="hidden-xs">{$listmenu[$setting[tableparaname21]]}</td></neq>
+				<neq name="setting.paratable22" value=""><td class="hidden-xs">{$listmenu[$setting[tableparaname22]]}</td></neq>
+				<neq name="setting.paratable23" value=""><td class="hidden-xs">{$listmenu[$setting[tableparaname23]]}</td></neq>
+				<neq name="setting.paratable24" value=""><td class="hidden-xs">{$listmenu[$setting[tableparaname24]]}</td></neq>
+				<neq name="setting.paratable25" value=""><td class="hidden-xs">{$listmenu[$setting[tableparaname25]]}</td></neq>
+				<neq name="setting.paratable26" value=""><td class="hidden-xs">{$listmenu[$setting[tableparaname26]]}</td></neq>
+				<neq name="setting.paratable27" value=""><td class="hidden-xs">{$listmenu[$setting[tableparaname27]]}</td></neq>
+				<neq name="setting.paratable28" value=""><td class="hidden-xs">{$listmenu[$setting[tableparaname28]]}</td></neq>
+				<neq name="setting.paratable29" value=""><td class="hidden-xs">{$listmenu[$setting[tableparaname29]]}</td></neq>
+				
+				<!-- <td>{$listmenu['user']}</td> -->
+				<!-- <td><?php 
+						if($listmenu['create_time']!=0)
+						echo date('Y-m-d H:i',$listmenu['create_time']);?>
+				</td>	 -->
+				
+				<!-- 特殊处理 -->
+				<eq name="setting.title" value="投资项目">
+				<td>{$listmenu['income']}</td>
+				</eq>
+				
+				
+				
+				<eq name="setting.title" value="税筹合同">
+				<td>{$listmenu['contractmoneyleft']}</td>
+				<td>{$listmenu['returnmoneyleft']}</td>
+				<td>{$listmenu['taxleft']}</td>
+				</eq>
+				
+				<eq name="setting.title" value="借贷设置">
+				<th>{$listmenu['borrowedmoney']}</th>
+				<th>{$listmenu['creditmoney']}</th>
+				</eq>
+				
+						
+				<neq name="check" value="1">	
+				<td>
+				<!--
+				<a href="__URL__/change/id/{$listmenu['id']}/navTabId/{$nodename}/currentPage/{$currentPage}" target="dialog" data-toggle="modal" data-target="#bigmodal" class="" title="跟踪备注" width="680" height="370" style="color:blue">跟踪记录</a>
+				-->
+				<in name="listmenu.approvestatus" value="待审批,审批中,退回至审批人"><!--新加退回至审批人-->
+				<?php if(false!==strstr($listmenu["current"],$_SESSION["namenumber"])){?>
+					<a href='__URL__/approve/id/<?php echo $listmenu["id"]; ?>/navTabId/<?php echo $nodename; ?>/nodename/<?php echo $nodename; ?>' target="navTab" data-toggle="modal" data-target="#bigmodal" rel="approve" title="<?php echo $setting["title"];?>审批"  class="btn btn-warning btn-xs">审批</a>
+				<?php }?>
+				</in>	
+			
+
+				<eq name="listmenu.status" value="1">
+				<eq name="_SESSION[name]" value="$listmenu.user">
+					<a href="__URL__/modify/id/{$listmenu['id']}/templateid/{$listmenu['templateid']}/navTabId/{$nodename}/nodename/{$nodename}" target="navTab" data-toggle="modal" data-target="#bigmodal" rel="edit" title="{$setting.title}修改"  class="btn btn-info btn-xs" mask="true">修改</a>
+					<!-- <a href="__URL__/revoke/id/{$listmenu['id']}/templateid/{$listmenu['templateid']}/navTabId/{$nodename}/nodename/{$nodename}" target="ajaxTodo" title="确定删除申请吗？"   class="btn btn-danger btn-xs">删除</a> -->
+				</eq>
+				</eq>
+				
+				
+				
+				<eq name="listmenu.status" value="1">
+					<eq name="_SESSION[name]" value="$listmenu.user">
+					<a href="__URL__/forbid/id/{$listmenu['id']}/templateid/{$listmenu['templateid']}/navTabId/{$nodename}/nodename/{$nodename}" target="ajaxTodo" title="确定禁用吗？"   class="btn btn-warning btn-xs">
+					<eq name="setting.title" value="税筹合同">完结</eq>
+					<neq name="setting.title" value="税筹合同">禁用</neq>
+					</a>
+					</eq>
+				</eq>
+				<eq name="listmenu.status" value="0">
+					<eq name="_SESSION[name]" value="$listmenu.user">
+					<a href="__URL__/resume/id/{$listmenu['id']}/templateid/{$listmenu['templateid']}/navTabId/{$nodename}/nodename/{$nodename}" target="ajaxTodo" title="确定禁用吗？"   class="btn btn-info btn-xs">恢复</a>
+					</eq>
+				</eq>
+				
+				
+				
+				
+				<a href="__URL__/check/id/{$listmenu['id']}/templateid/{$listmenu['templateid']}/navTabId/{$nodename}/nodename/{$nodename}" target="navTab" data-toggle="modal" data-target="#bigmodal" rel="check" title="{$setting.title}查看"   class="btn btn-success btn-xs">查看</a> 
+				<eq name="listmenu.approvestatus" value="审批完成"> 
+				 <!--
+				 <neq name="listmenu.alreadyknow" value="1">
+				 | <a href="__URL__/iknow/id/{$listmenu['id']}/navTabId/{$nodename}" target="ajaxTodo" class="" title="确定确认知悉吗？"  style="color:red">确认知悉</a>
+				 </neq>
+				 <eq name="listmenu.alreadyknow" value="1">
+				 | <a href="javascript:void(0)" style="color:grey">(已知悉)</a>
+				 </eq>
+				 -->
+				 <eq name="listmenu.needexecute" value="1">
+				 
+				 <neq name="listmenu.alreadyexecute" value="1">
+					<a href="__URL__/execute/id/{$listmenu['id']}/templateid/{$listmenu['templateid']}/navTabId/{$nodename}/nodename/{$nodename}" target="navTab" data-toggle="modal" data-target="#bigmodal" title="知悉执行"   class="btn btn-primary btn-xs">知悉执行</a>
+				 </neq>
+				 <eq name="listmenu.alreadyexecute" value="1">
+					<a href="javascript:void(0)" style="color:grey">(已知悉执行)</a>
+				 </eq>
+				 
+				 </eq>
+				 
+				 <eq name="_SESSION[account]" value="admin">
+				 <a href="__URL__/approvebyadmin/id/{$listmenu['id']}/templateid/{$listmenu['templateid']}/navTabId/{$nodename}/nodename/{$nodename}" target="navTab" data-toggle="modal" data-target="#bigmodal" rel="approve" title="{$setting.title}流转" class="btn btn-info btn-xs">流转</a>  
+				 </eq>
+				</eq>
+				
+				
+			
+				
+				
+				<eq name="_SESSION[account]" value="admin">
+				<a href="__URL__/flowforeverdelete/id/{$listmenu['id']}/templateid/{$listmenu['templateid']}/navTabId/{$nodename}/nodename/{$nodename}" target="ajaxTodo" title="管理员删除功能！请谨慎操作！确定删除申请吗？"   class="btn btn-danger btn-xs">删除</a>
+				</eq>
+				
+				
+				<!-- 
+				<neq name="listmenu.status" value="1">
+				<a href="javascript:void(0)" style="color:grey">(已删除)</a>
+				<eq name="_SESSION[account]" value="admin">
+				<a href="__URL__/flowforeverdelete/id/{$listmenu['id']}/templateid/{$listmenu['templateid']}/navTabId/{$nodename}/nodename/{$nodename}" target="ajaxTodo" title="确定永久删除吗？删除后将无法恢复数据！"  class="btn btn-danger btn-xs">永久删除</a>
+				</eq>
+				</neq>
+				 -->
+				
+				</td>	
+				</neq>
+
+				
+						
+			</tr>
+			</volist>
+		</tbody>
+	</table>
+	<div class="panelBar" style="height:60px;">
+		<div class="pages">
+			<span>共{$totalCount}条</span>
+		</div>
+		<div class="pagination" targetType="navTab" totalCount="{$totalCount}" numPerPage="{$numPerPage}" pageNumShown="10" currentPage="{$currentPage}">{$page}</div>
+	</div>
+</div>
+
+
+
+<neq name="check" value="1">
+<include file="Public:iframe_bottom" />
+</neq>
+<eq name="check" value="1">
+<include file="Public:iframe_bottom_nav" />
+</eq>
+
+
+<script type="text/javascript" src="__PUBLIC__/lightbox/source/jquery.fancybox.js?v=2.1.5"></script>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/lightbox/source/jquery.fancybox.css?v=2.1.5" media="screen" />
+<script type="text/javascript">
+		$(document).ready(function() {
+			$('.fancybox').fancybox();
+		});
+</script>

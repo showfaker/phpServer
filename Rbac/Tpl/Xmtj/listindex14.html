@@ -1,0 +1,187 @@
+
+<link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/style.css?v=4.1.0" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="__PUBLIC__/dwz/themes/css/core1.css">
+
+
+<style>
+.panel-heading
+{
+	font-weight:bold;
+}
+.panel-body
+{
+	font-weight:bold;
+}
+</style>
+
+<form method="post" action="__URL__/insert1/callbackType/closeCurrent/navTabId/Second" ENCTYPE="multipart/form-data" onsubmit="return iframeCallback(this, dialogAjaxDone)">
+<div class="modal-body" id="file-pretty"> 
+	<input type="hidden" value="{$orgdata.id}" name="id">
+	
+		
+		<div class="modal-header" style="text-align:left;margin-bottom:20px;">
+			<h4 class="modal-title" style="font-weight:bold">主项工程量统计</h4>
+		</div>
+		<table class="drafttable" style="position:relative;top:8px;margin:0 auto;width:100%;margin-bottom:28px;font-family:微软雅黑;">
+			<tr>
+				
+				<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6;width:16%">专项</td>
+				<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6;width:16%">节点</td>
+				<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6;width:10%">计划工程量</td>
+				<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6;width:10%">完成工程量</td>
+				<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6;width:10%">计划时间</td>
+				<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6;width:10%">完成时间</td>
+				<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6;width:8%">是否超期</td>
+			</tr>
+			<volist name="qualityschedules1" id="schedule">
+			<neq name="schedule.classify" value="$qualityschedules1[$key-1][classify]">
+			<tr>
+			<td style="background-color:#eee;height:20px;border:1px solid #999;font-weight:bold;padding-left:4px;line-height:20px" colspan="8">{$schedule.classify}</td>
+			</tr>
+			</neq>
+			<tr>
+				
+				<td class="normal" >
+				<neq name="schedule.worktype" value="$qualityschedules1[$key-1][worktype]">
+				{$schedule.worktype}
+				</neq>
+				</td>
+				<td class="normal" >
+				{$schedule.subworktype}
+				</td>
+				<td class="normal" >
+				{$schedule.plantimelength}天
+				</td>
+				<td class="normal" >
+				{$schedule.percent}
+				</td>
+				<td class="normal" >
+				{$schedule[plantimeend]}</br>{$schedule[plantimeend]}
+				</td>
+				<td class="normal" >
+				{$schedule[realtimebegin]}</br>{$schedule[realtimeend]}
+				<neq name="schedule[realtimeend]" value="">
+				<span class='badge badge-info' title="{$schedules[$key][id]}">完成</span>
+				</neq>
+				</td>
+				<td class="normal" >
+				<!--
+				<neq name="schedules[$key][percent]" value="">
+				<font style="color:blue">{$schedules[$key][percent]}</font>
+				</neq>
+				<eq name="schedules[$key][percent]" value="">
+				<font style="color:red">未开始</font>
+				</eq>
+				-->
+				
+				<gt name="qualityschedules1[$key][realtimeend]" value="$schedules[$key][plantimeend]">
+				<span class='badge badge-danger' title="{$qualityschedules1[$key][id]}">超期</span>
+				</gt>
+				
+				</td>
+			</tr>
+			</volist>
+		
+			
+			<tr>
+			<td style="background-color:#eee;height:10px;border:1px solid #999" colspan="8"></td>
+			</tr>
+		</table>
+	
+		
+		<div class="modal-header" style="text-align:left;margin-bottom:20px;">
+			<h4 class="modal-title" style="font-weight:bold">工程量统计</h4>
+		</div>
+		<table class="drafttable" style="position:relative;top:8px;margin:0 auto;width:100%;margin-bottom:28px;font-family:微软雅黑;">
+			<tr>
+				
+				<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6;width:16%">专项</td>
+				<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6;width:16%">节点</td>
+				<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6;width:10%">计划工程量</td>
+				<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6;width:10%">完成工程量</td>
+				<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6;width:10%">计划时间</td>
+				<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6;width:10%">完成时间</td>
+				<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6;width:8%">是否超期</td>
+			</tr>
+			<volist name="qualityschedules" id="schedule">
+			<neq name="schedule.classify" value="$qualityschedules[$key-1][classify]">
+			<tr>
+			<td style="background-color:#eee;height:20px;border:1px solid #999;font-weight:bold;padding-left:4px;line-height:20px" colspan="8">{$schedule.classify}</td>
+			</tr>
+			</neq>
+			<tr>
+				
+				<td class="normal" >
+				<neq name="schedule.worktype" value="$qualityschedules[$key-1][worktype]">
+				{$schedule.worktype}
+				</neq>
+				</td>
+				<td class="normal" >
+				{$schedule.subworktype}
+				</td>
+				<td class="normal" >
+				{$schedule.planquality}{$schedule.qualityunit}
+				</td>
+				<td class="normal" >
+				{$schedule.realquality}<neq name="schedule.realquality" value="">{$schedule.qualityunit}</neq>
+				</td>
+				<td class="normal" >
+				{$schedule[plantimeend]}</br>{$schedule[plantimeend]}
+				</td>
+				<td class="normal" >
+				{$schedule[realtimebegin]}</br>{$schedule[realtimeend]}
+				<neq name="schedule[realtimeend]" value="">
+				<span class='badge badge-info' title="{$schedules[$key][id]}">完成</span>
+				</neq>
+				</td>
+				<td class="normal" >
+				<!--
+				<neq name="schedules[$key][percent]" value="">
+				<font style="color:blue">{$schedules[$key][percent]}</font>
+				</neq>
+				<eq name="schedules[$key][percent]" value="">
+				<font style="color:red">未开始</font>
+				</eq>
+				-->
+				
+				<gt name="qualityschedules[$key][realtimeend]" value="$schedules[$key][plantimeend]">
+				<span class='badge badge-danger' title="{$qualityschedules[$key][id]}">超期</span>
+				</gt>
+				
+				</td>
+			</tr>
+			</volist>
+		
+			
+			<tr>
+			<td style="background-color:#eee;height:10px;border:1px solid #999" colspan="8"></td>
+			</tr>
+		</table>
+	
+	
+		
+	
+	
+	
+		<!--
+		<div class="form-group">
+			<label style="float:left">变更原因</label>
+			<input type="text" readonly class="form-control" name="reason" value="{$schedules[0][reason]}" style="position:relative;top:4px">
+		</div>
+		-->
+</div>
+
+
+
+</form>
+
+<!-- Prettyfile -->
+<script src="js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+<script>
+	$('input[type="file"]').prettyFile();
+</script>

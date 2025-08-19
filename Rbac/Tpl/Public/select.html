@@ -1,0 +1,313 @@
+<tagLib name="html" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<TITLE></title>
+<script language="javascript">
+function $(str){
+    return document.getElementById(str);
+}
+function removeOption(select,index)
+{
+    $(select).options[index]=null;
+    //$(select).remove(index);
+}
+
+function appendOptionLast(select,text,value)
+{
+var elOptNew = document.createElement('option');
+elOptNew.text = text;
+elOptNew.value =value;
+var elSel = document.getElementById(select);
+try {
+    elSel.add(elOptNew, null); // 未能在 IE 中运行
+}
+catch(ex) {
+    elSel.add(elOptNew); //只适合于 IE 
+}
+}
+function allToRight(){
+	
+   var left=document.getElementById("select_left");
+   for (i = left.length - 1; i>=0; i--) {
+        try{
+            appendOptionLast("select_right",left.options[i].text,left.options[i].value);
+        }catch(e){}
+        left.remove(i);
+        //removeOption("select_left",i);
+   }
+}
+
+function selectedToRight(){
+   var left=document.getElementById("select_left");
+   for (i = left.length - 1; i>=0; i--) {
+      if(left.options[i].selected){
+        try{
+            appendOptionLast("select_right",left.options[i].text,left.options[i].value);
+        }catch(e){}
+        left.remove(i);
+        //removeOption("select_left",i);
+    }
+   }
+}
+
+function selectedToLeft(){
+   var right=document.getElementById("select_right");
+   for (i = right.length - 1; i>=0; i--) {
+      if(right.options[i].selected){
+        try{
+            appendOptionLast("select_left",right.options[i].text,right.options[i].value);
+        }catch(e){}
+        right.remove(i);
+        //removeOption("select_right",i);
+    }
+   }
+}
+function allToLeft(){
+   var right=document.getElementById("select_right");
+   for (i = right.length - 1; i>=0; i--) {
+        try{
+            appendOptionLast("select_left",right.options[i].text,right.options[i].value);
+        }catch(e){}
+        right.remove(i);
+        //removeOption("select_right",i);
+   }
+}
+function getRightValue() //取得右边select的值
+{
+   var right=document.getElementById("select_right");
+   var str="";
+   for (i = right.length - 1; i>=0; i--) {
+        str+=right.options[i].value+";";
+   }
+   alert(str);
+}
+</script>
+<!-- 
+<load type="css" href ="../Public/css/style.css" />
+ -->
+<script language="JavaScript">
+<!--
+function closewindow(){
+	var my = parent.document.getElementById("form");
+    if (my != null)
+        my.parentNode.removeChild(my);
+}
+function ok(){
+	var result = new Array();
+	var obj	   = form1.group.options;
+	var j=0;
+	if(obj.length>1)
+		{
+		alert("最多选择一名员工");
+		return;
+		}
+	for(var i=0;i<obj.length;i++){
+		//if (obj[i].selected==true){
+			result[j] = new Array();
+			result[j][0]	=	obj[i].text;
+			result[j][1]	=	obj[i].value;
+			parent.document.getElementById('{$arg1}').value=result[j][0];
+			parent.document.getElementById('{$arg2}').value=result[j][1];
+			j++;
+		//}
+	}
+	var my = parent.document.getElementById("form");
+    if (my != null)
+        my.parentNode.removeChild(my);
+	//asyncbox.tips('成功','success');
+	//window.close(); 
+}
+var stylerecord=-1;
+function insertopt(deptname,style){/*0为按部门选择，1为按职位选择*/
+	var userall = "<?php echo $userdept;?>";
+    if((style!=stylerecord)&&(stylerecord!=-1))
+    {
+    		document.getElementById('select_left').length=0;   		
+    		/*去掉选择*/
+    		var a = document.getElementsByTagName("input");
+    		for (var i=0; i<a.length; i++)
+    		{
+    		      if ((a[i].type == "checkbox")&&(a[i].id!=deptname))
+    		    	  a[i].checked = false;
+    		}
+    		//document.getElementById(deptname).checked=0；
+    }
+    stylerecord=style;
+    do
+    {
+	    var index1 = userall.indexOf(",");
+	    var sub_string1 = userall.substring(0,index1);
+	    var userall = userall.replace(sub_string1+',',"");    
+	    //var index2 = sub_string1.indexOf(deptname);
+		var index3 = sub_string1.indexOf(".");
+		var index4 = sub_string1.lastIndexOf(".");
+		var sub_string2 = sub_string1.substring(index3+1,index4);
+		if(style==0)/*如果是按部门选择*/
+		{
+			sub_string4 = sub_string1.substring(0,index3);
+		}
+		else{/*如果是按职位选择，在后面加个标志role*/
+			var sub_string4 = sub_string1.substring(index4+1)+'role';
+			}
+		if(sub_string4==deptname)
+	    //if(index2!=-1)
+	    {
+	    	if(document.getElementById(deptname).checked)
+	    	{	
+	    		document.getElementById('select_left').add(new Option(sub_string2,sub_string2));
+	    	}
+	    	else
+	    	{	
+	    		//document.getElementById('select_left').remove(Option(sub_string1,sub_string1));
+	    		var o=document.getElementById('select_left');
+	    		for(var i = 0; i < o.length; i++) {
+	           		if (o[i].value == sub_string2)
+	           		{
+	           			o.remove(o[i].index);
+           			}
+	    		}
+	    	}
+	    }
+    }while(index1!=-1)
+}
+
+//-->
+</script>
+<base target="_self" />
+
+<style type="text/css">
+body {
+	background-color:#F6F7F9;
+    font-size:14px;
+}
+#slidingBlock {
+    width:416px;border:1px #53A6D6 solid;padding:1px;over-flow:hidden
+}
+#slidingBlock h4 {
+    float:left;width:208px;height:26px;line-height:25px;text-align:center;font-size:13px;over-flow:hidden;margin: 0 0 0 0px;
+}
+#slidingBlock h4.menuNo {
+    font-weight:normal;color:#333333;background:url(__PUBLIC__/Images/select/slidingMenuLine.gif) repeat-x
+}
+#slidingBlock h4.menuOn {
+    font-weight:bold;color:#355977;background:url(__PUBLIC__/Images/select/slidingMenu.gif) no-repeat
+}
+#slidingBlock DIV.slidingList_none {
+    display:none
+}
+#slidingBlock DIV.slidingList {
+    margin:0px;padding:5px;height:315px
+}
+#slidingBlock DIV.slidingList ul {
+    margin:0px;padding:0px
+}
+#slidingBlock DIV.slidingList li {
+    height:20px;line-height:20px
+}
+#slidingBlock DIV.slidingList li span {
+    font-size:12px;font-weight:normal;color:#ffffff;padding-left:4px;padding-right:8px
+}
+#slidingBlock DIV.slidingList li.one {
+    background:url(__PUBLIC__/Images/select/slidingTag1.gif) no-repeat
+}
+#slidingBlock DIV.slidingList li.two {
+    background:url(__PUBLIC__/Images/select/slidingTag2.gif) no-repeat
+}
+#slidingBlock DIV.slidingList li.thr {
+    background:url(__PUBLIC__/Images/select/slidingTag3.gif) no-repeat
+}
+.btn3_mouseout {
+  BORDER-RIGHT: #7EBF4F 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: #7EBF4F 1px solid; PADDING-LEFT: 2px; FONT-SIZE: 13px; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#ffffff, EndColorStr=#B3D997); BORDER-LEFT: #7EBF4F 1px solid; CURSOR: hand; COLOR: black; PADDING-TOP: 2px; BORDER-BOTTOM: #7EBF4F 1px solid
+}
+</style>
+<script language="javascript">
+  function switchmodTag(modtag,modcontent,modk) {
+    for(i=1; i <3; i++) {
+      if (i==modk) {
+        document.getElementById(modtag+i).className="menuOn";document.getElementById(modcontent+i).className="slidingList";}
+      else {
+        document.getElementById(modtag+i).className="menuNo";document.getElementById(modcontent+i).className="slidingList_none";}
+    }
+   
+  }
+</script>
+</head>
+<body style="margin:0;overflow:hidden">
+
+
+<div id="slidingBlock">
+<h4 class="menuOn" id="mod1" onmouseover="switchmodTag('mod','slidingList','1');this.blur();">
+	按部门选择</h4>
+	<h4 class="menuNo" id="mod2" onmouseover="switchmodTag('mod','slidingList','2');this.blur();">
+	按职位选择</h4>
+<div class="slidingList" id="slidingList1" style="overflow:auto">
+	<voList name="dept" id="dept" >
+	<input type="checkbox" name="{$dept.name}" id="{$dept.id}" value="{$dept.id}"  onclick="insertopt('{$dept.id}',0)" />{$dept.name}<br>
+	</voList>
+</div>
+<div class="slidingList_none" id="slidingList2"  style="overflow:auto">
+	<voList name="role" id="role">
+	<input type="checkbox" name="{$role.name}" id="{$role.id}role" value="{$role.id}role"  onclick="insertopt('{$role.id}role',1)" />{$role.name}<br>
+	</voList>
+</div>
+</div>
+
+
+<FORM METHOD="POST" style="margin:0" name = "form1" action=""><!-- {__NOTOKEN__} -->
+<div align="left">
+<table id="table1" class="order" cellpadding=0 style="margin:0;position:absolute;left:180px;top:28px;width:16px" cellspacing=0 width="100%">
+<tr><td height="5" colspan="2" class="topTd" ></td></tr>
+<!-- 
+<tr>
+	<td width="100%" align="right">
+	<div class="solid">
+	<select style="width:160px;height:278px" id="select_left" 
+	ondblclick="ok()" name="group" size="15" multiple="true">
+</select></div>
+</td>
+</tr>
+ -->
+ 
+ <tr><td ondblclick="selectedToRight()">
+    <select id="select_left" size="10" multiple="multiple" style="width:100px;height:270px">
+    </select>
+</td>
+<td>
+    <input type="button" value=">>" onclick="allToRight();"><br>
+    <input type="button" value=">" onclick="selectedToRight();"><br>
+    <input type="button" value="<<" onclick="allToLeft();"><br>
+    <input type="button" value="<" onclick="selectedToLeft();"><br>
+    <!-- <input type="button" value="已" onclick="getRightValue();"> -->
+
+</td>
+<td ondblclick="selectedToLeft()">
+    <select id="select_right" size="10" name="group" multiple="multiple" style="width:100px;height:270px">
+    </select>
+</td>
+</tr>
+
+<tr>
+<td><font style="color:#552A00;font-size:13px">待选人员</font></td>
+<td></td>
+<td><font style="color:#552A00;font-size:13px">已选人员</font></td>
+</tr>
+ 
+<tr>
+<td colspan=3 align="center" style="">
+
+<input type="button" value=" 确 定 " onClick="ok()" class="" />&nbsp;<!-- btn3_mouseout -->
+<input name="reset" type="reset" value=" 取 消 " onClick="closewindow()" class=""/>
+
+</td>
+</tr>
+<tr><td height="5" colspan="2" class="topTd" ></td></tr>
+</table>
+</div>
+</form>
+
+
+
+
+</html>

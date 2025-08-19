@@ -1,0 +1,79 @@
+<link rel="shortcut icon" href="favicon.ico">
+<link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/style.css?v=4.1.0" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+
+
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal">×</button>
+<h4 class="modal-title">新增会议类别</h4>
+</div>
+<form id="format1" method="post" action="__URL__/name_add3" enctype="multipart/form-data" class="form-horizontal">    
+	<div class="modal-body"> 
+		<div class="form-group" style="margin:auto;padding:10px;">
+		<label class="col-sm-3 col-xs-3 control-label">会议类别：</label>
+		<div class="col-sm-8 col-xs-8">
+			<span style="color:#ffa500;">类别请不要使用空格等不常见字符</span>
+			<input type="text" class="form-control" value="" name="name" id="name">
+			<span style="color:#ff0000;display: none;" id='span'>类别不能为空或已经存在</span>
+		</div>
+		</div>
+		<div class="form-group" style="margin:auto;padding:10px;">
+			<label class="col-sm-3 col-xs-3 control-label">颜色识别：</label>
+			<div class="col-sm-8 col-xs-8">
+				<select name="color" id="" class="form-control">
+					<option value="">请选择颜色识别</option>
+					<option value="444444" style="background-color:#444444">#444444</option>
+					<option value="FF0000" style="background-color:#FF0000">#FF0000</option>
+					<option value="00FF00" style="background-color:#00FF00">#00FF00</option>
+					<option value="0000FF" style="background-color:#0000FF">#0000FF</option>
+					<option value="FFA500" style="background-color:#FFA500">#FFA500</option>
+					<option value="00FFFF" style="background-color:#00FFFF">#00FFFF</option>
+					<option value="FF00FF" style="background-color:#FF00FF">#FF00FF</option>
+					<option value="C0C0C0" style="background-color:#C0C0C0">#C0C0C0</option>
+				</select>
+			</div>
+		</div>
+		  
+		<div class="btn1">				
+		</div>
+	</div>	
+	<div class="modal-footer">
+		<button type="button" class="btn btn-sm btn-white pull-right m-t-n-xs" data-dismiss="modal" style="margin-left:10px">关闭</button>
+		<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit" id='submit'><strong>确定</strong>
+		</button>
+		
+	</div>
+</form> 
+    <!-- Chosen -->   
+	<script src="js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+	<script>
+	    $("#name").blur(function(){
+	    	var name=$("#name").val();
+	    	var aj = $.ajax({
+                    url:'__URL__/ajax_name_check',
+                    data:{  
+                        name : name,
+						type : 3
+                    },
+                    type:'post',  
+                    cache:false,  
+                    dataType:'json',  
+                    success:function(data) {
+                        if(data==1){
+                        	$("#span").css('display','block');
+                            $('#submit').attr('disabled',true);
+                        }                   
+                        
+                    }  
+            });
+	    });
+	    $('input').focus(function(){
+	    	$("#span").css('display','none');
+            $('#submit').attr('disabled',false);
+	    });
+		    
+	</script>
+		    }

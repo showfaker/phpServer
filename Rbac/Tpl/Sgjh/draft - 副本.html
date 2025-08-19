@@ -1,0 +1,153 @@
+
+
+
+	<form id="sgjhform" method="post" action="__URL__/draftsubmit" enctype="multipart/form-data" class="form-horizontal" onsubmit="return false;">   
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			<h4 class="modal-title">设备到货计划</h4>
+		</div>
+		<div class="modal-body" style="width:100%">
+			<input type="hidden" value="{$orgdata.id}" name="id">
+			<input type="hidden" value="{$change}" name="change">
+			<input type="hidden" value="{$moduletitle}" name="moduletitle">
+			<div style="text-align:left">
+				<a onclick="fnClickAddRow();" href="javascript:void(0);" class="btn btn-primary btn-xs" >添加行</a>
+			</div>
+			<div style="height:600px;overflow-y:auto;overflow-x:hidden;">
+			<table class="table table-striped table-bordered table-hover " id="editable">
+				<thead>
+					<tr>
+						
+						<th width="30%">设备</th>
+						<th width="10%">供货周期</th>
+						<th width="10%">数量</th>
+						<th width="20%">计划开始日期</th>
+						<th width="20%">计划完成日期</th>
+						<th width="10%">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr id="table-row-0">
+					<td width="30%"><input type="text" class="form-control" style="width:120px;float:left" name="worktype[]" id="title0" readonly><input type="hidden" name="worktypeid[]" id="worktypeid0"><a href="" onclick="find1(this)" title="0" data-toggle="modal" data-target="#modal" data-backdrop="static" target="dialog" class="btn btn-info btn-xs" style="float:left;margin-left:5px">查找</a></td>
+					<td width="10%"><input type="text" class="form-control" style="width:100px;" name="period[]" id="period0" readonly></td>
+					<td width="10%"><input type="text" class="form-control" style="width:100px;" name="plancount[]" id="plancount0" value="0"></td>
+					<td width="20%"><input type="text" class="form-control" style="width:120px;" name="plantimebegin[]" id="plantimebegin0" onclick="takeplantimebegin(0)"></td>
+					<td width="20%"><input type="text" class="form-control" style="width:120px;" name="plantimeend[]" id="plantimeend0" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})"></td>
+					<td width="10%"><a class="btn btn-danger btn-xs delete" href="javascript:void(0);">删除</a></td>
+					</tr>
+				</tbody>
+			</table>
+			</div>
+		</div>	
+		<input type="hidden" name="sgjhissave" id="sgjhissave" value="0">
+		<div class="modal-footer">
+			<!-- <button type="submit" class="btn btn-warning" id="savesubmit">保存</button> -->
+			<button type="submit" class="btn btn-danger" id="submit">提交</button>
+			<button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+		</div>
+	</form>
+		
+
+	<script type="text/javascript" src="__PUBLIC__/js/jquery-form.js" ></script>
+	<script>
+		document.getElementById("submit").addEventListener("click",function(){
+			document.getElementById("sgjhissave").value=0;
+			$('#sgjhform').ajaxSubmit({
+				dataType:'json',//服务器返回json格式数据
+				type: "post",
+				url: "__APP__/Sgjh/draftsubmit/",
+				data: $('#sgjhform').serialize(),
+				error: function (data) {
+					console.log(data);
+					alert('服务器连接超时，请稍后再试');  
+				},
+				success: function (data) {
+					var result = new Array();  
+					result = eval(data);
+					if(result['message']=="操作成功!")
+					{
+						alert("操作成功");
+						location.href=location.href;
+					}else{
+						alert(result['message']);
+					}
+				}
+			});
+		});
+		
+	</script>
+	<script src="js/plugins/jeditable/jquery.jeditable.js"></script>
+    <script src="js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="js/plugins/dataTables/dataTables.bootstrap.js"></script>
+
+
+
+	<script>
+        function find1(e){
+			var id=$("input[name='id']").val();
+			$(e).attr("href","__URL__/choice/key/"+e.title+"/id/"+id); 
+		}
+    	
+	</script>
+    <script>
+		var currentrow=1;
+        function fnClickAddRow() {
+            $('#editable').dataTable().fnAddData([
+				'<td><input type="text" class="form-control" style="width:120px;float:left" name="worktype[]" id="title'+currentrow+'" readonly><input type="hidden" name="worktypeid[]" id="worktypeid'+currentrow+'"><a href="" onclick="find1(this)" title="'+currentrow+'" data-toggle="modal" data-target="#modal" data-backdrop="static" target="dialog" class="btn btn-info btn-xs" style="float:left;margin-left:5px">查找</a></td>',
+                '<td><input type="text" class="form-control" style="width:100px;" name="period[]" id="period'+currentrow+'" readonly></td>',
+				'<td><input type="text" class="form-control" style="width:100px;" name="plancount[]" value="0" id="plancount'+currentrow+'"></td>',
+				'<td><input type="text" class="form-control" style="width:120px;" name="plantimebegin[]" value="" id="plantimebegin'+currentrow+'" onclick="takeplantimebegin('+currentrow+')"></td>',
+				'<td><input type="text" class="form-control" style="width:120px;" name="plantimeend[]" value="" id="plantimeend'+currentrow+'" onclick="laydate({istime: false, format: '+"'"+'YYYY-MM-DD'+"'"+'})"></td>',
+				'<td><a class="btn btn-danger btn-xs delete" href="javascript:void(0);">删除</a></td>'
+				]);
+				currentrow++;
+				$('.delete').on('click', function(e) {
+					var table = $('#editable').DataTable();
+					table.row($(this).parents('tr')).remove().draw();
+				});
+        }
+		$('.delete').on('click', function(e) {
+			var table = $('#editable').DataTable();
+			table.row($(this).parents('tr')).remove().draw();
+		});
+		
+    </script>
+    
+	<script>
+	var id="<?php echo $orgdata["id"];?>";
+	var moduletitle="<?php echo $moduletitle;?>";
+	
+	function takeplantimebegin(key)
+	{
+		var worktypeid=$("#worktypeid"+key).val();
+		laydate({
+			istime: false,
+			istoday: false,
+			format: 'YYYY-MM-DD',
+			choose: function(value, date)
+			{
+				//alert('你选择的日期是：' + value + '\n获得的对象是' + JSON.stringify(date));
+				var aj = $.ajax({
+					url:'__APP__/Sgjh/gettimeend1',
+					data:{
+						id:id,
+						worktypeid:worktypeid,
+						moduletitle:moduletitle,
+						date:value
+					},
+					type:'post',  
+					cache:false,  
+					dataType:'json',
+					success:function(data) {
+						console.log(data);
+						$("input[id='plantimeend"+key+"']").val(data);
+					}  
+				});
+			
+			}
+		});
+	}
+	</script>
+
+   
+	

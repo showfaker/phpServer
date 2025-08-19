@@ -1,0 +1,140 @@
+
+<!DOCTYPE html> 
+<html> 
+<head> 
+	<meta charset="utf-8" /> 
+	<title>RealWorldAdmin - Main Page</title> 
+	<link rel="stylesheet" href="css/main.css" /> 
+	<link rel="stylesheet" href="css/theme2.css" />  
+	<script type="text/javascript" src="js/jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="js/jquery.mobile-1.0a2.min.js"></script> 
+   
+</head> 
+<body> 
+<div data-role="page"> 
+	<div data-role="header">
+		<h1>Sample Page</h1>
+	</div>
+	<div data-role="content"> 
+    	<h3>Status Messages</h3>
+        <div class="status info">Information Message</div>
+        <div class="status error">Error Message</div>
+        <div class="status warning">Warning Message</div>
+        <div class="status success">Success Message</div>
+        <h3 class="top-title">Page contents</h3>
+        <form method="post" action="#" name="form" id="page-form">
+            
+            <!-- Filter Panel -->
+             <fieldset data-role="controlgroup" data-type="horizontal" >
+				<legend>View Options:</legend>
+               	<div class="ui-block-a">
+                    <select name="addPage" id="filterby">
+                         <option value="">Filter By:</option>
+                       
+                        <option value="1">Published</option>
+                        <option value="2">Pending</option>
+                        <option value="3">Scheduled</option>
+                        <option value="4">Unpublished</option>
+                    </select>
+                </div>
+                <div class="ui-block-b">     	
+                  
+                    <select name="sorting" id="sortby" >
+                        <option value="">Sort by:</option>
+                        <option value="1">Name</option>
+                        <option value="2">Status</option>
+                    </select>
+           		</div>
+           </fieldset>
+           <div style="clear:both">
+               <a href="dialog.html" id="add-page" data-role="button" data-theme="b" data-icon="plus" rel="external">Insert New Page</a>
+           </div>
+            <table class="list-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="even">
+                    <td>Home Page</td>
+                    <td><span class="button submit small green-back rounded">Published</span></td>
+                    <td>
+                        <select name="actions"  data-icon="gear" data-iconpos="notext">
+                            <option value="">Choose</option>
+                            <option value="1">View</option>
+                            <option value="2">Preview</option>
+                            <option value="3">Edit</option>
+                            <option value="4">Delete</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr class="odd">
+                    <td>Portfolio Page</td>
+                    <td><span class="button submit small white-back rounded">Pending</span></td>
+                    <td>
+                        <select name="actions" data-icon="gear" data-iconpos="notext">
+                            <option value="">Choose</option>
+                            <option class="view-record" value="">View</option>
+                            <option class="preview-record" value="2">Preview</option>
+                            <option class="edit-record">Edit</option>
+                            <option class="delete-record">Delete</option>
+                        </select>
+                    </td>
+                </tr>
+                 <tr class="even">
+                    <td>Services Page</td>
+                    <td><span class="button submit small blue-back rounded">Scheduled</span></td>
+                    <td>
+                        <select name="actions"  data-icon="gear" data-iconpos="notext">
+                            <option value="">Choose</option>
+                            <option value="1">View</option>
+                            <option value="2">Preview</option>
+                            <option value="3">Edit</option>
+                            <option value="4">Delete</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr class="odd">
+                    <td>News Page</td>
+                    <td><span class="button submit small red-back rounded">Unpublished</span></td>
+                    <td>
+                        <select name="actions"  data-icon="gear" data-iconpos="notext">
+                            <option value="">Choose</option>
+                            <option class="view-record" value="">View</option>
+                            <option class="preview-record" value="2">Preview</option>
+                            <option class="edit-record">Edit</option>
+                            <option class="delete-record">Delete</option>
+                        </select>
+                    </td>
+                </tr>
+              
+            </tbody>
+            </table>
+        </form>
+        <hr /> <!-- Divider -->
+        
+        <!-- Pagination -->
+       <div class="pagination">
+            <span style="font-weight:bold; color:#333">Pages:&nbsp;</span>
+            <!--<a href="#">&laquo; First</a>
+
+            <a href="#">&laquo; Prev</a>-->
+            <a class="number" href="#">1</a>
+            <a class="number" href="#">2</a>
+            <a class="number" href="#">3</a>
+            <a class="number" href="#">4</a>
+            <a class="number" href="#">5</a>
+            <!--<a href="#">Next &raquo;</a>
+            <a href="#">Last &raquo;</a>-->
+        </div>
+    </div> 
+    <div data-role="footer">
+        <h4><a href="index.html" rel="external">Main Page</a></h4>
+    </div>
+</div> 
+</body> 
+</html> 
+

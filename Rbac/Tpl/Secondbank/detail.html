@@ -1,0 +1,260 @@
+
+<link rel="shortcut icon" href="favicon.ico"> 
+<link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/style.css?v=4.1.0" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="__PUBLIC__/dwz/themes/css/core1.css">
+    
+<div class="modal-header">
+	<button type="button" class="close hidden-xs" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+	</button>
+	<h4 class="modal-title">项目基本信息登记表</h4>
+</div>
+<form method="post" action="__URL__/insert/callbackType/closeCurrent/navTabId/Second" ENCTYPE="multipart/form-data" class="form-horizontal">
+<div class="modal-body" style="padding:10px;">
+	
+	<input type="hidden" value="{$orgdata.id}" name="id">
+	<input type="hidden" value="销售中心" name="design_status">
+	<div style="position:relative;top:0px;margin:0 auto;font-weight:bold;width:100%;">
+			<label>编写人:</label>
+			<input type="text"
+			style="font-size:15px;font-weight:bold;color:#676767;position:relative;border:0px;border-bottom:1px solid #BBBBBB;background:white;height:25px" name="name" value="{$orgdata.name}" disabled>
+			<label style="position:relative;padding-left:60px;">编写日期:</label>
+			<input value="{$orgdata[time]}" type="text" style="position:relative;border:0px;border-bottom:1px solid #BBBBBB;height:25px;background:white;" name="time" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" autocomplete="off" disabled>
+	</div>	
+	
+	<table class="drafttable" style="position:relative;top:28px;margin:0 auto;width:820px;margin-bottom:28px">
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">项目名称:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.title}" class="forminputlarge" name="title" required="" aria-required="true" disabled>
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">项目地址:</td>
+			<td class="normal" colspan="3">
+				<div id="demo3" class="citys">
+					
+						<input type="text" value="{$orgdata.province}" class="forminputsmall" name="province" required="" aria-required="true" disabled>
+						<input type="text" value="{$orgdata.city}" class="forminputsmall" name="city" required="" aria-required="true" disabled>
+						<input type="text" value="{$orgdata.area}" class="forminputsmall" name="area" required="" aria-required="true" disabled>
+						<input type="text" value="{$orgdata.address}" class="forminputmedium" name="address" required="" aria-required="true" disabled>
+					
+				</div>
+			
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">业主名称:</td>
+			<td class="normal" colspan="3">
+			建筑名称<input type="text" value="{$orgdata.buildingname}" class="forminputlarge" name="buildingname" disabled>
+			产权证用途<input type="text" value="{$orgdata.purpose}" class="forminputsmall" name="purpose" disabled>
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">项目类型:</td>
+			<td class="normal" colspan="3">建筑总层<input type="text"  value="{$orgdata.floors}" class="forminputsmall" name="floors" disabled>层，
+			门店所在楼层<input type="text"  value="{$orgdata.floor}" class="forminputsmall" name="floor" disabled>层</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">面      积:</td>
+			<td class="normal" colspan="3">合同面积<input type="text" value="{$orgdata.contractacreage}" class="forminputsmall" name="contractacreage" disabled>平方米，使用面积<input type="text"  value="{$orgdata.useacreage}" class="forminputsmall" name="useacreage" disabled>平方米</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">预计场地交付时间:</td>
+			<td class="normal" colspan="3">
+			<input type="text" class="layer-date forminputmedium" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" autocomplete="off" value="{$orgdata.plantime}" name="plantime" disabled>
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">约定场地交付状态:</td>
+			<td class="normal i-checks" colspan="3">
+			毛坯交付（<input type="radio" value="毛坯交付" name="deliver" <eq name="orgdata.deliver" value="毛坯交付">checked</eq> disabled>）
+			现状交付需拆除（<input type="radio" value="现状交付需拆除" name="deliver" <eq name="orgdata.deliver" value="现状交付需拆除">checked</eq> disabled>）
+			</td>
+		</tr>
+		<in name="_SESSION[account]" value="admin,zhourong,chenxiaohua">
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">约定合同期</td>
+			<td class="normal" colspan="3">自<input type="text" class="layer-date forminputmedium" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" autocomplete="off" value="{$orgdata.freebegintime1}" name="freebegintime1" disabled>起，至<input type="text" class="layer-date forminputmedium" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" autocomplete="off" value="{$orgdata.freeendtime1}" name="freeendtime1" disabled>止，共（<input type="text" value="{$orgdata.freemonth1}" class="forminputsmall" name="freemonth1" disabled>）年</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">约定装修免租期:</td>
+			<td class="normal" colspan="3">自<input type="text" class="layer-date forminputmedium" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" autocomplete="off" value="{$orgdata.freebegintime}" name="freebegintime"disabled>起，至<input type="text" class="layer-date forminputmedium" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" autocomplete="off" value="{$orgdata.freeendtime}" name="freeendtime" disabled>止，共（<input type="text" value="{$orgdata.freemonth}" class="forminputsmall" name="freemonth" disabled>）个月</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">约定租金:</td>
+			<td class="normal" colspan="3">起点租金<input type="text" class="forminputsmall" value="{$orgdata.ydzj1}" name="ydzj1" required="" aria-required="true" disabled>元/平方米/日 从<input type="text" value="{$orgdata.ydzj2}" class="forminputsmall" name="ydzj2" required="" aria-required="true" disabled>年起每<input type="text" class="forminputsmall" value="{$orgdata.ydzj3}" name="ydzj3" required="" aria-required="true" disabled>年递增<input type="text" class="forminputsmall" value="{$orgdata.ydzj4}" name="ydzj4" required="" aria-required="true" disabled>%</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">约定物管费:</td>
+			<td class="normal" colspan="3">起点物管费<input type="text" class="forminputsmall" value="{$orgdata.ydwgf1}" name="ydwgf1" required="" aria-required="true" disabled>元/平方米/日 从<input type="text" value="{$orgdata.ydwgf2}" class="forminputsmall" name="ydwgf2" required="" aria-required="true" disabled>年起每<input type="text" class="forminputsmall" value="{$orgdata.ydwgf3}" name="ydwgf3" required="" aria-required="true" disabled>年递增<input type="text" class="forminputsmall" value="{$orgdata.ydwgf4}" name="ydwgf4" required="" aria-required="true" disabled>%</td>
+		</tr>
+		</in>
+		<tr>
+			<td class="normal" rowspan="12" style="font-weight:bold;height:45px">主要工程交付条件:</td>
+			<td class="normal i-checks" colspan="3">
+			1、泳池：现有（<input type="radio" value="现有" name="para11" <eq name="orgdata.para11" value="现有">checked</eq> disabled>）  
+			无（<input type="radio" value="无" name="para11" <eq name="orgdata.para11" value="无">checked</eq> disabled>） 
+			需自建（<input type="radio" value="需自建" name="para11" <eq name="orgdata.para11" value="需自建">checked</eq> disabled>）  
+			泳池设计方案甲方确认（<input type="checkbox" value="泳池设计方案甲方确认" name="para12" <eq name="orgdata.para12" value="泳池设计方案甲方确认">checked</eq> disabled>）   </td>
+		</tr>
+		<tr>
+			<td class="normal i-checks" colspan="3">
+			2、用电：满足需求（<input type="radio" value="满足需求" name="para21" <eq name="orgdata.para21" value="满足需求">checked</eq> disabled>）
+			需要增容（<input type="radio" value="需要增容" name="para21" <eq name="orgdata.para21" value="需要增容">checked</eq> disabled>）
+			增容费用分摊方式<input type="text" value="{$orgdata.para22}" class="forminputsmall" name="para22" disabled>
+			</td>
+		</tr>
+		<tr>
+			<td class="normal i-checks" colspan="3">
+			3、弱电：接驳点已入户（<input type="radio" value="接驳点已入户" name="para31" <eq name="orgdata.para31" value="接驳点已入户">checked</eq> disabled>）   
+			接驳点未入户，需甲方施工（<input type="radio" value="接驳点未入户，需甲方施工" name="para31" <eq name="orgdata.para31" value="接驳点未入户，需甲方施工">checked</eq> disabled>）
+			</td>
+		</tr>
+		<tr>
+			<td class="normal i-checks" colspan="3">
+			4、给水：满足需求（<input type="radio" value="满足需求" name="para41" <eq name="orgdata.para41" value="满足需求">checked</eq> disabled>）    
+			需要二次施工（<input type="radio" value="需要二次施工" name="para41" <eq name="orgdata.para41" value="需要二次施工">checked</eq> disabled>）   
+			施工费用分摊方式<input type="text" value="{$orgdata.para42}" class="forminputsmall" name="para42" <eq name="orgdata.para42" value="现状交付需拆除">checked</eq> disabled>
+			</td>
+		</tr>
+		<tr>
+			<td class="normal i-checks" colspan="3">
+			5、排水：满足需求（<input type="radio" value="满足需求" name="para51" <eq name="orgdata.para51" value="满足需求">checked</eq> disabled>）    
+			需要二次施工（<input type="radio" value="需要二次施工" name="para51" <eq name="orgdata.para51" value="需要二次施工">checked</eq> disabled>）   
+			施工费用分摊方式<input type="text" value="{$orgdata.para52}" class="forminputsmall" name="para52" disabled>
+			</td>
+		</tr>
+		<tr>
+			<td class="normal i-checks" colspan="3">
+			6、燃气：表前预留位置满足（<input type="radio" value="表前预留位置满足" name="para61" <eq name="orgdata.para61" value="表前预留位置满足">checked</eq> disabled>）
+			不满足（<input type="radio" value="不满足" name="para61" <eq name="orgdata.para61" value="不满足">checked</eq> disabled>）   
+			用气量满足  （<input type="radio" value="用气量满足" name="para62" <eq name="orgdata.para62" value="用气量满足">checked</eq> disabled>）
+			不满足（<input type="radio" value="不满足" name="para62" <eq name="orgdata.para62" value="不满足">checked</eq> disabled>）
+			</td>
+		</tr>
+		<tr>
+			<td class="normal i-checks" colspan="3">
+			7、消防：甲方代报（<input type="radio" value="甲方代报" name="para71" <eq name="orgdata.para71" value="甲方代报">checked</eq> disabled>）    
+			需要自行申报（<input type="radio" value="需要自行申报" name="para71" <eq name="orgdata.para71" value="需要自行申报">checked</eq> disabled>）
+			</td>
+		</tr>
+		<tr>
+			<td class="normal i-checks" colspan="3">
+			8、空调：满足需求（<input type="radio" value="满足需求" name="para81" <eq name="orgdata.para81" value="满足需求">checked</eq> disabled>）    
+			需要二次施工（<input type="radio" value="需要二次施工" name="para81" <eq name="orgdata.para81" value="需要二次施工">checked</eq> disabled>）
+			施工费用分摊方式<input type="text" value="{$orgdata.para82}" class="forminputsmall" name="para82" disabled>
+			</td>
+		</tr>
+		<tr>
+			<td class="normal i-checks" colspan="3">
+			9、设备间：位置已与甲方确认（<input type="radio" value="位置已与甲方确认" name="para91" <eq name="orgdata.para91" value="位置已与甲方确认">checked</eq> disabled>）
+			位置没确认（<input type="radio" value="位置没确认" name="para91" <eq name="orgdata.para91" value="位置没确认">checked</eq> disabled>）
+			我方加固（<input type="radio" value="我方加固" name="para92" <eq name="orgdata.para92" value="我方加固">checked</eq> disabled>）
+			甲方加固（<input type="radio" value="甲方加固" name="para92" <eq name="orgdata.para92" value="甲方加固">checked</eq> disabled>）</td>
+		</tr>
+		<tr>
+			<td class="normal i-checks" colspan="3">
+			10、甲方应提供原始图纸及材料：已提供（<input type="radio" value="已提供" name="para101" <eq name="orgdata.para101" value="已提供">checked</eq> disabled>）  
+			没提供（<input type="radio" value="没提供" name="para101" <eq name="orgdata.para101" value="没提供">checked</eq> disabled>）  
+			提供但不齐全（<input type="radio" value="提供但不齐全" name="para101" <eq name="orgdata.para101" value="提供但不齐全">checked</eq> disabled>）
+			</td>
+		</tr>
+		<tr>
+			<td class="normal i-checks" colspan="3">
+			11、广告位：免费提供（<input type="radio" value="免费提供" name="para111" <eq name="orgdata.para111" value="免费提供">checked</eq> disabled>）
+			付费提供（<input type="radio" value="付费提供" name="para111" <eq name="orgdata.para111" value="付费提供">checked</eq> disabled>）    
+			不提供（<input type="radio" value="不提供" name="para111" <eq name="orgdata.para111" value="不提供">checked</eq> disabled>）   
+			</td>
+		</tr>
+		<tr>
+			<td class="normal i-checks" colspan="3">
+			12、预售点：免费提供（<input type="radio" value="免费提供" name="para121" <eq name="orgdata.para121" value="免费提供">checked</eq> disabled>）
+			付费提供（<input type="radio" value="付费提供" name="para121" <eq name="orgdata.para121" value="付费提供">checked</eq> disabled>）      
+			现状满足（<input type="radio" value="现状满足" name="para122" <eq name="orgdata.para122" value="现状满足">checked</eq> disabled>）
+			不满足（<input type="radio" value="不满足" name="para122" <eq name="orgdata.para122" value="不满足">checked</eq> disabled>）    
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" rowspan="2" style="font-weight:bold;height:45px">主要联系人:</td>
+			<td class="normal" colspan="3">
+			招商对接人：<input type="text" value="{$orgdata.user1}" class="forminputmedium" name="user1" disabled>
+			电话：<input type="text" value="{$orgdata.user1tel}" class="forminputmedium" name="user1tel" disabled></td>
+		</tr>
+		<tr>
+			<td class="normal" colspan="3">
+			工程（物业）对接人：<input type="text" value="{$orgdata.user2}" class="forminputmedium" name="user2" disabled>
+			电话：<input type="text" value="{$orgdata.user2tel}" class="forminputmedium" name="user2tel" disabled></td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px" rowspan="2">其他资料:</td>
+			<td class="normal" colspan="1">
+			照片：进门位置、整体空间、顶地
+			</td>
+			<td class="normal" colspan="2">
+			<neq name="orgdata.picture" value="">
+			
+				<volist name="orgdata.picture" id="picture">
+				<neq name="picture" value="">
+				 [ 
+				<a href="__URL__/filedown/filename/{$picture}/filerealname/{$orgdata[picturefilename][$key]}" style="color:green">{$orgdata[picturefilename][$key]} 
+				</a>  ] 
+				</neq>
+				</volist>
+			
+			</neq>
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="normal" colspan="1">
+			客流动线图
+			</td>
+			<td class="normal" colspan="2">
+			<neq name="orgdata.clientpicture" value="">
+			
+				<volist name="orgdata.clientpicture" id="clientpicture">
+				<neq name="clientpicture" value="">
+				 [ 
+				<a href="__URL__/filedown/filename/{$clientpicture}/filerealname/{$orgdata[clientpicturefilename][$key]}" style="color:green">{$orgdata[clientpicturefilename][$key]} 
+				</a>  ] 
+				</neq>
+				</volist>
+			
+			</neq>
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" colspan="1" style="font-weight:bold;height:45px">
+			审核记录
+			</td>
+			<td class="normal" colspan="3" style="line-height:18px">
+			{$orgdata.handlehistory}
+			</td>
+		</tr>
+					
+    </table>
+	
+	
+
+</div>
+</form>
+
+<!-- Prettyfile -->
+<script src="js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+<script>
+	$('input[type="file"]').prettyFile();
+</script>
+
+<script>
+	$(document).ready(function () {
+		$('.i-checks').iCheck({
+			checkboxClass: 'icheckbox_square-green',
+			radioClass: 'iradio_square-green',
+		});
+	});
+</script>

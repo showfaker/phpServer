@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>{$moduletitle}</title>
+	<!--
+	<link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+	-->
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/stylegantt.css?v=4.1.0" rel="stylesheet">
+	
+	
+	<link rel="stylesheet" href="__PUBLIC__/gantt/css/style.css" />  
+	<link rel="stylesheet" href="css/main.css">
+
+</head>
+
+<body class="gray-bg">
+	<a type="button" href="javascript:history.back(-1)" class="btn btn-info btn-xs delete" style="position:fixed;margin:38px 2px 2px 2px;background-color:#23C6C8;color:white;border-radius:3px;font-size:12px;text-decoration:none;padding:2px 4px;z-index:9999">返回</a>
+	<input type="hidden" name="plmid" id="plmid" value="{$detail.id}">
+	<table style="display:none">
+		<thead>
+		<tr>
+		</tr>
+		</thead>
+		<tbody>
+		<volist name="scheduleworktypes" id="scheduleworktype" key="i">
+			<tr target="sid_obj">
+				<td class="ll" id="{$scheduleworktype.subworktype}">{$scheduleworktype.subworktype}</td>
+			</tr>
+			<tr target="sid_obj" rel="{$listmenu['id']}">
+				<td class="{$scheduleworktype.subworktype}_11">{$scheduleworktype.subworktype}</td>
+				<td id="{$scheduleworktype.subworktype}_plantimebegin">{$scheduleworktype['plantimebegin']}</td>
+				<td id="{$scheduleworktype.subworktype}_plantimeend">{$scheduleworktype['plantimeend']}</td>
+			</tr>
+			<tr target="sid_obj" rel="{$listmenu['id']}">
+				<td class="{$scheduleworktype.subworktype}_44">{$scheduleworktype.subworktype}</td>
+				<td id="{$scheduleworktype.subworktype}_timebegin">{$scheduleworktype['timebegin']}</td>
+				<td id="{$scheduleworktype.subworktype}_timeend">{$scheduleworktype['timeend']}</td>
+				<td id="{$scheduleworktype.subworktype}_percent">{$scheduleworktype['percent']}</td>
+				<td id="{$scheduleworktype.subworktype}_daily">{$scheduleworktype['daily']}</td>
+			</tr>
+		</volist>
+		</tbody>
+	</table>
+	
+	
+	<div style="background-color:white;height:28px;padding:2px 5px 2px 10px;border-top:4px solid #E7EAEC;border-left:1px solid #DDDDDD;border-right:1px solid #DDDDDD">
+		<h4 style="font-family:微软雅黑">{$detail['title']}-{$scheduleworktypes[0]['worktype']}</h4>
+	</div>
+	<div class="ibox-content">
+		<div class="" id="echarts-line-chart1"></div>
+	</div>
+   
+    <!-- 全局js -->
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+
+
+    <!-- 自定义js -->
+    <script src="js/content.js?v=1.0.0"></script>
+	
+	
+	
+	
+	
+	<!--包中未包含jquery，你需要自行下载最新版的-->
+	<script src="__PUBLIC__/gantt/js/jquery.fn.gantt.js"></script>
+	<!--若为jquery1.9以上，还需要引入-->
+	<script src="__PUBLIC__/gantt/js/jquery-migrate-1.2.1.min.js"></script>
+	
+	
+	<script type="text/javascript">
+	$(function() {
+	
+		
+		var data=[];
+		var subdata=[];
+		var color="";
+		var plmid=document.getElementById("plmid").value;
+		$(".ll").each(function(i){
+			var id=this.id;
+			subdata=[];
+			var subworktype=id;
+			var timebeginstr=document.getElementById(subworktype+"_plantimebegin").innerHTML;
+			var timeendstr=document.getElementById(subworktype+"_plantimeend").innerHTML;
+			
+			timebegin = Date.parse(new Date(timebeginstr))-24*60*60*1000;
+			timeend = Date.parse(new Date(timeendstr))-24*60*60*1000;
+			
+			color="ganttRed";
+			
+			var plan=subworktype + "(计划) : " +timebeginstr+" ~ "+timeendstr;
+			subdata[0]={
+				from:timebegin,   //起始时间，13位时间戳,这里不同于原版"/Date(1333411200000)/"  
+				to:timeend,     //终止时间，13位时间戳,这里不同于原版"/Date(1333411200000)/"  
+				desc:plan,       //描述  
+				label:subworktype,  //显示在进度条上的标签
+				customClass:color
+			};
+			data[2*i]={
+				name:subworktype+"(计划)",
+				values:subdata
+			};
+			
+			
+			//实际
+			subdatareal=[];
+			var timebeginstr=document.getElementById(subworktype+"_timebegin").innerHTML;
+			var timeendstr=document.getElementById(subworktype+"_timeend").innerHTML;
+			var percent=document.getElementById(subworktype+"_percent").innerHTML;
+			var daily=document.getElementById(subworktype+"_daily").innerHTML;
+			
+			timebegin = Date.parse(new Date(timebeginstr))-24*60*60*1000;
+			timeend = Date.parse(new Date(timeendstr))-24*60*60*1000;
+			
+			color="ganttBlue";
+			
+			var plan=subworktype + "(实际完成) : " +percent+daily;
+			subdatareal[0]={
+				from:timebegin,   //起始时间，13位时间戳,这里不同于原版"/Date(1333411200000)/"  
+				to:timeend,     //终止时间，13位时间戳,这里不同于原版"/Date(1333411200000)/"  
+				desc:plan,       //描述  
+				label:subworktype,  //显示在进度条上的标签
+				customClass:color
+			};
+			
+			data[2*i+1]={
+				name: $(this).html()+"(实际)",
+				values:subdatareal
+			};
+			
+		})
+		
+		$('#echarts-line-chart1').gantt({
+			source: data,	//显示的数据，见下面分析
+			navigate: "scroll",	//显示成scroll还是buttons
+			months: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],	//月份显示的语言
+			dow: ["日", "一", "二", "三", "四", "五", "六"],	//星期显示的语言
+			scale: "days",	//默认显示的粒度
+			maxScale: "months",	//最大显示的粒度
+			minScale: "days",	//最小显示的粒度
+			itemsPerPage: 18,	//每页显示的数目
+			onItemClick: function(data) {	//进度条显示的单击事件,data参见source定义
+				//alert("Item clicked - show some details" + data);
+			},
+			onAddClick: function(dt, rowId) {	//图表空白处的单击事件
+				
+			},
+			onRender: function() {	//渲染时的事件
+				
+			}
+		});
+
+	});
+	</script>
+	
+	
+	
+	
+
+	
+</body>
+
+</html>

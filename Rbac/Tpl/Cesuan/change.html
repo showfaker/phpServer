@@ -1,0 +1,136 @@
+<script language="JavaScript">
+
+</script>
+
+<div style="display:block; overflow:hidden; line-height:21px;">
+	
+	<div class="tabs">
+		<div class="tabsHeader">
+			<div class="tabsHeaderContent">
+				<ul>
+					<li class="selected"><a href="javascript:;"><span>备案记录</span></a></li>
+					<li><a href="javascript:;"><span>跟踪记录详情</span></a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="tabsContent" layoutH="45">
+			<div>
+				<form action="__URL__/changestatus/navTabId/__MODULE__/callbackType/closeCurrent" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+				<input type="hidden" name="ids" value="{$list.id}" >
+				
+					<div class="pageFormContent" style="background-color:white;border:1px solid #B8D0D6;border-bottom:0px" layoutH="116">
+					<table class="drafttable" style="position:relative;margin:0 auto;width:520px;">
+					<thead>
+					<tr>
+					<td colspan="8" style="padding-bottom:3px;padding-top:15px">
+					创建人：{$list.user}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;编制时间：<?php echo date('Y-m-d H:i:s',$list['create_time']);?>
+					</td>
+					</tr>
+
+					<tr>
+						<td class="normal" width="18%" style="text-align:center;background-color:#f7f7f7;font-weight:bold;height:30px">客户姓名</td>
+						<td class="normal" width="32%" colspan="3">{$list.name}</td>
+						<td class="normal" width="18%" style="text-align:center;background-color:#f7f7f7;font-weight:bold;height:30px">电话</td>
+						<td class="normal" width="32%" colspan="3">{$list.tel}</td>
+					</tr>
+					<tr>
+						<td class="normal" style="text-align:center;background-color:#f7f7f7;font-weight:bold;height:30px">项目名称</td>
+						<td class="normal" colspan="7"><input type="text" readonly value="{$list.address}" style="position:relative;border:0px;border-bottom:0px solid #BBBBBB;height:17px;background:white;width:400px"></td>
+					</tr>
+					
+					<tr>
+						<td class="normal" width="18%" style="text-align:center;background-color:#f7f7f7;font-weight:bold;height:30px">营销备案时间</td>
+						<td class="normal" width="32%" colspan="3">{$list.time}</td>
+						<!--
+						<td class="normal" width="18%" style="text-align:center;background-color:#f7f7f7;font-weight:bold;height:30px">备案营销人员</td>
+						<td class="normal" width="32%" colspan="3"><input type="text" readonly value="{$list.charge}" style="position:relative;border:0px;border-bottom:0px solid #BBBBBB;height:17px;background:white;width:"></td>
+						-->
+						<td class="normal" width="18%" style="text-align:center;background-color:#f7f7f7;font-weight:bold;height:30px">客户状态</td>
+						<td class="normal" width="32%" colspan="3">
+						<select name="clientstatus" <in name="list.design_status" value="设计合同,施工合同,土建改造,水电工期,瓦工工期,木工工期,油漆工期,安装工期,保洁工期,竣工,决算,结算,保修,死单待审核,死单审核不通过,废单待审核,废单审核不通过">disabled</in>>
+							<option <eq name="list.clientstatus" value="潜在客户">selected</eq> value="潜在客户">潜在客户</option>
+							<option <eq name="list.clientstatus" value="未接通">selected</eq> value="未接通">未接通</option>
+							<option <eq name="list.clientstatus" value="意向客户">selected</eq> value="意向客户">意向客户</option>
+							<option <eq name="list.clientstatus" value="预上门客户">selected</eq> value="预上门客户">预上门客户</option>
+							<option <eq name="list.clientstatus" value="已上门客户">selected</eq> value="已上门客户">已上门客户</option>
+							<option <eq name="list.clientstatus" value="签单客户">selected</eq> value="签单客户">签单客户</option>
+							<option <eq name="list.clientstatus" value="死单客户">selected</eq> value="死单客户">死单客户</option>
+						</select>
+						</td>
+					</tr>
+					
+					
+					<tr>
+						<td class="normal" style="text-align:center;background-color:#f7f7f7;font-weight:bold;height:30px">途径</td>
+						<td class="normal" colspan="3"><input type="text" readonly value="{$list.way}" style="position:relative;border:0px;border-bottom:0px solid #BBBBBB;height:17px;background:white;width:"></td>
+						<td class="normal" style="text-align:center;background-color:#f7f7f7;font-weight:bold;height:30px">备案负责人</td>
+						<td class="normal" colspan="3"><input type="text" readonly value="{$list.charge}" style="position:relative;border:0px;border-bottom:0px solid #BBBBBB;height:17px;background:white;width:"></td>
+					</tr>
+
+					</thead>
+                </table>
+						
+					</div>
+					<div class="formBar" style="border:1px solid #B8D0D6;height:41px">
+					
+						<ul style="float:left;padding-left:30px;">
+						<!--
+						<in name="list.approvestatus" value="二次备案审核通过,设计合同状态,施工合同状态,施工死单状态">
+						<li style="padding-top:6px">
+							修改状态：
+						</li>
+						<li>
+							<select class="combox" name="approvestatus">
+								<option value="设计合同状态" <eq name="list.approvestatus" value="二次备案审核通过">selected</eq> >设计合同状态</option>
+								<option value="施工合同状态" <eq name="list.approvestatus" value="设计合同状态">selected</eq> >施工合同状态</option>
+								<option value="施工死单状态" <in name="list.approvestatus" value="施工合同状态,施工死单状态">selected</in> >施工死单状态</option>
+							</select>
+						</li>	
+						</in>
+						-->
+						<li style="padding-top:6px;padding-left:10px">
+							客户跟踪记录：
+						</li>
+						<li>
+							<textarea type="text" name="remark" style="width:300px"></textarea>
+						</li>
+						
+						</ul>
+						
+						
+				
+						
+						<!--
+						<ul style="float:left;padding-left:20px;" id="approveuser" style="display:block">
+						<li  style="padding-top:6px">审核意见：</li>
+						<li>
+							<input type="text" name="suggestion" id="suggestion" style="width:200px"></input>
+						</li>
+						</ul>
+						-->
+						
+						
+						
+						<ul>
+							<li><div class="buttonActive"><div class="buttonContent"><button type="submit">确定</button></div></div></li>
+							<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+						</ul>
+					</div>
+				</form>
+			</div>
+			
+			<div>
+			<div  layoutH="65" style="padding:5px;background-color:white;border:1px solid #A2BAC0;line-height:16px">
+			
+			{$list.handlehistory}
+			
+			</div>
+			</div>
+			
+		</div>
+		<div class="tabsFooter">
+			<div class="tabsFooterContent"></div>
+		</div>
+	</div>
+
+</div>

@@ -1,0 +1,26 @@
+﻿
+
+<div class="modal-header">
+	<h4 class="modal-title">上传进度</h4>
+</div>
+<iframe src="__URL__/piliangdailyadd2/moduletitle/{$moduletitle}" id="piliangdailyadd2" style="height:600px;width:100%;border:0px;overflow-y:scroll"></iframe>
+
+
+<div class="modal-footer">
+<font style="color:#188FFD;margin-right:50px">点击确定即生成一条进度日志，请不要重复提交</font>
+	<button type="submit" class="btn btn-danger" onclick="submit()" id="parentsubmit">确定上传</button>
+	<button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+	<!--<button type="button" class="btn btn-primary">保存</button>-->
+</div>
+
+<script>
+	function submit()
+	{
+		document.getElementById('piliangdailyadd2').contentWindow.document.getElementById('submit').click();
+	}
+	function parentreload()
+	{
+		//setTimeout("location.href=location.href", 1100);
+	}
+	
+</script>

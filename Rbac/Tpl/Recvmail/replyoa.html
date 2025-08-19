@@ -1,0 +1,111 @@
+
+<script language="JavaScript">
+<!--
+function checkName(){
+	ThinkAjax.send('__URL__/checkAccount/','ajax=1&account='+$F('account'));
+}
+//-->
+</script>
+<style>
+table.addmailtable{
+                /*margin:10px 0px 0px 0px; 
+				padding:5px; */
+				border-collapse:collapse; 
+				text-align:left; 
+				
+				clear:both;
+				font-family:Verdana,Geneva,Arial,Helvetica,sans-serif;
+				background-color: transparent;
+				/*border:1px solid #cccccc;*/
+				}
+				
+table.addmailtable tr td.normal{ 
+				padding:5px;
+				vertical-align:middle;
+				background-color: transparent;
+				/*border:1px solid #cccccc;*/
+                }
+table.addmailtable tr td img{ 
+				/*padding:0px 0px 15px 0px; */
+				vertical-align:middle;
+                }
+</style>
+
+<div class="pageContent" >
+	
+	<form method="post" action="__URL__/insert/navTabId/__MODULE__/callbackType/closeCurrent" class="pageForm required-validate" onsubmit="return validateCallback(this)">
+		<div class="pageFormContent" layoutH="60">
+
+			
+			
+			<table class="addmailtable" cellpadding=3 cellspacing=3 >
+				<thead>
+				
+	<tr><!-- div id="wrap"-->
+	<td class="normal" style="font-weight:bold" width="9%">接收人:</td>
+	<td class="normal" >
+	<input id="receiver" type="text" class="text"  style="width:615px"  name="receiver" value="{$data.sender}" readonly placeholder="点击获取人员" onclick="selectGroupmulti('receiver','pid')">
+	
+	    <input type="hidden" class="medium bLeft" id="pid" name="pid"/>
+	    
+	  </td>
+	<!-- /div> -->
+</tr>
+<tr><!--<div id="wrap">-->
+	<td class="normal" style="font-weight:bold">抄送:</td>
+	<td class="normal" ><input id="copy" type="text" style="width:615px"   class="text" name="copy"  value="{$data.copy}" readonly placeholder="点击获取人员" onclick="selectGroupmulti('copy','pid')">
+		    <input type="hidden" class="medium bLeft" id="pid" name="pid"/>
+	</td>
+	<!--</div>-->
+</tr>
+<tr>
+	<td class="normal" style="font-weight:bold">主题:</td>
+	<td class="normal" ><input type="text" class="text" style="width:615px"   name="title" value="回复：{$data.title}"></td>
+</tr>
+<tr>
+	<td class="normal" style="font-weight:bold">内容:</td>
+	<td class="normal" ><textarea class="editor" name="content" rows="14" cols="70"  style="width:620px"  tools="simple">
+	<br/><br/>-------------------原始邮件-------------------<br/>
+	<div style="background-color:#EFEFEF">
+	<font style="font-weight:bold;line-height:16px">发件人</font>：{$data.sender}<br/>
+	<font style="font-weight:bold;line-height:16px">发送时间</font>：<?php 
+						if($data['create_time']!=0)
+						echo date('Y-m-d H:i:s',$data['create_time']);?><br/>
+	<font style="font-weight:bold;line-height:16px">收件人</font>：{$data.receiver}<br/>
+	<font style="font-weight:bold;line-height:16px">抄送人</font>：{$data.copy}<br/>
+	<font style="font-weight:bold;line-height:16px">主&nbsp;&nbsp;题</font>：{$data.title}
+	</div>
+	<br/>{$data.content}
+	</textarea></td>
+</tr>
+<tr>
+	<td class="normal" style="font-weight:bold">附件:</td>
+	<td class="normal">
+    <div class="impBtn  fLeft" ><input name="image" id="image" type="file" class="file huge" value="{$data.annex}"/>（最大支持5M大小文件）</div>
+<tr>
+
+                    <!-- <tr>
+	                    <td></td>
+	                    <td class="center">
+						    <div style="width:85%;margin:5px">
+	                            <input type="hidden" class="huge bLeftRequire" name="id" value="{$vo.id}">
+	                            <input type="submit" value="发送" class="button medium">
+	                        </div>
+						</td>
+                    </tr> -->
+					</thead>
+                </table>
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">发送</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close1" data-dismiss="modal">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+
+
+

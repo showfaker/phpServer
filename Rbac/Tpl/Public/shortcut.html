@@ -1,0 +1,228 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+        
+<style>
+   h1, h2, h3, h4, h5, h6, #menu a {font-family:Open Sans !important;}
+   div.descr{
+   background-color:#F8F9FA;
+   }
+</style>
+
+<link rel='stylesheet' href='__PUBLIC__/sh/bootstrap.css' type='text/css' media='all' />
+<link rel='stylesheet' href='__PUBLIC__/sh/main.css' type='text/css' media='all' />
+<link rel="stylesheet" href="__PUBLIC__/Images/classic/skin1.css" type="text/css" />
+</head>
+
+<body>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td width="17" valign="top" background="__PUBLIC__/Images/classic/mail_leftbg.gif">
+			<img src="__PUBLIC__/Images/classic/left-top-right.gif" width="17" height="29" />
+		</td>
+		<td valign="top" background="__PUBLIC__/Images/classic/content-bg.gif">
+			<table width="100%" height="31" border="0" cellpadding="0" cellspacing="0" class="left_topbg" id="table2">
+				<tr>
+					<td height="31"><div class="titlebt">常用功能</div></td>
+					<td style="font-size:12px;text-align:right"><a href="#" onclick="getpanel()"></a></td>
+				</tr>
+			</table>
+		</td>
+		<td width="16" valign="top" background="__PUBLIC__/Images/classic/mail_rightbg.gif">
+			<img src="__PUBLIC__/Images/classic/nav-right-bg.gif" width="16" height="29" />
+		</td>
+	</tr>
+   
+
+	<tr height="400px">
+		<td valign="middle" background="__PUBLIC__/Images/classic/mail_leftbg.gif">&nbsp;</td>	
+		<td valign="top" style="background:#F8F9FA;">
+			<table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+				<tr>       
+					<div class="container">
+						<div class="span3 ">
+                            <div class="view">
+                                <a href="__APP__/Recvmail/index/"><img src="__PUBLIC__/sh/img/letter.png" alt="" /></a>
+							</div>
+                            <div class="descr">
+                                <a onmouseover=this.style.color="#CB0000";   onmouseout=this.style.color="#666";  style="color:#666;font-size:13px;" href="__APP__/Recvmail/index/"><font id="remindmail" style="color:red;">({$count})未读</font></a>
+                            </div>
+                        </div>	
+																								
+						<div class="span3 ">
+                            <div class="view view-first">
+                                <a href="__APP__/Form/index/"><img src="__PUBLIC__/sh/img/notice.png" alt="" /></a>
+							</div>
+                            <div class="descr">
+                                <a onmouseover=this.style.color="#CB0000";   onmouseout=this.style.color="#666";  style="color:#666;font-size:13px;" href="__APP__/Form/index/">新闻公告</a>
+                            </div>
+                        </div>
+						
+						<div class="span3 ">
+                            <div class="view view-first">
+                                <a href="__APP__/Schedule/index/"><img src="__PUBLIC__/sh/img/signature.png" alt="" /></a>
+                            </div>
+                            <div class="descr">
+                                <a onmouseover=this.style.color="#CB0000";   onmouseout=this.style.color="#666";  style="color:#666;font-size:13px;" href="__APP__/Schedule/index/">待我审核</a>
+                            </div>
+                        </div>
+						
+						<div class="span3 ">
+                            <div class="view view-first">
+                                <a href="__APP__/Mywork/index/"><img src="__PUBLIC__/sh/img/work.png" alt="" /></a>
+                            </div>
+                            <div class="descr">
+                                <a onmouseover=this.style.color="#CB0000";   onmouseout=this.style.color="#666";  style="color:#666;font-size:13px;" href="__APP__/Mywork/index/">我的工作</a>
+                            </div>
+                        </div>	                                        
+						                                        
+						<div class="span3">
+							<div class="view view-first">
+                                <a href="__APP__/Myplm/index/"><img src="__PUBLIC__/sh/img/Fresh-addon_08.png" alt="" /></a>
+							</div>
+                            <div class="descr">
+                                <a onmouseover=this.style.color="#CB0000";   onmouseout=this.style.color="#666";  style="color:#666;font-size:13px;" href="__APP__/Myplm/index/">我的项目</a>
+                            </div>
+                        </div>	                                        
+						
+						<div class="span3">
+                            <div class="view view-first">
+                                <a href="#"><img src="__PUBLIC__/sh/img/20121205113249121.png" alt="" /></a>
+							</div>
+                            <div class="descr">
+                                <a onmouseover=this.style.color="#CB0000";   onmouseout=this.style.color="#666";  style="color:#666;font-size:13px;" href="#">收文</a>
+                            </div>
+                        </div>	    
+										
+						<div class="span3">
+                            <div class="view view-first">
+                                <a href="#"><img src="__PUBLIC__/sh/img/20121205113248895.png" alt="" /></a>
+							</div>
+                            <div class="descr">
+                                <a onmouseover=this.style.color="#CB0000";   onmouseout=this.style.color="#666";  style="color:#666;font-size:13px;" href="#">发文</a>
+                            </div>
+                        </div>
+						
+						<div class="span3">
+                            <div class="view view-first">
+                                <a href="__APP__/Timecard/index/"><img src="__PUBLIC__/sh/img/time.png" alt="" /></a>
+							</div>
+                            <div class="descr">
+                                <a onmouseover=this.style.color="#CB0000";   onmouseout=this.style.color="#666";  style="color:#666;font-size:13px;" href="__APP__/Timecard/index/">考勤登记</a>
+                            </div>
+                        </div>	
+
+						<div class="span3">
+                            <div class="view view-first">                                           
+                                <a href="__APP__/Meetingfind/index/"><img src="__PUBLIC__/sh/img/bird_envelope_02.png" alt="" /></a>
+                            </div>
+                            <div class="descr">
+                                <a onmouseover=this.style.color="#CB0000";   onmouseout=this.style.color="#666";  style="color:#666;font-size:13px;" href="__APP__/Meetingfind/index/">会议室</a>
+                            </div>
+                        </div>
+										
+						<div class="span3">
+                            <div class="view">                                           
+                                <a href="__APP__/Salemanage/index/"><img src="__PUBLIC__/sh/img/green_pc_26.png" alt="" /></a>
+                            </div>
+                            <div class="descr">
+                                <a onmouseover=this.style.color="#CB0000";   onmouseout=this.style.color="#666";  style="color:#666;font-size:13px;" href="__APP__/Salemanage/index/">我的跟单</a>
+                            </div>
+                        </div>
+						
+						<div class="span3">
+                            <div class="view">                                           
+                                <a href="__APP__/Recvmail/index/"><img src="__PUBLIC__/sh/img/file_share.png" alt="" /></a>
+                            </div>
+                            <div class="descr">
+                                <a onmouseover=this.style.color="#CB0000";   onmouseout=this.style.color="#666";  style="color:#666;font-size:13px;" href="__APP__/Recvmail/index/">知识共享</a>
+                            </div>
+                        </div>
+																				
+						<div class="span3">
+							<div class="view">
+                                <a href="__APP__/Bbs/index/"><img src="__PUBLIC__/sh/img/bbs.png" alt="" /></a>
+                            </div>
+                            <div class="descr">
+                                <a onmouseover=this.style.color="#CB0000";   onmouseout=this.style.color="#666";  style="color:#666;font-size:13px;" href="__APP__/Bbs/index/">内部论坛</a>
+                            </div>
+                        </div>
+																																							
+						<div class="span3 ">
+                            <div class="view ">                                            
+                                <a href="__APP__/Mystore/index/"><img src="__PUBLIC__/sh/img/Fresh-addon_05.png" width="60px" height="60px" alt="" /></a>
+							</div>
+                            <div class="descr">
+                                <a onmouseover=this.style.color="#CB0000";   onmouseout=this.style.color="#666";  style="color:#666;font-size:13px;" href="__APP__/Mystore/index/">个人资产</a>
+                            </div>
+                        </div>
+						
+						<div class="span3">
+                            <div class="view">                                           
+                                <a href="__APP__/Warehouse/index/"><img src="__PUBLIC__/sh/img/simple_vvr_62.png" alt="" /></a>
+                            </div>
+                            <div class="descr">
+                                <a onmouseover=this.style.color="#CB0000";   onmouseout=this.style.color="#666";  style="color:#666;font-size:13px;" href="__APP__/Warehouse/index/">库存管理</a>
+                            </div>
+                        </div>
+						
+						<div class="span3">
+                            <div class="view">                                           
+                                <a href="__APP__/Workstr/index/"><img src="__PUBLIC__/sh/img/comment512.png" alt="" /></a>
+                            </div>
+                            <div class="descr">
+                                <a onmouseover=this.style.color="#CB0000";   onmouseout=this.style.color="#666";  style="color:#666;font-size:13px;" href="__APP__/Workstr/index/">业务定义</a>
+                            </div>
+                        </div>
+						
+						<div class="span3 ">
+                            <div class="view">                                           
+                                <a href="__APP__/Myinfo/index/"><img src="__PUBLIC__/sh/img/person.png" alt="" /></a>
+                            </div>
+                            <div class="descr">
+								<a onmouseover=this.style.color="#CB0000";   onmouseout=this.style.color="#666";  style="color:#666;font-size:13px;" href="__APP__/Myinfo/index/">个人信息</a>
+                            </div>
+                        </div>
+						
+					</div>       
+				</tr>
+
+				<tr>
+					<td height="40" colspan="4">
+						<table width="100%" height="1" border="0" cellpadding="0" cellspacing="0" bgcolor="#CCCCCC">
+							<tr>
+								<td></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr style="float:right;text-align:right;">
+					<td>
+						<img src="__PUBLIC__/Images/classic/20130222102149124_easyicon_cn_16.png" width="16" height="16">官方网站：<a href="http://www.changlian365.com" target="_blank">www.changlian365.com</a>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<img src="__PUBLIC__/Images/classic/20130222032615436_easyicon_cn_16.png" width="16" height="16">版本更新时间：2013年6月1日
+					</td>  
+				</tr>
+			</table>
+		
+		</td>
+		
+		
+		<td background="__PUBLIC__/Images/classic/mail_rightbg.gif">&nbsp;</td>
+	</tr>
+	
+	
+	<tr>
+		<td valign="bottom" background="__PUBLIC__/Images/classic/mail_leftbg.gif"><img src="__PUBLIC__/Images/classic/buttom_left2.gif" width="17" height="17" /></td>
+		<td background="__PUBLIC__/Images/classic/buttom_bgs.gif"><img src="__PUBLIC__/Images/classic/buttom_bgs.gif" width="17" height="17"></td>
+		<td valign="bottom" background="__PUBLIC__/Images/classic/mail_rightbg.gif"><img src="__PUBLIC__/Images/classic/buttom_right2.gif" width="16" height="17" /></td>
+	</tr>
+
+</table>
+
+</body>
+</html>

@@ -1,0 +1,259 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+<meta charset="utf-8" /> 
+<title>上传进度</title> 
+
+<link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/style.css?v=4.1.0" rel="stylesheet">
+<link rel="stylesheet" href="__PUBLIC__/dwz/themes/css/core1.css">
+</head>
+<body> 
+
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal">×</button>
+	<h4 class="modal-title">详情</h4>
+</div>
+
+
+<div style="height:500px;overflow-y:scroll">
+<form method="post" action="__APP__/Sgrz/dailyupdate/callbackType/closeCurrent/navTabId/Second" id="sgrzform" ENCTYPE="multipart/form-data" onsubmit="return iframeCallback_sgrz()">
+<input value="{$dailyid}" name="dailyid" type="hidden">
+<input value="{$plmid}" name="plmid" type="hidden">
+<input value="{$worktype}" name="worktype" type="hidden">
+<input value="{$subworktype}" name="subworktype" type="hidden">
+<table class="drafttable" style="position:relative;top:8px;margin:0 auto;width:96%;margin-bottom:16px;font-family:微软雅黑;">
+	<tr>
+		<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6;width:100px">专项</td>
+		<eq name="moduletitle" value="采购进度管理">
+		<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6;">计划数量</td>
+		</eq>
+		<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6;width:200px">节点</td>
+		<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6">计划开始</td>
+		<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6">计划完成</td>
+		
+		<eq name="moduletitle" value="施工进度管理">
+		<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6">工程量</td>
+		</eq>
+		<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6">今日实际</td>
+		
+		<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6">备注</td>
+		<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6">附件</td>
+		
+		<in name="moduletitle" value="开发进度管理,采购进度管理">
+		<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6">保管人</td>
+		</in>
+	</tr>
+	
+	<volist name="schedules" id="schedule">
+	<input type="hidden" name="scheduleid[]" value="{$schedule.id}">
+	<tr>
+		<eq name="schedule.block" value="1">
+		<td class="normal" rowspan="{$schedule.rowspan}" style="font-weight:bold;height:45px">{$schedule.worktype}</td>
+		</eq>
+		
+		
+		<eq name="moduletitle" value="采购进度管理">
+		<eq name="schedule.block" value="1">
+		<td class="normal" rowspan="{$schedule.rowspan}" >
+		{$schedules[$key+3][plancount]}
+		</td>
+		</eq>
+		</eq>
+		
+		<td class="normal" >
+		<neq name="schedule.attribute">（{$schedule.attribute}）</neq>{$schedule.subworktype}
+		</td>
+		<td class="normal" >{$schedule[plantimebegin]}</td>
+		<td class="normal" >{$schedule[plantimeend]}</td>
+		<eq name="moduletitle" value="施工进度管理">
+		<td class="normal" >{$schedule[planquality]}<neq name="schedule.qualityunit" value="">({$schedule[qualityunit]})</neq></td>
+		</eq>
+		<td class="normal" >
+		
+		
+		<neq name="worktypesubworktype" value="$schedule[worktypesubworktype]"></neq>
+		<in name="moduletitle" value="开发进度管理,设计进度管理,施工进度管理,主项进度管理">
+		{$schedule[percent]}
+		</in>
+		<in name="moduletitle" value="采购进度管理">
+		<neq name="schedule.subworktype" value="到货">
+		{$schedule[percent]}
+		</neq>
+		<eq name="schedule.subworktype" value="到货">
+		{$schedule[realcount]}
+		</eq>
+		</in>
+		
+		<!-- 
+		<eq name="worktypesubworktype" value="$schedule[worktypesubworktype]">
+		<select name="percent[]" id="percent{$key}" style="width:60px" placeholder="选择进度">
+			<?php for($i=$schedule["percentdigit"];$i<=100;$i++) {?>
+				<option value="<?php echo $i."%"; ?>"><?php echo $i;?>%</option>
+			<?php } ?>
+		</select>
+		</eq> -->
+		
+		</td>
+		
+		
+		
+		
+		
+		<td class="normal" >
+		
+		<neq name="worktypesubworktype" value="$schedule[worktypesubworktype]">
+		{$schedule[remark]}
+		</neq>
+		<eq name="worktypesubworktype" value="$schedule[worktypesubworktype]">
+		<input value="{$schedule[remark]}" type="text" style="width:40px" name="remark" placeholder="">
+		</eq>
+		</td>
+		
+		
+		<td class="normal" >
+		<volist name="schedule.photos" id="photo">
+		<neq name="photo" value="">
+		<eq name="schedule[photostype][$key]" value="image">
+		<a class="fancybox" href="__PUBLIC__/Uploads/{$photo}" data-fancybox-group="gallery_projectsend" title="{$schedule['title']}">
+		<img src="__PUBLIC__/Uploads/{$photo}" style="width:20px;height:20px;float:left;margin:1px">
+		</a>
+		<eq name="worktypesubworktype" value="$schedule[worktypesubworktype]">
+		<input type="checkbox" name="delbox[{$key}]" value="1">删除</br></br>
+		</eq>
+		</eq>
+		<neq name="schedule[photostype][$key]" value="image">
+		<a href="__URL__/filedown/filename/{$photo}/filerealname/{$schedule[photosrealname][$key]}" title="{$schedule['title']}">
+		{$schedule[photosrealname][$key]}
+		</a>
+		<eq name="worktypesubworktype" value="$schedule[worktypesubworktype]">
+		<input type="checkbox" name="delbox[{$key}]" value="1">删除</br></br>
+		</eq>
+		</br>
+		</neq>
+		</neq>
+		</volist>
+		<eq name="worktypesubworktype" value="$schedule[worktypesubworktype]">
+		<input type="file" style="width:72px" name="file[]" id="upload" placeholder="" multiple onchange="getFile(value)">
+		<div id="doc"></div>
+		<script>
+			function getFile(value){
+				// 获取文本框dom
+				var doc = document.getElementById('doc');
+				// 获取上传控件dom
+				var upload = document.getElementById('upload');
+				// 获取文件名
+				var fileName = "";
+				for(i = 0; i < upload.files.length; i++) {
+					fileName += upload.files[i].name+"</br>";
+				}
+				// 获取文件路径
+				var filePath = upload.value;
+				// 将文件名载入文本框
+				doc.innerHTML = fileName;
+				console.log(fileName);
+			}
+		</script>
+		
+		</eq>
+		
+		
+		
+		
+		</td>
+		
+		
+		<in name="moduletitle" value="采购进度管理,开发进度管理">
+		<td class="normal" >
+		<neq name="worktypesubworktype" value="$schedule[worktypesubworktype]">
+		{$schedule[keeper]}
+		</neq>
+		
+		<eq name="worktypesubworktype" value="$schedule[worktypesubworktype]">
+		<select name="keeper" style="" placeholder="">
+			<option value="">选择</option>
+			<volist name="users" id="user">
+			<option value="{$user.nickname}" <eq name="schedule.keeper" value="$user.nickname">selected</eq>>{$user.nickname}</option>
+			</volist>
+		</select>
+		</eq>
+		</td>
+		</in>
+	</tr>
+	</volist>
+	
+	
+</table>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-sm btn-white pull-right m-t-n-xs" data-dismiss="modal" style="margin-left:10px">关闭</button>
+	<button type="button" class="btn btn-sm btn-primary pull-right m-t-n-xs" id="submit" style="display:">确认修改</a>
+</div> 
+
+
+</form>
+
+
+
+
+<!-- 微信 JS-SDK 如果不需要兼容小程序，则无需引用此 JS 文件。 -->  
+<script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>  
+<!-- uni 的 SDK，必须引用。 -->  
+<script type="text/javascript" src="//js.cdn.aliyun.dcloud.net.cn/dev/uni-app/uni.webview.0.1.52.js"></script>
+<script src="__PUBLIC__/appsource/js/mui.min.js"></script> 
+<script src="__PUBLIC__/appsource/js/mui.zoom.js"></script>
+<script src="__PUBLIC__/appsource/js/mui.previewimage.js"></script>
+<script src="__PUBLIC__/appsource/js/mui.picker.js"></script>
+<script src="__PUBLIC__/appsource/js/mui.poppicker.js"></script>
+<!-- Chosen -->
+<script src="js/plugins/chosen/chosen.jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/jquery-form.js" ></script>
+
+<link href="__PUBLIC__/appsource/muishowloading/showloading.css" rel="stylesheet">
+<script src="__PUBLIC__/appsource/muishowloading/showloading.js"></script>
+<script>
+mui.init();
+var mask = mui.createMask();
+document.getElementById("submit").addEventListener("click",function(){
+	
+	mask.show();
+	mui.showLoading("正在上传,请等待..","div")
+	document.getElementById("submit").style.display="none";
+	$('#sgrzform').ajaxSubmit({
+		dataType:'json',//服务器返回json格式数据
+		type: "post",
+		url: "__APP__/Sgrz/dailyupdate/",
+		data: $('#sgrzform').serialize(),
+		error: function (data) {
+			console.log(data);
+			mask.close();
+			mui.hideLoading();
+			document.getElementById("submit").style.display="";
+			mui.alert('服务器连接超时，请稍后再试');  
+		},
+		success: function (data) {
+			mask.close();
+			mui.hideLoading();
+			document.getElementById("submit").style.display="";
+			var result = new Array();  
+			result = eval(data);
+			if(result['message']=="操作成功")
+			{
+				mui.toast("操作成功");
+				location.href=location.href;
+			}else{
+				mui.alert(result['message']);
+			}
+		}
+	});
+});
+</script>
+
+
+
+</body>
+</html>

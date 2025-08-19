@@ -1,0 +1,325 @@
+* {
+	margin:0; 
+	padding:0; 
+	line-height:20px; 
+	font-family:'Helvetica Neue',Arial, Helvetica, sans-serif; 
+	color:#333; 
+	font-size:14px;
+	
+}
+
+img {
+	border:none;
+}
+
+a{
+	color:#3399ff;
+}
+
+ul{
+	list-style:none;
+}
+
+h4.list{
+	font-size:14px; 
+	font-weight:bold; 
+	text-decoration:underline; 
+	width:100px;
+	padding-left:16px;
+	margin-top:10px;
+	background:url('../images/nav_arrow.png') no-repeat left;
+}
+
+.right-panel p{
+	padding-left:16px;
+}
+
+body {
+	background:#e4e4e4 url('../images/back_inside.jpg') repeat-x; 
+	color: #5a5a5a;
+}
+
+.clear{
+	clear:both;
+}
+
+#container{
+	width:960px; 
+	margin:auto;
+}
+
+#header{
+	padding:10px 0px; 
+	height:110px;
+}
+
+#content{
+	background:#F8F8F8;
+	width:900px; 
+	margin:0px auto; 
+	padding:20px 30px 40px 30px; 
+	min-height:540px;
+	-moz-box-shadow: 2px 2px 3px 2px #CCC;
+	-webkit-box-shadow: 2px 2px 3px 2px #CCC;
+	box-shadow: 2px 2px 3px 2px #CCC;
+	/* For IE 8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#CCCCCC')";
+	/* For IE 5.5 - 7 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#CCCCCC');
+}
+
+h2{
+	text-transform:uppercase; 
+	font-size:16px; 
+	font-weight:bold; 
+	background:url('../images/delimiter.png') repeat-x bottom; 
+	margin:10px auto; 	
+	color:#111; 
+	padding-bottom:4px;
+}
+
+h2#main-title{
+	text-align:center; 
+	font-size:24px; 
+	width:900px; 
+	padding-bottom:10px
+
+}
+h3{
+	margin:30px 0px 10px 0px;
+	font-size:16px;
+	font-weight:bold;
+	border-bottom:dotted 1px #666;
+}
+
+p.text-content{
+	margin:20px 0px; 
+	width:700px;
+}
+
+#top-block{
+	width:920px; 
+	margin:20px auto;
+}
+
+#template-shot{
+	float:left; 
+	width:246px; 
+	padding:20px; 
+	border-right:solid 1px #CCC; 
+	background:#EEE;
+	margin-top:28px;
+}
+
+#template-info{
+	float:left; 
+	width:400px; 
+	padding:20px;
+}
+
+.info-table{
+	padding:2px; 
+	margin-bottom:10px; 
+	font-size:14px;
+}
+
+.info-table td{
+	padding-left:10px;
+}
+
+.info-table td.title{
+	font-weight:bold; 
+	padding-left:0px;  
+	text-align:right;
+}
+
+ol.toc{padding-left:20px; font-weight:bold; margin-bottom:10px}
+
+ol.toc li {
+	line-height:26px;
+}
+
+ol.toc li a{
+	
+}
+
+ul.inner-list{
+	padding:10px 0px 10px 20px;
+}
+ul.inner-list li{
+	list-style:none;
+	padding-left:20px;
+	line-height:26px;
+	background:url(arrow.png) no-repeat left;
+}
+
+ul.inner-list li a{
+	text-decoration:none;
+}
+
+.anchorLink{font-size:14px; font-weight:bold; float:right; text-decoration:none; color:#333; font-weight:bold; background:url('../images/arrow_up.png') no-repeat left; padding-left:20px}
+
+/*********************** TREE VIEW *******************************/
+.treeview{	
+	margin:10px;
+}
+
+.treeview ul {
+	list-style: none;
+	margin-top: 4px;
+}
+
+.treeview .hitarea {
+	background: url('../images/tree/treeview-default.gif') -64px -25px no-repeat;
+	height: 16px;
+	width: 16px;
+	margin-left: -16px;
+	float: left;
+	cursor: pointer;
+}
+/* fix for IE6 */
+* html .hitarea {
+	display: inline;
+	float:none;
+}
+
+.treeview li { 
+	margin: 0;
+	padding: 3px 0pt 3px 16px;
+}
+
+.treeview a.selected {
+	background-color: #eee;
+}
+
+#treecontrol {
+	margin: 1em 0; 
+	display: none; 
+}
+
+.treeview .hover {
+	color: red; 
+	cursor: pointer; 
+}
+
+.treeview li {
+	background: url('../images/tree/treeview-default-line.gif') 0 0 no-repeat; 
+}
+
+.treeview li.collapsable, .treeview li.expandable { 
+	background-position: 0 -176px; 
+}
+
+.treeview .expandable-hitarea { 
+	background-position: -80px -3px;
+}
+
+.treeview li.last {
+	background-position: 0 -1766px; 
+}
+
+.treeview li.lastCollapsable, .treeview li.lastExpandable {
+	background-image: url('../images/tree/treeview-default.gif');
+}  
+
+.treeview li.lastCollapsable {
+	background-position: 0 -111px; 
+}
+
+.treeview li.lastExpandable {
+	background-position: -32px -67px; 
+}
+
+.treeview div.lastCollapsable-hitarea, .treeview div.lastExpandable-hitarea { background-position: 0; }
+
+
+
+/*--- Files Tree Styles ---*/
+.filetree li {
+	padding: 3px 0 2px 16px;
+}
+
+.filetree .folder, .filetree .file, .filetree .image {
+	padding: 0px 2px 1px 16px; 
+	display: block;
+}
+
+.filetree .folder {
+	background: url('../images/tree/folder-open.png') 0 0 no-repeat; 
+}
+
+.filetree li.expandable .folder {
+	background: url('../images/tree/folder.png') 0 0 no-repeat; 
+}
+
+.filetree .file {
+	background: url('../images/tree/file.png') 0 0 no-repeat; 
+}
+
+.filetree .image {
+	background: url('../images/tree/image.png') 0 0 no-repeat; 
+}
+
+/*****************************************************************/
+
+.tree-panel{
+	float:left; 
+	width:250px;
+	margin-left:20px;
+}
+
+.right-panel{
+	float:left;
+	width:610px;
+	margin-left:20px;
+}
+
+.right-panel p.text-content{
+	width:500px;
+}
+
+.tree-panel h3, .right-panel h3{
+	font-size:14px;
+}
+
+ul.files-list {list-style:square; margin:10px 0px}
+ul.files-list li{margin-left:40px; line-height:24px}
+
+.demo-image{
+	margin:10px 0px;
+}
+
+
+/***************** .list-table ******************/
+.list-table {
+	border-collapse:collapse;
+	margin:0px auto; 
+	width:98%; 
+}
+
+.list-table tr.active td{
+	font-size:0.9em; 
+	background:#EDEDED;
+}
+.list-table th, .mini-.list-table th {
+	color:#FFF;
+	padding:8px; 
+	text-align:left; 
+	font-weight:bold;
+	background:#3399FF;
+	border-right:1px solid #DDD;
+}
+
+.list-table td {
+	padding:10px; 
+	color:#111;
+	border-left:1px solid #EEE;
+	border-right:1px solid #EEE;
+	background:url("../images/bg-td.png") repeat-x scroll 0 100% transparent;
+}
+
+.list-table td.sub {
+	padding-left:15px;
+	text-align:left;
+}
+/*********************************************/

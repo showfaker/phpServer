@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="__PUBLIC__/dwz/themes/css/core1.css">
+</head>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <div>
+							<form action="__URL__/index/token/{$token}/" method="post">
+								<input type="hidden" value="{$tab}" name="tab">
+								<div style="width:100%;margin-bottom:10px" class="input-group">
+									<div class="input-group col-sm-2 col-xs-8" style="float:left;padding-right:20px">
+										<span class="input-group-addon">项目名称</span>
+										<input type="text" class="form-control" name="keyword" value="{$keyword}" onclick="laydate()">
+									</div>
+									<button class="btn btn-primary btn-sm" style="float:left;margin-right:10px;" type="submit">查询</button>
+								</div>		
+							</form>
+                        </div>
+                        <table class="table table-striped table-bordered table-hover" style="margin-top:20px">
+							<tbody>
+								<volist name="list" id="listmenu">
+								<thead>
+									<tr>			
+										<th>{$listmenu['title']}</th>
+									</tr>
+								</thead>
+								<tr>
+								<td>
+									<div>项目编号：{$listmenu['number']}</div>
+									<div>项目名称：{$listmenu['title']}</div>
+									<div>项目地址：{$listmenu['province']}{$listmenu['city']}{$listmenu['area']}{$listmenu['address']}</div>
+									<div>项目类型：{$listmenu['projecttype']}</div>
+									
+									<neq name="listmenu.activity" value="投入使用">
+									<div style="color:blue">项目状态：{$listmenu['design_status']}</div>
+									</neq>
+									<eq name="listmenu.activity" value="投入使用">
+									<div style="color:white">项目状态：<span style="background-color:green;padding:4px;color:white;border-radius:4px">投入使用</span></div>
+									</eq>
+									<in name="tab" value="6">
+									<div>
+									<eq name="listmenu.daily.worktype" value="">
+									专项节点：尚未开始
+									</eq>
+									<neq name="listmenu.daily.worktype" value="">
+									专项节点：{$listmenu['daily']['worktype']}/{$listmenu['daily']['subworktype']}
+									</neq>
+									</div>
+									<div style="color:blue">当前进度：{$listmenu['daily']['percent']}
+									</div>
+									</in>
+									
+									
+									<in name="tab" value="4">
+									<div>验收文件：
+										<neq name="listmenu.finishphoto1" value="">
+											<volist name="listmenu.finishphoto1" id="finishphoto1">
+											<neq name="finishphoto1" value="">
+											<a href="__URL__/filedown/filename/{$finishphoto1}/filerealname/{$listmenu[finishphotofilename1][$key]}" style="color:green">
+											<img src="__PUBLIC__/Uploads/{$finishphoto1}" style="height:16px">
+											</a> 
+											</neq>
+											</volist>
+										</neq>
+									</div>
+									</in>
+									
+									<div <eq name="tab" value="滞后"> style="color:red" </eq> <eq name="tab" value="延期"> style="color:orange" </eq>>备注：{$listmenu['content1']}</div>
+                                    <div>操作：
+									<a href="__APP__/Xmtj/plmdetail/id/{$listmenu['id']}" class="btn btn-info btn-xs">详情</a>
+									</div>		
+								</td>									
+								</tr>
+								</volist>
+							</tbody>
+                        </table>
+						{$page}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div class="gohome"><a class="animated bounceInUp" href="http://{$hostip}/projecttest/Rbac/App/" title="返回首页"><i class="fa fa-home"></i></a></div>
+	
+	<div id="modal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-lg">
+		<div class="modal-content">
+		   <div class="modal-header">  
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
+                    <span aria-hidden="true">×</span>  
+                </button>  
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>  
+            </div>  
+            <div class="modal-body">  
+                <p>One fine body…</p>  
+            </div>  
+            <div class="modal-footer">  
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                <button type="button" class="btn btn-primary">Save</button>  
+            </div>  
+		</div>
+	  </div>
+	</div>
+	
+	
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+	<script src="js/plugins/layer/laydate/laydate.js"></script>
+    <script src="js/content.js?v=1.0.0"></script>
+    
+</body>
+</html>

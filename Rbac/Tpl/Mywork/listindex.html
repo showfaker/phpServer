@@ -1,0 +1,95 @@
+<include file="Public:pagerForm" />
+<?php
+	//$accessSystemDB = moduleAccess('SystemDB');
+	$search   = array("\r\n", "\n", "\r");
+	$replace = '<br />';
+    $index = 0;
+?>
+<div class="pageHeader">
+    <form rel="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__/index/token/{$token}/" method="post">
+        <div class="searchBar">
+            <ul class="searchContent">
+				<!--
+                <li style="width:150px">
+                    <label style="width:60px">年份筛选：</label>
+                    <select name="year" class="combox" ref="weeklyReport_weekMonday" refUrl="__URL__/weeksByYear/year/{value}">
+                        <for start="date('Y')-2" end="date('Y')+1" name="item">
+                            <option value="{$item}" <?php echo $item == $year ? 'selected' : '' ?>>{$item}年</option>
+                        </for>
+                    </select>
+                </li>
+				
+                <li style="width:250px">
+                    <label style="width:50px">周筛选：</label>
+                    <select name="weekMonday" class="combox" id="weeklyReport_weekMonday" onchange="$(this).parents('form:first').submit()">
+                        <volist id="week" name="weeks">
+                        <option value="{$week['date']|date="Y-m-d",###}" <?php echo date('Y-m-d', $week['date']) == $weekMonday ? 'selected' : '' ?>>第{$week['sn']}周 {$week['date']|date="Y-m-d",###}</option>
+                        </volist>
+                    </select>
+                </li>
+				<div class="buttonActive"><div class="buttonContent"><button type="submit">查询</button></div></div>
+				-->
+				<a href="__URL__/index/token/{$token}/department/{$_REQUEST['department']}/weekMonday/{$lastMonday|date='Y-m-d',###}" style="margin-left:50px" target="navTab" rel="DailyTask" class="button"><span>&lt;&lt; 上个月</span></a>
+				<a href="__URL__/index/token/{$token}/department/{$_REQUEST['department']}/weekMonday/{$nextMonday|date='Y-m-d',###}" target="navTab" rel="DailyTask" class="button" style="margin-left: 17px"><span>下个月 &gt;&gt;</span></a>
+			
+                
+               
+				
+            </ul>
+            
+        </div>
+    </form>
+</div>
+
+<div class="pageContent">
+    <div class="panelBar">
+        <ul class="toolBar">
+			<!--
+            <li><a class="add" href="__URL__/edit/user_id/<?php echo $_SESSION[C('USER_AUTH_KEY')] ?>/task_date/<?php echo date('Y-m-d') ?>" target="navTab" rel="DailyTaskOpt"><span>写工作日志</span></a></li>
+            <li class="line">line</li>
+			-->
+            <li><a class="icon" href="__URL__/indexoa" target="navTab" rel="Workmanage_list" title="日志详细列表"><span>进入详细列表</span></a></li>
+        </ul>
+    </div>
+    <table class="list weeklyReport" width="100%" layoutH="90" style="border-top:1px solid white">
+        <thead>
+        <tr>
+            <th width="20"></th>
+            <th>姓名</th>
+            <volist id="vo" name="data.head">
+                <th width="13%">{$vo}</th>
+            </volist>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach($data['body'] as $key => $userRow){ ?>
+        <tr>
+            <td>{++$index}</td>
+            <td style="font-weight: bold">
+            <?php if ($accessSystemDB) { ?>
+                <a class="unit" href="__URL__/edit/user_id/{$userRow['user_id']}/task_date/<?php echo date('Y-m-d') ?>" target="navTab" rel="DailyTaskOpt">{$key}</a>
+            <?php
+            } else {
+                echo $key;
+            }
+
+            if (!empty($userRow['qq'])) {
+				echo '<a class="btnQQ" href="tencent://message/?uin='.$userRow['qq'].'">QQ</a>';
+			}
+			?>
+            </td>
+            <td><?php echo str_replace($search, $replace, $userRow['Mon']['content']) ?></td>
+            <td><?php echo str_replace($search, $replace, $userRow['Tue']['content']) ?></td>
+            <td><?php echo str_replace($search, $replace, $userRow['Wed']['content']) ?></td>
+            <td><?php echo str_replace($search, $replace, $userRow['Thu']['content']) ?></td>
+            <td><?php echo str_replace($search, $replace, $userRow['Fri']['content']) ?></td>
+            <td><?php echo str_replace($search, $replace, $userRow['Sat']['content']) ?></td>
+            <td><?php echo str_replace($search, $replace, $userRow['Sun']['content']) ?></td>
+        </tr>
+        <?php } ?>
+        </tbody>
+    </table>
+
+</div>
+
+

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <link rel="shortcut icon" href="favicon.ico"> 
+	<link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/core1.css">
+	<link href="css/plugins/toastr/toastr.min.css" rel="stylesheet">
+	<style>
+	input:focus{
+		border:1px solid;
+		border-color: #1AB394;
+	}
+	select:focus{
+		border:1px solid;
+		border-color: #1AB394;
+	}
+	.searchBar label{width:80px;text-align:center}
+	@media (max-width: 768px) {
+		.pageHeader {
+			margin-top:0px;
+		}
+	}
+	.pageFormContent div.unit input[type="file"]
+	{
+		line-height:26px;
+	}
+	</style>
+</head>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+					<neq name="_SESSION[app]" value="1">
+                    <div class="ibox-title" style="border-top:0px;min-height:42px">
+                        <h5>{$moduletitle}</h5>
+					</div>
+					</neq>
+                    <div class="ibox-content" <eq name="_SESSION[app]" value="1">style="padding:0px 2px 0px 2px"</eq>>

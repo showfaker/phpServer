@@ -1,0 +1,69 @@
+<link rel="shortcut icon" href="favicon.ico">
+<link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/style.css?v=4.1.0" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal">×</button>
+<h4 class="modal-title">编辑会议分类</h4>
+</div>
+
+<form id="format1" method="post" action="__URL__/name_edit1" enctype="multipart/form-data" class="form-horizontal"> 
+	<input type="hidden" value='{$id}' name="id">   
+	<div class="modal-body" > 
+		<div class="form-group" style="margin:auto;padding:10px;">
+			<label class="col-sm-3 col-xs-3 control-label">会议分类：</label>
+			<div class="col-sm-8 col-xs-8">
+				<span style="color:orange;">分类请不要使用空格等不常见字符</span>
+				<input type="text" class="form-control" value="{$name}" name="name" id="name">
+				<span style="color:red;display: none;" id='span'>分类不能为空或已经存在</span>
+			</div>
+		</div>
+		<div class="btn1">				
+		</div>
+	</div>	
+	<div class="modal-footer">
+		<button type="button" class="btn btn-sm btn-white pull-right m-t-n-xs" data-dismiss="modal" style="margin-left:10px">关闭</button>
+		
+		<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit" id='submit'><strong>确定</strong>
+		</button>
+		
+	</div>
+</form> 
+    <!-- Chosen -->   
+	<script src="js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+	
+	<script>
+	    $("#name").blur(function(){
+	    	var id=$('input[name="id"]').val();
+	    	var name=$("#name").val();
+			console.log(name);
+			console.log(id);
+	    	var aj = $.ajax({
+                    url:'__URL__/ajax_name_check',
+                    data:{  
+                        name : name,
+                        id:id,
+						type: "1"
+                    },
+                    type:'post',  
+                    cache:false,  
+                    dataType:'json',  
+                    success:function(data) {
+						console.log(data);
+                        if(data==1){
+                        	$("#span").css('display','block');
+                            $('#submit').attr('disabled',true);
+                        }                   
+                        
+                    }  
+            });
+	    });
+	    $('input').focus(function(){
+	    	$("#span").css('display','none');
+            $('#submit').attr('disabled',false);
+	    });
+		    
+	</script>
+		    }

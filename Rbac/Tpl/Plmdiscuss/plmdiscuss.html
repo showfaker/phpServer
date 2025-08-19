@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>{$moduletitle}</title>
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.7" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+</head>
+<style>
+    ::-webkit-scrollbar{
+        width:0px!important;
+    }
+</style>
+<body class="gray-bg" style="background:#ffffff">
+    <div class="row" >
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins" style="margin-bottom:0px;box-shadow: 0px 0px 0px 0px #DFE2E6;">
+                <div class="ibox-title" style="position:fixed;top:0px;width:100%;border-style:solid solid solid ;border-width: 4px 0px 1px;">
+                    <h5>项目协同（{$plminfo.discusscount}）</h5>
+                    <a class="" href="" style="float:right" ><i class="fa fa-refresh"></i></a>
+                </div>
+                <div class="ibox-content" style="border:none;padding-bottom:0px;padding-top:63px;">
+                    <div class="panel blank-panel">
+                        <div class="panel-body" style="padding:0px">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="tab-1">
+                                    <div class="feed-activity-list">
+                                        <volist name="plmdiscusses" id="plmdiscuss">
+                                            <div class="feed-element">
+                                                <a href="javascript:void(0)" class="pull-left">
+                                                    <img alt="image" class="img-circle" src="img/a1.jpg">
+                                                </a>
+                                                <div class="media-body ">
+                                                    <small class="pull-right badge badge-info">{$plmdiscuss["address"]}</small>
+                                                    <strong>{$plmdiscuss.user}</strong> 发布了一条信息<font style="color:blue;font-weight:bold">{$plmdiscuss.title}</font>
+                                                    <br>
+                                                    <small class="text-muted"><?php echo date("Y-m-d H:i:s",$plmdiscuss[create_time]); ?></small>
+                                                    <div>
+                                                        {$plmdiscuss.content}
+                                                        <neq name="plmdiscuss.atuser" value="">
+                                                            <volist name="plmdiscuss.at" id="atlists">
+                                                                <eq name="_SESSION['nickname']" value="$atlists">
+                                                                    <span class="badge badge-danger">@我</span>
+                                                                </eq>
+                                                                <neq name="_SESSION['nickname']" value="$atlists">
+                                                                    <span class="badge badge-info">@{$atlists}</span>
+                                                                </neq>
+                                                            </volist>
+                                                        </neq>
+                                                    </div>
+                                                    <volist name="plmdiscuss.replys" id="reply">
+                                                        <div class="well">
+                                                            {$reply.user}于<?php echo date("Y-m-d H:i:s",$reply[create_time]); ?>回复：{$reply.content}
+                                                            <neq name="reply.atuser" value="">
+                                                                <volist name="reply.at" id="atlist">
+                                                                    <eq name="_SESSION['nickname']" value="$atlist">
+                                                                        <span class="badge badge-danger">@我</span>
+                                                                    </eq>
+                                                                    <neq name="_SESSION['nickname']" value="$atlist">
+                                                                        <span class="badge badge-info">@{$atlist}</span>
+                                                                    </neq>
+                                                                </volist>
+                                                            </neq>
+                                                            <if condition="($_SESSION['nickname'] eq $plmdiscuss['user']) OR ($_SESSION['nickname'] eq $reply['user']) ">
+                                                                <a class="btn btn-danger btn-xs delete btn-outline" title="{$reply.id}" style="float:right">删除</a>
+                                                            </if>
+                                                        </div>
+                                                    </volist>
+                                                    <div class="actions pull-right">
+                                                        <a class="btn btn-xs btn-white support" title="{$plmdiscuss.id}">
+                                                            <i class="fa fa-thumbs-up"></i>
+                                                            <span id="support{$plmdiscuss.id}">{$plmdiscuss.support}</span>赞 
+                                                        </a>
+                                                        <a data-toggle="modal" data-target="#modal" data-backdrop="static" class="btn btn-xs btn-success hidden-xs" href="__URL__/reply/id/{$plmdiscuss.id}">
+                                                            <i class="fa fa-pencil"></i> 回复
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </volist>
+                                    </div>
+                                    <div class="panelBar">
+                                        <div class="pagination" targetType="navTab" totalCount="{$totalCount}" numPerPage="{$numPerPage}" pageNumShown="10" currentPage="{$currentPage}">{$page}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	<div id="modal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+			   <div class="modal-header">  
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">  
+						<span aria-hidden="true">×</span>  
+					</button>  
+					<h4 class="modal-title" id="myModalLabel">正在加载</h4>  
+				</div>  
+				<div class="modal-body">  
+					<p>正在加载…</p>  
+				</div>  
+				<div class="modal-footer">  
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+					<button type="button" class="btn btn-primary">Save</button>  
+				</div>  
+			</div>
+		</div>
+	</div>
+    <!-- 全局js -->
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.7"></script>
+    <!-- 自定义js -->
+    <script src="js/content.js?v=1.0.0"></script>
+	<script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+	<link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <script>
+        $(document).ready(function () {
+            $('#loading-example-btn').click(function () {
+                btn = $(this);
+                simpleLoad(btn, true)
+                simpleLoad(btn, false)
+            });
+        });
+
+        function simpleLoad(btn, state) {
+            if (state) {
+                btn.children().addClass('fa-spin');
+                btn.contents().last().replaceWith(" Loading");
+            } else {
+                setTimeout(function () {
+                    btn.children().removeClass('fa-spin');
+                    btn.contents().last().replaceWith(" Refresh");
+                }, 2000);
+            }
+        }
+		
+        $('.delete').click(function () {
+            id=$(this).attr("title");		
+            swal({
+                title: "您确定要删除吗",
+                text: "删除后将无法恢复操作，请谨慎操作！",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                cancelButtonText: "取消",
+                confirmButtonText: "确定",
+                closeOnConfirm: false
+            }, function () {
+                //获取选中的checkbox
+                //发送请求命令			
+                var aj = $.ajax({
+                    url:'__URL__/foreverdelete',
+                    data:{  
+                        id : id
+                    },
+                    type:'post',  
+                    cache:false,  
+                    dataType:'json',  
+                    success:function(data) {					
+                        swal("删除成功！", "请刷新查看结果。", "success");
+                        location.href=location.href;
+                    }  
+                });
+                
+            });
+        });
+	
+        var currentsupport=0;
+        $('.support').click(function () {
+            currentsupport=$(this).attr("title");		
+            var aj = $.ajax({
+                url:'__URL__/support',
+                data:{  
+                    id : currentsupport
+                },
+                type:'post',  
+                cache:false,  
+                dataType:'json',  
+                success:function(data) {
+                    document.getElementById("support"+currentsupport).innerHTML=data;
+                }  
+            });
+        });
+    </script>
+</body>
+</html>

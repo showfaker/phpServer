@@ -1,0 +1,388 @@
+	<link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <!-- Data Tables -->
+    <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="css/plugins/chosen/chosen.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.css">
+	
+
+
+	<form id="format1" method="post" action="__URL__/insertpiliang" enctype="multipart/form-data" class="form-horizontal">    
+		<div class="modal-body" style="width:90%">
+			<div class="form-group">
+				<div class="col-sm-10">
+					<!--
+					<label class="col-sm-2 control-label">城市：</label>
+					<div class="col-sm-4">
+					    <select name="city" data-placeholder="选择城市" class="chosen-select" style="width:230px;" tabindex="2">
+							<option value="">请选择城市</option>
+							<volist name="cities" id="citylist">
+							<option value="{$citylist.city}" hassubinfo="true" <eq name="check_city" value="$citylist.city"> selected="selected"</eq> >{$citylist.city}</option>
+							</volist>
+						</select>
+					</div>
+					
+					<label class="col-sm-2 control-label">项目：</label>
+					<div class="col-sm-4">
+						<eq name="check_plm" value="">
+					    <select class="form-control" name="plmid" style="width:230px">
+							<option id="opt" value="">请选择项目</option>
+						</select>
+						</eq>
+						<neq name="check_plm" value="">
+					    <select class="form-control" name="plmid" style="width:230px">
+							<option id="opt" value="{$check_plmid}">{$check_plm}</option>
+						</select>
+						</neq>
+					</div>
+					-->
+					<label class="col-sm-2 control-label">项目：</label>
+					<div class="col-sm-4">
+					    <select class="form-control chosen-select" data-placeholder="选择项目" name="plmid[]" id="plmid"  multiple style="width:930px">
+							<volist name="citiesprojects" id="cityvo">
+							<optgroup label="{$cityvo.city}">
+							<volist name="cityvo.projects" id="projectvo">
+							<option id="opt" value="{$projectvo.id}">{$projectvo.title}</option>
+							</volist>
+							</optgroup>
+							</volist>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="">
+				<a onclick="fnClickAddRow();" href="javascript:void(0);" class="btn btn-primary ">添加行</a>
+			</div>
+			<div style="height:300px;overflow-y:auto;overflow-x:hidden;">
+			<table class="table table-striped table-bordered table-hover " id="editable">
+				<thead>
+					<tr>
+						<th width="15%">商品编号</th>
+						<th width="15%">商品名称</th>
+						<th width="6%">商品类别</th>
+						<th width="5%">规格</th>
+						<th width="5%">单位</th>
+						<th width="10%">供应商</th>
+						<th width="5%">价格</th>
+						<th width="7%">近三次价格</th>
+						<th width="5%">历史价格</th>
+						<th width="5%">数量</th>
+						<th width="5%">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					
+					<tr id="table-row-0">
+
+						<td>
+						<input type="hidden" name="mid[]" id="mid_0">
+						<input type="text" placeholder="商品编号" class="form-control" size="10%" name="para1[]" id="para1_0">
+						<a href="" onclick="find(this)" title="0" data-toggle="modal" data-target="#modal" data-backdrop="static"  target="dialog" class="btn btn-info btn-xs">查找</a> 
+						</td>
+						<td>
+						<input type="text" placeholder="商品名称" class="form-control" size="10%" name="para2[]" id="para2_0">
+						<a href="" onclick="find1(this)" title="0" data-toggle="modal" data-target="#modal" data-backdrop="static"  target="dialog" class="btn btn-info btn-xs">查找</a>
+						</td>
+						<td>
+							<select name="para3[]" id="para3_0" class="form-control" style="width:130px;">
+								<option value="">请选择类别</option>
+								<volist name="leibie" id="llist">
+									<option value="{$llist.name}">{$llist.name}</option>
+								</volist>
+							</select>
+						</td>
+						<td><input type="text" placeholder="规格" class="form-control" size="6%" name="para4[]" id="para4_0"></td>
+						<td><input type="text" placeholder="单位" class="form-control" size="5%" name="para5[]" id="para5_0" required="required"></td>
+						<eq name="check_supplier" value="">
+						<td><input type="text" placeholder="供应商" class="form-control" size="10%" name="para6[]" id="para6_0" ></td>
+						</eq>
+
+						<neq name="check_supplier" value="">
+						<td><input type="text" placeholder="供应商" class="form-control" size="10%" name="para6[]" id="para6_0" value="{$check_supplier}" readonly="true"></td>
+						</neq>
+
+						<td><input type="text" placeholder="价格" onkeyup="calcprice()" class="form-control price" size="5%" name="para7[]" value="0" id="para7_0"></td>
+						<td><input type="text" placeholder="近三次价格" readonly="true" class="form-control threeprice" size="6%" name="para8[]" value="0" id="para8_0"></td>
+						<td><input type="text" placeholder="历史价格" readonly="true" class="form-control lowprice" size="5%" name="para9[]" value="0" id="para9_0"></td>
+						<td><input type="text" placeholder="数量" oninput="calcprice()" class="form-control count" size="5%" name="para10[]" value="0" id="para10_0"></td>                        
+						<td>						
+						<a class="btn btn-danger btn-xs delete" href="javascript:void(0);">删除</a>
+						</td>				
+					</tr>
+				</tbody>
+			</table>
+			</div>
+		</div>	
+		<input type="hidden" name="orderid" value="{$check_orderid}">
+		<input type="hidden" name="tj_id" value="{$check_tj_id}">
+		<div class="modal-footer">
+		
+			<span style="float:left">商品总价：</span><input type="text" readonly placeholder="总价自动计算" class="form-control" style="width:150px;float:left;position:relative;top:-7px" name="price" id="price">
+			
+			<!--<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="button" id="sub"><strong>提交采购单</strong></button>-->
+			<button type="button" onclick="changeout(this)" class="btn btn-primary" id="myconfirm">确认订单</button>
+			
+			<a id="btnclick" href="" data-toggle="modal" data-target="#modal" data-backdrop="static"  target="dialog"  class="btn btn-primary hidden"></a>
+			
+			
+		</div>
+	</form>
+    <script src="js/jquery.min.js?v=2.1.4"></script>	
+    <!-- Chosen -->
+    <script src="js/plugins/chosen/chosen.jquery.js"></script>
+    <script src="js/demo/form-advanced-demo.js"></script>
+	<!-- jQuery Validation plugin javascript-->
+    <script src="js/plugins/validate/jquery.validate.min.js"></script>
+    <script src="js/plugins/validate/messages_zh.min.js"></script>
+
+    <script src="js/demo/form-validate-demo.js"></script>
+	<script>
+		var table=$('#editable').dataTable(
+		{
+		   iDisplayLength : 10000
+		}
+		);
+    </script>
+    <script>
+		var currentrow=1;
+        function fnClickAddRow() {
+            $('#editable').dataTable().fnAddData([
+			    '<input type="hidden" name="mid[]" id="mid_'+currentrow+'"><input type="text" placeholder="商品编号" style="margin-right:4px" class="form-control" size="10%" name="para1[]" id="para1_'+currentrow+'"><a href="" onclick="find(this)" title="'+currentrow+'" data-toggle="modal" data-target="#modal" data-backdrop="static"  target="dialog" class="btn btn-info btn-xs">查找</a>',
+				'<input type="text" placeholder="商品名称" class="form-control" size="10%" name="para2[]" id="para2_'+currentrow+'"><a href="" onclick="find1(this)" title="'+currentrow+'" data-toggle="modal" data-target="#modal" data-backdrop="static"  target="dialog" class="btn btn-info btn-xs">查找</a>',
+                '<select name="para3[]" id="para3_'+currentrow+'" data-placeholder="请选择类别" class="form-control" style="width:130px;"><option value="">请选择类别</option><volist name="leibie" id="llist"><option value="{$llist.name}">{$llist.name}</option></volist></select>',
+                '<input type="text" placeholder="规格" class="form-control" size="6%" name="para4[]" id="para4_'+currentrow+'">',
+                '<input type="text" placeholder="单位" class="form-control" size="5%" name="para5[]" id="para5_'+currentrow+'">',
+                '<eq name="check_supplier" value=""><td><input type="text" placeholder="供应商" class="form-control" size="10%" name="para6[]" id="para6_'+currentrow+'"></td></eq><neq name="check_supplier" value=""><td><input type="text" placeholder="供应商" class="form-control" size="10%" name="para6[]" id="para6_'+currentrow+'" value="{$check_supplier}" readonly="true"></td></neq>',
+                '<input type="text" placeholder="价格" onkeyup="calcprice()" class="form-control price" size="5%" name="para7[]" value="0" id="para7_'+currentrow+'">',
+				'<input type="text" placeholder="近三次价格" readonly="true" class="form-control threeprice" size="7%" name="para8[]" value="0" id="para8_'+currentrow+'">',
+				'<input type="text" placeholder="历史价格" readonly="true" class="form-control lowprice" size="5%" name="para9[]" value="0" id="para9_'+currentrow+'">',
+				'<input type="text" placeholder="数量" oninput="calcprice()" class="form-control count" size="5%" name="para10[]" value="0" id="para10_'+currentrow+'">',
+				'<a class="btn btn-danger btn-xs delete" href="javascript:void(0);">删除</a>'
+				]);
+			currentrow++;
+			$('.delete').on('click', function(e) {
+				var table = $('#editable').DataTable();
+				table.row($(this).parents('tr')).remove().draw();
+			});
+        }
+		function calcprice()
+		{
+			var sum=0;
+			$(".count").each(function(){
+				var t=$(this).val();
+				var n=$(this).parent().parent().find(".price").val();
+				var a=t*n;
+				sum+=Number(a);
+			})
+			sum=sum.toFixed(2);
+			document.getElementById("price").value=sum;
+		}
+		
+    </script>
+
+	<!--<script>
+	    $("#sub").click(function(){
+           $("#format1").submit();
+		})
+	</script>-->
+    
+	<script>
+	function changeout(test){
+		// $('#myconfirm').attr('disabled',true);
+		var city=$("select[name='city']").val();
+		//var plmid=$("select[name='plmid']").val();
+		var plmid=$("#plmid").val();
+		var orderid=$("input[name='orderid']").val();
+		var tj_id=$("input[name='tj_id']").val();
+		var mid=new Array();
+		var brand_null=0;
+		var unit_null =0;
+		var number_null=0;
+		$("input[name='mid[]']").each(function(i,value){		
+			mid[i]=$(this).val();
+		  });
+		var number=new Array();
+		$("input[name='para1[]']").each(function(i,value){		
+			number[i]=$(this).val();
+		  });
+		var name=new Array();
+		$("input[name='para2[]']").each(function(i,value){
+			name[i]=$(this).val();
+		  });
+		var brand=new Array();
+		$("select[name='para3[]']").each(function(i,value){
+			brand[i]=$(this).val();
+		  });
+        var standard=new Array();
+		$("input[name='para4[]']").each(function(i,value){
+			standard[i]=$(this).val();
+		  });
+        var unit=new Array();
+		$("input[name='para5[]']").each(function(i,value){
+			unit[i]=$(this).val();
+		  });
+        var supplier=new Array(); 
+		$("input[name='para6[]']").each(function(i,value){
+			supplier[i]=$(this).val();
+		  });
+        var price=new Array();
+		$("input[name='para7[]']").each(function(i,value){
+			price[i]=$(this).val();
+		  });
+		var threeprice=new Array();
+		$("input[name='para8[]']").each(function(i,value){
+			threeprice[i]=$(this).val();
+		  });
+        var lowprice=new Array();
+		$("input[name='para9[]']").each(function(i,value){
+			lowprice[i]=$(this).val();
+		  });		  
+        var count=new Array();
+		$("input[name='para10[]']").each(function(i,value){
+			count[i]=$(this).val();
+		  });		
+		var found=$("input[name='price']").val();
+		console.log(brand);
+		console.log(unit);
+		// var checkBrand=new Array();
+		// $('.check').each(function(i){
+		// 	checkBrand[]=$(this).val();
+		// });
+		for(var i=0;i<brand.length;i++){
+			// alert(brand[i]);
+			if(brand[i]==''){
+				alert('请选择商品类别.');
+				brand_null=1;
+				return false;
+			}
+			if(brand[i]==null){
+				alert('请选择商品类别.');
+				brand_null=1;
+				return false;
+			}
+		}
+
+
+		for(var i=0;i<unit.length;i++){
+			// alert(brand[i]);
+			if(unit[i]==''){
+				alert('请填写单位.');
+				unit_null=1;
+				return false;
+			}
+			if(unit[i]==null){
+				alert('请填写单位.');
+				unit_null=1;
+				return false;
+			}
+		}
+
+		for(var i=0;i<number.length;i++){
+			// alert(brand[i]);
+			if(number[i]==''){
+				alert('请填写商品编号.');
+				number_null=1;
+				return false;
+			}
+			if(number[i]==null){
+				alert('请填写商品编号.');
+				number_null=1;
+				return false;
+			}
+		}
+
+		if(brand_null==0 && unit_null==0){
+			var aj = $.ajax({
+				url:'__URL__/ajaxinsertpiliang',
+				data:{  
+					mid:mid,city:city,plmid:plmid,number:number,name:name,brand:brand,standard:standard,unit:unit,supplier:supplier,price:price,threeprice:threeprice,lowprice:lowprice,count:count,found:found,orderid:orderid,tj_id:tj_id
+				},
+				type:'post',  
+				cache:false,  
+				dataType:'json',  
+				success:function(data) {
+					console.log(data);
+					if(data==0){
+						$('#myconfirm').attr('disabled',false);
+						alert('没有找到对应的供应商,请先新建供应商再下单.');
+					}else{
+						if(data!=null){
+							$("#btnclick").attr("href","__URL__/confirmpiliang/ids/"+data+"/tj_id/"+tj_id);
+							$("#btnclick").click();
+						}
+					}
+				}  
+			}); 
+		}else{
+			$('#myconfirm').attr('disabled',false);
+		}
+			
+	}
+	
+	</script>
+   
+	<script>
+	    $("select[name='city']").change(function(){
+		$("#opt").nextAll().remove();
+		var city=$(this).val();
+		var aj = $.ajax({
+				url:'__URL__/ajaxcity',
+				data:{  
+					city : city
+				},
+				type:'post',  
+				cache:false,  
+				dataType:'json',  
+				success:function(data) {
+					if(data!=null){
+						var code="";
+						for(var i=0;i<data.length;i++){
+						code+="<option value='"+data[i]['id']+"'>"+data[i]['title']+"</option>";
+						}
+						$("select[name='plmid']").append(code);
+					}					
+					
+				}  
+			});
+		
+		})
+	
+	</script>
+
+    <script>
+        function find(e){
+        var city=$("select[name='city']").val();
+		var plmid=$("#plmid").val();
+		console.log(plmid);
+        // alert(supplier);
+        var number=$(e).prev().val();
+        if($('input[name="tj_id"]').val()>0){
+        	var supplier=$("input[id='para6_0']").val();
+        	$(e).attr("href","__URL__/choice/key/"+e.title+"/city/"+city+"/supplier/"+supplier+"/number/"+number+"/plmid/"+plmid);
+        }else{
+        	$(e).attr("href","__URL__/choice/key/"+e.title+"/city/"+city+"/number/"+number+"/plmid/"+plmid);
+        }		
+		 
+		}
+    	
+	</script>
+	<script>
+        function find1(e){
+        var city=$("select[name='city']").val();
+		var plmid=$("#plmid").val();
+		console.log(plmid);
+        // var supplier=$("input[id='para6_0']").val();
+        var name=$(e).prev().val();	
+        // alert(name);	
+		 if($('input[name="tj_id"]').val()>0){
+        	var supplier=$("input[id='para6_0']").val();
+        	$(e).attr("href","__URL__/choice/key/"+e.title+"/city/"+city+"/supplier/"+supplier+"/name/"+name+"/plmid/"+plmid);
+        }else{
+        	$(e).attr("href","__URL__/choice/key/"+e.title+"/city/"+city+"/name/"+name+"/plmid/"+plmid);
+        }	 
+		}
+    	
+	</script>

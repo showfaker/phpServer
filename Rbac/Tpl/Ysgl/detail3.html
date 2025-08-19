@@ -1,0 +1,60 @@
+
+<link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/style.css?v=4.1.0" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+<link href="css/plugins/steps/jquery.steps.css" rel="stylesheet">
+<link rel="stylesheet" href="__PUBLIC__/dwz/themes/css/core1.css">
+
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+	</button>
+	<h4 class="modal-title">节点设置</h4>
+</div>
+<form method="post" action="__URL__/insert2/callbackType/closeCurrent/navTabId/Second" ENCTYPE="multipart/form-data" onsubmit="return iframeCallback(this, dialogAjaxDone)">
+<div class="modal-body" id="file-pretty" style="padding:20px"> 
+	<input type="hidden" value="{$orgdata.id}" name="id">
+	<div class="form-group" style="width:100%;line-height:20px;text-align:left">
+		<label>项目名称:{$orgdata['title']}</label>
+	</div>
+	<table class="drafttable" style="position:relative;top:8px;margin:0 auto;width:100%;margin-bottom:28px">
+		<volist name="orgdata.worktype" id="worktype">
+		<tr>
+			<eq name="worktype.block" value="1">
+			<td class="normal" rowspan="{$worktype.rowspan}" style="font-weight:bold;height:45px">{$worktype.pworktype}</td>
+			</eq>
+			<td class="normal" colspan="3">
+			<neq name="worktype.attribute">（{$worktype.attribute}）</neq>{$worktype.title}
+			</td>
+		</tr>
+		</volist>
+	</table>	
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+</div>
+
+
+
+</form>
+
+<!-- Steps -->
+<script src="js/plugins/staps/jquery.steps.min.js"></script>
+
+<!-- Jquery Validate -->
+<script src="js/plugins/validate/jquery.validate.min.js"></script>
+<script src="js/plugins/validate/messages_zh.min.js"></script>
+
+
+<script>
+$(document).ready(function () {
+	$("#wizard").steps();
+	$('.i-checks').iCheck({
+		checkboxClass: 'icheckbox_square-green',
+		radioClass: 'iradio_square-green',
+	});
+});
+</script>

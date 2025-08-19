@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="__PUBLIC__/dwz/themes/css/core1.css">
+</head>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>{$moduletitle}</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div style="margin-bottom:10px;">
+							<form action="__URL__/index/token/{$token}/" method="post">
+								<input type="hidden" name="pageNum" value="1" />
+								<input type="hidden" name="numPerPage" value="${model.numPerPage}" />
+								<input type="hidden" name="orderField" value="${param.orderField}" />
+								<input type="hidden" name="orderDirection" value="${param.orderDirection}" />
+							     <div style="width:100%;" class="input-group">
+									<div class="input-group" style="width:300px;float:left">
+									<font style="margin-left:0%;float:left;position:relative;top:9px">项目名称：</font>
+									<input type="" name="address" id="address-search" value="{$address}" class="form-control" style="width:200px;display:inline;float:left;margin-right:10px">
+									<div class="input-group-btn">
+										<ul class="dropdown-menu dropdown-menu-right" role="menu">
+										</ul>
+									</div>
+									</div>
+									<button class="btn btn-primary btn-sm" style="float:left;margin-right:10px" type="submit">查询</button>
+							    </div>
+							</form>
+                        </div>
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+								<tr>
+									<th width="6%" rowspan="2">项目名称</th>
+									<th width="4%" rowspan="2">项目状态</th>
+									<th width="4%" rowspan="2">进退场时间</th>
+									<th width="4%" rowspan="2">热再生面积(万㎡)</th>
+									<th width="4%" rowspan="2">项目经理</th>
+									<th width="4%" rowspan="2">项目实际天数</th>
+									<th width="4%" rowspan="2">热再生施工天数</th>
+									
+									<th width="4%" colspan="10" style="text-align:center">热再生待工天数</th>
+									
+									<th width="4%" rowspan="2">施工饱满度（有效施工天数占实际天数百分比）</th>
+									<th width="4%" rowspan="2">实际日产出</th>
+									<th width="4%" rowspan="2">有效日产出</th>
+								</tr>
+								<tr>
+									
+									<th width="4%">天气原因</th>
+									<th width="4%">自产机械故障</th>
+									<th width="4%">标准设备原因</th>
+									<th width="4%">供料原因</th>
+									<th width="4%">人员原因</th>
+									<th width="4%">业务等待</th>
+									<th width="4%">临时中断</th>
+									<th width="4%">返工</th>
+									<th width="4%">其他施工</th>
+									<th width="4%">小计</th>
+									
+								</tr>
+							</thead>
+							<tbody>
+								<volist name="list" id="listmenu">
+								<tr >
+									<td>{$listmenu['title']}</td>
+									<td style="color:blue">
+									{$listmenu['design_status']}
+									</td>
+									<td>{$listmenu['mindate']} ~ {$listmenu['maxdate']}</td>
+									<td>{$listmenu['outputhot']}</td>
+									<td>{$listmenu['projectmanager']}</td>
+									<td>{$listmenu['outputday']}</td>
+									<td>{$listmenu['outputhotday']}</td>
+									<td>{$listmenu['天气原因']}</td>
+									<td>{$listmenu['自产机械故障']}</td>
+									<td>{$listmenu['标准设备原因']}</td>
+									<td>{$listmenu['供料原因']}</td>
+									<td>{$listmenu['人员原因']}</td>
+									<td>{$listmenu['业务等待']}</td>
+									<td>{$listmenu['临时中断']}</td>
+									<td>{$listmenu['返工']}</td>
+									<td>{$listmenu['其他施工']}</td>
+									<td>{$listmenu['小计']}</td>
+									<td>{$listmenu['效率']}</td>
+									<td>{$listmenu['outputhot']}/{$listmenu['outputday']}</td>
+									<td>{$listmenu['outputhot']}/{$listmenu['outputhotday']}</td>
+								</tr>
+								</volist>
+							</tbody>
+                        </table>
+						<div class="panelBar"><div class="pagination" targetType="navTab" totalCount="{$totalCount}" numPerPage="{$numPerPage}" pageNumShown="10" currentPage="{$currentPage}">{$page}</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	
+	<div id="modal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-lg">
+		<div class="modal-content">
+		   <div class="modal-header">  
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
+                    <span aria-hidden="true">×</span>  
+                </button>  
+                <h4 class="modal-title" id="myModalLabel">正在加载</h4>  
+            </div>  
+            <div class="modal-body">  
+                <p>正在加载…</p>  
+            </div>  
+            <div class="modal-footer">  
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                <button type="button" class="btn btn-primary">Save</button>  
+            </div>  
+		</div>
+	  </div>
+	</div>
+	
+	
+	<link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+	<script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="js/plugins/jeditable/jquery.jeditable.js"></script>
+    <script src="js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="js/plugins/dataTables/dataTables.bootstrap.js"></script>
+    <script src="js/content.js?v=1.0.0"></script>
+	<script src="js/plugins/layer/laydate/laydate.js"></script>
+	<script src="js/plugins/iCheck/icheck.min.js"></script>
+	<script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+	<script>
+        $(document).ready(function () {
+            //$('.dataTables-example').dataTable();
+            //var oTable = $('#editable').dataTable();
+			$("#modal").on("hidden.bs.modal", function() {
+				$(this).removeData("bs.modal");  
+			});
+        });
+    </script>
+	<script>	
+	  $('.delete').click(function () {	
+        id=$(this).attr("title");		
+		swal({
+			title: "您确定要删除吗",
+			text: "删除后将无法恢复操作，请谨慎操作！",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			confirmButtonText: "确定",
+			closeOnConfirm: false
+		}, function () {
+			//获取选中的checkbox
+			//发送请求命令			
+			var aj = $.ajax({
+				url:'__URL__/foreverdelete',
+				data:{  
+					id : id
+				},
+				type:'post',  
+				cache:false,  
+				dataType:'json',  
+				success:function(data) {					
+					swal("删除成功！", "请刷新查看结果。", "success");
+					location.href=location.href;
+				}  
+			});
+			
+		});
+	});
+	</script>
+    <table style="display:none">
+		<tbody>
+		<volist name="allprojects" id="project" key="i">
+			<tr target="sid_obj">
+				<td class="addressvalue" id="{$project.id}">{$project.value}</td>
+			</tr>
+		</volist>
+		</tbody>
+	</table>
+	<script src="js/plugins/suggest/bootstrap-suggest.min.js"></script>
+	<script>
+		var dataarray=[];
+		$(".addressvalue").each(function(i){
+			dataarray[i]={
+				id:this.id,
+				word:$(this).html()
+			};
+		})
+		//data 数据中获取
+		var testdataBsSuggest = $("#address-search").bsSuggest({
+			indexId: 0, //每组数据的第几个数据，作为input输入框的 data-id，设为 -1 且 idField 为空则不设置此值
+			indexKey: 1, //data.value 的第几个数据，作为input输入框的内容
+			data: {
+				'value': dataarray
+			}
+		});
+		
+		$("input#address-search").on("onSetSelectValue", function (event, result) {
+			//console.log(result.id);
+		});
+	</script>
+    
+</body>
+</html>

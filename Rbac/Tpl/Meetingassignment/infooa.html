@@ -1,0 +1,91 @@
+<div class="modal-header" style="text-align: left;">
+	<button type="button" class="close" data-dismiss="modal">×</button>
+	<h4 class="modal-title" >查看会议计划</h4>
+</div>
+<form method="post"  class="form-horizontal">
+	<div class="modal-body" >
+		<div class="form-group">
+			<label class="col-sm-3 col-xs-3 control-label">所属项目：</label>
+			<div class="col-sm-8 col-xs-8">
+				<input readonly="true" type="text" class="form-control" value="{$vo.plm}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 col-xs-3 control-label">专项节点：</label>
+			<div class="col-sm-8 col-xs-8">
+				<input readonly="true" type="text" class="form-control" value="{$vo.group}">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-sm-3 col-xs-3 control-label">会议分类：</label>
+			<div class="col-sm-8 col-xs-8">
+				<input readonly="true" type="text" class="form-control" value="{$vo.type1}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 col-xs-3 control-label">会议属性：</label>
+			<div class="col-sm-8 col-xs-8">
+				<input readonly="true" type="text" class="form-control" value="{$vo.type2}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 col-xs-3 control-label">会议级别：</label>
+			<div class="col-sm-8 col-xs-8">
+				<input readonly="true" type="text" class="form-control" value="{$vo.type3}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 col-xs-3 control-label">会议名称：</label>
+			<div class="col-sm-8 col-xs-8">
+				<input readonly="true" type="text" class="form-control" value="{$vo.title}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 col-xs-3 control-label">会议时间：</label>
+			<div class="col-sm-8 col-xs-8">
+				<input readonly="true" type="text" class="form-control" value="{$vo.timebegin}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 col-xs-3 control-label">会议目标：</label>
+			<div class="col-sm-8 col-xs-8">
+				<input readonly="true" type="text" class="form-control" value="{$vo.aim}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 col-xs-3 control-label">记录人：</label>
+			<div class="col-sm-8 col-xs-8">
+				<input readonly="true" type="text" class="form-control" value="{$vo.recorder}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 col-xs-3 control-label">参会人：</label>
+			<div class="col-sm-8 col-xs-8">
+				<input readonly="true" type="text" class="form-control" value="{$vo.attendee}">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 col-xs-3 control-label">议程：</label>
+			<div class="col-sm-8 col-xs-8">
+				<textarea class="form-control" name="agenda" id="agenda" rows="12" cols="60" tools="simple" upLinkUrl="{editorRoot}upload.php" upLinkExt="zip,rar,doc,docx" upImgUrl="{editorRoot}upload.php"  upImgExt="jpg,jpeg,gif,png">{$vo.agenda}</textarea>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 col-xs-3 control-label">上会资料：</label>
+			<div class="col-sm-8 col-xs-8">
+				<textarea class="form-control" name="materials" id="materials" rows="12" cols="60" tools="simple" upLinkUrl="{editorRoot}upload.php" upLinkExt="zip,rar,doc,docx" upImgUrl="{editorRoot}upload.php"  upImgExt="jpg,jpeg,gif,png">{$vo.materials}</textarea>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 col-xs-3 control-label">会议内容：</label>
+			<div class="col-sm-8 col-xs-8">
+				<textarea class="form-control" name="content" rows="12" cols="60" tools="simple" upLinkUrl="{editorRoot}upload.php" upLinkExt="zip,rar,doc,docx" upImgUrl="{editorRoot}upload.php"  upImgExt="jpg,jpeg,gif,png">{$vo.content}</textarea>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal-footer">
+		<button type="button" class="btn btn-sm btn-white pull-right m-t-n-xs" data-dismiss="modal" style="margin-left:10px">关闭</button>
+	</div>
+</form>

@@ -1,0 +1,45 @@
+
+<script language="JavaScript">
+<!--
+function checkName(){
+	ThinkAjax.send('__URL__/checkAccount/','ajax=1&account='+$F('account'));
+}
+//-->
+</script>
+
+
+<div class="pageContent">
+	
+	<form method="post" action="__URL__/setsubmit/navTabId/__MODULE__/callbackType/closeCurrent" class="pageForm required-validate" onsubmit="return validateCallback(this)">
+		<div class="pageFormContent" layoutH="58">
+			<input type="hidden" name="id" value="{$vo.id}">
+			<div class="unit">
+				<label style="width:80px">模块名称：</label>
+				<input type="text" class="required" required style="width:300px" name="title" value="{$vo.title}" readonly />
+			</div>
+			<!-- <div class="unit">
+				<label style="width:80px">所属类型：</label>
+				<select name="pid">
+				<volist name="type" id="type">
+				<option value="{$type.id}" <eq name="vo.pid" value="$type.id">selected</eq>>{$type.title}</option>
+				</volist>
+                </select>
+			</div> -->
+			<div class="unit">
+				<label style="width:80px">排序：</label>
+                <input type="text" class="required" required style="width:300px" name="sort" value="{$vo.sort}"/>
+			</div>
+			
+		</div>
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">发布</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close1" data-dismiss="modal">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+</div>
+
+
+

@@ -1,0 +1,175 @@
+<link rel="shortcut icon" href="favicon.ico">
+<link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/style.css?v=4.1.0" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+
+<link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="css/plugins/chosen/chosen.css" rel="stylesheet">
+
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal">×</button>
+<h4 class="modal-title">材料登记</h4>
+</div>
+
+<form id="format1" method="post" action="__URL__/draftsubmit" enctype="multipart/form-data" class="form-horizontal">    
+	<div class="modal-body">
+		<div class="form-group">
+			<input type="hidden" id="plmid" value="{$id}" name="plmid">
+			<div class="">
+				<a onclick="fnClickAddRow();" href="javascript:void(0);" class="btn btn-primary ">添加行</a>
+				
+			</div>
+			
+			<table class="table table-striped table-bordered table-hover " id="editable">
+				<thead>
+					<tr>
+						<th width="17%">材料类别</th>
+						<th width="10%">材料编号</th>
+						<th width="10%">材料名称</th>
+						<th width="10%">规格型号</th>
+						<th width="6%">单位</th>
+						<th width="6%">数量</th>
+						<th width="5%">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<volist name="materials" id="material">
+					<tr id="table-row-0">
+						<td>
+						<select class="form-control" name="para1[]" id="para1_{$key}"style="width:80%;">
+							<option value="">选择材料类别</option>
+							<volist name="brand" id="brandlist">
+							<option value="{$brandlist.name}" <eq name="material.brand" value="$brandlist.name">selected</eq>>{$brandlist.name}</option>
+							</volist>
+						</select>
+						</td>
+						<td><input type="text" placeholder="材料编号" class="form-control" size="3%" name="para2[]" id="para2_{$key}" value="{$material.number}"></td>
+						<td><input type="text" placeholder="材料名称" class="form-control" size="3%" name="para3[]" id="para3_{$key}" value="{$material.name}"></td>
+						<td><input type="text" placeholder="规格型号" class="form-control" size="3%" name="para4[]" id="para4_{$key}" value="{$material.standard}"></td>
+						<td><input type="text" placeholder="单位" class="form-control" size="3%" name="para5[]" id="para5_{$key}" value="{$material.unit}"></td>
+						<td><input type="text" placeholder="数量" class="form-control" size="3%" name="para6[]" id="para6_{$key}" value="{$material.count}"></td>
+						<td> 
+						<a class="btn btn-danger btn-xs delete" href="javascript:void(0);">删除</a>
+						</td>				
+					</tr>
+					</volist>
+				</tbody>
+			</table>
+		</div>
+		<div class="btn1">
+								
+		</div>
+	</div>	
+	<div class="modal-footer">
+		<button type="button" class="btn btn-sm btn-white pull-right m-t-n-xs" data-dismiss="modal" style="margin-left:10px">关闭</button>
+		
+		<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="button" id="sub"><strong>确定</strong>
+		</button>
+		
+	</div>
+</form> 
+<form method="post" id="importModel" action="__URL__/getexcel" enctype="multipart/form-data" style="position:relative;top:-60px;width:400px">
+&nbsp;&nbsp;<input name="file" id="file" type="file" class="excelfile"/>
+<a class="btn btn-sm btn-warning pull-right m-t-n-xs" href="__PUBLIC__/material_yusuan.xls" target="_blank">下载模板</a>
+</form>
+
+				
+	<script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+    <!-- Chosen -->
+    <script src="js/plugins/chosen/chosen.jquery.js"></script>
+    <script src="js/demo/form-advanced-demo.js"></script>
+	
+	<script src="js/plugins/validate/jquery.validate.min.js"></script>
+    <script src="js/plugins/validate/messages_zh.min.js"></script>
+    <script src="js/demo/form-validate-demo.js"></script>
+	
+	
+	<script src="js/plugins/jeditable/jquery.jeditable.js"></script>
+    <script src="js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="js/plugins/dataTables/dataTables.bootstrap.js"></script>
+	
+	
+	
+	<script>
+		var table=$('#editable').dataTable();
+    </script>
+	<script>
+		$('.excelfile').on('change',function(e){
+			var formData = new FormData(document.getElementById("importModel"));
+			$.ajax({
+				type : 'post',
+				url : '__URL__/getexcel',
+				dataType : 'json',
+				data : formData,
+				contentType: false, 
+				processData: false, 
+				success : function(data){
+					if(data.status == '1'){
+						var str=data.message;
+						var obj = JSON.parse(str);
+						console.log(obj);
+						var objlength=0;
+						var i=3;
+						var j=3;
+						for(var js2 in obj){
+						   objlength++;
+						}
+						for(i = 1;i<=objlength;i++){
+							currentindex=i;
+							var trstr='<td><input type="text" placeholder="材料类别" class="form-control" size="3%" name="para1[]" id="para1_0" value="'+obj[i]["1"]+'"></td>\
+							<td><input type="text" placeholder="材料编号" class="form-control" size="3%" name="para2[]" id="para2_0" value="'+obj[i]["2"]+'"></td>\
+							<td><input type="text" placeholder="材料名称" class="form-control" size="3%" name="para3[]" id="para3_0" value="'+obj[i]["3"]+'"></td>\
+							<td><input type="text" placeholder="规格型号" class="form-control" size="3%" name="para4[]" id="para4_0" value="'+obj[i]["4"]+'"></td>\
+							<td><input type="text" placeholder="单位" class="form-control" size="3%" name="para5[]" id="para5_0" value="'+obj[i]["5"]+'"></td>\
+							<td><input type="text" placeholder="数量" class="form-control" size="3%" name="para6[]" id="para6_0" value="'+obj[i]["6"]+'"></td>\
+							<td><a class="btn btn-danger btn-xs delete" href="javascript:void(0);">删除</a></td>';
+							var row = document.getElementById("editable").insertRow(currentindex);
+							row.innerHTML=trstr;
+						}
+						currentindex=objlength;
+						$('.delete').on('click', function(e) {
+							var table = $('#editable').DataTable();
+							table.row($(this).parents('tr')).remove().draw();
+						});
+					} else {
+						alert(data.message);
+					}
+				}
+			});
+		})
+		
+	</script>
+	<script>
+		var currentrow="<?php echo $materialcount;?>";
+        function fnClickAddRow() {
+            $('#editable').dataTable().fnAddData([
+				'<select class="form-control" name="para1[]" id="para1_'+currentrow+'" style="width:80%;"><option value="">选择材料类别</option><volist name="brand" id="brandlist"><option value="{$brandlist.id}">{$brandlist.name}</option></volist></select>',
+				'<input type="text" placeholder="材料编号" class="form-control" size="5%" name="para2[]" id="para2_'+currentrow+'">',
+                '<input type="text" placeholder="材料名称" class="form-control" size="5%" name="para3[]" id="para3_'+currentrow+'">',
+                '<input type="text" placeholder="规格型号" class="form-control" size="5%" name="para4[]" id="para4_'+currentrow+'">',
+                '<input type="text" placeholder="单位" class="form-control" size="3%" name="para5[]" id="para5_'+currentrow+'">',
+				'<input type="text" placeholder="数量" class="form-control" size="3%" name="para6[]" id="para6_'+currentrow+'">',
+				'<a class="btn btn-danger btn-xs delete" href="javascript:void(0);">删除</a>'
+				]);
+			currentrow++;
+			$('.delete').on('click', function(e) {
+				var table = $('#editable').DataTable();
+				table.row($(this).parents('tr')).remove().draw();
+			});
+        }
+    </script>
+	
+	<script>
+	    $("#sub").click(function(){
+		    $("#format1").submit();
+		})
+		$('.delete').on('click', function(e) {
+			var table = $('#editable').DataTable();
+			table.row($(this).parents('tr')).remove().draw();
+		});
+	</script>
+	

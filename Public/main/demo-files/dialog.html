@@ -1,0 +1,67 @@
+<script type="text/javascript" charset="utf-8" src="js/jquery.uniform.min.js" ></script>
+<script type="text/javascript">
+	$(function(){
+		$("input, textarea, select, button").uniform();
+	});
+</script>
+<div id="heading-title">
+	<h2>Insert Page</h2>
+</div>
+<form action="" method="post" id="insert-form">
+   
+    <div class="form-left">
+        <label for="name">Name: <span class="required">*</span></label>
+    </div>
+    <div class="form-right">
+        <input type="text" name="name" class="txt" id="name" />
+        <span class="inline-help">Determines page url</span>
+   	</div>
+    <div class="form-left">
+        <label for="title">Title: <span class="required">*</span></label>
+    </div>
+    <div class="form-right">
+        <input type="text" name="title" class="txt" id="title" />
+    </div>
+    <div class="form-left">
+        <label for="message">Description: <span class="required">*</span></label>
+    </div>
+    <div class="form-right">
+        <textarea name="message" class="txt" cols="100" rows="200" id="message"></textarea>
+      	<span class="inline-help">Needed for SEO purposes</span>
+    </div>
+    <div class="form-left">
+        <label for="preview">Preview: <span class="required">*</span></label>
+    </div>
+    <div class="form-right">
+        <input type="file" name="preview" class="txt" id="preview" />
+    </div>
+   	<div class="form-left">
+    	<label for="subject">Access Level: <span class="required">*</span></label>
+    </div>
+    <div class="form-right">
+    	<input type="checkbox" name="mod" /> Moderators
+    	<input type="checkbox" name="reg" /> Members
+        <input type="checkbox" name="vis" /> Visitors
+    </div>
+    <div class="form-left">
+    	<label for="theme">Theme: <span class="required">*</span></label>
+    </div>
+    <div class="form-right">
+        <select name="theme" id="theme">
+       		<option value="">Select Theme</option>
+            <option value="1">Theme 1</option>
+            <option value=2"">Theme 2</option>
+        </select>
+    </div>
+    <div class="form-left">
+    	<label for="theme">Publish: <span class="required">*</span></label>
+   	</div>
+    <div class="form-right">
+        <input type="radio" />Yes
+        <input type="radio" /> No
+    </div>
+   
+    <div class="clear" style="text-align:right; width:372px">
+    	<input type="submit" value="Save" style="float:right" />
+   	</div>
+ </form>

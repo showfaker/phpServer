@@ -1,0 +1,203 @@
+	<link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <!-- Data Tables -->
+    <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+
+	<link rel="stylesheet" href="css/main.css">
+	
+	<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal">×</button>
+	<h4 class="modal-title">付款申请单</h4>
+	</div>
+
+	<form id="format1" method="post" action="__URL__/remark" enctype="multipart/form-data" class="form-horizontal">
+	    <input type="hidden" name="id" value="{$list.id}">
+		<div class="modal-body">
+		<table class="table table-bordered" id="editable">			
+				<tr>
+					<th width="15%">申请人</th>
+					<td width="35%">{$list.sqr}</td>
+					<th width="15%">付款日期</th>
+					<td width="35%">{$order.ctime|date='Y-m-d',###}</td>					
+				</tr>
+                <tr>
+					<th width="15%">所属部门</th>
+					<td width="35%">{$department}</td>
+					<th width="15%">分部</th>
+					<td width="35%">公司总部</td>					
+				</tr>
+                <tr>
+					<th width="15%">付款事由</th>
+					<td colspan="3" width="35%">
+						<eq name="limit3" value='1'>
+							<input type="text" name="shiyou" value="{$list.shiyou}" class="form-control">
+						</eq>
+						<neq name="limit3" value='1'>
+							<input type="text" name="shiyou" value="{$list.shiyou}" class="form-control" readonly="true">
+						</neq>	
+					</td>
+
+				</tr>
+                <tr>
+					<th width="15%">付款金额</th>
+					<td width="35%">{$total_pay}</td>
+					<th width="15%">金额大写</th>
+					<td width="35%">{$Total}</td>					
+				</tr>
+                <tr>
+					<th width="15%">供应商名称</th>
+					<td width="35%">{$supplier.supplier}</td>
+					<th width="15%">付款类型</th>
+					<td width="35%">采购类</td>					
+				</tr>
+                <tr>
+					<th width="15%">付款方式</th>
+					<td width="35%">网银</td>
+					<th width="15%">收款方姓名</th>
+					<td width="35%">{$supplier.bankname}</td>					
+				</tr>
+                <tr>
+					<th width="15%">开户行</th>
+					<td width="35%">{$supplier.bankhu}</td>
+					<th width="15%">银行账号</th>
+					<td width="35%">{$supplier.bankaccount}</td>					
+				</tr>
+				
+		</table>				
+		订单详情:
+        <table class="table table-bordered" id="editable">			
+				<tr>
+					<th width="5%">单号</th>
+					<th width="14%">项目</th>
+					<th width="8%">费用科目</th>
+					<th width="8%">金额（元）</th>
+					<th width="8%">定金（元）</th>
+					<th width="8%">运费（元）</th>
+					<th width="8%">优惠（元）</th>
+					<th width="8%">供应商返利（元）</th>
+				
+				</tr>			
+				<tr id="table-row-0">
+					<td>{$list.orderid}</td>
+					<td>{$list.plm}</td>
+					<td>采购费</td>
+					<td>{$total}</td>
+					<td>{$list.dj}</td>
+					<td>{$list.yf}</td>
+					<td>{$list.yhje}</td>
+					<td>{$list.yh2}</td>
+					
+				</tr>
+				<tr id="hide" style="margin-bottom: 10px;">
+					<td colspan="8" >{$str}</td>
+				</tr>
+				</table>
+				付款记录:
+				<table class="table table-bordered" id="editable">
+				<tr>
+					<th width="5%">序号</th>
+					<th width="10%">时间</th>
+					<th width="10%">金额（元）</th>
+					<th width="10%">操作人</th>
+					<th width="10%">操作</th>
+				</tr>			
+				<volist name="array" id="listmenu">
+				<neq name="listmenu" value="">	
+				<tr>
+					<td>{$key+1}</td>{$listmenu}
+				</tr>
+				</neq>
+				</volist>
+				<eq name="limit2" value='1'>	
+				<tr>
+					<td style='text-align: center;'>备注</td>
+					<td colspan="4"><textarea name="remark" id="" cols="40" rows="2">{$list.remark}</textarea>  </td>
+				</tr>
+				</eq>
+				<neq name="limit2" value='1'>	
+				<tr>
+					<td  style='text-align: center;'>备注</td>
+					<td colspan="4">{$list.remark}</td>
+				</tr>
+				</neq>
+				</table>
+		</div>
+		<div class="modal-body" id="hide3">
+			<div class="form-group">
+				<div class="col-sm-12" id="galley">				    
+					<volist name="newname" id="newnamelist">
+					<neq name="newname" value="">
+					<div class="file-box" style="margin:0 auto;">
+						<div class="file">
+							
+							<eq name='newnamelist.is_pic' value='1'>
+							<img alt="image" class="img-responsive" src="__PUBLIC__/Uploads/{$newnamelist.name}">
+							</eq>
+							<neq name='newnamelist.is_pic' value='1'>
+							<a href="__PUBLIC__/Uploads/{$newnamelist.name}">附件.{$newnamelist.name|explode='.',###|end}</a>
+							</neq>
+							
+						</div>
+                    </div>
+					</neq>	
+					</volist>
+                    				
+				</div>
+			</div>			
+		</div>
+	<div id="modal11" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" style="width:850px;height:600px">
+		<div class="modal-content">
+		   <div class="modal-header">  
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
+                    <span aria-hidden="true">×</span>  
+                </button>  
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>  
+            </div>  
+            <div class="modal-body">  
+                <p>One fine body…</p>  
+            </div>  
+            <div class="modal-footer">  
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                <button type="button" class="btn btn-primary">Save</button>  
+            </div>  
+		</div>
+	  </div>
+	</div>
+		<div class="modal-footer">
+			<button class="btn btn-sm btn-success" type="submit" id="hide2" style='margin-right: 10px;'><strong>修改</strong>
+			</button>
+			<button class="btn btn-sm btn-primary" type="button" id="sub" onclick="printPage()"><strong>打印</strong>
+			</button>
+		</div>
+	</form>
+
+
+	
+
+    <script src="js/plugins/layer/laydate/laydate.js"></script>	
+    <script src="js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+	<script>
+		$('input[type="file"]').prettyFile();
+	</script>
+	<script language=javascript>
+	function printPage() { 
+	$("#hide").css('display','none');
+	$("#hide2").css('display','none');
+	$("#hide3").css('display','none');
+	bdhtml=window.document.body.innerHTML; 
+	sprnstr='<div class="modal-body">'; //开始打印标识字符串有17个字符
+	eprnstr='<div class="modal-footer">'; //结束打印标识字符串
+	prnhtml=bdhtml.substr(bdhtml.indexOf(sprnstr)+24); //从开始打印标识之后的内容
+	prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr)); //截取开始标识和结束标识之间的内容
+	window.document.body.innerHTML=prnhtml; //把需要打印的指定内容赋给body.innerHTML
+	window.print(); //调用浏览器的打印功能打印指定区域
+	// window.document.body.innerHTML=bdhtml;//重新给页面内容赋值；
+	location.reload();
+	}
+	</script>
+	

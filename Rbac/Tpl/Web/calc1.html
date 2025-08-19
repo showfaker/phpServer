@@ -1,0 +1,320 @@
+﻿<!doctype html>
+<html>
+
+	<head>
+		<title>车辆运行参数</title>
+		<meta charset="utf-8">
+		<meta name="viewport"
+			content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__PUBLIC__/appsource/css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+		</style>
+	</head>
+
+	<body>
+		<div id="app" class="mui-content">
+		<div class="mui-content">
+			<form class="mui-input-group">
+				<div class="mui-input-row">
+					<label style="width: 50%;">车型</label>
+					<div style="display: flex;align-items: center;">
+					<input type="text" v-model="carModel" style="padding-left: 0;">
+					</div>
+				</div>
+				<div class="mui-input-row">
+					<label style="width: 50%;">生产厂家</label>
+					<div style="display: flex;align-items: center;">
+					<input type="text" v-model="carFactory" style="padding-left: 0;">
+					</div>
+				</div>
+				<div class="mui-input-row">
+					<label style="width: 50%;">电池类型</label>
+					<div style="display: flex;align-items: center;">
+					<input type="text" v-model="batteryTyp" style="padding-left: 0;">
+					</div>
+				</div>
+				<div class="mui-input-row">
+					<label style="width: 50%;">电池厂家</label>
+					<div style="display: flex;align-items: center;">
+					<input type="text" v-model="batteryFactory" style="padding-left: 0;">
+					</div>
+				</div>
+				<div class="mui-input-row">
+					<label style="width: 50%;">裸车购置价格</label>
+					<div style="display: flex;align-items: center;">
+					<input type="number" v-model="carPurPrc" style="padding-left: 0;">
+					</div>
+					<div
+						style="position: absolute;right: 10px;top: 0; height: 100%;display: flex;align-items: center;color: #999;font-size: 14px;">
+						万元</div>
+				</div>
+				<div class="mui-input-row">
+					<label style="width: 50%;">车辆台数<span style="color: red;"> *</span></label>
+					<div style="display: flex;align-items: center;">
+					<input type="number" v-model="carNum" style="padding-left: 0;">
+					</div>
+					<div
+						style="position: absolute;right: 10px;top: 0; height: 100%;display: flex;align-items: center;color: #999;font-size: 14px;">
+						台</div>
+				</div>
+				<div class="mui-input-row">
+					<label style="width: 50%;">电池容量<span style="color: red;"> *</span></label>
+					<div style="display: flex;align-items: center;">
+					<input type="number" v-model="batteryCap" style="padding-left: 0;">
+					</div>
+					<div
+						style="position: absolute;right: 10px;top: 0; height: 100%;display: flex;align-items: center;color: #999;font-size: 14px;">
+						kWh</div>
+				</div>
+				<div class="mui-input-row" style="height: auto;">
+					<label style="width: 50%;">单车平均日行驶里程<span style="color: red;"> *</span></label>
+					<div style="display: flex;align-items: center;height: 58px;">
+						<input type="number" v-model="avgDlyMileage" style="padding-left: 0;">
+					</div>
+					<div
+						style="position: absolute;right: 10px;top: 0; height: 100%;display: flex;align-items: center;color: #999;font-size: 14px;">
+						km</div>
+				</div>
+				<div class="mui-input-row" style="height: auto;">
+					<label style="width: 50%;">单车平均年运营天数<span style="color: red;"> *</span></label>
+					<div style="display: flex;align-items: center;height: 58px;">
+						<input type="number" v-model="avgAnnlOperatingDays" style="padding-left: 0;">
+					</div>
+					<div
+						style="position: absolute;right: 10px;top: 0; height: 100%;display: flex;align-items: center;color: #999;font-size: 14px;">
+						日</div>
+				</div>
+				<!-- <div style="white-space:nowrap;padding: 10px 15px 0;color: #999;">配套电池数量</div>
+				<div class="mui-input-row">
+					<input type="number" disabled v-model="batteryNum">
+					<div
+						style="position: absolute;right: 10px;top: 0; height: 100%;display: flex;align-items: center;color: #999;font-size: 14px;">
+						套</div>
+				</div>
+				<div style="white-space:nowrap;padding: 10px 15px 0;color: #999;">单车平均年行驶里程</div>
+				<div class="mui-input-row" style="position: relative;">
+					<input type="number" disabled v-model="avgAnnlMileage">
+					<div
+						style="position: absolute;right: 10px;top: 0; height: 100%;display: flex;align-items: center;color: #999;font-size: 14px;">
+						km</div>
+				</div>
+				<div style="white-space:nowrap;padding: 10px 15px 0;color: #999;">单次换电电量</div>
+				<div class="mui-input-row">
+					<input type="number" disabled v-model="singleBatteryChg">
+					<div
+						style="position: absolute;right: 10px;top: 0; height: 100%;display: flex;align-items: center;color: #999;font-size: 14px;">
+						kWh</div>
+				</div>
+				<div style="white-space:nowrap;padding: 10px 15px 0;color: #999;">单车平均日充电电量</div>
+				<div class="mui-input-row" style="position: relative;">
+					<input type="number" disabled v-model="avgDlyCrgCap">
+					<div
+						style="position: absolute;right: 10px;top: 0; height: 100%;display: flex;align-items: center;color: #999;font-size: 14px;">
+						kWh</div>
+				</div>
+				<div style="white-space:nowrap;padding: 10px 15px 0;color: #999;">单车平均年充电电量</div>
+				<div class="mui-input-row" style="position: relative;">
+					<input type="number" disabled v-model="avgAnnlCrgCap">
+					<div
+						style="position: absolute;right: 10px;top: 0; height: 100%;display: flex;align-items: center;color: #999;font-size: 14px;">
+						kWh</div>
+				</div>
+				<div style="white-space:nowrap;padding: 10px 15px 0;color: #999;">单车平均日换电次数</div>
+				<div class="mui-input-row" style="position: relative;">
+					<input type="number" disabled v-model="avgNumOfBatteryReplacementsPerDd">
+					<div
+						style="position: absolute;right: 10px;top: 0; height: 100%;display: flex;align-items: center;color: #999;font-size: 14px;">
+						次</div>
+				</div>
+				<div style="white-space:nowrap;padding: 10px 15px 0;color: #999;">平均日换电总次数</div>
+				<div class="mui-input-row" style="position: relative;">
+					<input type="number" disabled v-model="avgDlyTotNumOfReplacements">
+					<div
+						style="position: absolute;right: 10px;top: 0; height: 100%;display: flex;align-items: center;color: #999;font-size: 14px;">
+						次</div>
+				</div> -->
+			</form>
+			<div style="display: flex;justify-content: center;margin: 20px 0;">
+				<button type="button" class="mui-btn mui-btn-warning" style="width: 200px;" @click="submit">下一步</button>
+			</div>
+		</div>
+		</div>
+		<script src="__PUBLIC__/appsource/js/mui.min.js"></script>
+		<script src="__PUBLIC__/appsource/js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<!-- 微信 JS-SDK 如果不需要兼容小程序，则无需引用此 JS 文件。 -->  
+		<script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>  
+		<!-- uni 的 SDK，必须引用。 -->  
+		<script type="text/javascript" src="//js.cdn.aliyun.dcloud.net.cn/dev/uni-app/uni.webview.0.1.52.js"></script>
+		<script type="text/javascript">
+			document.addEventListener('UniAppJSBridgeReady', function() {
+			uni.getEnv(function(res) {
+				var vm = new Vue({
+					el: '#app',
+					data: {
+						preInfo:{},
+						
+						carModel: '', //车型
+						carFactory: '', //生产厂家
+						batteryTyp: '', //电池类型
+						batteryFactory: '', //电池厂家
+						carPurPrc: '', //裸车购置价格
+						carNum: '', //车辆台数(必填)
+						batteryCap: '', //电池容量(必填)
+						avgDlyMileage: '', //单车平均日行驶里程(必填)
+						avgAnnlOperatingDays: '', //单车平均年运营天数(必填)
+					},
+					computed: {
+						// 配套电池数量
+						batteryNum: function() {
+							if (this.carNum||this.carNum==0) {
+								let num = Number(this.carNum)
+								return Math.ceil(num > 50 ? num * 1.15 : num * 1.2)
+							}
+							return ''
+						},
+						// 单车平均年行驶里程
+						avgAnnlMileage: function() {
+							if ((this.avgDlyMileage||this.avgDlyMileage==0) && (this.avgAnnlOperatingDays||this.avgAnnlOperatingDays==0)) {
+								return (Number(this.avgDlyMileage) * Number(this.avgAnnlOperatingDays))
+									.toFixed(2)
+							}
+							return ''
+						},
+						// 单次换电电量
+						singleBatteryChg: function() {
+							if (this.batteryCap||this.batteryCap==0) {
+								return (Number(this.batteryCap) * 0.8).toFixed(2)
+							}
+							return ''
+						},
+						// 单车平均日充电电量
+						avgDlyCrgCap: function() {
+							if (this.avgDlyMileage||this.avgDlyMileage==0) {
+								return (Number(this.avgDlyMileage) * 2.5).toFixed(2)
+							}
+							return ''
+						},
+						// 单车平均年充电电量
+						avgAnnlCrgCap: function() {
+							if ((this.avgAnnlOperatingDays||this.avgAnnlOperatingDays==0) && (this.avgDlyCrgCap||this.avgDlyCrgCap==0)) {
+								return (Number(this.avgAnnlOperatingDays) * Number(this.avgDlyCrgCap))
+									.toFixed(2)
+							}
+							return ''
+						},
+						// 单车平均日换电次数
+						avgNumOfBatteryReplacementsPerDd: function() {
+							if ((this.avgDlyCrgCap||this.avgDlyCrgCap==0) && (this.singleBatteryChg||this.singleBatteryChg==0)) {
+								return (Number(this.avgDlyCrgCap) / Number(this.singleBatteryChg)).toFixed(2)
+							}
+							return ''
+						},
+						// 平均日换电总次数
+						avgDlyTotNumOfReplacements: function() {
+							if ((this.avgNumOfBatteryReplacementsPerDd||this.avgNumOfBatteryReplacementsPerDd==0) && (this.carNum||this.carNum==0)) {
+								return Math.ceil(Number(this.avgNumOfBatteryReplacementsPerDd) * Number(this
+									.carNum))
+							}
+							return ''
+						}
+					},
+					watch: {
+						// 禁止小数点
+						carNum(n, o) {
+							this.carNum = this.carNum.replace(/\D/g, '')
+						},
+						avgAnnlOperatingDays(n, o) {
+							this.avgAnnlOperatingDays = this.avgAnnlOperatingDays.replace(/\D/g, '')
+							if (Number(this.avgAnnlOperatingDays > 365)) {
+								this.avgAnnlOperatingDays = 365
+							}
+						}
+					},
+					created() {
+						let preInfo = JSON.parse(localStorage.getItem("preInfo"))
+						if (preInfo != null) {
+							this.preInfo = preInfo
+						}
+						let vehOperation=JSON.parse(localStorage.getItem("vehOperation"))
+						if(vehOperation!=null){
+							this.carModel=vehOperation.carModel
+							this.carFactory=vehOperation.carFactory
+							this.batteryTyp=vehOperation.batteryTyp
+							this.batteryFactory=vehOperation.batteryFactory
+							this.carPurPrc=vehOperation.carPurPrc
+							this.carNum=vehOperation.carNum
+							this.batteryCap=vehOperation.batteryCap
+							this.avgDlyMileage=vehOperation.avgDlyMileage
+							this.avgAnnlOperatingDays=vehOperation.avgAnnlOperatingDays
+						}
+					},
+					methods: {
+						submit() {
+							if (this.carNum==='') {
+								mui.toast('请输入车辆台数');
+								return
+							}
+							if (this.batteryCap==='') {
+								mui.toast('请输入电池容量');
+								return
+							}
+							if (this.avgDlyMileage==='') {
+								mui.toast('请输入单车平均日行驶里程');
+								return
+							}
+							if (this.avgAnnlOperatingDays==='') {
+								mui.toast('请输入单车平均年运营天数');
+								return
+							}
+							let vehOperation=JSON.stringify({
+								carModel: this.carModel,
+								carFactory: this.carFactory,
+								batteryTyp: this.batteryTyp,
+								batteryFactory: this.batteryFactory,
+								carPurPrc: this.carPurPrc,
+								carNum: this.carNum,
+								batteryCap: this.batteryCap,
+								avgDlyMileage: this.avgDlyMileage,
+								avgAnnlOperatingDays: this.avgAnnlOperatingDays,
+								batteryNum: this.batteryNum,
+								avgAnnlMileage: this.avgAnnlMileage,
+								singleBatteryChg: this.singleBatteryChg,
+								avgDlyCrgCap: this.avgDlyCrgCap,
+								avgAnnlCrgCap: this.avgAnnlCrgCap,
+								avgNumOfBatteryReplacementsPerDd: this.avgNumOfBatteryReplacementsPerDd,
+								avgDlyTotNumOfReplacements: this.avgDlyTotNumOfReplacements,
+							})
+							localStorage.setItem("vehOperation",vehOperation)
+							uni.navigateTo({
+								url: '/pages/web/index?page=calc1_2'
+							});
+						},
+						back(){
+							let vehOperation=JSON.stringify({
+								carModel: this.carModel,
+								carFactory: this.carFactory,
+								batteryTyp: this.batteryTyp,
+								batteryFactory: this.batteryFactory,
+								carPurPrc: this.carPurPrc,
+								carNum: this.carNum,
+								batteryCap: this.batteryCap,
+								avgDlyMileage: this.avgDlyMileage,
+								avgAnnlOperatingDays: this.avgAnnlOperatingDays,
+								batteryNum: this.batteryNum,
+								avgAnnlMileage: this.avgAnnlMileage,
+								singleBatteryChg: this.singleBatteryChg,
+								avgDlyCrgCap: this.avgDlyCrgCap,
+								avgAnnlCrgCap: this.avgAnnlCrgCap,
+								avgNumOfBatteryReplacementsPerDd: this.avgNumOfBatteryReplacementsPerDd,
+								avgDlyTotNumOfReplacements: this.avgDlyTotNumOfReplacements,
+							})
+							localStorage.setItem("vehOperation",vehOperation)
+						}
+					}
+				});
+			})
+			})
+		</script>
+	</body>
+
+</html>

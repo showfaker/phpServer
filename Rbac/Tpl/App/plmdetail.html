@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<title>项目详情</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <link rel="shortcut icon" href="favicon.ico"> 
+	<link href="css/bootstrapgantt.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.css">
+	<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+	
+	<link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+	<script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="js/plugins/jeditable/jquery.jeditable.js"></script>
+    <script src="js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="js/plugins/dataTables/dataTables.bootstrap.js"></script>
+    <script src="js/content.js?v=1.0.0"></script>
+	<script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+	<script src="js/plugins/layer/laydate/laydate.js"></script>
+	<script src="js/plugins/iCheck/icheck.min.js"></script>
+	<style>
+        .box {
+            transform: rotate(90deg);transform-origin: bottom left;position: absolute;top: -100vw;height: 100vw; width: 100vh;
+        }
+    </style>
+</head>
+<body class="gray-bg">
+    <div class="">
+        <div class="row" style="margin:0px;">
+            <div class="col-sm-12" style="padding:0px">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>{$listmenu['title']}</h5>
+                    </div>
+                    <div class="ibox-content">                        
+						<div class="row m-b-lg" >	
+						   <div class="col-sm-12" style="padding:0px">
+								<div class="tabs-container">
+										<ul class="nav nav-tabs">
+											<li <notin name="tab" value="2,4,5,7"> class="active" </notin>><a  href="__APP__/Secondcheck/plmdetail/id/{$listmenu['id']}/tab/1/app/1" style="font-size:12px">项目信息</a>
+											</li>
+											
+											<li <eq name="tab" value="4"> class="active" </eq>><a  href="__APP__/App/plmdetail/id/{$listmenu['id']}/tab/4/app/1" style="font-size:12px">项目计划</a>
+											</li>
+											<li <eq name="tab" value="2"> class="active" </eq>><a  href="__APP__/App/plmdetail/id/{$listmenu['id']}/tab/2/app/1" style="font-size:12px">施工日志</a>
+											</li>
+											<!--
+											<li <eq name="tab" value="3"> class="active" </eq>><a  href="__APP__/App/plmdetail/id/{$listmenu['id']}/tab/3/app/1" style="font-size:12px">采购日志</a>
+											</li>
+											<li <eq name="tab" value="6"> class="active" </eq>><a  href="__APP__/App/plmdetail/id/{$listmenu['id']}/tab/6/app/1" style="font-size:12px">材料下单</a>
+											</li>
+											-->
+											<li <eq name="tab" value="5"> class="active" </eq>><a  href="__APP__/App/plmdetail/id/{$listmenu['id']}/tab/5/app/1" style="font-size:12px">进度甘特图</a>
+											</li>
+											<li <eq name="tab" value="7"> class="active" </eq>><a  href="__APP__/App/plmdetail/id/{$listmenu['id']}/tab/7/app/1">项目流程</a>
+											</li>
+										</ul>
+										<div class="tab-content" style="padding:0px">
+												<div class="tab-pane active">
+													<div class="panel-body">
+													<eq name="orgdata.projecttype" value="分布式光伏发电">
+													<notin name="tab" value="2,3,4,5,6,7"><include file="../Secondcheck/draftfirst"/></notin>
+													</eq>
+													<eq name="orgdata.projecttype" value="集中式光伏发电">
+													<notin name="tab" value="2,3,4,5,6,7"><include file="../Secondcheck/draftfirst1"/></notin>
+													</eq>
+													<eq name="orgdata.projecttype" value="风力发电">
+													<notin name="tab" value="2,3,4,5,6,7"><include file="../Secondcheck/draftfirst2"/></notin>
+													</eq>
+													<eq name="tab" value="4"> <include file="../App/sgjh"/> </eq>
+													
+													<eq name="tab" value="2"> <include file="../App/timeline"/> </eq>
+													
+													<eq name="tab" value="5"> <include file="../App/gante"/> </eq>
+													
+													<eq name="tab" value="6"> <include file="../App/clxd"/> </eq>
+													
+													<eq name="tab" value="7"> <include file="../Xmtj/history"/> </eq>
+													
+													<eq name="tab" value="3"> <include file="../App/cgrz"/> </eq>
+													</div>
+												</div>
+										</div>
+								</div>
+							</div>
+						</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	
+	
+	
+	
+    
+	
+	<script>
+		$(document).ready(function () {
+			$('.i-checks').iCheck({
+				checkboxClass: 'icheckbox_square-green',
+				radioClass: 'iradio_square-green',
+			});
+		});
+	</script>
+
+    
+</body>
+</html>

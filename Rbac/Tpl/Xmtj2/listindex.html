@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.css">
+	
+	<style>
+	td{
+		text-align:center;
+		border-color:black;
+		border:1px solid black;
+	}
+	</style>
+</head>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content">
+        <div class="row">
+			<div class="col-sm-12" style="overflow-x:auto">	
+			
+			
+					<div style="margin-bottom:10px;">
+						<form action="__URL__/index/token/{$token}/token/{$token}/" method="post">
+							
+							
+							<div style="width:100%;margin-bottom:10px" class="input-group">
+								<div class="input-group col-sm-2 col-xs-6" style="float:left;padding-right:20px">
+									<span class="input-group-addon">月份</span>
+									<input type="text" class="form-control" name="month" value="{$month}" onclick="laydate({istime: false, format: 'YYYY-MM'})">
+								</div>
+								
+								<button class="btn btn-primary btn-sm" style="float:left;margin-right:10px;" type="submit">查询</button>
+								
+								<a href="__URL__/index/toexcel/1/month/{$month}/" class="btn btn-info btn-sm hidden-xs" style="float:left">导出EXCEL</a>
+								
+								<a href="__URL__/autoView" data-toggle="modal" data-target="#modal" data-backdrop="static"  target="dialog" class="btn btn-info btn-sm hidden-xs" style="float:left">生成记录</a> 
+								
+							</div>
+							
+						</form>
+						
+						
+					</div>
+						
+						
+					<table class="table table-hover margin bottom"><!-- table-bordered -->
+						
+						<tbody>
+							<tr>
+								<td colspan="16" style="border-top:1px solid black">南电项目可视化管理系统项目运行月度报告</td>
+							</tr>
+							<tr>
+								<td colspan="12"></td>
+								<td colspan="4">编制日期：{$date}</td>
+							</tr>
+							<tr>
+							<td colspan="16" style="text-align:left">
+							一、公司整体情况
+							</td>
+							</tr>
+							<tr style="background-color:#DDEBF7">
+								<td colspan="2" rowspan="2">截至月末在建</td>
+								<td colspan="2" rowspan="2">本月并网</td>
+								<td colspan="2" rowspan="2">本年度并网</td>
+								<td colspan="4">其中</td>
+								<td colspan="2" rowspan="2">累计并网</td>
+								<td colspan="4">其中</td>
+							</tr>
+							
+							<tr style="background-color:#DDEBF7">
+								<td colspan="2">风电</td>
+								<td colspan="2">光伏</td>
+								<td colspan="2">风电</td>
+								<td colspan="2">光伏</td>
+							</tr>
+							<tr>
+								<td width="4%">{$count1}</td>
+								<td width="6%">{$capacity1}mw</td>
+								
+								<td width="4%">{$count2}</td>
+								<td width="10%">{$capacity2}mw</td>
+								
+								<td width="10%">{$count3}</td>
+								<td width="6%">{$capacity3}mw</td>
+								
+								<td width="6%">{$count4}</td>
+								<td width="6%">{$capacity4}mw</td>
+								
+								<td width="6%">{$count5}</td>
+								<td width="6%">{$capacity5}mw</td>
+								
+								<td width="6%">{$count6}</td>
+								<td width="6%">{$capacity6}mw</td>
+								
+								<td width="6%">{$count7}</td>
+								<td width="6%">{$capacity7}mw</td>
+								
+								<td width="6%">{$count8}</td>
+								<td width="6%">{$capacity8}mw</td>
+								
+								
+							</tr>
+							
+							<tr>
+							<td colspan="16" style="text-align:left">
+							截至月末在建项目共{$count1}个，其中：</br>
+							■ 项目管理类项目{$count9}个，分别为<volist name="list9" id="vo">{$vo.title}；</volist></br>
+							■ 全流程项目{$count10}个，整体进度偏离{$count10_1}个<neq name="count10_1" value="0">，分别为<volist name="list10" id="vo"><eq name="vo.warning" value="1">{$vo.title}；</eq></volist></neq></br>
+							■ 纯EPC项目{$count11}个，整体进度偏离{$count11_1}个<neq name="count11_1" value="0">，分别为<volist name="list11" id="vo"><eq name="vo.warning" value="1">{$vo.title}；</eq></volist></neq></br>
+							具体情况如下：
+							</td>
+							</tr>
+							
+							<tr>
+							<td colspan="16" style="text-align:left">
+							二、各项目具体情况
+							</td>
+							</tr>
+							
+							<volist name="list12" id="vo">
+							<tr><td colspan="16" style="text-align:left;background-color:#AAC2D7">（{$key+1}）{$vo.title}(计划{$vo.planfinishtime}并网，计划总体进度{$vo.plan_image_progress}%，实际总体进度{$vo.image_progress}%）</td></tr>
+							<tr style="background-color:#DDEBF7">
+								<td colspan="1">序号</td>
+								<td colspan="4">一级节点</td>
+								<td colspan="2">计划完成时间</td>
+								<td colspan="2">计划进度</td>
+								<td colspan="2">实际进度</td>
+								<td colspan="1">状态</td>
+								<td colspan="4">原因说明</td>
+							</tr>
+							<volist name="vo.schedules1" id="schedule1">
+							<tr>
+								<td colspan="1">{$key+1}</td>
+								<td colspan="4">{$schedule1.worktype}</td>
+								<td colspan="2"><!-- {$schedule1.plantimebegin}~ -->{$schedule1.plantimeend}</td>
+								<td colspan="2">{$schedule1.planpercent}</td>
+								<td colspan="2">{$schedule1.realpercent}</td>
+								<td colspan="1">
+								
+								<gt name="schedule1.delaydays" value="0">超期{$schedule1.delaydays}天</gt>
+								
+								<eq name="schedule1.deviate" value="是">偏离</eq>
+								</td>
+								<td colspan="4">{$schedule1.reason}</td>
+							</tr>
+							</volist>
+							<tr>
+							<td colspan="16" style="text-align:left">
+							项目累计到期节点{$vo.nodecount5}个，其中按时完成{$vo.nodecount6}个，超期完成{$vo.nodecount7}个，未完成{$vo.nodecount8}个。</br>
+							项目本月到期节点{$vo.nodecount1}个，其中按时完成{$vo.nodecount2}个，超期完成{$vo.nodecount3}个，未完成{$vo.nodecount4}个。具体情况如下：
+							</td>
+							</tr>
+							
+							<tr style="background-color:#DDEBF7">
+								<td colspan="1">序号</td>
+								<td colspan="2">计划分类</td>
+								<td colspan="2">节点名称</td>
+								<td colspan="2">计划完成时间</td>
+								<td colspan="2">计划进度</td>
+								<td colspan="2">实际进度</td>
+								<td colspan="1">状态</td>
+								<td colspan="2">归属部门</td>
+								<td colspan="2">原因说明</td>
+							</tr>
+								
+
+							<volist name="vo.schedules2" id="schedule2">
+							<tr>
+								<eq name="schedule2.block" value="1">
+								<td rowspan="{$schedule2.rowscount}">1</td>
+								<td colspan="2" rowspan="{$schedule2.rowscount}">{$schedule2.classify}</td>
+								</eq>
+								<td colspan="2">{$schedule2.worktype}-{$schedule2.subworktype}</td>
+								<td colspan="2"><!-- {$schedule2.plantimebegin}~ -->{$schedule2.plantimeend}</td>
+								<td colspan="2">{$schedule2.planpercent}</td>
+								<td colspan="2">{$schedule2.realpercent}</td>
+								<td colspan="1">
+								
+								<gt name="schedule2.delaydays" value="0">超期{$schedule2.delaydays}天</gt>
+								<eq name="schedule2.deviate" value="是">偏离</eq>
+								</td>
+								<td colspan="2">{$schedule2.dept}</td>
+								<td colspan="2">{$schedule2.reason}</td>
+							</tr>
+							</volist>
+							<volist name="vo.schedules3" id="schedule3" key="x">
+							<tr>
+								<td>{$x+1}</td>
+								<td colspan="2">{$schedule3.classify}专项计划</td>
+								<td colspan="2">-</td>
+								<td colspan="2"><!-- {$schedule3.plantimebegin}~ -->{$schedule3.plantimeend}</td>
+								<td colspan="2">{$schedule3.planpercent}</td>
+								<td colspan="2">{$schedule3.realpercent}</td>
+								<td colspan="1">
+								
+								<gt name="schedule3.delaydays" value="0">超期{$schedule3.delaydays}天</gt>
+								<eq name="schedule3.deviate" value="是">偏离</eq>
+								
+								</td>
+								<td colspan="2">{$schedule3.dept}</td>
+								<td colspan="2">{$schedule3.reason}</td>
+							</tr>
+							</volist>
+							</volist>
+							
+							
+						</tbody>
+					</table>
+			</div>
+        </div>
+    </div>
+	
+	
+	<div id="myModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-lg">
+		<div class="modal-content animated bounceInRight">
+		   <div class="modal-header">  
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
+                    <span aria-hidden="true">×</span>  
+                </button>  
+                <h4 class="modal-title" id="myModalLabel">正在加载</h4>  
+            </div>  
+            <div class="modal-body">  
+                <p>正在加载…</p>  
+            </div>  
+            <div class="modal-footer">
+            </div>  
+		</div>
+	  </div>
+	</div>
+	
+	
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+	<script src="js/plugins/layer/laydate/laydate.js"></script>
+    <script src="js/content.js?v=1.0.0"></script>
+	<script>
+        $(document).ready(function () {
+			$("#myModal").on("hidden.bs.modal", function() {
+				$(this).removeData("bs.modal");  
+			});
+        });
+    </script>
+
+</body>
+</html>

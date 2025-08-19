@@ -1,0 +1,645 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    
+<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+<head>
+	<title>Documentation</title>
+    <link href="assets/css/styles.css"  rel="stylesheet" type="text/css" media="screen" />
+    <script type="text/javascript" src="assets/js/jquery.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.anchor.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.treeview.pack.js"></script>
+    <script type="text/javascript">
+		$(document).ready(function(){
+			$("#file-browser, #theme-browser, #psd-browser").treeview();
+		});
+    </script>
+</head>
+<body>
+	<div id="container">
+        <div id="header">
+            <div style="text-align:center">
+                <a href="http://www.themeforest.net/user/weblusive" title="Weblusive">
+                    <img class="png" src="assets/images/logo.png" alt="Weblusive" />
+                </a>
+            </div>
+            <div style="width:960px; margin:10px auto 0px auto; text-align:center; color:#DDD; text-transform:uppercase; font-size:18px; font-weight:bold">
+              "Real World Admin" Template Documentation v1.0
+            </div>
+        </div>
+      
+        <div id="content">
+            <h2 id="main-title"> "Real World Admin"</h2>
+        	<div id="top-block">
+            	<div id="template-shot">
+                	<img src="assets/images/preview.jpg" width="250" height="133" alt="Screenshot" />
+                </div>
+                <div id="template-info">
+                	<table class="info-table">
+                    	<tr>
+                        	<td class="title">Created:</td>
+                            <td>22 Sep, 2010</td>
+                        </tr>
+                        <tr>
+                        	<td class="title">By:</td>
+                            <td>Weblusive</td>
+                        </tr>
+                        <tr>
+                        	<td class="title">E-mail:</td>
+                            <td>info@weblusive.com</td>
+                        </tr>
+                          <tr>
+                        	<td class="title">Website:</td>
+                            <td>http://www.weblusive.com</td>
+                        </tr>
+                    </table>
+                    
+                    
+                	Thank you for purchasing my theme. If you have any questions that 
+                    are beyond the scope of this help file, please feel free to email 
+                    via my user page contact form <a href="http://themeforest.net/user/weblusive">here</a>. 
+                    I will do my best to be helpful to you.
+                </div>
+            </div>
+            <div class="clear"></div>
+            <h2>Table of Contents</h2>
+            <ol class="toc">
+            	<li><a href="#introduction">Introduction</a></li>
+                <li><a href="#generalHierarchy">General Files Hierarchy</a></li>
+                <li><a href="#htmlStructure">HTML Structure</a></li>
+                <li><a href="#cssFiles">CSS Files and Structure</a></li>
+                <li><a href="#javascript">JavaScript</a></li>
+    			<li><a href="#psdFiles">PSD Files</a></li>
+                <li><a href="#credits">Sources and Credits</a></li>
+                <li><a href="#issues">Known issues</a></li>
+                <li><a href="#mobile" style="color:#900">Mobile Version</a></li>
+            </ol>
+            
+            <h3 id="introduction">1. Introduction</h3>
+            <a href="#container" class="anchorLink">Back to Top</a>
+            <p class="text-content">
+            	Real World admin is a multi-themed administration interface template with fixed and liquid layouts.
+                Every page is designed to be as close to a real-world scenario as possible. The template can be 
+                easily extended to suit your specific needs. Throughout all pages an explanation for code is given 
+                wherever it makes point. Custom javascript code snippets are also heavily commented. For third party plugins links
+                to official pages as well as documentation pages are provided.
+             </p>
+            
+            <h3 id="generalHierarchy">2. General Files Hierarchy</h3>
+            <a href="#container" class="anchorLink">Back to Top</a>
+            <div class="tree-panel">
+            	<h3>Files Structure</h3>
+            	<!-- Files Tree -->
+                <ul id="file-browser" class="filetree">
+                    <li><span class="folder">Real World Admin</span>
+                         <ul>
+                            <li><span class="folder">css</span></li>
+                            <li><span class="folder">demo-files</span></li>
+                            <li><span class="folder">documentation</span></li>
+                            <li class="closed"><span class="folder">images</span>
+                                <ul id="folder21">
+                                     <li><span class="folder">arrows</span></li>
+                                	 <li><span class="folder">demo</span></li>
+                                     <li><span class="folder">icons</span></li>
+                                     <li><span class="folder">progressbar</span></li>
+                                     <li><span class="folder">structure</span></li>
+                                     <li><span class="folder">tooltip</span></li>
+                                     <li><span class="folder">tree</span></li>
+                                </ul>
+                            </li>
+                            <li><span class="folder">js</span></li>
+                            <li><span class="folder">Mobile</span></li>
+                            <li><span class="folder">PSD</span></li>
+                            <li><span class="folder">themes</span></li>
+                        </ul>
+                        <ul>
+                            <li><span class="file">assets.html</span>
+                      		<li><span class="file">dashboard.html</span>
+                            <li><span class="file">events.html</span>
+                            <li><span class="file">login.html</span>
+                            <li><span class="file">page.html</span>
+                            <li><span class="file">reports.html</span>
+                            <li><span class="file">tasks.html</span>
+                            <li><span class="file">themes.html</span>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- END Files Tree -->
+		 	</div>
+            <div class="right-panel">
+            	<h3 style="margin-top:10px">Description</h3>
+                
+                <h4 class="list">css</h4>
+                <p>Contains css files common for whole template styling as well as JQuery UI css framework.</p>
+                
+                <h4 class="list">demo-files</h4>
+                <p>
+                	Contains files used for popup window and context tooltip. The files were moved here 
+                    because they don't fit into general files category and have no influence on template's structure.
+                </p>
+                
+                <h4 class="list">documentation</h4>
+                <p>Contains this documentation and accompanying files.</p>
+                
+                <h4 class="list">images</h4>
+                <p>
+                    For your convenience, the images folder is divided into 7 subfolders. The folder names are
+                    self-documentable. The images in this folder are used for core needs and are the same for all 
+                    templates. The images specific to a theme are kept in template folders. For more information 
+                    on this part, See 'template' folder explanation below.  
+                </p>
+                
+                <h4 class="list">js</h4>
+                <p>all javascript plugins as well as custom developed files reside in this folder.</p>
+                
+                 <h4 class="list">Mobile</h4>
+                <p>Mobile Version of the template</p>
+                
+                
+                <h4 class="list">PSD</h4>
+                <p>
+                	The folder contains PSD files for all 3 themes as well as miscellaneous files 
+                	accompanying them.
+                </p>
+                
+                <h4 class="list">themes</h4>
+                <p>
+                	Themes files reside here. Generally a theme consists of the following folders and files:
+                    <ul class="files-list">
+                        <li>preview.jpg - theme preview file</li>
+                        <li>'css' folder - To override general styles matching theme colors and styles</li>
+                        <li>'images' folder - for all theme-specific images</li>
+                    </ul>
+                </p>
+              
+            </div>
+            <div class="clear"></div>
+			<h3 id="htmlStructure">3. HTML structure</h3>
+            <a href="#container" class="anchorLink">Back to Top</a>
+            <p class="text-content">
+            	The template supports both fixed and liquid layouts with variable quantity of columns. 
+                General structure consists of the following parts: Container, which holds header and content sections
+                and footer container which holds footer div. All of the information within the main content area is 
+                nested within "content" div. Header section itself contains 3 subsections: header-top, header-middle
+                and menu. The reason to have footer-container wrapping footer div is because we have liquid and 
+                fixed layouts. When liquid layout is chosen, thee footer's width extends to 100%, equalling footer-container's 
+                width, otherwise it is centered 960px div. 
+                The general structure is the same throughout the template. Here is the structure's skeleton
+                demonstration.
+             </p>
+             <p><img src="assets/images/html_structure.png" width="353" height="529" alt="HTML Structure" class="demo-image" /></p>
+             <p class="text-content">
+             	If you would like to edit the color, font, or style of any elements in one of these columns, you would do the following:
+				<pre>
+                  #menu li a {
+                        color: #someColor;
+                    } 
+                </pre>
+                If you find that your new style is not overriding, it is most likely because of a specificity problem. Scroll 
+                down in your <br />CSS file and make sure that there isn't a similar style that has more weight.
+                <pre>
+                I.E.
+                
+                    #menu li#active-item a {
+                        color: #someColor;
+                    }
+                </pre>
+                So, to ensure that your new styles are applied, make sure that they carry enough "weight" and that there isn't a 
+                style lower<br /> in the CSS file that is being applied after yours. A good showcase for css overriding is 
+                the templates' structure. Please refer to any of 3 templates' css source code for a working demonstration.
+             </p>
+             
+            <h3 id="cssFiles">4. CSS Files and Structure</h3>
+            <a href="#container" class="anchorLink">Back to Top</a>
+            <p class="text-content">
+            	The global styles used throughout template reside in the /css 
+                folder. For your convenience, the files are separated into logical parts the following way:
+                <ul class="files-list">
+                	<li>
+                        <strong>globals.css</strong>: The file is responsible for global element styles like margins,
+                        lists, buttons, etc...
+                	</li> 
+                	<li>
+                		<strong>commons.css</strong>: The styles specific for pages (like login page, dashboard page, etc...)
+                    	reside here.
+                	</li> 
+                	<li>
+                		<strong>plugins.css</strong>: Here reside the styles for various javascript plugins used in the template.
+                        The only exception are css files for MarkItUP and Jqplot plugins which were too specific in my opinion
+                        to include them in this file.   
+                	</li>
+                    <li>
+                		<strong>ui-lightness</strong>: This folder contains JQuery UI framework and associated files and images.
+                        It hasn't been merged into main files intentionally, so in case if you want to create a new theme
+                        you can download and use your own JQuery UI theme from official website or roll your own theme 
+                        (more information on rolling your own UI themes can be found on site http://jqueryui.com/themeroller/).  
+                	</li>
+                </ul>
+                All files are commented and have strict logical parts separation. 
+                Below is a demonstration of globals.css file. 	
+            </p>
+            <p><img src="assets/images/css_structure.png" width="540" height="502" alt="CSS Structure" class="demo-image" /></p>
+            <h4 style="margin:10px 0px">Themes' structure</h4> 
+            <p>Themes are structured the following way:</p>
+          
+            <ul id="theme-browser" class="filetree">
+                <li><span class="folder">themes</span>
+                     <ul>
+                        <li><span class="folder">abstract-blue</span>
+                        <ul id="folder21">
+                                 <li><span class="folder">css</span>
+                                     <ul id="folder21">
+                                         <li><span class="file">globals.css</span></li>
+                                         <li><span class="file">commons.css</span></li>
+                                         <li><span class="file">plugins.css</span></li>
+                                    </ul>
+                                 <li><span class="folder">images</span></li>
+                                 <li><span class="image">preview.jpg</span></li>
+                            </ul>
+                        </li>
+                        <li class="closed"><span class="folder">clean-grey</span>
+                        <ul id="folder21">
+                                 <li><span class="folder">css</span>
+                                     <ul id="folder21">
+                                         <li><span class="file">globals.css</span></li>
+                                         <li><span class="file">commons.css</span></li>
+                                         <li><span class="file">plugins.css</span></li>
+                                    </ul>
+                                 <li><span class="folder">images</span></li>
+                                 <li><span class="image">preview.jpg</span></li>
+                            </ul>
+                        </li>
+                        <li class="closed"><span class="folder">sleek-wood</span>
+                            <ul id="folder21">
+                                 <li><span class="folder">css</span>
+                                     <ul id="folder21">
+                                         <li><span class="file">globals.css</span></li>
+                                         <li><span class="file">commons.css</span></li>
+                                         <li><span class="file">plugins.css</span></li>
+                                    </ul>
+                                 <li><span class="folder">images</span></li>
+                                 <li><span class="image">preview.jpg</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+                <!-- END Files Tree -->
+		 	
+            Themes css files are the same as global structure's ones. The only difference is that they override 
+            general styles to include their own unique attributes. images folder is used for theme-specific images. 
+          	the preview.jpg file is the template's preview. 
+            
+            <h3 id="javascript">5. JavaScript</h3>
+            <a href="#container" class="anchorLink">Back to Top</a>
+            <p class="text-content">
+            	Below is the list of javascript files, frameworks and plugins used in the template.
+                All files are licensed under <a href="http://www.opensource.org/licenses/mit-license.php">MIT</a> 
+                or <a href="http://www.gnu.org/licenses/gpl.html">GPL</a> licenses or their modifications.
+            </p>
+            <table class="list-table">
+            	<thead>
+                	<tr>
+                    	<th>Name</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>URL</th>
+                        <th>License</th>
+                    </tr>
+                </thead>
+                <tbody>
+                	<tr>
+                    	<td>jquery.js</td>
+                        <td>Framework</td>
+                        <td>jQuery is a fast and concise JavaScript Library designed to change the way that you write JavaScript.</td>
+                        <td><a href="http://www.jquery.com"> Link</a></td>
+                        <td>MIT/GPL v.2</td>
+                    </tr> 
+                    <tr>
+                    	<td>cookie.js</td>
+                        <td>Plugin</td>
+                        <td>simplifies read/write manipulations with cookies.</td>
+                        <td><a href="http://stilbuero.de/jquery/cookie"> Link</a></td>
+                          <td>MIT/GPL</td>
+                    </tr> 
+                    <tr>
+                    	<td>filterable.js</td>
+                        <td>Plugin</td>
+                        <td>Interactive filtering plugin. I have made some modifications to make it work with dropdown select box.</td>
+                        <td>
+                        	<a href="http://www.gethifi.com/blog/a-jquery-plugin-to-create-an-interactive-filterable-portfolio-like-ours">
+                        	  Link
+                            </a>
+                       </td>
+                       <td>MIT</td>
+                    </tr>
+                    <tr>
+                    	<td>jquery.cluetip.js</td>
+                        <td>Plugin</td>
+                        <td>An interactive tooltip plugin which I have used on assets page as context window.</td>
+                        <td>
+                        	<a href="http://plugins.learningjquery.com/cluetip/">
+                        	  Link
+                            </a>
+                       </td>
+                       <td>MIT/GPL</td>
+                    </tr>
+                    <tr>
+                    	<td>jquery.nyromodal-1.6.2.pack.js</td>
+                        <td>Plugin</td>
+                        <td>Nyromodal is a very customisable multifunctional popup plugin supporting inline content, ajax and much more.</td>
+                        <td>
+                        	<a href="http://nyromodal.nyrodev.com">
+                        	  Link
+                            </a>
+                       </td>
+                       <td>MIT</td>
+                    </tr>
+                    <tr>
+                    	<td>jquery.progressbar.min.js</td>
+                        <td>Plugin</td>
+                        <td>A nice plugin to create colorful animated progress bars. Copyright (c) 2008 Gary Teo* http://t.wits.sg </td>
+                        <td>
+                        	<a href="http://t.wits.sg/jquery-progress-bar/">
+                        	  Link
+                            </a>
+                       </td>
+                       <td>No License (in Authors words: If its working for you, drop us a comment and tell us where we can see your stuff!)</td>
+                    </tr>
+                    <tr>
+                    	<td>jquery.treeview.pack.js</td>
+                        <td>Plugin</td>
+                        <td>Plugin helps to create hiearchic structures like the tree used in this documentation file</td>
+                        <td>
+                        	<a href="http://bassistance.de/jquery-plugins/jquery-plugin-treeview/">
+                        	  Link
+                            </a>
+                       </td>
+                        <td>MIT/GPL</td>
+                    </tr>
+                     <tr>
+                    	<td>jquery.uniform.min.js</td>
+                        <td>Plugin</td>
+                        <td>
+                        	Uniform masks standard form controls with custom themed ones. 
+                        	It works in sync with real form elements to ensure accessibility 
+                            and compatibility.
+                        </td>
+                        <td>
+                        	<a href="http://pixelmatrixdesign.com/uniform/">
+                        	  Link
+                            </a>
+                       	</td>
+                       	<td>MIT</td>
+                    </tr>
+                    <tr>
+                    	<td>jquery.weekcalendar.js</td>
+                        <td>Plugin</td>
+                        <td>A week calendar plugin with events support</td>
+                        <td>
+                        	<a href="http://www.redredred.com.au//">
+                        	  Link
+                            </a>
+                       	</td>
+                       	<td>MIT/GPL</td>
+                    </tr>
+                     <tr>
+                    	<td>jquery-ui-1.8.4.custom.min.js</td>
+                        <td>Library</td>
+                        <td>
+                        	jQuery UI is an open source library of interface components — interactions, 
+                        	full-featured widgets, and animation effects — based on the 
+                        	stellar jQuery javascript library . 
+                        </td>
+                        <td>
+                        	<a href="http://jqueryui.com/">
+                        	  Link
+                            </a>
+                       </td>
+                       <td>MIT/GPL v.2</td>
+                    </tr>
+                   <tr>
+                    	<td>table.js</td>
+                        <td>Plugin</td>
+                        <td>TableDnD plug-in for JQuery, allows you to drag and drop table rows.</td>
+                        <td>
+                        	<a href="http://www.isocra.com/2008/02/table-drag-and-drop-jquery-plugin/">
+                        	  Link
+                            </a>
+                       </td>
+                       <td>MIT/GPL v.2</td>
+                    </tr>
+                        <tr>
+                    	<td>jquery.tools.min.js</td>
+                        <td>Library</td>
+                        <td>
+                        	JQuery tools is a compact library which provides many nice plugins. 
+                        	In our case the tooltip plugin was used.</td>
+                        <td>
+                        	<a href="http://flowplayer.org/tools/demos/tooltip/index.html">
+                        	  Link
+                            </a>
+                       	</td>
+                       	<td>No License (do with code whatever you wish to do)</td>
+                    </tr>
+                    <tr>
+                    	<td>ie6/warning.js</td>
+                        <td>Plugin</td>
+                        <td>A plugin for blocking IE 6 users and suggesting an update to the browser.</td>
+                        <td>
+                        	<a href="http://code.google.com/p/ie6-upgrade-warning/">
+                        	  Link
+                            </a>
+                       </td>
+                       <td>MIT</td>
+                    </tr>
+                     <tr>
+                    	<td>jqplot</td>
+                        <td>Library</td>
+                        <td>Jquery plotting library. Helps to create charts with a pleuthora of options and customizations</td>
+                        <td>
+                        	<a href="http://www.jqplot.com">
+                        	  Link
+                            </a>
+                       </td>
+                       <td>MIT/GPL v.2</td>
+                    </tr>
+                    <tr>
+                    	<td>markitup</td>
+                        <td>Plugin</td>
+                        <td>A nice and stable jquery WYSIWYG plugin</td>
+                        <td>
+                        	<a href="http://markitup.jaysalvat.com/">
+                        	  Link
+                            </a>
+                       </td>
+                       <td>MIT/GPL</td>
+                    </tr>
+                     <tr>
+                    	<td>custom.js</td>
+                        <td>Snippets</td>
+                        <td>
+                        	Jquery Code snippets necessary for site functioning. Everything is well-documented
+                        	so it should be pretty easy to make modifications if required.
+                        </td>
+                        <td>
+                        	-
+                       </td>
+                       <td>
+                        	-
+                       </td>
+                    </tr>
+                 
+                    
+                </tbody>    
+            </table>
+             
+            <h3 id="psdFiles">6. PSD Files</h3>
+            <a href="#container" class="anchorLink">Back to Top</a>
+            <p class="text-content">
+            	Photoshop files are provided for the general pages for each theme.
+                The layers are logically named and are groupped. 
+                Beside template files, there is also a folder  ('misc') where some
+                additional styles are provided. The main structure is shown below.  
+             </p>
+             <ul id="theme-browser" class="filetree">
+                <li><span class="folder">PSD</span>
+                     <ul>
+                        <li><span class="folder">abstract-blue</span>
+                            <ul id="folder21">
+                                <li><span class="image">Assets.psd</span></li>
+                                <li><span class="image">Dashboard.psd</span></li>
+                            	<li><span class="image">Events.psd</span></li>
+                                <li><span class="image">Login.psd</span></li>
+                                <li><span class="image">Sample Page.psd</span></li>
+                            	<li><span class="image">Tasks.psd</span></li>
+                            </ul>
+                        </li>
+                        <li class="closed"><span class="folder">clean-grey</span>
+                        	<ul id="folder21">
+                                <li><span class="image">Assets.psd</span></li>
+                                <li><span class="image">Dashboard.psd</span></li>
+                            	<li><span class="image">Events.psd</span></li>
+                                <li><span class="image">Login.psd</span></li>
+                                <li><span class="image">Sample Page.psd</span></li>
+                            	<li><span class="image">Tasks.psd</span></li>
+                            </ul>
+                        </li>
+                        <li class="closed"><span class="folder">sleek-wood</span>
+                            <ul id="folder21">
+                                <li><span class="image">Assets.psd</span></li>
+                                <li><span class="image">Dashboard.psd</span></li>
+                            	<li><span class="image">Events.psd</span></li>
+                                <li><span class="image">Login.psd</span></li>
+                                <li><span class="image">Sample Page.psd</span></li>
+                            	<li><span class="image">Tasks.psd</span></li>
+                            </ul>
+                        </li>
+                        <li ><span class="folder">Misc</span>
+                            <ul id="folder21">
+                                <li><span class="image">Menus and status messages.psd</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <p class="text-content">
+            	All the photoshop files are well documented and are divided into 3 logical groups: header, body and footer.
+            </p>
+            
+            <h3 id="credits">7. Sources and Credits</h3>
+            <a href="#container" class="anchorLink">Back to Top</a>
+            <p class="text-content">
+            	Except the javascript sources provided above, some other sources are used in the template, like icons.
+                The credits go to the sources listed below:
+                 <table class="list-table">
+            		<thead>
+                        <tr>
+                            <th>Type</th>
+                            <th width="120">Name</th>
+                            <th width="150">Source</th>
+                            <th>Additional Notes</th>
+                        </tr>
+                	</thead>
+                	<tbody>
+                        <tr>
+                            <td>icon</td>
+                            <td>Fugue icons</td>
+                            <td><a href="http://p.yusukekamiyamane.com/">Official Website</a></td>
+                           	<td>
+                           		Some Icons are Copyright © Yusuke Kamiyamane. All rights reserved. Licensed under a 
+                           		Creative Commons Attribution 3.0 license.
+                            </td>
+                        </tr> 
+                        <tr>
+                            <td>icon</td>
+                            <td>Basic Set 2</td>
+                            <td><a href="http://pixel-mixer.com/"> Official Website</a></td>
+                           	<td>
+                           		Beautiful icons set from pixel-mixer.com. The icons are free for commercial use if 
+                                A link to pixel-mixer.com is provided. Otherwise, consider purchasing 
+                                a <a href="https://www.plimus.com/jsp/buynow.jsp?contractId=2791546">commercial license</a>.
+                            </td>
+                        </tr> 
+                        <tr>
+                            <td>icon</td>
+                            <td>Baggy Icon Set</td>
+                            <td><a href="http://freebiesdock.com/baggy-icon-set-released/"> Official Website</a></td>
+                           	<td>
+                           		Baggy Icons are Free for commercial and non-commercial use.
+                            </td>
+                        </tr> 
+                        <tr>
+                            <td>photo</td>
+                            <td>Woman photo</td>
+                            <td><a href="http://www.flickr.com/photos/adriarichards/2798736890/"> Official Page</a></td>
+                           	<td>
+                            	The photo was used on tasks' page for member's list.
+                           		This is a remix of a photo found on flickr. Licensed under 
+                                <a href="http://creativecommons.org/licenses/by-sa/2.0/deed.en">
+                                	Creative Commons Attribution-ShareAlike 2.0 Generic</a> license.
+                            </td>
+                        </tr> 
+                    </tbody>
+                </table> 
+            </p>
+           	<h3 id="issues">8. Known issues</h3>
+            <a href="#container" class="anchorLink">Back to Top</a>
+            <p class="text-content">
+            	Chrome doesn't support cookies for local files unless you start it with the --enable-file-cookies flag.
+                Though not a catastrophic issue in our case, this functionaltiy is required to save theme and layout preferences of the template. 
+            	You can read a discussion about it <a href="http://code.google.com/p/chromium/issues/detail?id=535">here</a>.
+                If you are having the problem executing AJAX in chrome no matters you are using jQuery, Mootools or core javascript. Just make sure 
+                you are not using it in normal html page running fro your local disk. Its chromes security which cancels all AJAX calls on local 
+                file storage. Please make sure your code is running on any webserver WAMP, XAMP , ISS or any other. Otherwise all other browsers 
+                will render your AJAX calls but chrome will fail to render such calls.
+            </p>
+            
+            <h3 id="mobile" style="color:#900">9. Mobile Version</h3>
+            <a href="#container" class="anchorLink">Back to Top</a>
+            <p class="text-content">
+            	The mobile version is based on brand-new jquery mobile - a Touch-Optimized Web Framework for Smartphones &amp; Tablets.
+                Visit <a href="http://jquerymobile.com/">Jquery Mobile Website</a>.
+                All the documentation can be found <a href="http://jquerymobile.com/demos/1.0a2/">Here</a>. Please note that the link 
+                to documentation page might change when new versions of the library become available so it is better to navigate to main
+                website first.
+                <p>
+                	There are 2 theme files available currently: Default and Valencia. For your convenience the themes styles' files are 
+                    copied to <span style="font-style:italic">/mobile/css</span> folder. 
+                    To choose preferred theme file just change the css include file to theme1.css or theme2.css in mobile templates' files.
+                    All these reside in <code><span style="font-style:italic">&lt;head&gt;&lt;/head&gt;</span></code> section of corresponding html files.
+                </p>
+                <p>
+                	The PSD Files for mobile version have not been created as there is an amazing IPhone GUI also available. 
+                    The files can be downloaded here:<br /> 
+                    <ul>
+                    	<li><a href="http://teehanlax.com/s3.php?path=files/iPhone_GUI_PSD_4.psd.zip">IPhone GUI 4</a></li>
+                    	<li><a href="http://teehanlax.com/s3.php?path=files/iPhone_4_GUI_PSD_Retina_Display.zip">IPhone GUI 4 (Retina Display)</a></li>
+                    </ul>
+                </p>
+                <p>Also, don't forget to check for Jquery Mobile framework updates to always have the best version available.</p>
+            </p>
+        </div>
+                  
+    </div>
+</body>
+</html>

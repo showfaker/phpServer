@@ -1,0 +1,101 @@
+<div class="pageHeader" style="border:1px #B8D0D6 solid">
+	<form id="pagerForm" onsubmit="return divSearch(this, 'jbsxBoxmywork');" action="__URL__/index/token/{$token}/" method="post">
+	<input type="hidden" name="pageNum" value="1" />
+	<input type="hidden" name="numPerPage" value="${model.numPerPage}" />
+	<input type="hidden" name="orderField" value="${param.orderField}" />
+	<input type="hidden" name="orderDirection" value="${param.orderDirection}" />
+	<input type="hidden" name="search" value="1" />
+	<div class="searchBar">
+		<table class="searchContent">
+			<tr>
+				<td class="dateRange">
+					委派日期:
+					<input type="text" value="" readonly="readonly" class="date" name="timebeginmywork">
+					<span class="limit">-</span>
+					<input type="text" value="" readonly="readonly" class="date" name="timeendmywork">
+				</td>
+				<td><div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div></td>
+			</tr>
+		</table>
+	</div>
+	</form>
+</div>
+
+<div class="pageContent" style="border-left:1px #B8D0D6 solid;border-right:1px #B8D0D6 solid">
+<div class="panelBar">
+		<ul class="toolBar"><!-- target="dialog"  mask="true" rel="add" height="170" width="520" -->
+			<li><a class="edit" href="__URL__/edit/id/{sid_mywork}" warn="请选择您要分配的任务！" target="dialog" mask="true" height="270" width="520"><span>分配任务</span></a></li>
+			<li class="line">line</li>
+			<li><a class="edit" href="__URL__/commit/id/{sid_mywork}" warn="请选择您要结束的任务！" target="dialog"  mask="true" height="170" width="520"><span>完成任务</span></a></li>
+			<li class="line">line</li>
+			<li><a class="delete" href="__URL__/refusework/id/{sid_mywork}" warn="请选择您要拒绝的任务！" target="dialog"  mask="true" height="170" width="520"><span>拒绝任务</span></a></li>
+			<li><a class="icon" href="__APP__/Workassignment/info/id/{sid_mywork}" target="dialog" warn="请选择您要查看的任务！" height="360" width="540"><span>任务详情</span></a></li>
+		</ul>
+	</div>
+	<table class="table" width="99%" layoutH="166" rel="jbsxBoxmywork">
+		<thead>
+			<tr>
+						<th width="3%"><input class="check-all" type="checkbox" /></th>
+					    <th width="8%">任务标题</th>
+					    <!-- <th width="10%">任务内容</th> -->
+					    <th width="4%">重要</th>
+						<th width="11%">当前责任人</th>
+						<th width="11%">经办人</th>
+                        <!-- <th width="11%">委派时间</th> -->
+                        <!-- <th width="8%">起始时间</th> -->
+                        <th width="15%">完成期限</th>
+                        <th width="6%">委派人</th>
+                        <th width="5%">状态</th>
+                        <!-- <th width="11%">完成时间</th> -->
+                        <!-- <th width="12%">处理意见</th> -->
+						<th width="9%">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+		<volist name="list" id="listmenu">
+				    <tr title="{$listmenu['process']}" target="sid_mywork" rel="{$listmenu['id']}">
+                        <td><input type="checkbox" name="key" value="{$listmenu['id']}"></td>
+				        <td>{$listmenu['title']}</td>
+				        <!-- <td>{$listmenu['content']}</td> -->
+				        <td>{$listmenu['important']}</td>
+				        <td>{$listmenu['current']}</td>
+				        <td>{$listmenu['user_id']}</td>
+				        <!-- <td>
+				        <?php 
+						if($listmenu['create_time']!=0)
+						echo date('Y年m月d日 H:i:s',$listmenu['create_time']);?>
+				        </td> -->
+				        <td>{$listmenu['timebegin']}至<font color="red">{$listmenu['timeend']}</font></td>
+				        <td>{$listmenu['releaser']}</td>
+				        <td>
+                             {$listmenu['status']|workStatus=$listmenu['id']}
+                        </td>
+				        <!-- <td>
+						{$listmenu['view']}
+				        </td> -->
+                        <td>
+                       		<eq name="listmenu.ifcurrent" value="1">
+				            <a href="__URL__/edit/id/{$listmenu['id']}" target="dialog" mask="true" height="270" width="520" title="分配任务">
+                            <img src="__PUBLIC__/dwz/images/17.png" style="padding-top:2px" alt="分配" /></a> 
+                            <a href="__URL__/commit/id/{$listmenu['id']}" target="dialog"  mask="true" height="170" width="520" title="完成任务">
+                            <img src="__PUBLIC__/dwz/images/26.png" style="padding-top:2px" alt="完成" /></a>
+				            <a href="__URL__/refusework/id/{$listmenu['id']}" target="dialog"  mask="true" height="170" width="520" title="拒绝任务">
+                            <img src="__PUBLIC__/dwz/images/04.png" style="padding-top:2px" alt="拒绝" /></a>
+                            </eq>
+                            <eq name="listmenu.ifcurrent" value="0">
+                           	 您不是当前责任人
+                           	 </eq>
+				        </td>
+				    </tr>
+			        </volist>
+		</tbody>
+	</table>
+	<div class="panelBar">
+		<div class="pages">
+			<span>共{$totalCount}条</span>
+		</div>
+		
+		<div class="pagination" rel="jbsxBoxmywork" totalCount="{$totalCount}" numPerPage="{$numPerPage}" pageNumShown="5" currentPage="{$currentPage}"></div>
+
+	</div>
+</div>

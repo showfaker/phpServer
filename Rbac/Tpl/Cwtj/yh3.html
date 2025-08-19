@@ -1,0 +1,76 @@
+	<link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <!-- Data Tables -->
+    <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+
+	<link rel="stylesheet" href="css/main.css">
+	
+	<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal">×</button>
+	<h4 class="modal-title">供应商返利</h4>
+	</div>
+
+	<form id="format1" method="post" action="__URL__/yh3submit" enctype="multipart/form-data" class="form-horizontal">
+	    <input type="hidden" name="id" value="{$list.id}">
+		<div class="modal-body">
+        <table class="table table-bordered" id="editable">			
+				<tr>
+					<th width="5%">订单号</th>
+					<th width="14%">项目</th>
+					<th width="8%">费用科目</th>
+					<th width="10%">金额（元）</th>
+					<th width="10%">保证金（元）</th>
+					<th width="10%">材料金额（元）</th>
+					<th width="10%">已付金额（元）</th>
+					<th width="10%">供应商返利（元）</th>
+				
+				</tr>
+				<tr id="table-row-0">
+					<td>GC_{$list.id}</td>
+					<td>{$list.plm}</td>
+					<td>采购费</td>
+					<td><input type="hidden" name="total1" value='{$list.price}'>{$list.price}</td>
+					<td>{$list.baozheng}</td>
+					<td>{$list.price}</td>
+					<td>{$total_time2}</td>
+					<td><input type="text" name="yh2" value="{$list.yh2}" style="width:100px;"></td>
+				</tr>
+				<!-- <tr id="table-row-0" style="margin-bottom: 10px;">
+					<td colspan="8">{$str}</td>
+				</tr> -->
+		</table>
+		</div>
+	<div id="modal11" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" style="width:850px;height:600px">
+		<div class="modal-content">
+		   <div class="modal-header">  
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
+                    <span aria-hidden="true">×</span>  
+                </button>  
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>  
+            </div>  
+            <div class="modal-body">  
+                <p>One fine body…</p>  
+            </div>  
+            <div class="modal-footer">  
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                <button type="button" class="btn btn-primary">Save</button>  
+            </div>  
+		</div>
+	  </div>
+	</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-sm btn-white pull-right m-t-n-xs" data-dismiss="modal" style="margin-left:20px">关闭</button>
+			<button class="btn btn-sm btn-primary pull-right m-t-n-xs"><strong>提交</strong>
+			</button>
+		</div>
+	</form>
+    <script src="js/plugins/layer/laydate/laydate.js"></script>	
+    <script src="js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+	<script>
+		$('input[type="file"]').prettyFile();
+	</script>

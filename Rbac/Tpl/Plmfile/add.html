@@ -1,0 +1,76 @@
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport"/>
+<link rel="shortcut icon" href="favicon.ico">
+<link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/style.css?v=4.1.0" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal">×</button>
+<h4 class="modal-title">新增类别</h4>
+</div>
+
+<form id="format1" method="post" action="__URL__/name_add" enctype="multipart/form-data">    
+	<div class="modal-body" style="padding:10px"> 
+		<div class="form-group">
+		<label>类目：</label>
+		<div>
+			<span style="color:orange;">名称请不要使用空格等不常见字符</span>
+			<input type="text" class="form-control" value="" name="name">
+			<span style="color:red;display: none;" id='span'>名称不能为空或已经存在</span>
+		</div>
+		</div>
+		
+		
+		<div class="form-group">
+		<label>文件夹：</label>
+		<div>
+			<select type="text" class="form-control" value="" name="classify">
+				<option value="">请选择文件夹</option>
+				<volist name="folders" id="folder">
+					<option value="{$folder.name}">{$folder.name}</option>
+				</volist>
+			</select>
+		</div>
+		</div>
+		
+		<div class="btn1">				
+		</div>
+	</div>	
+	<div class="modal-footer">
+		<button type="button" class="btn btn-sm btn-white pull-right m-t-n-xs" data-dismiss="modal" style="margin-left:10px">关闭</button>
+		
+		<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit" id='submit'><strong>确定</strong>
+		</button>
+		
+	</div>
+</form> 
+    <!-- Chosen -->   
+	<script src="js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+	
+	<script>
+	    $("input").blur(function(){
+	    	var name=$(this).val();
+	    	var aj = $.ajax({
+                    url:'__URL__/ajax_name_check',
+                    data:{  
+                        name : name
+                    },
+                    type:'post',  
+                    cache:false,  
+                    dataType:'json',  
+                    success:function(data) {
+                        if(data==1){
+                        	$("#span").css('display','block');
+                            $('#submit').attr('disabled',true);
+                        }                   
+                        
+                    }  
+            });
+	    });
+	    $('input').focus(function(){
+	    	$("#span").css('display','none');
+            $('#submit').attr('disabled',false);
+	    });
+		    
+	</script>

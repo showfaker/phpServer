@@ -1,0 +1,410 @@
+	<link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <!-- Data Tables -->
+    <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="css/plugins/chosen/chosen.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.css">
+	<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+
+
+	<form id="format1" method="post" action="__URL__/insert" enctype="multipart/form-data" class="form-horizontal">    
+		<div class="modal-body" style="padding:0px;margin:0px">
+			<div class="form-group">
+				<div class="col-sm-12" style="margin-bottom: 20px;">
+					<label class="col-sm-2 control-label">选择项目：</label>
+					<div class="col-sm-4">
+					    <select name="plmid" data-placeholder="请选择项目" class="chosen-select" style="width:230px;">
+							<option value="">请选择项目</option>
+							<volist name="projects" id='project'>
+							<option value="{$project.id}" hassubinfo="true">{$project.title}</option>
+							</volist>
+						</select>
+					</div>
+					
+					<label class="col-sm-2 control-label">选择分组：</label>
+					<div class="col-sm-4">
+					    <select name="groupid" data-placeholder="请选择分组" style="width:230px;" class="form-control" tabindex="2">
+							<option value="">请选择分组</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-sm-12" style="margin-bottom: 20px;">	
+					<label class="col-sm-2 control-label">项目阶段：</label>
+					<div class="col-sm-4">
+						<select name="step" data-placeholder="请选择阶段" style="width:230px;" class="form-control" tabindex="2">
+							<option value="">请选择阶段</option>
+						</select>
+					</div>
+					
+					
+					<label class="col-sm-2 control-label">日期：</label>
+					<div class="col-sm-4">
+					    <input class="form-control" name="date" id="date" style="width:230px" value="<?php echo date("Y-m-d");?>">
+					</div>
+				</div>
+			</div>
+			<div style="overflow-y:auto;overflow-x:hidden;">
+			<table class="table table-bordered" id="editable" style="width:80%;margin:0 auto">
+				<tr>
+					<th width="10%">项目内容</th>
+					<th width="75%">具体指标</th>
+					<th width="15%">备注</th>
+				</tr>
+				<tbody class="i-checks" id="t_able">
+					<tr class="i-checks">
+						<td>人员状况</td> 
+						<td style="line-height:30px">
+						施工人员数量变化？他们的建议？</br>
+						<!--管理人员3人，班长2人、施工员12人，值班人员2人、操作手7人、驾驶员7人。外租操作手7人、外租驾驶员3人（大巴车、平板）。-->
+						<textarea class="col-sm-12" name="worker"></textarea>
+						</td> 
+						<td>天气：</br>
+						<textarea class="col-sm-12" name="weather" style="width:100px;"></textarea>
+						</td> 
+					</tr>
+					<tr class="i-checks">
+						<td>机械设备</td> 
+						<td style="line-height:30px">
+						设备使用情况？</br>
+						<!--自有设备：HM16-4、HM16-26; HM16-18、TR168-8;RM6800-7、HM18-5、EM6500-3、165-13、水车1辆、标牌车1辆、维修车1辆、中卡1辆、公务车1辆。
+						外租设备：钢轮2台、戴纳派克摊铺机、1米铣刨机1台、大巴车1辆、山猫1辆、废料车1辆、防撞车1辆、平板车2辆。-->
+						<textarea class="col-sm-12" name="device" style="height:100px"></textarea></br>
+						设备维修情况？
+						<textarea class="col-sm-12" name="device1"></textarea></br>
+						</td> 
+						<td>
+						<textarea class="col-sm-12" name="device2" style="width:100px;"></textarea>
+						</td> 
+					</tr>
+					<tr class="i-checks">
+						<td>材料</td> 
+						<td style="line-height:30px">
+						物料供应情况： </br>
+						<!--SMA-13改性沥青：
+						当日采购数量：61.5吨；实际施工消耗61.5吨，浪费约0吨。-->
+						<textarea class="col-sm-12" name="material" style="height:100px"></textarea></br>
+						热再生施工：</br>
+						<!--热再生平均加铺厚度0.66cm，每平方用料 0.018吨。热再生累计使用沥青料953.42吨;（甲方供料）-->
+						<textarea class="col-sm-12" name="material1"></textarea>
+						物料质量是否存在问题？</br>
+						<textarea class="col-sm-12" name="material2"></textarea></br>
+						是否需要协助解决？</br>
+						<textarea class="col-sm-12" name="material3"></textarea>
+						</td> 
+						<td></td> 
+					</tr>
+					<tr class="i-checks">
+						<td>产出</td> 
+						<td style="line-height:30px">
+						热再生施工</br>
+						<!--
+						施工部位：</br>
+						南京方向行三车道K1234+700-K1233+800，实际长度900m，宽3.9m</br>
+						当日热再生完成3510㎡，累计完成46850.7㎡</br>
+						完成项目估算工程量：70.72%（合同暂定工程量66245㎡）</br>
+						-->
+						<textarea class="col-sm-12" name="output"></textarea>
+						</td> 
+						<td></td> 
+					</tr>
+					<tr class="i-checks">
+						<td>质量</td> 
+						<td style="line-height:30px">
+						修补质量，存在的问题是什么？明天需要注意什么？ 
+						<textarea class="col-sm-12" name="quality"></textarea>
+						</td> 
+						<td></td> 
+					</tr>
+					<tr class="i-checks">
+						<td>温度情况</td> 
+						<td style="line-height:30px">
+						<textarea class="col-sm-12" name="temp"></textarea>
+						</td> 
+						<td></td> 
+					</tr>
+					<tr class="i-checks">
+						<td>施工计划</td> 
+						<td style="line-height:30px">
+						<textarea class="col-sm-12" name="plan"></textarea>
+						</td> 
+						<td></td> 
+					</tr>
+					<tr class="i-checks">
+						<td>返工记录</td> 
+						<td style="line-height:30px">
+						<textarea class="col-sm-12" name="remade"></textarea>
+						</td> 
+						<td></td> 
+					</tr>
+					<tr class="i-checks">
+						<td>安全状况</td> 
+						<td style="line-height:30px">
+						<textarea class="col-sm-12" name="safe"></textarea>
+						</td> 
+						<td></td> 
+					</tr>
+					<tr class="i-checks">
+						<td>与业主监理沟通</td> 
+						<td style="line-height:30px">
+						<textarea class="col-sm-12" name="communicate"></textarea>
+						</td> 
+						<td></td> 
+					</tr>
+					<tr class="i-checks">
+						<td>其它</td> 
+						<td style="line-height:30px">
+						<textarea class="col-sm-12" name="other"></textarea>
+						</td> 
+						<td></td> 
+					</tr>
+				</tbody>
+			</table>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<a href="#" onclick="changeout()" class="btn btn-primary">确认提交</a>
+			<button id="btnclick" class="btn btn-primary hidden"></button>
+		</div>
+	</form>
+	<div id="modal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" style="width:850px;height:600px">
+		<div class="modal-content">
+		   <div class="modal-header">  
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
+                    <span aria-hidden="true">×</span>  
+                </button>  
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>  
+            </div>  
+            <div class="modal-body">  
+                <p>One fine body…</p>  
+            </div>  
+            <div class="modal-footer">  
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                <button type="button" class="btn btn-primary">Save</button>  
+            </div>  
+		</div>
+	  </div>
+	</div>
+    <script src="js/jquery.min.js?v=2.1.4"></script>	
+    <!-- Chosen -->
+    <script src="js/plugins/chosen/chosen.jquery.js"></script>
+    <script src="js/demo/form-advanced-demo.js"></script>
+	<!-- jQuery Validation plugin javascript-->
+    <script src="js/plugins/validate/jquery.validate.min.js"></script>
+    <script src="js/plugins/validate/messages_zh.min.js"></script>
+
+    <script src="js/demo/form-validate-demo.js"></script>
+	<script src="js/plugins/iCheck/icheck.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$('.i-checks').iCheck({
+				checkboxClass: 'icheckbox_square-green',
+				radioClass: 'iradio_square-green',
+			});
+		});
+		var table=$('#editable').dataTable(
+			{
+			   iDisplayLength : 10000
+			}
+		);
+    </script>
+   
+	<script>
+		var step="";
+	    $("select[name='plmid']").change(function(){
+			document.getElementsByName("step")[0].innerHTML = "";
+			document.getElementsByName("groupid")[0].innerHTML = "";
+			var plmid=$(this).val();
+			var date=$('input[name="date"]').val();
+			var aj = $.ajax({
+				url:'__URL__/ajaxstep',
+				data:{
+					plmid : plmid
+				},
+				type:'post',  
+				cache:false,  
+				dataType:'json',  
+				success:function(data) {
+					if(data!=null){
+						var code="";
+						for(var i=0;i<data.length;i++){
+						code+="<option value='"+data[i]['pworktype']+"'>"+data[i]['pworktype']+"</option>";
+						}
+						$("select[name='step']").append(code);
+						
+						
+						step=$('select[name="step"]').val();
+						var aj = $.ajax({
+							url:'__URL__/ajaxgroup',
+							data:{  
+								plmid : plmid
+							},
+							type:'post',  
+							cache:false,  
+							dataType:'json',  
+							success:function(data) {
+								if(data!=null){
+									var code="";
+									for(var i=0;i<data.length;i++){
+									code+="<option value='"+data[i]['id']+"'>"+data[i]['group']+"</option>";
+									}
+									$("select[name='groupid']").append(code);
+									
+									
+									
+									var groupid=document.getElementsByName("groupid")[0].value;
+									var aj = $.ajax({
+											url:'__URL__/ajaxgetWorkersByGroupId',
+											data:{
+												groupid : groupid,
+												date:date,
+												step:step
+											},
+											type:'post',  
+											cache:false,  
+											dataType:'json',  
+											success:function(data) {
+												if(data!=null){
+												
+													document.getElementsByName("worker")[0].value=data.worker;
+													document.getElementsByName("device")[0].value=data.device;
+													document.getElementsByName("device1")[0].value=data.device1;
+													document.getElementsByName("material")[0].value=data.material;
+													document.getElementsByName("material1")[0].value=data.material1;
+													document.getElementsByName("output")[0].value=data.output;
+													
+													$('.i-checks').iCheck({
+														checkboxClass: 'icheckbox_square-green',
+														radioClass: 'iradio_square-green',
+													});
+												}					
+												
+											}  
+										});
+							
+							
+								}					
+								
+							}  
+						});
+					}					
+					
+				}  
+			});
+			
+			
+		})
+		
+		$("select[name='groupid']").change(function(){
+			var groupid=$(this).val();
+			var date=$('input[name="date"]').val();
+			step=$('select[name="step"]').val();
+			//$("#t_able").children().remove();
+			var aj = $.ajax({
+					url:'__URL__/ajaxgetWorkersByGroupId',
+					data:{  
+						groupid:groupid,
+						date:date,
+						step:step
+					},
+					type:'post',  
+					cache:false,  
+					dataType:'json',  
+					success:function(data) {
+						if(data!=null){
+							
+							document.getElementsByName("worker")[0].value=data.worker;
+							document.getElementsByName("device")[0].value=data.device;
+							document.getElementsByName("device1")[0].value=data.device1;
+							document.getElementsByName("material")[0].value=data.material;
+							document.getElementsByName("material1")[0].value=data.material1;
+							document.getElementsByName("output")[0].value=data.output;
+													
+							$('.i-checks').iCheck({
+								checkboxClass: 'icheckbox_square-green',
+								radioClass: 'iradio_square-green',
+							});
+						}					
+						
+					}  
+				});
+		})
+		
+		
+		
+		$("input[name='date']").change(function(){
+			var groupid=$('select[name="groupid"]').val();
+			var date=$('input[name="date"]').val();
+			step=$('select[name="step"]').val();
+			var aj = $.ajax({
+					url:'__URL__/ajaxgetWorkersByGroupId',
+					data:{  
+						groupid:groupid,
+						date:date,
+						step:step
+					},
+					type:'post',  
+					cache:false,  
+					dataType:'json',  
+					success:function(data) {
+						if(data!=null){
+							document.getElementsByName("worker")[0].value=data.worker;
+							document.getElementsByName("device")[0].value=data.device;
+							document.getElementsByName("device1")[0].value=data.device1;
+							document.getElementsByName("material")[0].value=data.material;
+							document.getElementsByName("material1")[0].value=data.material1;
+							document.getElementsByName("output")[0].value=data.output;
+							
+							$('.i-checks').iCheck({
+								checkboxClass: 'icheckbox_square-green',
+								radioClass: 'iradio_square-green',
+							});
+						}					
+						
+					}  
+				});
+		})
+		
+		/*
+		laydate.render({
+			elem:'#date',//制定元素
+			type:'date',
+			//range:true,//开启左右面板
+			min:'2020-10-21',//
+			max:'2025-10-21',//规定时间期限
+			trigger:'mouseover',//定义鼠标悬停时弹出控件
+			show:true,//默认显示
+			position:'absolute',
+			//btns:['clear','now'],//工具按钮 默认值['clear', 'now', 'confirm']
+			theme:'#393D49',//主题颜色
+			calendar:true,//是否显示公历节日
+			mark:{
+				'2017-9-21': '发布'//自定义标注重要日子
+			},
+			done:function(value,date){//value, date, endDate点击日期、清空、现在、确定均会触发。回调返回三个参数，分别代表：生成的值、日期时间对象、结束的日期时间对象
+				console.log(value);
+				console.log(date);
+				alert("123");
+			}
+		});
+		*/
+	</script>
+	<script>
+	 function changeout(){
+	 	var plm=$('select[name="plmid"]').val();
+		var date=$('select[name="date"]').val();
+		if(date==''){
+			alert('请选择日期');
+		}else if(plm==''){
+			alert('请选择项目');
+		}else{
+			$("#btnclick").click();
+		}
+	 }
+	
+	</script>
+
+    

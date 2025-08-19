@@ -1,0 +1,270 @@
+	<link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <!-- Data Tables -->
+    <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="css/plugins/chosen/chosen.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.css">
+	
+
+
+	<form id="format1" method="post" action="__URL__/insert" enctype="multipart/form-data" class="form-horizontal">    
+		<div class="modal-body" style="padding:0px;margin:0px">
+			<div class="form-group">
+				<div class="col-sm-12" style="margin-bottom: 20px;">
+					<label class="col-sm-2 control-label">选择项目：</label>
+					<div class="col-sm-4">
+					    <select name="plmid" data-placeholder="请选择项目" class="chosen-select" style="width:230px;">
+							<option value="">请选择项目</option>
+							<volist name="projects" id='project'>
+							<option value="{$project.id}" hassubinfo="true" <eq name="project.title" value="$lastplm">selected</eq>>{$project.title}</option>
+							</volist>
+						</select>
+					</div>
+					
+					<!--
+					<label class="col-sm-2 control-label">项目阶段：</label>
+					<div class="col-sm-4">
+						<select name="step" data-placeholder="请选择阶段" style="width:230px;" class="form-control" tabindex="2">
+							<option value="">请选择阶段</option>
+						</select>
+					</div>
+					-->
+				</div>	
+				<div class="col-sm-12" style="margin-bottom: 20px;">
+					<!--
+					<label class="col-sm-2 control-label">选择分组：</label>
+					<div class="col-sm-4">
+						<select name="groupid" data-placeholder="请选择分组" style="width:230px;" class="form-control" tabindex="2">
+							<option value="">请选择分组</option>
+						</select>
+					</div>
+					-->
+				
+					
+					<label class="col-sm-2 control-label">日期：</label>
+					<div class="col-sm-4">
+						<input class="form-control" name="date" style="width:230px" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" autocomplete="off" value="<?php echo date("Y-m-d");?>">
+					</div>
+					
+				</div>
+			</div>
+			<div class="">
+				<a onclick="fnClickAddRow();" href="javascript:void(0);" class="btn btn-primary ">添加行</a>
+			</div>
+			<div style="height:300px;overflow-y:auto;overflow-x:hidden;">
+			<table class="table table-striped table-bordered table-hover " id="editable">
+				<thead>
+					<tr>
+						<th width="6%">费用类型</th>
+						<th width="6%">费用金额</th>
+						<th width="5%">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr id="table-row-0">
+						<td><select name="classify[]"class="form-control" style="width:130px;">
+								<option value="">请选择类别</option>
+								<volist name="classifies" id="classify">
+									<option value="{$classify.name}">{$classify.name}</option>
+								</volist>
+							</select>
+						</td> 
+						<td><input type="text" placeholder="费用金额" class="form-control price" size="30%" name="money[]" onblur="jisuan()"></td> 
+						<td>						
+						<a class="btn btn-danger btn-xs delete" href="javascript:void(0);">删除</a>
+						</td>				
+					</tr>
+				</tbody>
+			</table>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<a href="#" onclick="changeout()" class="btn btn-primary">确认提交</a>
+			<button id="btnclick" class="btn btn-primary hidden"></button>
+		</div>
+	</form>
+	<div id="modal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" style="width:850px;height:600px">
+		<div class="modal-content">
+		   <div class="modal-header">  
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
+                    <span aria-hidden="true">×</span>  
+                </button>  
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>  
+            </div>  
+            <div class="modal-body">  
+                <p>One fine body…</p>  
+            </div>  
+            <div class="modal-footer">  
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                <button type="button" class="btn btn-primary">Save</button>  
+            </div>  
+		</div>
+	  </div>
+	</div>
+    <script src="js/jquery.min.js?v=2.1.4"></script>	
+    <!-- Chosen -->
+    <script src="js/plugins/chosen/chosen.jquery.js"></script>
+    <script src="js/demo/form-advanced-demo.js"></script>
+	<!-- jQuery Validation plugin javascript-->
+    <script src="js/plugins/validate/jquery.validate.min.js"></script>
+    <script src="js/plugins/validate/messages_zh.min.js"></script>
+
+    <script src="js/demo/form-validate-demo.js"></script>
+	<script>
+		var table=$('#editable').dataTable(
+		{
+		   iDisplayLength : 10000
+		}
+		);
+    </script>
+    <script>
+
+        function fnClickAddRow() {
+        	var flag=0;
+        	if(flag==0){
+        		$('#editable').dataTable().fnAddData([
+	            	'<select name="classify[]"class="form-control" style="width:130px;">\
+						<option value="">请选择类别</option>\
+						<volist name="classifies" id="classify">\
+							<option value="{$classify.name}">{$classify.name}</option>\
+						</volist>\
+					</select>',
+				    '<input type="text" placeholder="费用金额" class="form-control price" size="30%" name="money[]" onblur="jisuan()">',
+					'<a class="btn btn-danger btn-xs delete" href="javascript:void(0);">删除</a>'
+					]);
+				$('.layer-date').click(function(){
+					laydate({istime: true, format: 'YYYY-MM-DD'});
+				});
+				$('.delete').on('click', function(e) {
+					var table = $('#editable').DataTable();
+					table.row($(this).parents('tr')).remove().draw();
+					jisuan();
+				});
+				$('select').attr('class','form-control');
+        	}
+	            
+        }
+    </script>
+    <script>
+		function jisuan(){
+			var total=parseFloat(0);
+			total=parseFloat(total);
+			$('.price').each(function(i){
+				total=parseFloat(total+parseFloat($(this).val()));
+			});
+			if(isNaN(total)){
+				total=0;
+			}
+			$('#price').val(total);
+		}
+		
+	
+    </script>
+   
+	<script>
+	    $("select[name='plmid']").change(function(){
+		//$("#groupid").nextAll().remove();
+		document.getElementsByName("groupid")[0].innerHTML = "";
+		document.getElementsByName("step")[0].innerHTML = "";
+		var plmid=$(this).val();
+		var aj = $.ajax({
+				url:'__URL__/ajaxgroup',
+				data:{  
+					plmid : plmid
+				},
+				type:'post',  
+				cache:false,  
+				dataType:'json',  
+				success:function(data) {
+					if(data!=null){
+						var code="";
+						for(var i=0;i<data.length;i++){
+						code+="<option value='"+data[i]['id']+"'>"+data[i]['group']+"</option>";
+						}
+						$("select[name='groupid']").append(code);
+					}					
+					
+				}  
+			});
+		var aj = $.ajax({
+				url:'__URL__/ajaxstep',
+				data:{  
+					plmid : plmid
+				},
+				type:'post',  
+				cache:false,  
+				dataType:'json',  
+				success:function(data) {
+					if(data!=null){
+						var code="";
+						for(var i=0;i<data.length;i++){
+						code+="<option value='"+data[i]['pworktype']+"'>"+data[i]['pworktype']+"</option>";
+						}
+						$("select[name='step']").append(code);
+					}					
+					
+				}  
+			});
+		
+		})
+	
+	</script>
+	<script>
+	 function changeout(){
+	 	var supplier=$('select[name="supplier"]').val();
+	 	var city=$('select[name="city"]').val();
+	 	var plm=$('select[name="plmid"]').val();
+	 	var name=$('select[name="classify"]').val();
+	 	var count=0;
+	 	$('input[name="time[]"]').each(function(){
+	 		if($(this).val()==''){
+	 			count++;
+	 		}
+	 	});
+	 	if(count>1){
+	 		alert('时间节点只能留一个空白.');
+	 	}else{
+	 		if(supplier==''){
+		 		alert('请选择供应商.');
+		 	}else if(city==''){
+		 		alert('请选择城市.');
+		 	}else if(plm==''){
+		 		alert('请选择项目.');
+		 	}else if(name==''){
+		 		alert('请选择预付款项.');
+		 	}else{
+		 		$("#btnclick").click();
+		 	}
+	 	}
+		 	
+	 }
+	</script>
+	<script>
+		$('select[name="classify"]').change(function(){
+			$("#opt2").nextAll().remove();
+			var classify=$(this).val();
+			var ajax=$.ajax({
+				url:'__URL__/ajaxclassify',
+				data:{classify:classify},
+				type:'post',
+				cache:false,
+				dataType:'json',
+				success:function(data){
+						console.log(data);
+						var code="";
+						for(var i=0;i<data.length;i++){
+						code+="<option value='"+data[i]['supplier']+"'>"+data[i]['supplier']+"</option>";
+						}
+						$("select[name='supplier']").append(code);
+		
+				}
+			});
+		});
+
+	</script>
+
+    

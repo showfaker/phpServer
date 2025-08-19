@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.css">
+</head>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content">
+        <div class="row">
+
+			<div class="col-sm-12" style="overflow-x:auto">
+				
+				<div class="tab-content">
+                    <div id="tab-1" class="tab-pane active">			
+					<table class="table table-hover margin bottom table-bordered">
+						<thead>
+							<tr>
+								<th class="text-center">序号</th>
+								<th>{$title}</th>
+								<volist name="worktypes" id="worktype">
+								<th class="text-center">{$worktype.title}</th>
+								</volist>
+							</tr>
+						</thead>
+						<tbody>
+							<volist name="cities" id="city">
+							<tr>
+								<td class="text-center">{$key+1}</td>
+								<td>{$city[title]}</td>
+								<volist name="city.detail" id="detail">
+								<td class="text-center">
+								<notin name="detail.realtimelength" value=",0">
+								
+								<eq name="detail.realtimelength" value="0.1">
+								<a class="setcancle" title="{$city[title]}_{$detail[title]}">
+								<div title="{$city[title]}_{$detail[title]}">
+								<span class="btn btn-primary btn-sm btn-circle" type="button" style="width:20px;height:20px;padding:0px" title="{$city[title]}_{$detail[title]}"><i class="fa fa-check"></i></span>
+								</div>
+								</a>
+								</eq>
+								<neq name="detail.realtimelength" value="0.1">
+								<a class="setcancle" title="{$city[title]}_{$detail[title]}">
+								<div title="{$city[title]}_{$detail[title]}">
+								<span class="btn btn-info btn-sm btn-circle" type="button" style="width:20px;height:20px;padding:0px" title="{$city[title]}_{$detail[title]}"><i class="fa fa-check"></i></span>
+								</div>
+								</a>
+								</neq>
+								
+								</notin>
+								
+								<in name="detail.realtimelength" value=",0">
+								<a class="btn btn-default btn-xs setsubmit" title="{$city[title]}_{$detail[title]}">
+								<div title="{$city[title]}_{$detail[title]}">
+								</div>
+								</a>
+								</in>
+								
+								</td>
+								</volist>
+								</td>
+							</tr>
+							</volist>
+						</tbody>
+					</table>
+					</div>
+				</div>
+			</div>
+        </div>
+    </div>
+	
+	
+	<div id="myModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-lg">
+		<div class="modal-content animated bounceInRight">
+		   <div class="modal-header">  
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
+                    <span aria-hidden="true">×</span>  
+                </button>  
+                <h4 class="modal-title" id="myModalLabel">正在加载</h4>  
+            </div>  
+            <div class="modal-body">  
+                <p>正在加载…</p>  
+            </div>  
+            <div class="modal-footer">
+            </div>  
+		</div>
+	  </div>
+	</div>
+	
+	
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+	<script src="js/plugins/layer/laydate/laydate.js"></script>
+    <script src="js/content.js?v=1.0.0"></script>
+	
+	<link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+	<script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+	<script>
+        $(document).ready(function () {
+			$("#myModal").on("hidden.bs.modal", function() {
+				$(this).removeData("bs.modal");  
+			});
+        });
+    </script>
+	<script>	
+	$('.setcancle').click(function () {	
+        id=$(this).attr("title");		
+		swal({
+			title: "您确定要取消吗",
+			text: "取消后将无法恢复操作，请谨慎操作！",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			cancelButtonText: "取消",
+			confirmButtonText: "确定",
+			closeOnConfirm: false
+		}, function () {
+			var aj = $.ajax({
+				url:'__URL__/setcancel',
+				data:{
+					id : id
+				},
+				type:'post',  
+				cache:false,  
+				dataType:'json',  
+				success:function(data) {					
+					swal("操作成功！", "请刷新查看结果。", "success");
+					location.href=location.href;
+				}  
+			});
+			
+		});
+	});
+	
+	$('.setsubmit').click(function () {	
+        id=$(this).attr("title");
+		swal({
+			title: "您确定要设置吗",
+			text: "设置后将无法恢复操作，请谨慎操作！",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			cancelButtonText: "取消",
+			confirmButtonText: "确定",
+			closeOnConfirm: false
+		}, function () {
+			var aj = $.ajax({
+				url:'__URL__/setsubmit',
+				data:{
+					id : id
+				},
+				type:'post',  
+				cache:false,  
+				dataType:'json',  
+				success:function(data) {					
+					swal("操作成功！", "请刷新查看结果。", "success");
+					location.href=location.href;
+				}  
+			});
+			
+		});
+	});
+	</script>
+</body>
+</html>

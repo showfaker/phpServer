@@ -1,0 +1,160 @@
+	
+	<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal">×</button>
+	<h4 class="modal-title">付款单</h4>
+	</div>
+	<form action="__URL__/gcPaySubmit" method="post">
+		<div class="modal-body">
+			<div class="form-group" style="height:30px;">
+				<div class="col-sm-12">
+					<label class="col-sm-2 control-label">供应商名称：</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" value="{$supplier.supplier}" readonly>
+					</div>
+					<label class="col-sm-2 control-label">付款时间：</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" name="enddate" readonly value="{$list.ctime|date='Y-m-d',###}">
+					</div>
+				</div>
+			</div>
+			<div class="form-group" style="height:30px;">
+			<div class="col-sm-12">
+				<label class="col-sm-2 control-label">银行账号：</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" value="{$supplier.bankaccount}" readonly>
+				</div>
+				<label class="col-sm-2 control-label">银行账户名：</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" value="{$supplier.bankname}" readonly>
+				</div>
+			</div>
+		</div>
+		<div class="form-group" style="height:30px;">
+			<div class="col-sm-12">
+			    <label class="col-sm-2 control-label">开户行：</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" value="{$supplier.bankhu}" readonly>
+				</div>
+				<label class="col-sm-2 control-label">联系电话：</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" value="{$supplier.telephone}" readonly>
+				</div>
+			</div>
+		</div>
+        <div class="form-group" style="height:30px;">
+			<div class="col-sm-12">
+			    <label class="col-sm-2 control-label">材料总价：</label>
+				<div class="col-sm-4">
+					<input type="text" name="total" class="form-control" value="{$list.price}" readonly>
+				</div>
+				<label class="col-sm-2 control-label">保证金：</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" value="{$list.baozheng}" readonly>
+				</div>
+			</div>
+		</div>
+		<div class="form-group" style="height:30px;">
+			<div class="col-sm-12">
+			    <label class="col-sm-2 control-label">应付总价<br/>(扣除返利):</label>
+				<div class="col-sm-4">
+					<input type="text" name="total" class="form-control" value="{$should_pay}" readonly>
+				</div>
+			</div>
+		</div>
+        <div style="margin:0 auto;width:80%">
+				<table class="table table-striped table-bordered table-hover " id="editable" width="80%" style="margin:0 auto;">
+					<thead>
+						<tr>
+							<th width="20%" class="text-center">时间节点</th>
+							<th width="20%" class="text-center">材料金额</th>
+							<th width="20%" class="text-center">已付金额</th>
+							<th width="20%" class="text-center">付款金额</th>
+							<th width="20%" class="text-center">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<volist name="paytime" id="material">
+						<tr id="table-row-0">
+							<td style="text-align: center;">{$material.paytime}</td>
+							<td style="text-align: center;">{$material.pay}</td>
+							<td style="text-align: center;">{$material.oldpay}</td>
+							<td style="text-align: center;">
+								<eq name='material.status' value='0'>
+									<neq name="material.paytime" value="">
+										<input type="text" class="form-control"  value="{$material.notpay}">
+									</neq>
+									<eq name="material.paytime" value="">
+										未设置时间
+									</eq>
+								</eq>
+								<eq name='material.status' value="1"><b style="color:green;">已付款</b></eq>
+							</td>
+							<td style="text-align: center;">
+								<eq name='material.status' value='0'>
+									<neq name="material.paytime" value="">
+										<a class="btn btn-xs btn-info pay"  title="{$material.id}">付款</a>
+									</neq>
+									<eq name="material.paytime" value="">
+										<a class="btn btn-xs btn-info disabled" >付款</a>
+									</eq>
+								</eq>
+								<eq name='material.status' value="1"><b style="color:green;">已付款</b></eq>
+							</td>
+						</tr>
+						<tr><td class="text-right">申请人备注:</td><td colspan="4">{$material.remark}</td></tr>
+						</volist>
+					</tbody>
+				</table>
+		</div>			
+		</div>	
+		<div class="modal-footer">
+			<!-- <button class="btn btn-sm btn-primary  m-t-n-xs" type="submit">付款</button> -->
+			<button type="button" class="btn btn-sm btn-white pull-right m-t-n-xs" data-dismiss="modal" style="margin-left:10px">关闭</button>
+			</button>
+		</div>
+	</form>
+	
+	<script>
+	  $('.pay').click(function () {	
+        id=$(this).attr("title");
+        var pay=$(this).parents('tr').find('input').val();	
+		swal({
+			title: "您确定要付款吗?",
+			text: "请谨慎操作！",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			cancelButtonText: "取消",
+			confirmButtonText: "确定",
+			closeOnConfirm: false
+		}, function () {
+			//获取选中的checkbox
+			//发送请求命令			
+			var aj = $.ajax({
+					url:'__URL__/gcPaySubmit2',
+					data:{  
+						id : id,
+						pay:pay
+					},
+					type:'post',  
+					cache:false,  
+					dataType:'json',  
+					success:function(data) {
+						if(data==1){
+							swal("付款成功！", "请刷新查看结果。", "success");
+							var timer=setTimeout(function(){
+								location.reload();
+							},600);
+						}
+						if(data==2){
+							swal("付款失败,超出金额！", "请刷新查看结果。", "error");
+							var timer=setTimeout(function(){
+								location.reload();
+							},600);
+						}
+					}  
+			});
+			
+		});
+	});
+	</script>

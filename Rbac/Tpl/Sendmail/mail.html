@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<!-- saved from url=(0093)https://nanjingyuhuataiqu.createsend.com/System/EmailTemplates/PersonInvited-LivePreview.html -->
+<html style="background-color:#F2F2F2;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>{$vo.title}</title>
+	<style>
+	
+	  #header {
+	    background-color: #fbfbfb;
+	    margin-bottom:45px;
+	    text-align: left;
+	    font-size: 14px;
+	    padding-top: 22px;
+	    padding-bottom: 12px;
+	    border-bottom: 1px solid #ccc;
+	  }
+	  
+	  #header strong {
+	    text-align: right;
+	    width: 89px;
+	    display: inline-block;
+	    *display: inline;
+	    zoom: 1;
+	    color: #807f80;
+	    margin-right: 6px;
+	  }
+	  
+	  #header p {
+	    padding: 0;
+	    margin: 0;
+	    padding-bottom: 3px;
+	  }
+	  
+	  #header .from {
+	    font-weight: bold;
+	  }
+	
+	</style>
+			<script language="JavaScript">
+<!--
+function huifu($id)
+{	
+	returnValue=2;
+	window.close();
+}
+function guanbi($id)
+{	
+	returnValue=3;
+	window.close();
+}
+function zhuanfa($id)
+{
+	returnValue=1;
+	window.close();
+}
+function closeanddownload($url)
+{	
+	returnValue=$url;
+	window.close();
+}
+//-->
+</script>
+</head>
+<body style="background-color:#F2F2F2;text-align:center;font-family:Helvetica Neue, Arial, Helvetica, sans-serif; padding: 0; margin: 0;" onkeydown="return identifyEscKeyPressedEvent(event);">
+
+
+  <div id="header">
+    
+    <p>
+      <strong>发件人:</strong>
+      <span>{$vo.sender}</span>
+    </p>
+    <p>
+      <strong>主题:</strong>
+      <span>{$vo.title}</span>
+    </p>
+    <p>
+      <strong>收件人:</strong>
+      <span class="person-name-full">{$vo.receiver}</span>
+    </p>
+	<p>
+      <strong>抄送人:</strong>
+      <span class="person-name-full">{$vo.copy}</span>
+    </p>
+
+  </div>
+
+
+		<div align="left" style="font-size:13px;position:absolute; left:40px;top: 135px;">										
+												     <p>
+      
+      <span class="person-name-full">
+	  
+	  <?php 
+	  if($vo['create_time']!=0)
+	  echo date('Y-m-d H:i:s',$vo['create_time']);?>
+	  </span>
+    </p>   
+	</div>
+	<div align="right" style="position:absolute; right:0px;top: 130px;">
+												
+												<!--<input name="reset" type="reset" value="回复" onClick="huifu({$vo.id})" class="submit small" />
+												&nbsp;-->
+												<input name="reset" type="reset" value="转发" onClick="zhuanfa({$vo.id})" class="submit small" />
+												&nbsp;
+												<input name="reset" type="reset" value="关闭" onClick="guanbi()" class="submit small" />&nbsp;&nbsp;
+												</div>
+	<table class="container" align="center" cellspacing="0" border="0" cellpadding="0" bgcolor="#FFFFFF" style="width:895px;background-color:#FFF;border-top: 1px solid #DDD; border-bottom: 1px solid #DDD; -webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;">
+		<tbody><tr>
+			<td class="title" style="padding-top:34px;padding-left:39px;padding-right:39px;text-align:left;border-left-width:1px;border-left-style:solid;border-left-color:#DDD;border-right-width:1px;border-right-style:solid;border-right-color:#DDD;">
+				<!--<h2 style="font-family:Helvetica Neue, Arial, Helvetica, sans-serif;font-size:32px;color:#262626;font-weight:normal;margin-top:0;margin-bottom:20px;margin-right:0;margin-left:0;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;letter-spacing:0;line-height:1.35;">
+				
+				    
+				    
+				    </h2>-->
+				<h3 style="font-family:Helvetica Neue, Arial, Helvetica, sans-serif;font-size:16px;color:#515965;font-weight:normal;margin-top:0;margin-bottom:24px;margin-right:0;margin-left:0;padding-top:0;padding-bottom:0;padding-right:0;padding-left:0;line-height:1.6;">
+				  
+				  <p>{$vo.content}</p>
+				  
+				  <p></p>
+				  
+				  </h3>
+			</td>
+		</tr>
+		<tr>
+			<td class="cta" align="left" style="background-color:#F1FAFE;font-size:14px;color:#1f1f1f;border-top-width:1px;border-top-style:solid;border-top-color:#DAE3EA;border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#DAE3EA;border-left-width:1px;border-left-style:solid;border-left-color:#DDD;border-right-width:1px;border-right-style:solid;border-right-color:#DDD;margin-top:0;margin-bottom:0;margin-right:0;margin-left:0;padding-top:20px;padding-bottom:20px;padding-right:39px;padding-left:31px;text-align:left;">
+
+				<table cellspacing="0" border="0" cellpadding="0" width="500" align="left">
+					<tbody><tr>
+						<td class="link" align="left" style="font-family:Helvetica Neue, Arial, Helvetica, sans-serif;padding-left:9px; font-size: 14px; text-decoration: underline;"><a style="color: #2b6cb5; font-family:Helvetica Neue, Arial, Helvetica; font-size: 18px; font-weight: normal;"><strong><a href="__PUBLIC__/Uploads/{$vo['annex']}" id=pic1 style="cursor:hand" onclick="closeanddownload('{$vo["annex"]}');">{$vo['annex']}</a></strong></a></td>
+					</tr>
+				</tbody></table>
+			</td>
+		</tr>
+
+		<tr>
+	</tr></tbody></table>
+
+
+</body></html>

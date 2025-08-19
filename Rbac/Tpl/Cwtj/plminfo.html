@@ -1,0 +1,136 @@
+	<link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <!-- Data Tables -->
+    <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+
+	<link rel="stylesheet" href="css/main.css">
+	
+	<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal">×</button>
+	<h4 class="modal-title">类别详情</h4>
+	</div>
+		<div class="modal-body">			
+		采购材料类别:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;总采购:{$total}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  已付款:{$pay}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  优惠:{$youhui}
+        <table class="table table-bordered" id="editable">
+	        <tr>
+	        	<th class="text-center" width="10%">类别</th>
+		        <th class="text-center" width="5%">总采购</th>
+		        <th class="text-center" width="5%">已付</th>
+		        <th class="text-center" width="10%">类别</th>
+		        <th class="text-center" width="5%">总采购</th>
+		        <th class="text-center" width="5%">已付</th>
+		        <th class="text-center" width="10%">类别</th>
+		        <th class="text-center" width="5%">总采购</th>
+		        <th class="text-center" width="5%">已付</th>
+		    </tr>			
+			<volist name="material" id="materialList">
+				<eq name="key" value="0"><tr></eq>
+				<th>{$materialList.name}</th>
+				<td>{$materialList.total}</td>
+				<td>{$materialList.price}</td>
+				<?php if(($key+1)%3==0){echo "</tr><tr>";} ?>
+			</volist>
+		</table>
+		工程下单类别:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;总款项:{$allTotal}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  已付款:{$allPay}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  保证金已付:{$baozhengyifu}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 保证金未付:{$baozhengweifu}&nbsp;&nbsp;&nbsp;优惠金额:{$youhui3}
+		<table class="table table-bordered" id="editable">
+			 <tr>
+	        	<th class="text-center" width="10%">类别</th>
+		        <th class="text-center" width="5%">总款项</th>
+		        <th class="text-center" width="5%">已付</th>
+		        <th class="text-center" width="10%">类别</th>
+		        <th class="text-center" width="5%">总款项</th>
+		        <th class="text-center" width="5%">已付</th>
+		        <th class="text-center" width="10%">类别</th>
+		        <th class="text-center" width="5%">总款项</th>
+		        <th class="text-center" width="5%">已付</th>
+		    </tr>	
+			<volist name="classify" id="classifyList">
+				<eq name="key" value="0"><tr></eq>
+				<th>{$classifyList.name}</th>
+				<td>{$classifyList.total}</td>
+				<td>{$classifyList.price}</td>
+				<?php if(($key+1)%3==0){echo "</tr><tr>";} ?>
+			</volist>
+		</table>
+			<a href="__URL__/print_info/plm/{$plmid}" class="btn btn-info btn-xs" data-toggle="modal" data-backdrop="static"
+			style="float:right">导出excel</a>
+		</div>
+
+<!-- 		<div>
+			<a href="__URL__/print_info/plm/{$plmid}" class="btn btn-info btn-xs" data-toggle="modal" data-backdrop="static"
+			style="float:right">导出excel</a>
+		</div> -->
+<!-- 		<div class="modal-body" id="hide3">
+			<div class="form-group">
+				<div class="col-sm-12" id="galley">				    
+					<volist name="newname" id="newnamelist">
+					<neq name="newname" value="">
+					<div class="file-box" style="margin:0 auto;">
+						<div class="file">
+							
+							<eq name='newnamelist.is_pic' value='1'>
+							<img alt="image" class="img-responsive" src="__PUBLIC__/Uploads/{$newnamelist.name}">
+							</eq>
+							<neq name='newnamelist.is_pic' value='1'>
+							<a href="__PUBLIC__/Uploads/{$newnamelist.name}">附件.{$newnamelist.name|explode='.',###|end}</a>
+							</neq>
+							
+						</div>
+                    </div>
+					</neq>	
+					</volist>
+                    				
+				</div>
+			</div>			
+		</div> -->
+	<!-- <div id="modal11" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" style="width:850px;height:600px">
+		<div class="modal-content">
+		   <div class="modal-header">  
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
+                    <span aria-hidden="true">×</span>  
+                </button>  
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>  
+            </div>  
+            <div class="modal-body">  
+                <p>One fine body…</p>  
+            </div>  
+            <div class="modal-footer">  
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                <button type="button" class="btn btn-primary">Save</button>  
+            </div>  
+		</div>
+	  </div>
+	</div> -->
+		<!-- <div class="modal-footer">
+			<button class="btn btn-sm btn-success" type="submit" id="hide2" style='margin-right: 10px;'><strong>修改</strong>
+			</button>
+			<button class="btn btn-sm btn-primary" type="button" id="sub" onclick="printPage()"><strong>打印</strong>
+			</button>
+		</div> -->
+
+    <script src="js/plugins/layer/laydate/laydate.js"></script>	
+    <script src="js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+	<script>
+		$('input[type="file"]').prettyFile();
+	</script>
+<script language=javascript>
+function printPage() { 
+$("#hide").css('display','none');
+$("#hide2").css('display','none');
+$("#hide3").css('display','none');
+bdhtml=window.document.body.innerHTML; 
+sprnstr='<div class="modal-body">'; //开始打印标识字符串有17个字符
+eprnstr='<div class="modal-footer">'; //结束打印标识字符串
+prnhtml=bdhtml.substr(bdhtml.indexOf(sprnstr)+24); //从开始打印标识之后的内容
+prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr)); //截取开始标识和结束标识之间的内容
+window.document.body.innerHTML=prnhtml; //把需要打印的指定内容赋给body.innerHTML
+window.print(); //调用浏览器的打印功能打印指定区域
+// window.document.body.innerHTML=bdhtml;//重新给页面内容赋值；
+location.reload();
+}
+</script>

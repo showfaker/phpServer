@@ -1,0 +1,402 @@
+<div class="toggleCollapse"><h2>主菜单</h2><div>收缩</div></div>
+	<!--  
+	<div class="accordion" fillSpace="sideBar">
+	<volist name="nodeGroupList" class="nav-top-item" id="grouplist">
+	<eq name="grouplist['flag']" value="1">
+		<div class="accordionHeader">
+			<h2><span>Folder</span>{$grouplist['title']}</h2>
+		</div>
+		<div class="accordionContent">
+		
+			<ul class="tree treeFolder">
+				<volist id="item" name="menu" >
+				<eq name="item['group_id']" value="$grouplist['id']">
+				<neq name="item['name']|strtolower" value="public" >
+					<neq name="item['name']|strtolower" value="index" >
+					<eq name="item['access']" value="1">
+					<li><a href="__APP__/{$item['name']}/index/" target="navTab" rel="{$item['name']}">{$item['title']}</a></li>
+					</eq>
+					</neq>
+				</neq>
+				</eq>
+				</volist>
+	
+			</ul>
+	
+		</div>
+		
+	</eq>	
+	</volist>	
+		
+	</div>
+	-->
+				<div class="accordion" fillSpace="sidebar">
+					<eq name="casemenulist" value="1">
+					<div class="accordionHeader">
+						<h2><span>Folder</span>项目管理</h2>
+					</div>				
+					<div class="accordionContent">
+						<ul class="tree treeFolder expand"><!--collapse-->
+							<volist name="nodeGroupList" class="nav-top-item" id="grouplist">
+							<in name="grouplist['id']" value="101,102,103,104,105,106,107,108,132,133,135,136,139">
+							<eq name="grouplist['flag']" value="1">
+							<eq name="grouplist['id']" value="101">
+								<li icon="__PUBLIC__/dwz/images/171.png">
+							</eq>
+							<eq name="grouplist['id']" value="102">
+								<li icon="__PUBLIC__/dwz/images/24.png">
+							</eq>
+							<eq name="grouplist['id']" value="103">
+								<li icon="__PUBLIC__/dwz/images/rmb.png">
+							</eq>
+							<eq name="grouplist['id']" value="104">
+								<li icon="__PUBLIC__/dwz/images/211.png">
+							</eq>
+							<eq name="grouplist['id']" value="105">
+								<li icon="__PUBLIC__/dwz/images/321.png">
+							</eq>
+							<eq name="grouplist['id']" value="106">
+								<li icon="__PUBLIC__/dwz/images/repair.png">
+							</eq>
+							<eq name="grouplist['id']" value="107">
+								<li icon="__PUBLIC__/dwz/images/301.png">
+							</eq>
+							<eq name="grouplist['id']" value="108">
+								<li icon="__PUBLIC__/dwz/images/check.png">
+							</eq>
+							<eq name="grouplist['id']" value="133">
+								<li icon="__PUBLIC__/dwz/images/321.png">
+							</eq>
+							<eq name="grouplist['id']" value="135">
+								<li icon="__PUBLIC__/dwz/images/approve.png">
+							</eq>
+							<eq name="grouplist['id']" value="136">
+								<li icon="__PUBLIC__/dwz/images/repaircycle.png">
+							</eq>
+							<eq name="grouplist['id']" value="132">
+								<li icon="__PUBLIC__/dwz/images/211.png">
+							</eq>
+							<eq name="grouplist['id']" value="139">
+								<li icon="__PUBLIC__/dwz/images/211.png">
+							</eq>
+								<a href="javascript:;">{$grouplist['title']}</a>
+								<ul>
+								<volist id="item" name="menu" >
+								<eq name="item['group_id']" value="$grouplist['id']">
+								<neq name="item['name']|strtolower" value="public" >
+									<neq name="item['name']|strtolower" value="index" >
+									<eq name="item['access']" value="1">
+									<li><a href="__APP__/{$item['name']}/index/" target="navTab" rel="{$item['name']}">{$item['title']}</a></li>
+									</eq>
+									</neq>
+								</neq>
+								</eq>
+								</volist>
+								</ul>
+								</li>
+							</eq>
+							</in>
+							</volist>
+							
+							<eq name="myfwork" value="1" >  
+							<li icon="__PUBLIC__/dwz/images/331.png"><a href="javascript:;">我的业务</a>
+	        				<ul>
+							<volist name="works" id="workslist" >                  
+							<li><a href="__APP__/Myfwork/index/workstrid/{$workslist['id']}" target="navTab" rel="Myfwork">{$workslist['title']}</a><!--{$key}-->
+							</li>
+							</volist>
+	        				</ul>
+	        				</li>
+							</eq>		
+						</ul>
+					</div>
+					</eq>
+					
+					<eq name="materialmenulist" value="1">
+					<div class="accordionHeader">
+						<h2><span>Folder</span>材料管理</h2>
+					</div>					
+					<div class="accordionContent">
+						<ul class="tree treeFolder expand"><!--collapse-->
+							<volist name="nodeGroupList" class="nav-top-item" id="grouplist">
+							<in name="grouplist['id']" value="111,112,113,114,115">
+							<eq name="grouplist['flag']" value="1">
+							<eq name="grouplist['id']" value="111">
+								<li icon="__PUBLIC__/dwz/images/212.png">
+							</eq>
+							<eq name="grouplist['id']" value="112">
+								<li icon="__PUBLIC__/dwz/images/222.png">
+							</eq>
+							<eq name="grouplist['id']" value="113">
+								<li icon="__PUBLIC__/dwz/images/232.png">
+							</eq>
+							<eq name="grouplist['id']" value="114">
+								<li icon="__PUBLIC__/dwz/images/242.png">
+							</eq>
+							<eq name="grouplist['id']" value="115">
+								<li icon="__PUBLIC__/dwz/images/242.png">
+							</eq>						
+								<a href="javascript:;">{$grouplist['title']}</a>
+								<ul>
+								<volist id="item" name="menu" >
+								<eq name="item['group_id']" value="$grouplist['id']">
+								<neq name="item['name']|strtolower" value="public" >
+									<neq name="item['name']|strtolower" value="index" >
+									<eq name="item['access']" value="1">
+									<li><a href="__APP__/{$item['name']}/index/" target="navTab" rel="{$item['name']}">{$item['title']}</a></li>
+									</eq>
+									</neq>
+								</neq>
+								</eq>
+								</volist>
+								</ul>
+								</li>
+							</eq>
+							</in>
+							</volist>	
+						</ul>
+					</div>
+					</eq>
+									
+					<eq name="dothingmenulist" value="1">
+					<div class="accordionHeader">
+						<h2><span>Folder</span>运营管理</h2>
+					</div>	
+					<div class="accordionContent">
+						<ul class="tree treeFolder expand"><!--collapse-->
+							<volist name="nodeGroupList" class="nav-top-item" id="grouplist">
+							<in name="grouplist['id']" value="3,122,123,124,137,138,16">
+							<eq name="grouplist['flag']" value="1">
+							<eq name="grouplist['id']" value="3">
+								<li icon="__PUBLIC__/dwz/images/07.png">
+							</eq>
+							<eq name="grouplist['id']" value="122">
+								<li icon="__PUBLIC__/dwz/images/20.png">
+							</eq>
+							<eq name="grouplist['id']" value="123">
+								<li icon="__PUBLIC__/dwz/images/rmb.png">
+							</eq>
+							<eq name="grouplist['id']" value="124">
+								<li icon="__PUBLIC__/dwz/images/link.gif">
+							</eq>
+							<eq name="grouplist['id']" value="137">
+								<li icon="__PUBLIC__/dwz/images/unlink4.png">
+							</eq>
+							<eq name="grouplist['id']" value="138">
+								<li icon="__PUBLIC__/dwz/images/331.png">
+							</eq>
+							<eq name="grouplist['id']" value="16">
+								<li icon="__PUBLIC__/dwz/images/431.png">
+							</eq>
+								<a href="javascript:;">{$grouplist['title']}</a>
+								<ul>
+								<volist id="item" name="menu" >
+								<eq name="item['group_id']" value="$grouplist['id']">
+								<neq name="item['name']|strtolower" value="public" >
+									<neq name="item['name']|strtolower" value="index" >
+									<eq name="item['access']" value="1">
+									<li>
+										<neq name="item['threeexist']" value="1"><a href="__APP__/{$item['name']}/index/" target="navTab" rel="{$item['name']}">{$item['title']}</a></neq>
+										<eq name="item['threeexist']" value="1"><a href="javascript:;">{$item['title']}</a></eq>							
+										<volist id="three" name="threelist" >
+											<eq name="item['id']" value="$three.pid">
+											<eq name="three['access']" value="1">
+												<ul><li><a href="__APP__/{$three['name']}/index/" target="navTab" rel="{$three['name']}">{$three.title}</a></li></ul>
+											</eq>
+											</eq>
+										</volist>
+									</li>
+									</eq>
+									</neq>
+								</neq>
+								</eq>
+								</volist>
+								</ul>
+								</li>
+							</eq>
+							</in>
+							</volist>	
+						</ul>
+					</div>
+					</eq>
+					
+					<eq name="budgetmenulist" value="1">
+					<div class="accordionHeader">
+						<h2><span>Folder</span>定额模板</h2>
+					</div>					
+					<div class="accordionContent">
+						<ul class="tree treeFolder expand">
+							<volist name="nodeGroupList" class="nav-top-item" id="grouplist">
+							<in name="grouplist['id']" value="134">
+							<eq name="grouplist['flag']" value="1">
+							<eq name="grouplist['id']" value="131">
+								<li icon="__PUBLIC__/dwz/images/rmb.png">
+							</eq>
+							<eq name="grouplist['id']" value="132">
+								<li icon="__PUBLIC__/dwz/images/211.png">
+							</eq>							
+							<eq name="grouplist['id']" value="134">
+								<li icon="__PUBLIC__/dwz/images/template.png">
+							</eq>
+								<a href="javascript:;">{$grouplist['title']}</a>
+								<ul>
+								<volist id="item" name="menu" >
+								<eq name="item['group_id']" value="$grouplist['id']">
+								<neq name="item['name']|strtolower" value="public" >
+									<neq name="item['name']|strtolower" value="index" >
+									<eq name="item['access']" value="1">
+									<li><a href="__APP__/{$item['name']}/index/" target="navTab" rel="{$item['name']}">{$item['title']}</a></li>
+									</eq>
+									</neq>
+								</neq>
+								</eq>
+								</volist>
+								</ul>
+								</li>
+							</eq>
+							</in>
+							</volist>		
+						</ul>
+					</div>
+					</eq>	
+					
+					<!--
+					<div class="accordionHeader">
+						<h2><span>Folder</span>项目决算</h2>
+					</div>					
+					<div class="accordionContent">
+						<ul class="tree treeFolder expand">
+							<volist name="nodeGroupList" class="nav-top-item" id="grouplist">
+							<in name="grouplist['id']" value="131,132">
+							<eq name="grouplist['flag']" value="1">
+							<eq name="grouplist['id']" value="131">
+								<li icon="__PUBLIC__/dwz/images/rmb.png">
+							</eq>
+							<eq name="grouplist['id']" value="132">
+								<li icon="__PUBLIC__/dwz/images/211.png">
+							</eq>							
+							<eq name="grouplist['id']" value="134">
+								<li icon="__PUBLIC__/dwz/images/template.png">
+							</eq>
+								<a href="javascript:;">{$grouplist['title']}</a>
+								<ul>
+								<volist id="item" name="menu" >
+								<eq name="item['group_id']" value="$grouplist['id']">
+								<neq name="item['name']|strtolower" value="public" >
+									<neq name="item['name']|strtolower" value="index" >
+									<eq name="item['access']" value="1">
+									<li><a href="__APP__/{$item['name']}/index/" target="navTab" rel="{$item['name']}">{$item['title']}</a></li>
+									</eq>
+									</neq>
+								</neq>
+								</eq>
+								</volist>
+								</ul>
+								</li>
+							</eq>
+							</in>
+							</volist>		
+						</ul>
+					</div>
+					-->
+					
+					
+					<eq name="configmenulist" value="1">
+					<div class="accordionHeader">
+						<h2><span>Folder</span>配置中心</h2>
+					</div>					
+					<div class="accordionContent">
+						<ul class="tree treeFolder expand"><!--collapse-->
+							
+							<volist name="nodeGroupList" class="nav-top-item" id="grouplist">
+							<eq name="grouplist['id']" value="2">
+							<eq name="grouplist['flag']" value="1">
+							<li icon="__PUBLIC__/dwz/images/41.png"><a href="javascript:;">{$grouplist['title']}</a>
+							<ul>
+							<volist id="item" name="menu" >
+							<eq name="item['group_id']" value="$grouplist['id']">
+							<neq name="item['name']|strtolower" value="public" >
+								<neq name="item['name']|strtolower" value="index" >
+								<eq name="item['access']" value="1">
+								<li><a href="__APP__/{$item['name']}/index/" target="navTab" rel="{$item['name']}">{$item['title']}</a></li>
+								</eq>
+								</neq>
+							</neq>
+							</eq>
+							</volist>
+							</ul>
+							</li>
+							</eq>
+							</eq>
+							</volist>
+							
+							<volist name="nodeGroupList" class="nav-top-item" id="grouplist">
+							<eq name="grouplist['id']" value="1">
+							<eq name="grouplist['flag']" value="1">
+							<li icon="__PUBLIC__/dwz/images/weixin.png"><a href="javascript:;">{$grouplist['title']}</a>
+							<ul>
+							<volist id="item" name="menu" >
+							<eq name="item['group_id']" value="$grouplist['id']">
+							<neq name="item['name']|strtolower" value="public" >
+								<neq name="item['name']|strtolower" value="index" >
+								<eq name="item['access']" value="1">
+								<li><a href="__APP__/{$item['name']}/index/" target="navTab" rel="{$item['name']}">{$item['title']}</a></li>
+								</eq>
+								</neq>
+							</neq>
+							</eq>
+							</volist>
+							</ul>
+							</li>
+							</eq>
+							</eq>
+							</volist>
+							
+							<volist name="nodeGroupList" class="nav-top-item" id="grouplist">
+							<eq name="grouplist['id']" value="21">
+							<eq name="grouplist['flag']" value="1">
+							<li icon="__PUBLIC__/dwz/images/19.png"><a href="javascript:;">{$grouplist['title']}</a>
+							<ul>
+							<volist id="item" name="menu" >
+							<eq name="item['group_id']" value="$grouplist['id']">
+							<neq name="item['name']|strtolower" value="public" >
+								<neq name="item['name']|strtolower" value="index" >
+								<eq name="item['access']" value="1">
+								<li><a href="__APP__/{$item['name']}/index/" target="navTab" rel="{$item['name']}">{$item['title']}</a></li>
+								</eq>
+								</neq>
+							</neq>
+							</eq>
+							</volist>
+							</ul>
+							</li>
+							</eq>
+							</eq>
+							</volist>				
+
+							<volist name="nodeGroupList" class="nav-top-item" id="grouplist">
+							<eq name="grouplist['id']" value="200">
+							<eq name="grouplist['flag']" value="1">
+							<li icon="__PUBLIC__/dwz/images/19.png"><a href="javascript:;">{$grouplist['title']}</a>
+							<ul>
+							<volist id="item" name="menu" >
+							<eq name="item['group_id']" value="$grouplist['id']">
+							<neq name="item['name']|strtolower" value="public" >
+								<neq name="item['name']|strtolower" value="index" >
+								<eq name="item['access']" value="1">
+								<li><a href="__APP__/{$item['name']}/index/" target="navTab" rel="{$item['name']}">{$item['title']}</a></li>
+								</eq>
+								</neq>
+							</neq>
+							</eq>
+							</volist>
+							</ul>
+							</li>
+							</eq>
+							</eq>
+							</volist>								
+						</ul>
+					</div>
+					</eq>
+					
+				</div>

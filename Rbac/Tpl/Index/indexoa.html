@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <meta name="renderer" content="webkit">
+
+    <title>南电项目管理系统</title>
+
+    <meta name="keywords" content="南电项目管理系统">
+    <meta name="description" content="南电项目管理系统">
+
+    <!--[if lt IE 9]>
+    <meta http-equiv="refresh" content="0;ie.html" />
+    <![endif]-->
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+	<!--
+    <link href="css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+	-->
+	<link href="css/font-awesome.4.7.0.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.css">
+	<link href="css/plugins/toastr/toastr.min.css" rel="stylesheet">
+</head>
+
+<body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
+    <div id="wrapper">
+        <!--左侧导航开始-->
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="nav-close"><i class="fa fa-times-circle"></i>
+            </div>
+            <div class="sidebar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li class="nav-header" style="padding:5px 25px 5px 25px;">
+                        <div class="dropdown profile-element">
+                            <span style="color:#eee;font-family:;font-weight:bold;font-size:16px;line-height:41px">
+							<!-- <img alt="image" class="" src="__PUBLIC__/jinjiniao/logo.png" style="height:41px;position:relative;left:-10px"/> -->
+							南电项目管理系统</span>
+                        </div>
+                        <div class="logo-element">
+						<!-- <img alt="image" class="" src="__PUBLIC__/jinjiniao/logo.png" style="height:21px;position:relative;left:0px"/> -->
+						南
+                        </div>
+                    </li>
+					
+					<volist name="nodeGroupList" id="grouplist">
+					<eq name="grouplist['flag']" value="1">
+					<li>
+                        <a href="#">
+						
+						<i class="fa {$grouplist['fa']}"></i><span class="nav-label" style="position:relative;left:20px;top:1px">{$grouplist['title']}</span><span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+						
+							<volist id="item" name="menu" >
+								<eq name="item['group_id']" value="$grouplist['id']">
+								<neq name="item['name']|strtolower" value="public" >
+									<neq name="item['name']|strtolower" value="index" >
+									<eq name="item['access']" value="1">
+									
+								
+									<neq name="item.remark" value="1">
+									<li><a class="J_menuItem" name="ahref" href="__APP__/{$item['name']}/index/moduletitle/{$item['title']}/" onclick="changeCss(this)" target="navTab" rel="{$item['name']}" data-index="0" style="padding-left:75px;">{$item['title']}</a></li>
+									</neq>
+									<eq name="item.remark" value="1">
+									<li><a class="J_menuItem" name="ahref" href="__APP__/Flowform/index/nodename/{$item['name']}/moduletitle/{$item['title']}/" onclick="changeCss(this)" target="navTab" rel="{$item['name']}" data-index="0" style="padding-left:75px;">{$item['title']}</a></li>
+									</eq>
+									
+									</eq>
+									</neq>
+								</neq>
+								</eq>
+							</volist>
+							
+						 </ul>
+                    </li>
+					</eq>
+					</volist>
+					
+					<script> 
+					function changeCss(obj){ 
+						var alist = document.getElementsByName("ahref");
+						for(var i =0;i < alist.length;i++){ 
+							alist[i].style.backgroundColor = "#092D41"; //给所有a标签赋原色 #293846
+							alist[i].style.color = "#a7b1c2"; //给所有a标签赋原色 #293846
+						} 
+						obj.style.backgroundColor = "#1890FF"; //令当前标签高亮 
+						obj.style.color = "#FFFFFF"; //令当前标签高亮 
+					} 
+					</script> 
+
+                </ul>
+            </div>
+        </nav>
+        <!--左侧导航结束-->
+        <!--右侧部分开始-->
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+            <div class="row" style="border-bottom:1px solid #2F4050"><!-- border-bottom -->
+                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom:0;background-color:#2F4050;">
+                    <div class="navbar-header" style="width:440px"><!-- style="width:300px" -->
+						<a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#" style="position:relative;top:-3px"><i class="fa fa-bars"></i> </a>
+						
+                        <div role="search" class="navbar-form-custom" method="post" action="search_results.html">
+                            <div class="input-group">
+                                <input type="text" placeholder="请输入您需要查找的项目 …" class="form-control" name="top-search" id="top-search" style="color:#999;width:360px">
+								<div class="input-group-btn">
+									<ul class="dropdown-menu dropdown-menu-right" role="menu">
+									</ul>
+								</div>
+                            </div>
+                        </div>
+						
+                    </div>
+		
+                    <ul class="nav navbar-top-links navbar-right">
+						
+						<li class="hidden-xs" style="border-left:1px solid #2A2F32;">
+                            <a href="__APP__/Index/index_v3" class="J_menuItem" data-index="0"><i class="fa fa-home"></i> 主页</a>
+                        </li>
+						
+						
+						<li class="hidden-xs" style="border-left:1px solid #2A2F32;">
+                            <a href="http://{$hostip}/projecttest/bigscreen" target="_blank"><i class="fa fa-bar-chart-o"></i> 大屏</a>
+                        </li>
+						
+						<li class="hidden-xs" style="border-left:1px solid #2A2F32;">
+                            <a href="__APP__/Index/index_v3" class="J_menuItem" data-index="0">&nbsp;{$_SESSION[name]}-{$_SESSION[role]}-{$_SESSION[dept]}</a>
+                        </li>
+						
+						<!--
+						<li class="hidden-xs" style="border-left:1px solid #2A2F32;">
+                            <a href="__APP__/Index/index_v1" class="J_menuItem" data-index="0"><i class="fa fa-star"></i> 工程</a>
+                        </li>
+						<li class="hidden-xs" style="border-left:1px solid #2A2F32;">
+                            <a href="__APP__/Index/index_v2" class="J_menuItem" data-index="0"><i class="fa fa-cube"></i> 材料</a>
+                        </li>
+						-->
+                        <li class="dropdown hidden-xs" style="border-left:1px solid #2A2F32;display:none">
+                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="javascript:void()" onclick="getschedules()" style="background-color:#2F4050">
+                                <i class="fa fa-bell-o"></i> <span class="label label-primary" id="remind">{$schcount}</span>
+                            </a>
+							
+                            <ul class="dropdown-menu dropdown-alerts" id="schedules">
+								<volist name="datasch" id="datasch" offset="0" length="10">
+								<neq name="datasch.title1" value="">
+                                <li>
+                                    <a href="{$datasch.href}/plmid/{$datasch['taskid']}/" class="J_menuItem" data-index="0">
+                                        <div>
+                                            <i class="fa fa-envelope fa-fw"></i> {$datasch.title1}
+                                            <span class="pull-right text-muted small"><?php echo date('m-d H:i',$datasch['create_time']);?></span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+								</neq>
+								</volist>
+								
+                                <li>
+                                    <div class="text-center link-block">
+                                        <a class="J_menuItem" href="__APP__/Schedule/index">
+                                            <strong>查看所有消息</strong>
+                                            <i class="fa fa-angle-right"></i>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+							
+                        </li>
+                        <li class="hidden-xs" style="border-left:1px solid #2A2F32">
+                            <a href="#edit-form" href="#edit-form" data-toggle="modal" data-index="0"><i class="fa fa-question-circle"></i> 密码</a>
+                        </li>
+                        <li class="hidden-xs" style="border-left:1px solid #2A2F32">
+							<a href="__APP__/Public/logout" class=""><i class="fa fa fa-sign-out"></i> 退出</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+		
+            <div class="row content-tabs">
+                <button class="roll-nav roll-left J_tabLeft"><i class="fa fa-backward"></i>
+                </button>
+                <nav class="page-tabs J_menuTabs">
+                    <div class="page-tabs-content">
+                        <a href="javascript:;" class="active J_menuTab" data-id="__APP__/Index/index_v3">主页</a>
+                    </div>
+                </nav>
+                <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i>
+                </button>
+                <div class="btn-group roll-nav roll-right">
+                    <button class="dropdown J_tabClose" data-toggle="dropdown">关闭操作<span class="caret"></span>
+
+                    </button>
+                    <ul role="menu" class="dropdown-menu dropdown-menu-right">
+                        <li class="J_tabShowActive"><a>定位当前选项卡</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li class="J_tabCloseAll"><a>关闭全部选项卡</a>
+                        </li>
+                        <li class="J_tabCloseOther"><a>关闭其他选项卡</a>
+                        </li>
+                    </ul>
+                </div>
+				
+                <a href="__APP__/Public/logout" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
+            </div>
+			
+            <div class="row J_mainContent" id="content-main">
+                <iframe class="J_iframe" name="iframe0" id="iframe0" width="100%" height="100%" src="__APP__/Index/index_v3" frameborder="0" data-id="__APP__/Index/index_v3" seamless></iframe>
+            </div>
+			<!--
+            <div class="footer">
+                <div class="pull-right">&copy; 2014-2015 <a href="http://www.zi-han.net/" target="_blank">zihan's blog</a>
+                </div>
+            </div>
+			-->
+        </div>
+        <!--右侧部分结束-->
+        <!--右侧边栏开始-->
+        
+        <!--右侧边栏结束-->
+    </div>
+	
+	
+	
+	
+	<!--修改密码-->
+	<div id="edit-form" class="modal fade" aria-hidden="true">
+		<script>
+		function fleshVerify(){
+			//重载验证码
+			$('#verifyImg').attr("src", '__APP__/Public/verify/'+new Date().getTime());
+		}
+		</script>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div>
+                            <h3 class="m-t-none m-b">修改密码</h3>
+
+                            <div class="ibox-content">
+                            <form id="format2" method="post" action="__APP__/Public/changePwd" class="form-horizontal">
+								<input type="hidden" id="id" name="id">
+                                <div class="form-group">
+                                <label class="col-sm-3 control-label">旧密码：</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" name="oldpassword" autocomplete="off">
+                                </div>
+								 
+                               
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label">新密码(密码必须包含英文,数字,符号)：</label>
+									<div class="col-sm-6">
+										<input type="password" class="form-control" name="password" autocomplete="off">
+									</div>
+									
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-3 control-label">重复密码：</label>
+									<div class="col-sm-6">
+										<input type="text" class="form-control" name="repassword" autocomplete="off">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label">验证码：</label>
+									<div class="col-sm-6">
+										<input type="text" class="form-control" name="verify" style="width:70%;float:left"> 
+										<img src="__APP__/Public/verify/" BORDER="0" ALT="click" id="verifyImg" onClick="fleshVerify()" style="cursor:pointer;float:left;position:relative;top:5px;left:10px" align="absmiddle">
+									</div>
+									
+								</div>
+								<div class="btn2">
+								
+								</div>
+                                <div>
+									<button type="button" class="btn btn-sm btn-white pull-right m-t-n-xs" data-dismiss="modal" style="margin-left:10px">关闭</button>
+                                    <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="button" id="sub2"><strong>确定</strong>
+                                    </button>
+                                </div>
+                            </form>
+							</div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>	
+	
+    <!-- 全局js -->
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="js/plugins/layer/layer.min.js"></script>
+	
+	<script src="js/plugins/toastr/toastr.min.js"></script>
+	
+    <!-- 自定义js -->
+    <script src="js/hplus.js?v=4.1.0"></script>
+	<script src="js/my.js"></script>
+    <script type="text/javascript" src="js/contabs.js"></script>
+
+    <!-- 第三方插件 -->
+    <script src="js/plugins/pace/pace.min.js"></script>
+	
+	
+	<table style="display:none">
+		<tbody>
+		<volist name="allprojects" id="project" key="i">
+			<tr target="sid_obj">
+				<td class="ll" id="{$project.id}">{$project.value}</td>
+			</tr>
+		</volist>
+		</tbody>
+	</table>
+	<a href="" class="J_menuItem" id="x" data-index="0" style="display:none">项目详情</a>
+	<script src="js/plugins/suggest/bootstrap-suggest.min.js"></script>
+	<script>
+		var dataarray=[];
+		$(".ll").each(function(i){
+			dataarray[i]={
+				id:this.id,
+				word:$(this).html()
+			};
+		})
+		//data 数据中获取
+        var testdataBsSuggest = $("#top-search").bsSuggest({
+            indexId: 0, //每组数据的第几个数据，作为input输入框的 data-id，设为 -1 且 idField 为空则不设置此值
+            indexKey: 1, //data.value 的第几个数据，作为input输入框的内容
+            data: {
+                'value': dataarray
+            }
+        });
+		
+		$("input#top-search").on("onSetSelectValue", function (event, result) {
+			console.log(result.id);
+			document.getElementById("x").href="__APP__/Xmtj/plmdetail/id/"+result.id+"/noclose/1";
+			document.getElementById("x").click();
+		});
+	</script>
+	<script>
+	    $("#sub2").click(function(){
+		    $(".btn2").children().remove();
+		    oldpassword=$('input[name=oldpassword]').val();
+			password=$('input[name=password]').val();
+			repassword=$('input[name=repassword]').val();
+			verify=$('input[name=verify]').val();
+		    $.ajax({
+				url:'__URL__/ajax1',
+				type:'post',  
+				data:{'oldpassword':oldpassword,'password':password,'repassword':repassword,'verify':verify},
+				dataType:'json',  
+				success:function(data) {
+					if(data==1){
+					   $("#format2").submit();
+					}else{
+					   var aa="<span style='color:red;margin-left:70px'>"+data+"</span>";
+					   $(".btn2").append(aa);
+					}
+				}  
+			});
+		})
+		
+	</script>
+	
+	
+	
+	
+	<load href="__PUBLIC__/js/prototype1.js" />
+	<load href="__PUBLIC__/js/Ajax/ThinkAjax_dwz.js" />
+	<script language="JavaScript">
+	var globalnewscount=999;
+	var globalemailcount=999;
+	var globalschedulecount=999;
+	checkmess();
+
+	var g_timei;
+	var g_timeii;
+	var g_timej;
+	var g_timek;
+	
+	function checkmess()
+	{
+		g_timei=setTimeout("ThinkAjax.send('__APP__'+'/Public/findmyshedule','ajax=1',scheduledata);",10000);
+	}
+	
+	function scheduledata(data,status)
+	{
+		console.log("定时查询邮件和待办");
+		g_timeii=setTimeout("ThinkAjax.send('__APP__'+'/Public/findmyshedule','ajax=1',scheduledata);",10000);//如果采用点击后获取待办数据，此行要注释掉
+		
+		data.substring(0,data.indexOf("~!@#$"));
+		notifyemail(data.substring(0,data.indexOf("~!@#$")),data.substring(data.indexOf("~!@#$")+5,data.indexOf("~!@#$")+6));
+		notifyuser(data.substring(data.indexOf("~!@#$")+6,data.indexOf("@#$%^")),1,data.substring(data.indexOf("@#$%^")+5));
+		if (typeof(CollectGarbage) == "function") {
+		CollectGarbage();//适用于IE 
+		}
+		//g_timeii=setTimeout("ThinkAjax.send('__APP__'+'/Public/findmyshedule','ajax=1',scheduledata);",10000);
+		
+		data=null; delete data;
+		return;
+	}
+	
+
+	function notifyemail(data,status){
+		//document.getElementById("remindmail").innerHTML=data;
+		document.getElementById('iframe0').contentWindow.document.getElementById('remindmail').innerHTML="查看共计"+data+"条";
+		if(1)//(globalemailcount!=data)&&(globalemailcount!=999)
+		{
+			
+			//Player.controls.play();
+			//clearInterval(g_timei);
+			//clearInterval(g_timeii);
+			//clearInterval(g_timej);
+			//clearInterval(g_timek);
+			ThinkAjax.send('__APP__'+'/Public/getEmailData','ajax=1',getEmailData);
+		}
+		globalemailcount=data;
+		data=null; delete data;
+		status=null; delete status;
+		if (typeof(CollectGarbage) == "function") {
+		CollectGarbage();//适用于IE 
+		}
+		return;
+	}
+	function getEmailData(data,status)
+	{
+		console.log("您有新邮件");
+		document.getElementById('iframe0').contentWindow.document.getElementById('emaildata').innerHTML=data;
+		ThinkAjax.send('__APP__'+'/Public/getScheduleData','ajax=1',getScheduleData);
+	}
+	function notifyuser(data,status,schedules){
+		if (status==1)
+		{
+			//if((globalschedulecount<data)&&(globalschedulecount!=999))
+			if(1)//(globalschedulecount!=data)&&(globalschedulecount!=999)
+			{
+				//titleWink(0);
+				
+				if(data>globalschedulecount)
+				{
+					//Player.controls.play();
+				}
+				//clearInterval(g_timei);
+				//clearInterval(g_timeii);
+				//clearInterval(g_timej);
+				//clearInterval(g_timek);
+				//document.getElementById("remind").innerHTML=data;
+				//document.getElementById("schedules").innerHTML=schedules;
+				//ThinkAjax.send('__APP__'+'/Public/getScheduleData','ajax=1',getScheduleData);
+			}
+			$('.schedule_a').on('click', menuItem);
+			//$.getScript('js/contabs.js',function(){
+            //  
+            //});
+		}
+		globalschedulecount=data;
+		data=null; delete data;
+		status=null; delete status;
+		schedules=null; delete schedules;
+		if (typeof(CollectGarbage) == "function") {
+		CollectGarbage();
+		}
+		return;
+	}
+	
+	function getScheduleData(data,status)
+	{
+		console.log("您有新待办");
+		document.getElementById('iframe0').contentWindow.document.getElementById('schdata').innerHTML=data;
+	}
+	function menuItem() {
+        // 获取标识数据
+        var dataUrl = $(this).attr('href'),
+            dataIndex = $(this).data('index'),
+            menuName = $.trim($(this).text()),
+            flag = true;
+        if (dataUrl == undefined || $.trim(dataUrl).length == 0)return false;
+
+        // 选项卡菜单已存在
+        $('.J_menuTab').each(function () {
+            if ($(this).data('id') == dataUrl) {
+                if (!$(this).hasClass('active')) {
+                    $(this).addClass('active').siblings('.J_menuTab').removeClass('active');
+                    scrollToTab(this);
+                    // 显示tab对应的内容区
+                    $('.J_mainContent .J_iframe').each(function () {
+                        if ($(this).data('id') == dataUrl) {
+                            $(this).show().siblings('.J_iframe').hide();
+                            return false;
+                        }
+                    });
+                }
+				
+				/*add by zcy on 2017/10/23*/
+				var target = $('.J_iframe[data-id="' + $(this).data('id') + '"]');
+				var url = target.attr('src');
+				//显示loading提示
+				var loading = layer.load();
+				target.attr('src', url).load(function () {
+					//关闭loading提示
+					layer.close(loading);
+				});
+				
+				
+                flag = false;
+                return false;
+            }
+        });
+
+        // 选项卡菜单不存在
+        if (flag) {
+            var str = '<a href="javascript:;" class="active J_menuTab" data-id="' + dataUrl + '">' + menuName + ' <i class="fa fa-times-circle"></i></a>';
+            $('.J_menuTab').removeClass('active');
+
+            // 添加选项卡对应的iframe
+            var str1 = '<iframe class="J_iframe" name="iframe' + dataIndex + '" width="100%" height="100%" src="' + dataUrl + '" frameborder="0" data-id="' + dataUrl + '" seamless></iframe>';
+            $('.J_mainContent').find('iframe.J_iframe').hide().parents('.J_mainContent').append(str1);
+			/*unnote by zcy on 2017/10/23*/
+            //显示loading提示
+            var loading = layer.load();
+
+            $('.J_mainContent iframe:visible').load(function () {
+                //iframe加载完成后隐藏loading提示
+                layer.close(loading);
+            });
+            // 添加选项卡
+			/*
+            $('.J_menuTabs .page-tabs-content').append(str);
+            scrollToTab($('.J_menuTab.active'));
+			*/
+        }
+        return false;
+    }
+
+	</script>
+	<script type="text/javascript">
+		 step = 0;
+		 var ytitle = document.title;
+		 var id=0;
+		 var globalflag=0;
+		 function titleWink(flag){
+			 if(flag==1)
+			 {
+				 clearTimeout(id);
+				 step = 0;
+				 document.title='{$comname}';
+				 globalflag=0;
+			 }
+			 else if((globalflag==0)||(flag==2))/*flag=2表示是从内部发起的*/
+			 {
+				 step++;
+				 if(step==3){step=1}
+				 if(step==1){document.title='您有新的事务提醒'}
+				 if(step==2){document.title='请注意查收'}
+				 globalflag=1;
+				 id=setTimeout("titleWink(2)",500);
+			 }
+		 }
+	</script>
+	
+	
+	
+	
+	
+	
+</body>
+
+</html>

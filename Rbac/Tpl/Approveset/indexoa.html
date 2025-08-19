@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+	<link href="css/plugins/chosen/chosen.css" rel="stylesheet">
+	<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.css">
+</head>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated">
+        <div class="row">
+            
+			
+			
+			
+			
+			<div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>审核设置</h5>
+                    </div>
+                    <div class="ibox-content">
+						<form method="post" action="__URL__/insert1" class="pageForm required-validate" onsubmit="return validateCallback(this, navTabAjaxDone);">
+                        <div class="pageFormContent" style="margin-bottom:50px" >
+							<table class="table table-bordered table-hover">
+							<tr>
+								<td>
+								节点名称
+								</td>
+								<td>
+								一级审核
+								</td>
+								<td>
+								二级审核
+								</td>
+							</tr>
+							<tr>
+								<td>
+								<input class="form-control" value="{$list[0][title]}" name="title[]">
+								</td>
+								<td>
+								<select type="text" class="form-control" name="approver[]">
+								<option value="" <eq name="list[0].approver" value="">selected</eq>>请选择</option>
+								<option value="0" <eq name="list[0].approver" value="0">selected</eq>>由上级审核</option>
+								<volist name="roles" id="role">
+									<option value="{$role.id}" <eq name="list[0].approver" value="$role.id">selected</eq>>由{$role.name}审核</option>
+								</volist>
+								</select>
+								</td>
+								<td>
+								<select type="text" class="form-control" name="approver2[]">
+								<option value="" <eq name="list[0].approver2" value="">selected</eq>>请选择</option>
+								<option value="0" <eq name="list[0].approver2" value="0">selected</eq>>由上级审核</option>
+								<volist name="roles" id="role">
+									<option value="{$role.id}" <eq name="list[0].approver2" value="$role.id">selected</eq>>由{$role.name}审核</option>
+								</volist>
+								</select>
+								</td>
+							</tr>
+							<tr>
+								<td><input class="form-control" value="{$list[1][title]}" name="title[]"></td>
+								<td><input type="hidden" value="" name="approver[]"></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td><input class="form-control" value="{$list[2][title]}" name="title[]"></td>
+								<td>
+								<select type="text" class="form-control" name="approver[]">
+								<option value="" <eq name="list[2].approver" value="">selected</eq>>请选择</option>
+								<option value="0" <eq name="list[2].approver" value="0">selected</eq>>由上级审核</option>
+								<volist name="roles" id="role">
+									<option value="{$role.id}" <eq name="list[2].approver" value="$role.id">selected</eq>>由{$role.name}审核</option>
+								</volist>
+								</select>
+								</td>
+								<td></td>
+							</tr>
+							<!--
+							<tr>
+								<td><input class="form-control" value="联合验收"></td>
+								<td>
+								<select type="text" class="form-control" name="subtitle14">
+								<option value="" <eq name="list[0].subtitle14" value="">selected</eq>>请选择</option>
+								<option value="0" <eq name="list[0].subtitle14" value="0">selected</eq>>由上级审核</option>
+								<volist name="roles" id="role">
+									<option value="{$role.id}" <eq name="list[0].subtitle14" value="$role.id">selected</eq>>由{$role.name}审核</option>
+								</volist>
+								</select>
+								</td>
+							</tr>
+							<tr>
+								<td><input class="form-control" value="竣工验收"></td>
+								<td>
+								<select type="text" class="form-control" name="subtitle14">
+								<option value="" <eq name="list[0].subtitle14" value="">selected</eq>>请选择</option>
+								<option value="0" <eq name="list[0].subtitle14" value="0">selected</eq>>由上级审核</option>
+								<volist name="roles" id="role">
+									<option value="{$role.id}" <eq name="list[0].subtitle14" value="$role.id">selected</eq>>由{$role.name}审核</option>
+								</volist>
+								</select>
+								</td>
+							</tr>
+							-->
+						</table>
+						
+						<button type="submit" class="btn btn-primary" style="margin-right:0px;float:right">确认</button>
+						</form>
+                    </div>
+                </div>
+            </div>
+			
+			
+			
+        </div>
+    </div>
+	
+	
+	
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+	<script src="js/plugins/layer/laydate/laydate.js"></script>
+    <script src="js/content.js?v=1.0.0"></script>
+</body>
+</html>
+
+
+<!--<h2 class="contentTitle">信息设置</h2>
+<div class="pageContent">
+	<form method="post" action="__URL__/insert" class="pageForm required-validate" onsubmit="return validateCallback(this, navTabAjaxDone);">
+		<div class="pageFormContent" layoutH="96">
+			<p>
+				<label style="width:80px;">系统名称：</label>
+				<input name="name" class="" type="text" size="40" value="{$list[0].name}" alt="请输入系统名称"/>
+			</p>
+			<p>
+				<label style="width:80px;">系统副标题：</label>
+				<input name="subname" class="" type="text" size="40" value="{$list[0].subname}" alt="请输入系统副标题"/>
+			</p>
+			<p>
+				<label style="width:80px;">单位名称：</label>
+				<input name="title" class="required" type="text" size="40" value="{$list[0].title}" alt="请输入单位名称"/>
+			</p>
+			<p>
+				<label style="width:80px;">单位副标题：</label>
+				<input name="subtitle" class="required" type="text" size="40" value="{$list[0].subtitle}" alt="请输入单位副标题"/>
+			</p>
+			<p>
+				<label style="width:80px;">单位地址：</label>
+				<input name="address" class="" type="text" size="40" value="{$list[0].address}" alt="请输入单位地址"/>	
+			</p>
+			<p>
+				<label style="width:80px;">单位邮箱：</label>
+				<input name="email" class="" type="text" size="40" value="{$list[0].email}" alt="请输入单位邮箱"/>
+			</p>
+			<p style="display:none;">
+				<label style="width:80px;">单位电话：</label>
+				<input name="phone" class="" type="text" size="40" value="{$list[0].phone}" alt="请输入单位电话"/>
+			</p>
+			
+		</div>
+		<div class="formBar">
+			<ul style="margin-right:500px">
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
+				<li>
+					<div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div>
+				</li>
+			</ul>
+		</div>
+	</form>
+</div>-->

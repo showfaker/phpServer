@@ -1,0 +1,73 @@
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport"/>
+<link rel="shortcut icon" href="favicon.ico"> 
+<link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/style.css?v=4.1.0" rel="stylesheet">
+
+
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+	</button>
+	<h4 class="modal-title">添加</h4>
+</div>
+<form method="post" action="__URL__/insert/callbackType/closeCurrent/navTabId/Second" ENCTYPE="multipart/form-data" onsubmit="return iframeCallback(this, dialogAjaxDone)">
+<div class="modal-body"> 
+	<input type="hidden" value="{$plmid}" name="plmid">
+	
+	<div class="form-group">
+		<label style="float:left">标题</label>
+		<input type="text" placeholder="" class="form-control" name="title" required>
+	</div>
+	<div class="form-group">
+		<label style="float:left">内容</label>
+		<input type="text" placeholder="" class="form-control" name="content" required>
+	</div>
+	<div class="form-group">
+		<label style="float:left">@</label>
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="input-group">
+					<input type="text" class="form-control" id="test" name="atuser">
+					<div class="input-group-btn">
+						<button type="button" class="btn btn-white dropdown-toggle" data-toggle="dropdown">
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu dropdown-menu-right" role="menu">
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal-footer">
+	<button type="submit" class="btn btn-danger">提交</button>
+	<button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+</div>
+</form>
+<script src="js/plugins/suggest/bootstrap-suggest.min.js"></script>
+<script>	
+	var testBsSuggest = $("#test").bsSuggest({
+		allowNoKeyword: true, //是否允许无关键字时请求数据
+		multiWord: true, //以分隔符号分割的多关键字支持 
+		separator: ",", //多关键字支持时的分隔符，默认为空格
+		getDataMethod: "url", //获取数据的方式，总是从 URL 获取
+		url: "__URL__/getuser/nickname/",
+		processData: function (json) { // url 获取数据时，对数据的处理，作为 getData 的回调函数
+			console.log(json);
+			var i, len, data = {
+				value: []
+			};
+			len = json.data.length;
+			for (i = 0; i < len; i++) {
+				data.value.push({
+					nickanme: json.data[i]['nickname']
+				});
+			}
+			return data;
+		}
+	})
+</script>

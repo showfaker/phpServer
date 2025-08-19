@@ -1,0 +1,823 @@
+
+<link rel="shortcut icon" href="favicon.ico"> 
+<link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/style.css?v=4.1.0" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="__PUBLIC__/dwz/themes/css/core1.css">
+    
+<div class="modal-header">
+	<h4 class="modal-title">项目基本信息登记表</h4>
+</div>
+<form method="post" id="postform" action="__URL__/insert/callbackType/closeCurrent/navTabId/Second" ENCTYPE="multipart/form-data" class="form-horizontal">
+<div class="modal-body" style="height:600px;overflow-y:scroll">
+	
+	<input type="hidden" value="{$orgdata.id}" name="id">
+	<input type="hidden" value="{$jypg}" name="jypg">
+	<input type="hidden" value="{$highcheck}" name="highcheck">
+	
+	<div style="position:relative;top:0px;margin:0 auto;font-weight:bold;width:100%;">
+			<label>编写人:</label>
+			<eq name="orgdata.name" value="">
+			<input type="text"
+			style="font-size:15px;font-weight:bold;color:#676767;position:relative;border:0px;border-bottom:1px solid #BBBBBB;background:white;height:25px" name="name" value="{$_SESSION[name]}">
+			</eq>
+			<neq name="orgdata.name" value="">
+			<input type="text"
+			style="font-size:15px;font-weight:bold;color:#676767;position:relative;border:0px;border-bottom:1px solid #BBBBBB;background:white;height:25px" name="name" value="{$orgdata.name}">
+			</neq>
+			<label style="position:relative;padding-left:60px;">编写日期:</label>
+			<neq name="orgdata.time" value="">
+			<input value="{$orgdata[time]}" type="text" style="position:relative;border:0px;border-bottom:1px solid #BBBBBB;height:25px;background:white;" name="time" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" autocomplete="off" autocomplete="off">
+			</neq>
+			<eq name="orgdata.time" value="">
+			<input value="<?php echo date("Y-m-d");?>" type="text" style="position:relative;border:0px;border-bottom:1px solid #BBBBBB;height:25px;background:white;" name="time" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" autocomplete="off" autocomplete="off">
+			</eq>
+	</div>	
+	
+	<table class="drafttable" style="position:relative;top:28px;margin:0 auto;width:100%;margin-bottom:28px">
+	
+	
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px;width:10%">项目类型<font style="color:red">*</font>:</td>
+			<td class="normal" style="font-weight:bold;height:45px;width:10%"></td>
+			<td class="normal" style="font-weight:bold;height:45px;width:20%"></td>
+			<td class="normal" colspan="1">
+			{$orgdata.projecttype}
+			<input name="projecttype" type="radio" checked id="projecttype" value="{$orgdata.projecttype}" style="display:none"/>
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px;width:10%">项目属性<font style="color:red">*</font>:</td>
+			<td class="normal" style="font-weight:bold;height:45px;width:10%"></td>
+			<td class="normal" style="font-weight:bold;height:45px;width:20%"></td>
+			<td class="normal" colspan="1">
+			一般（<input type="radio" value="一般" name="quality"  <eq name="orgdata.quality" value="一般">checked</eq>>）  
+			市政（<input type="radio" value="市政" name="quality"  <eq name="orgdata.quality" value="市政">checked</eq>>） 
+			民生（<input type="radio" value="民生" name="quality"  <eq name="orgdata.quality" value="民生">checked</eq>>） 
+			绿色（<input type="radio" value="绿色" name="quality"  <eq name="orgdata.quality" value="绿色">checked</eq>>） 
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px;width:10%">是否需要备案状态<font style="color:red">*</font>:</td>
+			<td class="normal" style="font-weight:bold;height:45px;width:10%"></td>
+			<td class="normal" style="font-weight:bold;height:45px;width:20%"></td>
+			<td class="normal" colspan="1">
+			是（<input type="radio" value="是" name="keeponrecord" <eq name="orgdata.keeponrecord" value="是">checked</eq> onchange="change()">）  
+			否（<input type="radio" value="否" name="keeponrecord" <eq name="orgdata.keeponrecord" value="否">checked</eq> onchange="change()">） 
+			
+			<div id="file1" <in name="orgdata.keeponrecord" value="是,">style="display:block"</in> <eq name="orgdata.keeponrecord" value="否">style="display:none"</eq>>
+			
+			<neq name="orgdata.keeponrecord1" value="">
+				<volist name="orgdata.keeponrecord1" id="keeponrecord1">
+				<neq name="keeponrecord1" value="">
+				 [ 
+				<a href="__URL__/filedown/filename/{$keeponrecord1}/filerealname/{$orgdata[keeponrecord1filename][$key]}" style="color:green">{$orgdata[keeponrecord1filename][$key]} 
+				</a>  ] </br>
+				</neq>
+				</volist>
+			</neq>
+			
+			<neq name="orgdata.keeponrecord2" value="">
+				<volist name="orgdata.keeponrecord2" id="keeponrecord2">
+				<neq name="keeponrecord2" value="">
+				 [ 
+				<a href="__URL__/filedown/filename/{$keeponrecord2}/filerealname/{$orgdata[keeponrecord2filename][$key]}" style="color:green">{$orgdata[keeponrecord2filename][$key]} 
+				</a>  ] </br>
+				</neq>
+				</volist>
+			</neq>
+			<div>
+			备案证：
+			<input type="file" name="file1[]" multiple="multiple">
+			信息报送表：
+			<input type="file" name="file2[]" multiple="multiple">
+			</div>
+			</div>
+			备案金额：
+			<input type="text" name="keeponrecordmoney" class="forminputlarge" style="width:100px" value="{$orgdata.keeponrecordmoney}">万元
+			
+			<script>
+			function change()
+			{
+				var keeponrecord=$("input[name='keeponrecord']:checked").val();
+				if(keeponrecord=="是")
+				{
+					document.getElementById("file1").style.display="block";
+				}
+				else
+				{
+					document.getElementById("file1").style.display="none";
+				}
+			}
+			</script>
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px;width:10%">合作模式<font style="color:red">*</font>:</td>
+			<td class="normal" style="font-weight:bold;height:45px;width:10%"></td>
+			<td class="normal" style="font-weight:bold;height:45px;width:20%"></td>
+			<td class="normal" colspan="1">
+				<select type="text" class="forminputmedium" name="invester" id="invester_temp" onchange="setinvestpercent()">
+					<option value="省投资" title="省投资" <eq name="orgdata.invester" value="省投资">selected</eq>>省投资</option>
+					<option value="自投资" title="自投资" <eq name="orgdata.invester" value="自投资">selected</eq>>自投资</option>
+					<option value="合作投资" title="合作投资" <eq name="orgdata.invester" value="合作投资">selected</eq>>合作投资</option>
+				</select>
+				<eq name="orgdata.id" value="">
+				<div>省投资：<input type="text" value="100" class="forminputlarge" name="investpercent1" style="width:100px" oninput="setinvestpercent()">%</div>
+				<div>自投资：<input type="text" value="0" class="forminputlarge" name="investpercent2" style="width:100px" oninput="setinvestpercent()">%</div>
+				</eq>
+				<neq name="orgdata.id" value="">
+				<div>省投资：<input type="text" value="{$orgdata.investpercent1}" class="forminputlarge" name="investpercent1" style="width:100px" oninput="setinvestpercent()">%</div>
+				<div>自投资：<input type="text" value="{$orgdata.investpercent2}" class="forminputlarge" name="investpercent2" style="width:100px" oninput="setinvestpercent()">%</div>
+				</neq>
+				<script>
+					function setinvestpercent()
+					{
+						var value=document.getElementById("invester_temp").value;
+						if(value=="省投资")
+						{
+							document.getElementsByName("investpercent1")[0].value="100";
+							document.getElementsByName("investpercent2")[0].value="0";
+						}
+						if(value=="自投资")
+						{
+							document.getElementsByName("investpercent1")[0].value="0";
+							document.getElementsByName("investpercent2")[0].value="100";
+						}
+						if(value=="合作投资")
+						{
+							var investpercent1=document.getElementsByName("investpercent1")[0].value;
+							var investpercent2=100-investpercent1;
+							document.getElementsByName("investpercent2")[0].value=investpercent2;
+						}
+						calctotalForTitle();
+					}
+				</script>
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px;width:10%">招标方式<font style="color:red">*</font>:</td>
+			<td class="normal" style="font-weight:bold;height:45px;width:10%"></td>
+			<td class="normal" style="font-weight:bold;height:45px;width:20%"></td>
+			<td class="normal" colspan="1">
+			EPC（<input type="radio" value="EPC" name="biddingtype" <eq name="orgdata.biddingtype" value="EPC">checked</eq>>）  
+			PC（<input type="radio" value="PC" name="biddingtype" <eq name="orgdata.biddingtype" value="PC">checked</eq>>） 
+			其他（<input type="radio" value="其他" name="biddingtype" <eq name="orgdata.biddingtype" value="其他">checked</eq>>） 
+			</td>
+		</tr>
+		
+		<!--
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px;width:10%">供应商:</td>
+			<td class="normal" style="font-weight:bold;height:45px;width:10%"></td>
+			<td class="normal" style="font-weight:bold;height:45px;width:20%"></td>
+			<td class="normal" colspan="1">
+				<select type="text" class="forminputlarge" name="supplier">
+					<option value="南瑞" title="南瑞" <eq name="orgdata.supplier" value="supplier">selected</eq>>南瑞</option>
+				</select>
+			</td>
+		</tr>
+		-->
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px;width:10%">服务对象<font style="color:red">*</font>:</td>
+			<td class="normal" style="font-weight:bold;height:45px;width:10%"></td>
+			<td class="normal" style="font-weight:bold;height:45px;width:20%"></td>
+			<td class="normal" colspan="1">
+				<div>
+				企业或者单位名称：<input type="text" value="{$orgdata.client}" class="forminputlarge required" name="client" style="width:300px">
+				</div>
+				<div>
+				负责人及联系方式：<input type="text" value="{$orgdata.clienttel}" class="forminputlarge required" name="clienttel" style="width:300px">
+				</div>
+			</td>
+		</tr>
+		
+		
+		<td class="normal" style="font-weight:bold;height:45px;width:10%" rowspan="10">基本信息</td>
+		<td class="normal" style="font-weight:bold;height:45px;width:10%" rowspan="9">基本信息</td>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px;width:20%">省公司<font style="color:red">*</font>:</td>
+			<td class="normal" colspan="2">
+			<select type="text" class="forminputlarge" name="owner" id="owner_type" onchange="calctotalForTitle()">
+				<option value="电动汽车" title="电动汽车" <eq name="orgdata.owner" value="电动汽车">selected</eq>>电动汽车</option>
+			</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">地市公司<font style="color:red">*</font>:</td>
+			<td class="normal" colspan="2">
+			<select type="text" class="forminputlarge" name="owner2" id="owner2_temp" onchange="calctotalForTitle()">
+				<option value="南京电动" title="南京电动" <eq name="orgdata.owner2" value="南京电动">selected</eq>>南京电动</option>
+				<option value="无锡电动" title="无锡电动" <eq name="orgdata.owner2" value="无锡电动">selected</eq>>无锡电动</option>
+				<option value="徐州电动" title="徐州电动" <eq name="orgdata.owner2" value="徐州电动">selected</eq>>徐州电动</option>
+				<option value="常州电动" title="常州电动" <eq name="orgdata.owner2" value="常州电动">selected</eq>>常州电动</option>
+				<option value="苏州电动" title="苏州电动" <eq name="orgdata.owner2" value="苏州电动">selected</eq>>苏州电动</option>
+				<option value="南通电动" title="南通电动" <eq name="orgdata.owner2" value="南通电动">selected</eq>>南通电动</option>
+				<option value="连云港电动" title="连云港电动" <eq name="orgdata.owner2" value="连云港电动">selected</eq>>连云港电动</option>
+				<option value="淮安电动" title="淮安电动" <eq name="orgdata.owner2" value="淮安电动">selected</eq>>淮安电动</option>
+				<option value="盐城电动" title="盐城电动" <eq name="orgdata.owner2" value="盐城电动">selected</eq>>盐城电动</option>
+				<option value="扬州电动" title="扬州电动" <eq name="orgdata.owner2" value="扬州电动">selected</eq>>扬州电动</option>
+				<option value="镇江电动" title="镇江电动" <eq name="orgdata.owner2" value="镇江电动">selected</eq>>镇江电动</option>
+				<option value="泰州电动" title="泰州电动" <eq name="orgdata.owner2" value="泰州电动">selected</eq>>泰州电动</option>
+				<option value="宿迁电动" title="宿迁电动" <eq name="orgdata.owner2" value="宿迁电动">selected</eq>>宿迁电动</option>
+			</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">项目所在区/县:<font style="color:red;font-weight:bold">*</font></td>
+			<td class="normal" colspan="2">
+				<script type="text/javascript" src="__PUBLIC__/city/script/jquery.citys.js"></script>
+				<div id="demo3" class="citys">
+					
+						<select name="province" onchange="calctotalForTitle()" class="form-control required" style="float:left;width:20%"></select>
+						<select name="city" onchange="calctotalForTitle()" class="form-control required" style="float:left;width:20%"></select>
+						<select name="area" onchange="calctotalForTitle()" class="form-control required" style="float:left;width:20%"></select>
+						
+					
+				</div>
+				<script type="text/javascript">
+				$('#demo3').citys({
+					valueType:'name',
+					required:false,
+					nodata:'disabled',
+					province:'{$orgdata.province}',
+					city:'{$orgdata.city}',
+					area:'{$orgdata.area}',
+					onChange:function(info){
+					}
+				},function(api){
+					var info = api.getInfo();
+				});
+			</script>
+			
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">项目建设地址<font style="color:red">*</font>:</td>
+			<td class="normal" colspan="2">
+			<input type="text" value="{$orgdata.address}" id="address_temp" class="forminputlarge required" name="address" oninput="calctotalForTitle()">
+				<a href="__URL__/findpositioniframe/lat/{$orgdata['lat']}/lng/{$orgdata.lng}/check/1" data-toggle="modal" data-target="#modalposition" data-backdrop="static" target="dialog" class="btn btn-success btn-xs" style="position:relative;top:7px">位置</a>
+				<div class="form-group">
+			
+					<input name="jw" type="hidden" id="jw" value="{$orgdata.jw}"/>
+					<input name="lat" type="" placeholder="纬度" id="lat" value="{$orgdata.lat}" style="display:none" />
+					<input name="lng" type="" placeholder="经度" id="lng" value="{$orgdata.lng}" style="display:none" />
+					<a onClick="getPoint()"  style="display:none" >获取所填经纬度的位置</a>
+					
+					<!--
+					<iframe id="position" name="position" src="__URL__/findposition/lat/{$orgdata.lat}/lng/{$orgdata.lng}" style="border:0px;width:500px;height:310px;padding:0px;position:relative;left:20px;top:20px"></iframe>
+					-->
+				</div>
+				<script>
+					function getPoint()
+					{
+						lat=document.getElementById("lat").value;
+						lng=document.getElementById("lng").value;
+						src="__URL__/findposition/lat/"+lat+"/lng/"+lng;
+						document.getElementById('position').src=src;
+						return false;
+					}
+				</script>
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">项目编号<font style="color:red">*</font>:</td>
+			<td class="normal" colspan="2">
+			<neq name="orgdata.number" value="">
+			<input type="text" value="{$orgdata.number}" class="forminputlarge required" name="number" readonly>
+			</neq>
+			<eq name="orgdata.number" value="">
+			<input type="text" value="{$thisorder}" class="forminputlarge required" name="number" readonly>
+			</eq>
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">项目名称<font style="color:red">*</font>:</td>
+			<td class="normal" colspan="2">
+			<input type="text" value="{$orgdata.headtitle}" class="forminputmedium required" name="headtitle" id="headtitle_temp" readonly style="border-bottom:0px;width:230px">
+			<input type="text" value="{$orgdata.subtitle}" class="forminputlarge required" name="subtitle" id="subtitle_temp" placeholder="请输入项目名称" style="width:50%" oninput="calctotalForTitle()">
+			<input type="hidden" value="{$orgdata.title}" class="forminputlarge required" name="title" id="title_temp" readonly>
+			</td>
+		</tr>
+		
+		
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">建设类型:</td>
+			<td class="normal i-checks" colspan="2">
+			新建项目（<input type="radio" onchange="calctotalForTitle()" value="新建项目" name="type" <eq name="orgdata.type" value="新建项目">checked</eq> checked>）  
+			扩建项目（<input type="radio" onchange="calctotalForTitle()" oninput="calctotalForTitle()" value="扩建项目" name="type" <eq name="orgdata.type" value="扩建项目">checked</eq>>） 
+			改建项目（<input type="radio" onchange="calctotalForTitle()" oninput="calctotalForTitle()" value="改建项目" name="type" <eq name="orgdata.type" value="改建项目">checked</eq>>） 
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">充电设施类型:</td>
+			<td class="normal i-checks" colspan="2">
+			两轮低速车（<input type="radio" onchange="calctotalForTitle()" value="两轮低速车" name="taketype" <eq name="orgdata.taketype" value="两轮低速车">checked</eq> checked>）  
+			三轮低速车（<input type="radio" onchange="calctotalForTitle()" value="三轮低速车" name="taketype" <eq name="orgdata.taketype" value="三轮低速车">checked</eq>>） 
+			其他（<input type="radio" onchange="calctotalForTitle()" value="其他" name="taketype" <eq name="orgdata.taketype" value="其他">checked</eq>>） 
+			<input type="text" value="{$orgdata.taketype_other}" class="forminputsmall" name="taketype_other" <neq name="orgdata.taketype" value="其他">style="display:none"</neq>>
+			</td>
+		</tr>
+		
+		
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px" rowspan="4">充电设备信息:</td>
+		</tr>	
+		
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px" rowspan="3">充电设施:</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">数量（套）:</td>
+			<td class="normal" colspan="2">
+				<input type="text" value="{$orgdata[chargedevice4array][0]}" class="forminputlarge" name="chargedevice4[]" oninput="calctotal()">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">终端数（每套）（个）:</td>
+			<td class="normal" colspan="2">
+				<input type="text" value="{$orgdata[chargedevice6array][0]}" class="forminputlarge" name="chargedevice6[]" oninput="calctotal()">
+			</td>
+		</tr>
+		
+		
+		
+		
+		
+		
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px" rowspan="23">资金信息:</td>
+		</tr>
+		
+		
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px" rowspan="8">充电收入:</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">单车日均充电量（kWh）<font style="color:red">*</font>:</td>
+			<td class="normal" colspan="2">
+			<input type="text" value="{$orgdata.capital1}" class="forminputlarge" name="capital1" oninput="calctotal()">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">服务车量数（辆）<font style="color:red">*</font>:</td>
+			<td class="normal" colspan="2">
+			<input type="text" value="{$orgdata.capital2}" class="forminputlarge" name="capital2" oninput="calctotal()">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">年服务时间（天）<font style="color:red">*</font>:</td>
+			<td class="normal" colspan="2">
+			<input type="text" value="{$orgdata.capital3}" class="forminputlarge" name="capital3" oninput="calctotal()">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">充电量合计（kWh）<font style="color:red">*</font>:</td>
+			<td class="normal" colspan="2">
+			<input type="text" value="{$orgdata.capital4}" class="forminputlarge" name="capital4" oninput="calctotal()">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">服务费标准（元/小时）<font style="color:red">*</font>:</td>
+			<td class="normal" colspan="2">
+			<input type="text" value="{$orgdata.capital5}" class="forminputlarge" name="capital5" oninput="calctotal()">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">用户储值金额:</td>
+			<td class="normal" colspan="2">
+			<input type="text" value="{$orgdata.capital7}" class="forminputlarge" name="capital7" oninput="calctotal()">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">充电收入（万元/年）<font style="color:red">*</font>:</td>
+			<td class="normal" colspan="2">
+			<input type="text" value="{$orgdata.capital6}" class="forminputlarge" name="capital6" oninput="calctotal()">
+			</td>
+		</tr>
+		
+		
+		
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px" <eq name="steponeflag" value="1">rowspan="2"</eq> rowspan="7">项目投资:</td>
+		</tr>
+		<tr <eq name="steponeflag" value="1">style="display:none"</eq>>
+			<td class="normal" style="font-weight:bold;height:45px">基本预备费（万元）:</td>
+			<td class="normal" colspan="2">
+				<input type="text" value="{$orgdata.invest1}" class="forminputlarge" name="invest1" oninput="calctotal()">
+			</td>
+		</tr>
+		<tr <eq name="steponeflag" value="1">style="display:none"</eq>>
+			<td class="normal" style="font-weight:bold;height:45px">安装工程费（万元）:</td>
+			<td class="normal" colspan="2">
+				<input type="text" value="{$orgdata.invest2}" class="forminputlarge" name="invest2" oninput="calctotal()">
+			</td>
+		</tr>
+		<tr <eq name="steponeflag" value="1">style="display:none"</eq>>
+			<td class="normal" style="font-weight:bold;height:45px">建筑工程费（万元）:</td>
+			<td class="normal" colspan="2">
+				<input type="text" value="{$orgdata.invest3}" class="forminputlarge" name="invest3" oninput="calctotal()">
+			</td>
+		</tr>
+		<tr <eq name="steponeflag" value="1">style="display:none"</eq>>
+			<td class="normal" style="font-weight:bold;height:45px">设备购置费（万元）:</td>
+			<td class="normal" colspan="2">
+				<div>配电设备费：<input type="text" value="{$orgdata.invest41}" class="forminputlarge" name="invest41" oninput="calctotal()" style="width:300px"></div>
+				<div>充电设备费：<input type="text" value="{$orgdata.invest42}" class="forminputlarge" name="invest42" oninput="calctotal()" style="width:300px"></div>
+				<div>其他费用：<input type="text" value="{$orgdata.invest43}" class="forminputlarge" name="invest43" oninput="calctotal()" style="width:300px"></div>
+				<div>费用总计：<input type="text" value="{$orgdata.invest4}" class="forminputlarge" name="invest4" oninput="calctotal()" style="width:300px"></div>
+				
+			</td>
+		</tr>
+		<tr <eq name="steponeflag" value="1">style="display:none"</eq>>
+			<td class="normal" style="font-weight:bold;height:45px">其他费用（万元）:</td>
+			<td class="normal" colspan="2">
+				<div>监理费用：<input type="text" value="{$orgdata.invest51}" class="forminputlarge" name="invest51" oninput="calctotal()" style="width:300px"></div>
+				<div>设计费用：<input type="text" value="{$orgdata.invest52}" class="forminputlarge" name="invest52" oninput="calctotal()" style="width:300px"></div>
+				<div>其他费用：<input type="text" value="{$orgdata.invest53}" class="forminputlarge" name="invest53" oninput="calctotal()" style="width:300px"></div>
+				<div>费用总计：<input type="text" value="{$orgdata.invest5}" class="forminputlarge" name="invest5" oninput="calctotal()" style="width:300px"></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">项目总投资（万元）<font style="color:red">*</font>:</td>
+			<td class="normal" colspan="2">
+				<input type="text" value="{$orgdata.invest6}" class="forminputlarge" name="invest6" oninput="calctotal()">
+			</td>
+		</tr>
+		
+		
+		
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px" rowspan="7">项目成本:</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">场地租金（购置）（万元/年）</td>
+			<td class="normal" colspan="2">
+				<input type="text" value="{$orgdata.cost1}" class="forminputlarge" name="cost1" oninput="calctotal()">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">外线费用（万元/年）:</td>
+			<td class="normal" colspan="2">
+				<input type="text" value="{$orgdata.cost2}" class="forminputlarge" name="cost2" oninput="calctotal()">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">线损成本（万元/年）:</td>
+			<td class="normal" colspan="2">
+				<input type="text" value="{$orgdata.cost3}" class="forminputlarge" name="cost3" oninput="calctotal()">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">整站运维成本（万元/年）:</td>
+			<td class="normal" colspan="2">
+				<input type="text" value="{$orgdata.cost4}" class="forminputlarge" name="cost4" oninput="calctotal()">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">其他成本（万元/年）:</td>
+			<td class="normal" colspan="2">
+				<input type="text" value="{$orgdata.cost5}" class="forminputlarge" name="cost5" oninput="calctotal()">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">总成本（万元/年）<font style="color:red">*</font>:</td>
+			<td class="normal" colspan="2">
+				<input type="text" value="{$orgdata.cost6}" class="forminputlarge" name="cost6" oninput="calctotal()">
+			</td>
+		</tr>
+		
+		
+		
+		
+		
+		
+		
+		
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px" rowspan="3">项目评估信息:</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">回收年限:</td>
+			<td class="normal" colspan="2"><input type="text" value="{$orgdata.cost7}" class="forminputlarge" name="cost7" oninput="calctotal()"></td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">建设内容:</td>
+			<td class="normal" colspan="2"><input type="text" value="{$orgdata.content}" class="forminputlarge" name="content"></td>
+		</tr>
+		
+		<script>
+		calctotalForTitle();
+		function calctotalForTitle()
+		{
+			/*
+			var taketype=$("input[name='taketype']:checked").val();if(taketype=="")taketype="";
+			if(taketype=="其他")
+			{
+				$("[name='taketype_other']").css('display','');
+			}
+			else
+			{
+				$("[name='taketype_other']").css('display','none');
+				document.getElementsByName("taketype_other")[0].value="";
+			}
+			
+			var owner=document.getElementById("owner_type").value;if(owner=="")owner="";
+			
+			var area=document.getElementsByName("area")[0].value;if(area=="")area="";
+			var address=document.getElementById("address_temp").value;if(address=="")address="";
+			var taketype=$("input[name='taketype']:checked").val();if(taketype=="")taketype="";
+			var projecttype=$("input[name='projecttype']:checked").val();if(projecttype=="")projecttype="";
+			var type=$("input[name='type']:checked").val();if(type=="")type="";
+			var title_temp=owner+owner2+area+address+taketype+"电动汽车充电站"+type;
+			
+			document.getElementById("title_temp").value=title_temp;
+			*/
+			var owner2=document.getElementById("owner2_temp").value;if(owner2=="")owner2="";
+			var subtitle=document.getElementById("subtitle_temp").value;if(subtitle=="")subtitle="";
+			var value=document.getElementById("invester_temp").value;
+			if(value=="省投资")
+			{
+				var title_temp="国网江苏电动汽车服务有限公司"+owner2.replace("电动","");
+			}
+			if(value=="自投资")
+			{
+				var title_temp="国网"+owner2+"汽车服务有限公司";
+			}
+			if(value=="合作投资")
+			{
+				var title_temp="国网江苏电动汽车服务有限公司"+owner2.replace("电动","");
+			}
+			document.getElementById("headtitle_temp").value=title_temp;
+			document.getElementById("title_temp").value=title_temp+subtitle;
+		}
+		function calctotal(i)
+		{
+			
+			var capital1=document.getElementsByName("capital1")[0].value;if(capital1=="")capital1=0;
+			var capital2=document.getElementsByName("capital2")[0].value;if(capital2=="")capital2=0;
+			var capital3=document.getElementsByName("capital3")[0].value;if(capital3=="")capital3=0;
+			var capital4=document.getElementsByName("capital4")[0].value;if(capital4=="")capital4=0;
+			var capital5=document.getElementsByName("capital5")[0].value;if(capital5=="")capital5=0;
+			var capital6=document.getElementsByName("capital6")[0].value;if(capital6=="")capital6=0;
+			var capital4_temp=parseFloat(1*capital1)*parseFloat(1*capital2)*parseFloat(1*capital3);
+			document.getElementsByName("capital4")[0].value=capital4_temp;
+			var capital6_temp=parseFloat(1*capital4_temp)*parseFloat(1*capital5);
+			document.getElementsByName("capital6")[0].value=(capital6_temp/10000).toFixed(4);
+			
+			var invest41=document.getElementsByName("invest41")[0].value;if(invest41=="")invest41=0;
+			var invest42=document.getElementsByName("invest42")[0].value;if(invest42=="")invest42=0;
+			var invest43=document.getElementsByName("invest43")[0].value;if(invest43=="")invest43=0;
+			var invest51=document.getElementsByName("invest51")[0].value;if(invest51=="")invest51=0;
+			var invest52=document.getElementsByName("invest52")[0].value;if(invest52=="")invest52=0;
+			var invest53=document.getElementsByName("invest53")[0].value;if(invest53=="")invest53=0;
+			var invest4_temp=parseFloat(1*invest41)+parseFloat(1*invest42)+parseFloat(1*invest43);
+			var invest5_temp=parseFloat(1*invest51)+parseFloat(1*invest52)+parseFloat(1*invest53);
+			document.getElementsByName("invest4")[0].value=invest4_temp.toFixed(4);
+			document.getElementsByName("invest5")[0].value=invest5_temp.toFixed(4);
+			
+			var invest1=document.getElementsByName("invest1")[0].value;if(invest1=="")invest1=0;
+			var invest2=document.getElementsByName("invest2")[0].value;if(invest2=="")invest2=0;
+			var invest3=document.getElementsByName("invest3")[0].value;if(invest3=="")invest3=0;
+			var invest4=document.getElementsByName("invest4")[0].value;if(invest4=="")invest4=0;
+			var invest5=document.getElementsByName("invest5")[0].value;if(invest5=="")invest5=0;
+			var invest6=document.getElementsByName("invest6")[0].value;if(invest6=="")invest6=0;
+			if((invest1==0)&&(invest2==0)&&(invest3==0)&&(invest4==0)&&(invest5==0))
+			{
+				var invest6_temp=invest6;
+			}
+			else
+			{
+				var invest6_temp=parseFloat(1*invest1)+parseFloat(1*invest2)+parseFloat(1*invest3)+parseFloat(1*invest4)+parseFloat(1*invest5);
+				document.getElementsByName("invest6")[0].value=(invest6_temp).toFixed(4);
+			}
+			
+			/*
+			var chargedevice4=document.getElementsByName("chargedevice4[]")[0].value;if(chargedevice4=="")chargedevice4=0;
+			var chargedevice6=document.getElementsByName("chargedevice6[]")[0].value;if(chargedevice6=="")chargedevice6=0;
+			var devicescale_temp=parseFloat(1*chargedevice4)*parseFloat(1*chargedevice6);
+			document.getElementsByName("devicescale")[0].value=(devicescale_temp).toFixed(2);
+			*/
+			
+			//document.getElementsByName("cost3")[0].value=(0.05*document.getElementsByName("capital6")[0].value).toFixed(2);
+			//document.getElementsByName("cost4")[0].value=(0.05*document.getElementsByName("capital6")[0].value).toFixed(2);
+			
+			var cost1=document.getElementsByName("cost1")[0].value;if(cost1=="")cost1=0;
+			var cost2=document.getElementsByName("cost2")[0].value;if(cost2=="")cost2=0;
+			var cost3=document.getElementsByName("cost3")[0].value;if(cost3=="")cost3=0;
+			var cost4=document.getElementsByName("cost4")[0].value;if(cost4=="")cost4=0;
+			var cost5=document.getElementsByName("cost5")[0].value;if(cost5=="")cost5=0;
+			var cost6=document.getElementsByName("cost6")[0].value;if(cost6=="")cost6=0;
+			var cost6_temp=parseFloat(1*cost1)+parseFloat(1*cost2)+parseFloat(1*cost3)+parseFloat(1*cost4)+parseFloat(1*cost5);
+			document.getElementsByName("cost6")[0].value=cost6_temp.toFixed(4);
+			
+			
+			//var cost7_temp=invest6_temp/(parseFloat(1*capital6_temp/10000)-parseFloat(1*cost6_temp));
+			//var cost7_temp=(parseFloat(1*invest6_temp)+parseFloat(1*cost6_temp))/(parseFloat(1*capital6_temp/10000));
+			var cost7_temp=(parseFloat(1*invest6_temp))/(parseFloat(1*capital6_temp/10000)-parseFloat(1*cost6_temp));
+			document.getElementsByName("cost7")[0].value=(cost7_temp).toFixed(1);
+			
+			return;
+			
+		}
+		
+		</script>
+		
+		<!--
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">状态:</td>
+			<td class="normal i-checks" colspan="3">
+			储备（<input type="radio" value="储备" name="design_status" <eq name="orgdata.design_status" value="储备">checked</eq>>）  
+			待进场（<input type="radio" value="待进场" name="design_status" <eq name="orgdata.design_status" value="待进场">checked</eq>>）  
+			待施工（<input type="radio" value="待施工" name="design_status" <eq name="orgdata.design_status" value="待施工">checked</eq>>）  
+			施工中（<input type="radio" value="施工中" name="design_status" <eq name="orgdata.design_status" value="施工中">checked</eq>>） 
+			已完成（<input type="radio" value="已完成" name="design_status" <in name="orgdata.design_status" value="已完成">checked</in>>） 
+			滞后（<input type="radio" value="滞后" name="design_status" <in name="orgdata.design_status" value="滞后">checked</in>>） 
+			暂停（<input type="radio" value="暂停" name="design_status" <in name="orgdata.design_status" value="暂停">checked</in>>） 
+			取消（<input type="radio" value="取消" name="design_status" <in name="orgdata.design_status" value="取消">checked</in>>） 
+			</td>
+		</tr>
+		-->
+		<!--
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">配电规模（kVA）:</td>
+			<td class="normal" colspan="3"><input type="text" value="{$orgdata.fundsource}" class="forminputlarge" name="fundsource"></td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">充电设施规模（kW）:</td>
+			<td class="normal" colspan="3"><input type="text" value="{$orgdata.hardness}" class="forminputlarge" name="hardness"></td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">可研估算:</td>
+			<td class="normal" colspan="3"><input type="text" value="{$orgdata.hardness}" class="forminputlarge" name="hardness"></td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">投资额:</td>
+			<td class="normal" colspan="3"><input type="text" value="{$orgdata.hardness}" class="forminputlarge" name="hardness"></td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">预估投资额:</td>
+			<td class="normal" colspan="3"><input type="text" value="{$orgdata.hardness}" class="forminputlarge" name="hardness"></td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">初步意向:</td>
+			<td class="normal" colspan="3"><input type="text" value="{$orgdata.hardness}" class="forminputlarge" name="hardness"></td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">编制、核实可研估算:</td>
+			<td class="normal" colspan="3"><input type="text" value="{$orgdata.hardness}" class="forminputlarge" name="hardness"></td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">合作协议签订（公共站证件办理）:</td>
+			<td class="normal" colspan="3"><input type="text" value="{$orgdata.hardness}" class="forminputlarge" name="hardness"></td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">入场:</td>
+			<td class="normal" colspan="3"><input type="text" value="{$orgdata.hardness}" class="forminputlarge" name="hardness"></td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">主体建设完成:</td>
+			<td class="normal" colspan="3"><input type="text" value="{$orgdata.hardness}" class="forminputlarge" name="hardness"></td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">送电（已提交结算审计）:</td>
+			<td class="normal" colspan="3"><input type="text" value="{$orgdata.hardness}" class="forminputlarge" name="hardness"></td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">项目进度:</td>
+			<td class="normal" colspan="3"><input type="text" value="{$orgdata.hardness}" class="forminputlarge" name="hardness"></td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">目前所处状态:</td>
+			<td class="normal" colspan="3"><input type="text" value="{$orgdata.hardness}" class="forminputlarge" name="hardness"></td>
+		</tr>
+		-->
+		<!--
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">取消时间:</td>
+			<td class="normal" colspan="3"><input type="text" value="{$orgdata.cancel_time}" class="forminputlarge" name="cancel_time" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" autocomplete="off"></td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">取消原因:</td>
+			<td class="normal" colspan="3"><input type="text" value="{$orgdata.cancel_reason}" class="forminputlarge" name="cancel_reason"></td>
+		</tr>
+		-->
+		<!--
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">其他资料:</td>
+			<td class="normal" colspan="3">
+			<neq name="orgdata.picture" value="">
+				<volist name="orgdata.picture" id="picture">
+				<neq name="picture" value="">
+				 [ 
+				<a href="__URL__/filedown/filename/{$picture}/filerealname/{$orgdata[picturefilename][$key]}" style="color:green">{$orgdata[picturefilename][$key]} 
+				</a>  ] 
+				</neq>
+				</volist>
+			</neq>
+			<input type="file" multiple="multiple" class="form-control" name="file1[]" style="width:100%">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" colspan="1" style="font-weight:bold;height:45px">
+			审核记录
+			</td>
+			<td class="normal" colspan="3" style="line-height:18px">
+			{$orgdata.handlehistory}
+			</td>
+		</tr>
+		-->
+		
+		<eq name="approve" value="1">
+		<input type="hidden" value="1" class="forminputlarge" name="approve">
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px;color:red;">审核结果:</td>
+			<td class="normal" colspan="3">
+			<select class="form-control" name="result" onchange="setdesign_status(this.value)">
+				<option value="同意">同意</option>
+				<option value="退回">退回</option>
+			</select>
+			</td>
+		</tr>
+		<script>
+			function setdesign_status(value)
+			{
+				if(value=="同意")
+				{
+					document.getElementsByName("design_status")[0].value="储备";
+				}
+				else
+				{
+					document.getElementsByName("design_status")[0].value="初步立项审批退回";
+				}
+			}
+		</script>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px;color:red;">审核意见:</td>
+			<td class="normal" colspan="3">
+			<textarea type="text" class="form-control" name="suggestion" id="suggestion"></textarea>
+			</td>
+		</tr>
+		</eq>
+    </table>
+	
+	
+
+</div>
+<div class="modal-footer">
+	<neq name="check" value="1">
+	<button type="button" class="btn btn-danger" id="submitbutton">确认提交</button>
+	</neq>
+	<neq name="noclose" value="1">
+	<button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+	</neq>
+</div>
+</form>
+<!-- Prettyfile -->
+<script src="js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+
+ <!-- 全局js -->
+<script src="js/jquery.min.js?v=2.1.4"></script>
+<script src="js/bootstrap.min.js?v=3.3.6"></script>
+
+<!-- 自定义js -->
+<script src="js/content.js?v=1.0.0"></script>
+
+<!-- jQuery Validation plugin javascript-->
+<script src="js/plugins/validate/jquery.validate.min.js"></script>
+<script src="js/plugins/validate/messages_zh.min.js"></script>
+
+<script src="js/demo/form-validate-demo.js"></script>
+
+
+
+<script>
+	$("#submitbutton").click(function(){
+		title=$('input[name=title]').val();
+		
+		var capital6=$("input[name='capital6']").val();
+		if(capital6<=0)
+		{
+			alert("充电收入（万元/年）不能小于等于0");return;
+		}
+		var invest6=$("input[name='invest6']").val();
+		var cost6=$("input[name='cost6']").val();
+		if(invest6<=0)
+		{
+			alert("项目总投资（万元）不能小于等于0");return;
+		}
+		if(cost6<=0)
+		{
+			alert("总成本（万元/年）不能小于等于0");return;
+		}
+		
+		$("#postform").validate();
+		$("#postform").submit();
+	})
+</script>

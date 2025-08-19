@@ -1,0 +1,133 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+	<meta charset="utf-8" /> 
+	<title>Real World Admin - Reports Page</title> 
+   	<link rel="stylesheet" href="css/main.css" /> 
+	<link rel="stylesheet" href="css/theme2.css" />  
+	<script type="text/javascript" src="js/jquery-1.4.4.min.js"></script>
+	<script type="text/javascript" src="js/jquery.mobile-1.0a2.min.js"></script> 
+</head> 
+
+<body> 
+
+<div data-role="page">
+
+	<div data-role="header">
+		<h1>All Reports</h1>
+        <a href="index.html" rel="external">Main Page</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		
+		<ul data-role="listview" >
+			<li data-role="list-divider">Product Sales</li>
+
+			<li>
+				<h3>Weekly Report</h3>
+				
+				
+                    <dl id="chart">
+                      <dt>Sales increase this week</dt>
+                      <dd><span id="data-one">47%</span></dd>
+                      <dt>Revenue increase this week</dt>
+                      <dd><span id="data-two">59%</span></dd>
+                      <dt>Profit increase this week</dt>
+                      <dd><span id="data-three">26%</span></dd>
+                    </dl>
+               
+				
+			</li>
+
+			
+        </ul>
+		<h4>Site Loads</h4>
+        <div id="vertgraph">
+            <ul>
+                <li class="critical" style="height: 150px;">22</li>
+                <li class="high" style="height: 80px;">7</li>
+                <li class="medium" style="height: 50px;">3</li>
+                <li class="low" style="height: 90px;">8</li>
+                <li class="info" style="height: 40px;">2</li>
+            </ul>
+       </div>
+       
+       
+       <div>
+       		<h4>Visitor statistics</h4>
+       	   <ul class="yAxis">
+                <li>100</li>
+                
+                <li>90</li>
+                <li>80</li>
+                <li>70</li>
+                <li>60</li>
+                <li>50</li>
+                <li>40</li>
+                
+           
+                </ul>
+                <dl id="csschart">
+                
+                <dt>Mon</dt>
+                <dd class="p36"><span><b>36</b></span></dd>
+                
+                <dd class="sub p30" ><span><b>36</b></span></dd>
+                
+                <dt>Tue</dt>
+                <dd class="p45"><span><b>45</b></span></dd>
+                <dd class="sub p35"><span><b>36</b></span></dd>	
+                
+                <dt>Wed</dt>
+                <dd class="p41"><span><b>41</b></span></dd>
+                
+                <dd class="sub p21"><span><b>51</b></span></dd>	
+                
+                <dt>Thu</dt>
+                <dd class="p48"><span><b>48</b></span></dd>
+                <dd class="sub p30" ><span><b>36</b></span></dd>
+                
+                <dt>Fri</dt>
+                <dd class="p55"><span><b>55</b></span></dd>
+                
+                <dd class="sub p15" ><span><b>36</b></span></dd>
+                
+                <dt>Sat</dt>
+                <dd class="p80"><span><b>80</b></span></dd>
+                <dd class="sub p71" ><span><b>36</b></span></dd>
+                
+                <dt>Sun</dt>
+                <dd class="p72"><span><b>72</b></span></dd>
+                
+                <dd class="sub p53" ><span><b>36</b></span></dd>
+                
+                <dt>Mon</dt>
+                <dd class="p71"><span><b>71</b></span></dd>
+                <dd class="sub p37" ><span><b>36</b></span></dd>
+                
+               
+                </dl>
+                <ul class="xAxis">
+                <li>Mon</li>
+                
+                <li>Tue</li>
+                <li>Wed</li>
+                <li>Thu</li>
+                <li>Fri</li>
+                <li>Sat</li>
+                <li>Sun</li>
+              
+            </ul>
+       </div>
+	</div><!-- /content -->
+    <div data-role="content"> 
+      
+    </div>
+    <div data-role="footer">
+        <h4><a href="index.html" rel="external">Main Page</a></h4>
+    </div>
+</div><!-- /page -->
+
+</body>
+</html>
+

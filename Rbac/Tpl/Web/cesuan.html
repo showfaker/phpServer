@@ -1,0 +1,191 @@
+﻿<!doctype html>
+<html>
+
+	<head>
+		<title>经济测算</title>
+		<meta charset="utf-8">
+		<meta name="viewport"
+			content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__PUBLIC__/appsource/css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			html,
+			body {
+				margin: 0;
+				padding: 0;
+				height: 100%;
+				overflow: hidden;
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+			}
+
+			.mui-content {
+				height: 100%;
+				overflow: auto;
+			}
+		</style>
+		<link href="__PUBLIC__/appsource/css/mui.picker.css" rel="stylesheet" />
+		<link href="__PUBLIC__/appsource/css/mui.poppicker.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<form class="mui-input-group">
+				<div class="mui-input-row">
+					<label style="white-space:nowrap;color: #999;">项目名称</label>
+					<input type="text" class="mui-input-clear" v-model="projectNm" disabled>
+				</div>
+				<div class="mui-input-row" @click="pickerShow">
+					<label style="white-space:nowrap">项目类型<span style="color: red;"> *</span></label>
+					<input type="text" class="mui-input-clear" v-model="projectTyp" placeholder="请选择项目类型" disabled>
+					<div style="position: absolute;right: 10px;height: 100%;display: flex;align-items: center;">
+						<img src="__PUBLIC__/appsource/images/arrow.png" style="width:12px">
+					</div>
+				</div>
+				<div class="mui-input-row" @click="areaPickerShow">
+					<label style="white-space:nowrap">所在地区<span style="color: red;"> *</span></label>
+					<input type="text" class="mui-input-clear" v-model="area" placeholder="请选择所在地区" disabled>
+					<div style="position: absolute;right: 10px;height: 100%;display: flex;align-items: center;">
+						<img src="__PUBLIC__/appsource/images/arrow.png" style="width:12px">
+					</div>
+				</div>
+				<div class="mui-input-row">
+					<label style="white-space:nowrap">详细地址<span style="color: red;"> *</span></label>
+					<input type="text" class="mui-input-clear" v-model="addr" placeholder="请填写详细地址">
+				</div>
+				<div v-if="projectTyp=='集中式光伏发电'">
+					<div style="white-space:nowrap;padding: 10px 15px 0;">统计方式<span style="color: red;"> *</span></div>
+					<div class="mui-input-row mui-radio">
+						<label style="color: #666;">按电量统计</label>
+						<input name="replacement" type="radio" :checked="replacement==0">
+					</div>
+					<div class="mui-input-row mui-radio">
+						<label style="color: #666;">按里程统计</label>
+						<input name="replacement" type="radio" :checked="replacement==1">
+					</div>
+				</div>
+			</form>
+			<div style="display: flex;justify-content: center;margin: 20px 0;">
+				<button type="button" class="mui-btn mui-btn-warning" style="width: 200px;" @click="submit">确定</button>
+			</div>
+		</div>
+		<script src="__PUBLIC__/appsource/js/mui.min.js"></script>
+		<script src="__PUBLIC__/appsource/js/mui.picker.js"></script>
+		<script src="__PUBLIC__/appsource/js/mui.poppicker.js"></script>
+		<script src="__PUBLIC__/appsource/js/city.data.js" type="text/javascript" charset="utf-8"></script>
+		<script src="__PUBLIC__/appsource/js/city.data-3.js" type="text/javascript" charset="utf-8"></script>
+		<script src="__PUBLIC__/appsource/js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<!-- 微信 JS-SDK 如果不需要兼容小程序，则无需引用此 JS 文件。 -->  
+		<script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>  
+		<!-- uni 的 SDK，必须引用。 -->  
+		<script type="text/javascript" src="//js.cdn.aliyun.dcloud.net.cn/dev/uni-app/uni.webview.0.1.52.js"></script>
+		<script type="text/javascript">
+		document.addEventListener('UniAppJSBridgeReady', function() {
+		uni.getEnv(function(res) {
+			var vm = new Vue({
+					el: '.mui-content',
+					data: {
+						projectTyp: '',
+						projectTypIndex: 0,
+						projectTypList: [{
+							value: 0,
+							text: '分布式光伏发电'
+						}, {
+							value: 1,
+							text: '集中式光伏发电'
+						}, {
+							value: 2,
+							text: '风力发电'
+						}, {
+							value: 3,
+							text: '工程承揽建设'
+						}, {
+							value: 4,
+							text: '智慧停车场建设'
+						}],
+						replacement: 0,
+						picker: '',
+						areaPicker: '',
+						area: '',
+						addr: ''
+					},
+					computed: {
+						projectNm: function() {
+							if (this.area && this.addr && this.projectTyp) {
+								return this.area + this.addr + this.projectTyp + '经济测算'
+							}
+							return ''
+						}
+					},
+					created() {
+						this.picker = new mui.PopPicker();
+						this.picker.setData(this.projectTypList);
+						this.areaPicker = new mui.PopPicker({
+							layer: 3
+						})
+						this.areaPicker.setData(cityData3)
+					},
+					methods: {
+						pickerShow() {
+							this.picker.show(selectItems => {
+								this.projectTyp = selectItems[0].text
+							})
+						},
+						areaPickerShow() {
+							this.areaPicker.show(selectItems => {
+								this.area = selectItems[0].text + selectItems[1].text + selectItems[2]
+									.text
+							})
+						},
+						submit() {
+							if (this.projectTyp === '') {
+								mui.toast('请选择项目类型');
+								return
+							}
+							if (this.area === '') {
+								mui.toast('请选择所在地区');
+								return
+							}
+							if (this.addr === '') {
+								mui.toast('请填写详细地址');
+								return
+							}
+							let replacement = document.getElementsByName("replacement")
+							for (let i = 0; i < replacement.length; i++) {
+								if (replacement[i].checked) {
+									this.replacement = i
+									break
+								}
+							}
+							
+							let preInfo = JSON.stringify({
+								projectNm:this.projectNm,
+								projectTyp:this.projectTyp,
+								area:this.area,
+								addr:this.addr
+							})
+							localStorage.setItem("preInfo", preInfo);
+							
+							if(this.projectTyp=='分布式光伏发电'){
+								uni.navigateTo({  
+									url: '/pages/web/index?page=calc3'
+								});
+							}else	if (this.projectTyp == '集中式光伏发电') {
+								if (this.replacement == 0) {
+									uni.navigateTo({  
+										url: '/pages/web/index?page=calc1'
+									});
+								} else if (this.replacement == 1) {
+									uni.navigateTo({  
+										url: '/pages/web/index?page=calc2'
+									});
+								}
+							}
+						}
+					}
+				});
+			});
+			});
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="__PUBLIC__/dwz/themes/css/core1.css">
+</head>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+					<neq name="_SESSION[app]" value="1">
+                    <div class="ibox-title">
+                        <h5>{$moduletitle}</h5>
+                    </div>
+					</neq>
+                    <div class="ibox-content" <eq name="_SESSION[app]" value="1">style="padding:0px"</eq>>
+						<div class="row m-b-lg" >	
+						   <div class="col-sm-6" style="width:100%">
+								<div class="tabs-container">
+										<ul class="nav nav-tabs">
+											
+											<eq name="moduletitle" value="运营工期分析">
+											<li <notin name="tab" value="2,3,4,5,6,7,8,9,10,11,12,13,14"> class="active" </notin>><a  href="__URL__/index/token/{$token}/tab/1">项目地域分类</a>
+											</li>
+											<li <eq name="tab" value="11"> class="active" </eq>><a  href="__URL__/index/token/{$token}/tab/11">负责人员统计</a>
+											</li>
+											<li <eq name="tab" value="13"> class="active" </eq>><a  href="__URL__/index/token/{$token}/tab/13">合作模式统计</a>
+											</li>
+											<li <eq name="tab" value="14"> class="active" </eq>><a  href="__URL__/index/token/{$token}/tab/14">装机容量统计</a>
+											</li>
+											</eq>
+											
+											<eq name="moduletitle" value="延误原因分析">
+											<li <eq name="tab" value="6"> class="active" </eq>><a  href="__URL__/index/token/{$token}/tab/6">开发</a>
+											</li>
+											<li <eq name="tab" value="7"> class="active" </eq>><a  href="__URL__/index/token/{$token}/tab/7">设计</a>
+											</li>
+											<li <eq name="tab" value="8"> class="active" </eq>><a  href="__URL__/index/token/{$token}/tab/8">采购</a>
+											</li>
+											<li <eq name="tab" value="9"> class="active" </eq>><a  href="__URL__/index/token/{$token}/tab/9">施工</a>
+											</li>
+											<li <eq name="tab" value="10"> class="active" </eq>><a  href="__URL__/index/token/{$token}/tab/10">主项</a>
+											</li>
+											</eq>
+											
+											<eq name="moduletitle" value="标准工期分析">
+											<li <eq name="tab" value="16"> class="active" </eq>><a  href="__URL__/index/token/{$token}/tab/16">开发</a>
+											</li>
+											<li <eq name="tab" value="17"> class="active" </eq>><a  href="__URL__/index/token/{$token}/tab/17">设计</a>
+											</li>
+											<li <eq name="tab" value="18"> class="active" </eq>><a  href="__URL__/index/token/{$token}/tab/18">采购</a>
+											</li>
+											<li <eq name="tab" value="19"> class="active" </eq>><a  href="__URL__/index/token/{$token}/tab/19">施工</a>
+											</li>
+											<li <eq name="tab" value="20"> class="active" </eq>><a  href="__URL__/index/token/{$token}/tab/20">主项</a>
+											</li>
+											</eq>
+											
+											<eq name="moduletitle" value="计划达成率分析">
+											<li <eq name="tab" value="26"> class="active" </eq>><a  href="__URL__/index/token/{$token}/tab/26">开发</a>
+											</li>
+											<li <eq name="tab" value="27"> class="active" </eq>><a  href="__URL__/index/token/{$token}/tab/27">设计</a>
+											</li>
+											<li <eq name="tab" value="28"> class="active" </eq>><a  href="__URL__/index/token/{$token}/tab/28">采购</a>
+											</li>
+											<li <eq name="tab" value="29"> class="active" </eq>><a  href="__URL__/index/token/{$token}/tab/29">施工</a>
+											</li>
+											<li <eq name="tab" value="30"> class="active" </eq>><a  href="__URL__/index/token/{$token}/tab/30">主项</a>
+											</li>
+											</eq>
+											
+											<eq name="moduletitle" value="项目分类统计">
+											<li <eq name="tab" value="41"> class="active" </eq>><a  href="__URL__/index/token/{$token}/tab/41">项目地域分类</a>
+											</li>
+											<li <eq name="tab" value="42"> class="active" </eq>><a  href="__URL__/index/token/{$token}/tab/42">负责人员统计</a>
+											</li>
+											<li <eq name="tab" value="43"> class="active" </eq>><a  href="__URL__/index/token/{$token}/tab/43">合作模式统计</a>
+											</li>
+											<!-- <li <eq name="tab" value="44"> class="active" </eq>><a  href="__URL__/index/token/{$token}/tab/44">装机容量统计</a>
+											</li> -->
+											</eq>
+											
+											<!-- <li <eq name="tab" value="10"> class="active" </eq>><a  href="__URL__/index/token/{$token}/tab/10">项目专项分类</a>
+											</li> -->
+											<!--
+											<li <eq name="tab" value="2"> class="active" </eq>><a  href="__URL__/index/token/{$token}/tab/2"> 预警分类（专项）</a>
+											</li>
+											<li <eq name="tab" value="3"> class="active" </eq>><a  href="__URL__/index/token/{$token}/tab/3"> 预警分类（项目）</a>
+											</li>
+											<li <eq name="tab" value="4"> class="active" </eq>><a  href="__URL__/index/token/{$token}/tab/4"> 报警分类（专项）</a>
+											</li>
+											<li <eq name="tab" value="5"> class="active" </eq>><a  href="__URL__/index/token/{$token}/tab/5"> 报警分类（项目）</a>
+											</li>
+											-->
+										</ul>
+										<div class="tab-content ">
+												<div class="tab-pane active">
+													<div class="panel-body">
+													<in name="tab" value="1,11,13,14"><include file="listindex"/> </in>
+                                                    <in name="tab" value="6,7,8,9,10"> <include file="listindex6"/> </in>
+													<in name="tab" value="16,17,18,19,20"> <include file="listindex16"/> </in>
+													<in name="tab" value="26,27,28,29,30"> <include file="listindex26"/> </in>
+													
+													<in name="tab" value="41,42,43,44"> <include file="listindex41"/> </in>
+													<eq name="tab" value="3"> <include file="listindex2"/> </eq>
+													<eq name="tab" value="4"> <include file="listindex3"/> </eq>
+													<eq name="tab" value="12"><include file="listindex12"/> </eq>
+													</div>
+												</div>
+										</div>
+									
+								</div>
+							</div>
+						</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div class="gohome"><a class="animated bounceInUp" href="http://{$hostip}/projecttest/Rbac/App/" title="返回首页"><i class="fa fa-home"></i></a></div>
+	
+	<div id="modal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+		<div class="modal-content">
+		   <div class="modal-header">  
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
+                    <span aria-hidden="true">×</span>  
+                </button>  
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>  
+            </div>  
+            <div class="modal-body">  
+                <p>One fine body…</p>  
+            </div>  
+            <div class="modal-footer">  
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                <button type="button" class="btn btn-primary">Save</button>  
+            </div>  
+		</div>
+	  </div>
+	</div>
+	
+	
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+	<script src="js/plugins/layer/laydate/laydate.js"></script>
+    <script src="js/content.js?v=1.0.0"></script>
+    <script>
+        $(document).ready(function () {
+			$("#modal").on("hidden.bs.modal", function() {
+				$(this).removeData("bs.modal");  
+			});
+        });
+    </script>
+</body>
+</html>

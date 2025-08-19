@@ -1,0 +1,289 @@
+
+<link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/style.css?v=4.1.0" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="__PUBLIC__/dwz/themes/css/core1.css">
+
+
+<style>
+.panel-heading
+{
+	font-weight:bold;
+}
+.panel-body
+{
+	font-weight:bold;
+}
+</style>
+
+<form method="post" action="__URL__/insert1/callbackType/closeCurrent/navTabId/Second" ENCTYPE="multipart/form-data" onsubmit="return iframeCallback(this, dialogAjaxDone)">
+<div class="modal-body" id="file-pretty" <eq name="_SESSION[app]" value="1">style="padding:0px"</eq>> 
+	<input type="hidden" value="{$orgdata.id}" name="id">
+	<!--
+	<div class="form-group">
+		<label style="float:left">项目名称</label>
+		<input type="text" placeholder="" class="form-control" readonly value="{$orgdata['title']}">
+	</div>
+	-->
+	
+	<!-- 
+		<div class="modal-header" style="text-align:left;margin-bottom:20px;display:">
+			<h4 class="modal-title" style="font-weight:bold">项目主项计划周期</h4>
+		</div>
+	
+	
+		<div class="row" style="display:">
+			<neq name="orgdata.predate0" value="">
+			<div class="col-sm-2">
+				<div <?php if($orgdata[date1]>$orgdata[predate1]){ ?>class="panel panel-danger"<?php }?> class="panel panel-primary">
+					<div class="panel-heading">开发时间</div>
+					<div class="panel-heading" style="background-color:#eee;color:#333;padding:2px">计划{$orgdata[predate0]}~{$orgdata[predate1]}</div>
+					<div class="panel-body" style="padding:2px">
+						实际{$orgdata[date0]}~{$orgdata[date1]}
+					</div>
+				</div>
+			</div>
+			</neq>
+			<neq name="orgdata.predate2" value="">
+			<div class="col-sm-2">
+				<div <?php if($orgdata[date3]>$orgdata[predate3]){ ?>class="panel panel-danger"<?php }?> class="panel panel-primary">
+					<div class="panel-heading">设计时间</div>
+					<div class="panel-heading" style="background-color:#eee;color:#333;padding:2px">计划{$orgdata[predate2]}~{$orgdata[predate3]}</div>
+					<div class="panel-body" style="padding:2px">
+						实际{$orgdata[date2]}~{$orgdata[date3]}
+					</div>
+				</div>
+			</div>
+			</neq>
+			<neq name="orgdata.predate4" value="">
+			<div class="col-sm-2">
+				<div <?php if($orgdata[date5]>$orgdata[predate5]){ ?>class="panel panel-danger"<?php }?> class="panel panel-primary">
+					<div class="panel-heading">采购时间</div>
+					<div class="panel-heading" style="background-color:#eee;color:#333;padding:2px">计划{$orgdata[predate4]}~{$orgdata[predate5]}</div>
+					<div class="panel-body" style="padding:2px">
+						实际{$orgdata[date4]}~{$orgdata[date5]}
+					</div>
+				</div>
+			</div>
+			</neq>
+			<neq name="orgdata.predate6" value="">
+			<div class="col-sm-2">
+				<div <?php if($orgdata[date7]>$orgdata[predate7]){ ?>class="panel panel-danger"<?php }?> class="panel panel-primary">
+					<div class="panel-heading">施工时间</div>
+					<div class="panel-heading" style="background-color:#eee;color:#333;padding:2px">计划{$orgdata[predate6]}~{$orgdata[predate7]}</div>
+					<div class="panel-body" style="padding:2px">
+						实际{$orgdata[date6]}~{$orgdata[date7]}
+					</div>
+				</div>
+			</div>
+			</neq>
+			
+		</div>
+		
+		
+		 -->
+		 
+		 
+		 
+		<div class="modal-header" style="text-align:left;margin-bottom:20px;">
+			<h4 class="modal-title" style="font-weight:bold">项目全生命周期</h4>
+			<a href="__APP__/Xmtj/toexcel/plmid/{$orgdata[id]}" class="btn btn-info btn-sm hidden-xs" style="float:right">计划和实际进度导出</a>
+	
+		</div>
+		<table class="drafttable" style="position:relative;top:8px;margin:0 auto;width:100%;margin-bottom:28px;font-family:微软雅黑;">
+			<tr>
+				
+				<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6;width:12%">专项</td>
+				<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6;width:12%">节点</td>
+				<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6;width:10%">计划时间</td>
+				<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6;width:10%">完成时间</td>
+				<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6;width:7%">计划进度</td>
+				<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6;width:7%">完成进度</td>
+				<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6;width:6%">是否超期</td>
+				<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6;width:8%">超期原因</td>
+				<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6;width:20%">依赖项</td>
+				<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6;width:8%">操作</td>
+			</tr>
+			
+			
+		
+			<volist name="orgdata.worktype" id="worktype">
+			<neq name="worktype.classify" value="$orgdata[worktype][$key-1][classify]">
+			<tr>
+			<td style="background-color:#eee;height:20px;border:1px solid #999;font-weight:bold;padding-left:4px;line-height:20px" colspan="10">{$worktype.classify}</td>
+			</tr>
+			</neq>
+			<tr>
+				
+				<td class="normal" <eq name="worktype.pworktype" value="$orgdata[worktype][$key-1][pworktype]">style="border-bottom:0px;border-top:0px"</eq><neq name="worktype.pworktype" value="$orgdata[worktype][$key-1][pworktype]">style="border-bottom:0px"</neq>>
+				<neq name="worktype.pworktype" value="$orgdata[worktype][$key-1][pworktype]">
+				{$worktype.pworktype}
+				</neq>
+				</td>
+				<td class="normal" >
+				{$worktype.title}
+				</td>
+				<td class="normal" >
+				{$schedules[$key][plantimebegin]}</br>{$schedules[$key][plantimeend]}
+				</td>
+				<td class="normal" >
+				{$schedules[$key][realtimebegin]}</br>
+				{$schedules[$key][realtimeend]}
+				<neq name="schedules[$key][realtimeend]" value="">
+				<span class='badge badge-info' title="{$schedules[$key][id]}">完成</span>
+				</neq>
+				</td>
+				
+				
+				<td class="normal" >
+				{$schedules[$key][planpercent]}
+				</td>
+				<td class="normal" >
+				{$schedules[$key][percent]}
+				</td>
+				
+				<td class="normal" >
+				<!--
+				<neq name="schedules[$key][percent]" value="">
+				<font style="color:blue">{$schedules[$key][percent]}</font>
+				</neq>
+				<eq name="schedules[$key][percent]" value="">
+				<font style="color:red">未开始</font>
+				</eq>
+				-->
+				
+				
+				<gt name="schedules[$key][realtimeend]" value="$schedules[$key][plantimeend]">
+				<span class='badge badge-danger' title="{$schedules[$key][id]}">超期</span>
+				</gt>
+				<eq name="schedules[$key][realtimeend]" value="">
+				<gt name="today" value="$schedules[$key][plantimeend]">
+				<span class='badge badge-danger' title="{$schedules[$key][id]}">超期</span>
+				</gt>
+				</eq>
+				
+				
+				
+				</td>
+				<td class="normal" >{$overduereasons[$worktype["title"]]}</td>
+				<td class="normal" >
+				{$worktype.dependencedetail}
+				</td>
+				<td class="normal" ><a href="__APP__/Xmtj/overdueedit/plmid/{$orgdata['id']}/check/1/classify/{$worktype.classify}/worktype/{$worktype.pworktype}/node/{$worktype.title}" data-toggle="modal" data-target="#modalposition" data-backdrop="static"  target="dialog" class="btn btn-info btn-xs">添加超期原因</a></td>
+			</tr>
+			</volist>
+			
+		
+			
+			<tr>
+			<td style="background-color:#eee;height:10px;border:1px solid #999" colspan="10"></td>
+			</tr>
+			
+			<tr>
+				<td class="normal" >
+				总计
+				</td>
+				<td class="normal" >
+				执行天数
+				</td>
+				<td class="normal" >
+				计划 {$orgdata[plantime2]}天
+				</td>
+				<td class="normal" >
+				实际 {$orgdata['realtime2']}天
+				</td>
+				<td class="normal" >
+				<?php if($orgdata['realtime2']>$orgdata['plantime2']){ ?><span class='badge badge-danger'>超期</span><?php }?>
+				</td>
+				<td class="normal" >{$overduereasons["执行天数2"]}</td>
+				<td class="normal" ></td>
+				<td class="normal" ></td>
+				<td class="normal" ></td>
+				<td class="normal" ><a href="__APP__/Xmtj/overdueedit/plmid/{$orgdata['id']}/check/1/node/执行天数2" data-toggle="modal" data-target="#modalposition" data-backdrop="static"  target="dialog" class="btn btn-info btn-xs">添加超期原因</a></td>
+			</tr>
+		
+		</table>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		<volist name="orgdata.worktype" id="worktype">
+		<neq name="worktype.classify" value="$orgdata[worktype][$key-1][classify]">
+		<div class="modal-header" style="text-align:left;margin-bottom:20px;display:">
+			<h4 class="modal-title" style="font-weight:bold">{$worktype.classify}执行周期</h4>
+		</div>
+		<div style="width:100%;overflow-x: scroll">
+		<div class="row" style="display:;width:10000px;padding-left:20px">
+		</neq>
+			
+			<div class="col-sm-1 col-xs-1" style="width:1.2%;padding:2px;">
+				<div <gt name="schedules[$key][realtimeend]" value="$schedules[$key][plantimeend]">class="panel panel-danger"</gt>
+					<eq name="schedules[$key][realtimeend]" value=""><gt name="today" value="$schedules[$key][plantimeend]">class="panel panel-danger"</gt></eq> class="panel panel-primary">
+					<div class="panel-heading" style="height:60px;padding:2px;font-size:12px;border-bottom:1px solid #eee;border-radius:0px">{$worktype.pworktype}</div>
+					<div class="panel-heading" style="height:60px;padding:2px;font-size:12px;border-radius:0px;overflow-y:hidden;">{$worktype.title}</div>
+					<div class="panel-heading" style="background-color:#eee;color:#333;font-size:12px;padding:2px;">计划{$schedules[$key][plantimeend]}</div>
+					<div class="panel-body" style="font-size:12px;padding:2px;height:22px;">
+						实际{$schedules[$key][realtimeend]}
+					</div>
+				</div>
+			</div>
+			
+			
+		<neq name="worktype.classify" value="$orgdata[worktype][$key+1][classify]">	
+		</div>
+		</div>
+		</neq>
+		</volist>
+		
+		<!-- <div class="col-sm-1" style="width:1.5%">
+			<div <?php if($orgdata['realtime2']>$orgdata[plantime2]){ ?>class="panel panel-danger"<?php }?> class="panel panel-primary">
+				<div class="panel-heading" style="height:100px">执行天数</div>
+				<div class="panel-heading" style="background-color:#eee;color:#333">计划 {$orgdata[plantime2]}天</div>
+				<div class="panel-body">
+					实际 {$orgdata['realtime2']}天
+				</div>
+			</div>
+		</div>
+		 -->
+		
+		
+		
+		<!--
+		<div class="form-group">
+			<label style="float:left">变更原因</label>
+			<input type="text" readonly class="form-control" name="reason" value="{$schedules[0][reason]}" style="position:relative;top:4px">
+		</div>
+		-->
+</div>
+
+
+
+</form>
+
+<!-- Prettyfile -->
+<script src="js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+<script>
+	$('input[type="file"]').prettyFile();
+</script>

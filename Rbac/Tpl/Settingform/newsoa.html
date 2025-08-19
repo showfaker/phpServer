@@ -1,0 +1,42 @@
+						<div class="accountInfo">
+						<!-- 
+							<div class="alertInfo">
+								<h2 style="font-weight:normal">新闻公告中心</h2>
+								<p style="position:relative;top:-6px">最新动态</p>
+							</div>
+						-->
+							<div class="right">
+								<p><a href="#" target="_blank" style="line-height:19px"></a></p>
+								<p><a href="#" target="_blank" style="line-height:19px"></a></p>
+							</div>
+							<p><span>新闻公告中心</span></p>
+							<p>{$vo['title']}<a href="#" target="_blank"></a></p>
+						</div>
+						<div class="" layoutH="80" style="margin-right:280px;padding:5px"><!-- pageFormContent -->
+							
+						{$vo['content']}
+						</br></br></br></br></br></br></br>
+						<div class="divider" style=""></div><!-- width:98% -->
+
+						
+						<img src="__PUBLIC__/Images/classic/20130222102149124_easyicon_cn_16.png" style="position:relative;top:3px" width="16" height="16"></img>&nbsp;发布人员：{$vo['user_id']}
+						
+						<img src="__PUBLIC__/Images/classic/20130222032615436_easyicon_cn_16.png" style="position:relative;top:3px" width="16" height="16">&nbsp;发布时间：<?php 
+						if($vo['create_time']!=0)
+						echo date('Y-m-d H:i:s',$vo['create_time']);?>
+						
+						</div>
+						
+						<div class="pageFormContent" style="border-left:1px solid #ACCDF4; width:270px;position: absolute;top:60px;right:0" layoutH="80">
+						
+						  <volist name="list" id="listmenu">
+						  <div class="unit"><img src="__PUBLIC__/dwz/images/44.png">
+						  <a href="__APP__/Form/news/id/{$listmenu['id']}" target="navTab" title="点击查看详情" style="color:#427B8E;line-height:20px">{$listmenu['title']}</a>
+						  </div>
+						  </volist>
+						  
+
+						  
+						  
+						  
+						</div>

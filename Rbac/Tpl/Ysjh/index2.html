@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title>预算计划</title>
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+	<link href="css/plugins/chosen/chosen.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+	<link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+	<link href="css/main.css" rel="stylesheet">
+	
+</head>
+<style>
+.chosen-container{float:left;margin-right:10px}
+</style>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content"><!--ibox-content-->
+                        <div style="margin-bottom:10px;">
+                            <form action="__URL__/index/token/{$token}/" method="post">
+                                <input type="hidden" name="supplier" value="{$gys}">
+                                <div style="width:100%;">
+                                    <font style="margin-left:0%;float:left;position:relative;top:9px">城市：</font>
+                                    <select name="city" data-placeholder="选择城市" class="chosen-select" style="width:15%;" tabindex="2">
+                                        <option value="">请选择城市</option>
+                                        <volist name="cities" id="cities">
+                                        <option <eq name="city" value="$cities.city">selected</eq> value="{$cities.city}" hassubinfo="true">{$cities.city}</option>
+                                        </volist>
+                                    </select>                               
+                                    <font style="margin-left:0%;float:left;position:relative;top:9px">项目：</font>
+                                    <select name="plm" data-placeholder="选择项目" class="chosen-select" style="width:15%;" tabindex="2">
+                                        <option value="">请选择项目</option>
+                                        <volist name="project" id="project">
+                                        <option <eq name="plm" value="$project.plm">selected</eq> value="{$project.plm}" hassubinfo="true">{$project.plm}</option>
+                                        </volist>
+                                    </select>
+                                    <font style="margin-left:0%;float:left;position:relative;top:9px">供应商：</font>
+                                    <select name="supplier" data-placeholder="选择供应商" class="chosen-select" style="width:15%;" tabindex="2">
+                                        <option value="">请选择供应商</option>
+                                        <volist name="suppliers" id="project">
+                                        <option <eq name="supplier" value="$project.supplier">selected</eq> value="{$project.supplier}" hassubinfo="true">{$project.supplier}</option>
+                                        </volist>
+                                    </select>                                   
+                                                                        
+                                    <button class="btn btn-primary btn-sm" style="float:left;margin-right:10px" type="submit">查询</button>
+                                    <button type="button" data-toggle="modal" class="btn btn-primary" onclick="setformdata(this)">设置付款时间</button>&nbsp;&nbsp;
+
+                                    <div style="display: inline-block;vertical-align: bottom;font-weight: bold;">选择总计:   <span id="checkAll">0</span></div>
+                                </div>
+                            </form>
+                        </div>
+						<table class="table table-striped table-bordered table-hover " id="editable">
+                            <thead>
+                                <tr>
+								    <th style="width:3%;"><input type="checkbox" class="i-checks" id="control"/></th>
+                                    <th style="width:20%;">项目</th>
+									<th style="width:20%;">订单</th>
+                                    <th style="width:20%;">供应商</th>
+									<th style="width:20%;">应付金额</th>
+                                    <th style="width:20%;">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+								<volist name="list" id="listmenu">
+                                <tr>
+                                    <td><input type="checkbox" value="{$listmenu.tj_id}" name="id" class="i-checks" /></td>
+                                    <td>{$listmenu.plm}</td>
+                                    <td>{$listmenu.ctime}</td>
+                                    <td>{$listmenu.supplier}</td>
+                                    <td>{$listmenu.total}</td>
+                                    <td><a href="__URL__/check2/id/{$listmenu['id']}/supplier/{$supplier}" data-toggle="modal" data-target="#modal" target="dialog" class="btn btn-info btn-xs">详情 </a></td>								
+                                </tr>
+                                </volist>
+                             </tbody>
+                        </table>
+						<div class="panelBar"><div class="pagination" targetType="navTab" totalCount="{$totalCount}" numPerPage="{$numPerPage}" pageNumShown="10" currentPage="{$currentPage}">{$page}</div></div>  
+                    </div>
+                </div>
+						
+            </div>
+        </div>
+    </div>
+	<div id="add-form" class="modal fade" aria-hidden="true">
+	    <script>
+			function setformdata(math)
+			{
+				var id="";	
+				$("input[name='id']").each(function(){
+				if($(this).is(":checked")==true){
+					id+=$(this).val()+',';
+				}
+				});
+				if(id==''){
+				alert("请选择需要的订单");
+				}else{
+                   
+                    var aj = $.ajax({
+                    url:'__URL__/ajaxcheck',
+                    data:{  
+                        id : id
+                    },
+                    type:'post',  
+                    cache:false,  
+                    dataType:'json',  
+                    success:function(data) {                    
+                        // console.log(data);
+                        if(isNaN(data)){
+                            alert(data+'项目不是你发起的，请重新选择！');
+                        }else{
+                            // console.log(id);
+                            $(math).attr("href","#add-form");
+                            $("input[name='tj_id']").val(id); 
+                        }
+                      }  
+                    });
+
+                   
+				}
+				
+				return;
+			}
+		</script>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div>
+                            <h3 class="m-t-none m-b">设置付款时间</h3>                           
+                            <form method="post" action="__URL__/insert">
+							    <input type="hidden" name="tj_id" value="">
+                                <div class="form-group">
+                                    <label>付款时间：</label>
+                                    <input name="enddate" required placeholder="请输入付款时间" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})" class="form-control" value="">
+                                </div>								
+                                <div>
+									<button type="button" class="btn btn-sm btn-white pull-right m-t-n-xs" data-dismiss="modal" style="margin-left:10px">关闭</button>
+                                    <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>确定</strong>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	<div id="modal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" style="width:850px;height:600px">
+		<div class="modal-content">
+		   <div class="modal-header">  
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
+                    <span aria-hidden="true">×</span>  
+                </button>  
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>  
+            </div>  
+            <div class="modal-body">  
+                <p>One fine body…</p>  
+            </div>  
+            <div class="modal-footer">  
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                <button type="button" class="btn btn-primary">Save</button>  
+            </div>  
+		</div>
+	  </div>
+	</div>
+	    
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+	<script src="js/plugins/layer/laydate/laydate.js"></script>
+	<script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+	<!-- Chosen -->
+    <script src="js/plugins/chosen/chosen.jquery.js"></script>
+    <script src="js/demo/form-advanced-demo.js"></script>
+	<script>	
+	$("#control").change(function(){
+	var flage =$(this).is(":checked");//全选选中为true，否则为false
+		$("input[type=checkbox]").each(function(){   
+		$(this).prop("checked",flage);
+        });
+	});
+	
+	</script>
+</body>
+</html>
+<script>
+    $('input[type="checkbox"]').change(function(){
+        var all=0;
+        $('input[name="id"]:checked').each(function(i){
+            all+=parseFloat($(this).parents('tr').children('td').eq(4).html());
+        });
+        all=all.toFixed(2);
+        // all=all.replace(/(\d{1,3})(?=(\d{3})+(?:$|\.))/g,'$1,');
+        $('#checkAll').html(all);
+    });
+</script>

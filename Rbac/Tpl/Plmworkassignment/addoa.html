@@ -1,0 +1,77 @@
+
+<div class="pageContent">
+	
+	<form method="post" action="__URL__/insert/rel/jbsxBoxworkassignment/callbackType/closeCurrent" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="modal-body" layoutH="58">
+			
+			<div class="form-group">
+				<label style="float:left">所属项目：</label>
+				<select name="plmid" data-placeholder="选择项目" class="form-control"  tabindex="2">
+					<option value="">请选择项目</option>
+					<volist name="allprojects" id="project">
+					<option value="{$project.id}" hassubinfo="true">{$project.title}</option>
+					</volist>
+				</select>
+			</div>
+
+			<div class="form-group">
+				<label style="float:left">任务名称：</label>
+				<input class="form-control" type="text" name="title" size="60" >
+			</div>
+			
+			<div class="form-group">
+				<label style="float:left">重要程度：</label>
+				<SELECT class="form-control"  name="important">
+					<option value="普通">普通</option>
+					<option value="重要">重要</option>
+					<option value="紧急">紧急</option>
+				</SELECT>
+			</div>
+			
+			<div class="form-group">
+				<label style="float:left">开始时间：</label>
+				<input type="text" name="timebegin" class="form-control" dateFmt="yyyy-MM-dd" readonly="true" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})" autocomplete="off"  value="<?php echo date('Y-m-d',time());?>"/>
+			</div>
+			
+			<div class="form-group">
+				<label style="float:left">完成期限：</label>
+				<input type="text" name="timeend" class="form-control" dateFmt="yyyy-MM-dd" readonly="true" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})" autocomplete="off"  value="<?php echo date('Y-m-d',time());?>"/>
+			</div>
+			
+			<div class="form-group">
+				<label style="float:left">责任员工：</label>
+				<input type="text" id="current" name="current" class="form-control" readonly placeholder="点击获取人员" onclick="selectGroupmulti('current','pid')">
+				<input type="hidden" id="pid" name="pid"/>
+	    		</a>
+			</div>
+			
+			<div class="form-group">
+				<label style="float:left">查看人：</label>
+				<input type="text" id="check" name="check" class="form-control"  readonly placeholder="点击获取人员" onclick="selectGroupmulti('check','checkpid')">
+				<input type="hidden" id="checkpid" name="checkpid"/>
+	    		</a>
+			</div>
+			
+			<div class="form-group">
+				<label style="float:left">任务内容：</label>
+				<textarea class="form-control" name="content" rows="3" cols="60" tools="simple" upLinkUrl="{editorRoot}upload.php" upLinkExt="zip,rar,doc,docx"  
+                        upImgUrl="{editorRoot}upload.php"  upImgExt="jpg,jpeg,gif,png"></textarea>
+			</div>
+			
+		</div>
+		
+			
+		<input type="hidden" name="status" value="1" />
+		<input type="hidden" name="releaser" value="<?php echo $_SESSION['loginUserName'].$_SESSION['number'] ?>">
+		
+		
+		<div class="modal-footer">
+			<button type="button" class="btn btn-sm btn-white pull-right m-t-n-xs" data-dismiss="modal" style="margin-left:10px">关闭</button>
+			<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>确定</strong></button>
+		</div>
+			
+		
+	</form>
+	
+</div>
+

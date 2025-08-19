@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+	<link href="css/plugins/chosen/chosen.css" rel="stylesheet">
+	<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="__PUBLIC__/dwz/themes/css/core1.css">
+</head>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>施工计划</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <table class="drafttable" style="position:relative;top:8px;margin:0 auto;width:100%;margin-bottom:28px;font-family:微软雅黑">
+							<tr>
+								<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6">专项</td>
+								<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6">节点</td>
+								<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6">计划开始时间</td>
+								<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6">计划完成时间</td>
+							</tr>
+							<volist name="orgdata.worktype" id="worktype">
+							<tr>
+								<eq name="worktype.block" value="1">
+								<td class="normal" rowspan="{$worktype.rowspan}" style="font-weight:bold;height:45px">{$worktype.pworktype}</td>
+								</eq>
+								<td class="normal" >
+								{$worktype.title}
+								</td>
+								<td class="normal" >
+								{$schedules[$key][plantimebegin]}
+								
+								<neq name="schedules[$key][plantimebegintmp]" value="">
+								<neq name="schedules[$key][plantimebegin]" value="$schedules[$key][plantimebegintmp]">
+								<font style="color:red"></br>变更为</br>{$schedules[$key][plantimebegintmp]}</font>
+								</neq>
+								</neq>
+								</td>
+								<td class="normal" >
+								{$schedules[$key][plantimeend]}
+								<neq name="schedules[$key][plantimeendtmp]" value="">
+								<neq name="schedules[$key][plantimeend]" value="$schedules[$key][plantimeendtmp]">
+								<font style="color:red"></br>变更为</br>{$schedules[$key][plantimeendtmp]}</font>
+								</neq>
+								</neq>
+								</td>
+							</tr>
+							</volist>
+						</table>
+						
+						<in name="orgdata.design_status" value="施工计划待审核">
+						<a href="__APP__/Sgjh/add1/id/{$orgdata['id']}/app/1" data-toggle="modal" data-target="#modal" data-backdrop="static"  target="dialog" class="btn btn-info btn-xs">计划审核</a> 
+						</in>
+						<in name="orgdata.plan_status" value="施工计划变更待审核">
+						<a href="__APP__/Sgjh/add11/id/{$orgdata['id']}/app/1" data-toggle="modal" data-target="#modal" data-backdrop="static"  target="dialog" class="btn btn-info btn-xs">计划变更审核</a> 
+						</in>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	<div id="modal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-medium">
+		<div class="modal-content">
+		   <div class="modal-header">  
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
+                    <span aria-hidden="true">×</span>  
+                </button>  
+                <h4 class="modal-title" id="myModalLabel">正在加载</h4>  
+            </div>  
+            <div class="modal-body">  
+                <p>正在加载…</p>  
+            </div>  
+            <div class="modal-footer">  
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                <button type="button" class="btn btn-primary">Save</button>  
+            </div>  
+		</div>
+	  </div>
+	</div>
+	
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+</body>
+</html>

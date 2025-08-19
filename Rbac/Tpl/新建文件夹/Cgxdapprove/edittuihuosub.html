@@ -1,0 +1,110 @@
+	<link rel="shortcut icon" href="favicon.ico">
+	<link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <!-- Data Tables -->
+    <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+
+	<link rel="stylesheet" href="css/main.css">
+	
+	
+	<form id="format1" method="post" action="__URL__/update" enctype="multipart/form-data" class="form-horizontal">    
+		<input type="hidden" name="id" value="{$orderinfo.id}">
+		<div class="modal-body">
+			<div class="form-group">
+				<div class="col-sm-10">
+					<label class="col-sm-2 control-label">城市：</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" readonly value="{$orderinfo.city}">
+					</div>
+					<label class="col-sm-2 control-label">项目：</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" readonly value="{$orderinfo.plm}">
+					</div>
+				</div>
+			</div>
+			<table class="table table-striped table-bordered table-hover " id="editable">
+				<thead>
+					<tr>
+						<th width="17%">商品类别</th>
+						<th width="10%">商品编号</th>
+						<th width="10%">商品名称</th>
+						<th width="10%">规格</th>
+						<th width="6%">单位</th>
+						<th width="10%">供应商</th>
+						<th width="5%">价格</th>
+						<th width="5%">数量</th>
+						<th width="5%">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<volist name="materials" id="material">
+					<tr id="table-row-0">
+						<td>
+						<input type="text" placeholder="商品类别" class="form-control" size="10%" name="para1[]" id="para1_{$key}" value="{$material.brand}">
+						</td>
+						<td><input type="text" placeholder="商品编号" class="form-control" size="10%" name="para2[]" id="para2_{$key}" value="{$material.number}"></td>
+						<td><input type="text" placeholder="商品名称" class="form-control" size="10%" name="para3[]" id="para3_{$key}" value="{$material.name}"></td>
+						<td><input type="text" placeholder="规格" class="form-control" size="10%" name="para4[]" id="para4_{$key}" value="{$material.standard}"></td>
+						<td><input type="text" placeholder="单位" class="form-control" size="5%" name="para5[]" id="para5_{$key}" value="{$material.unit}"></td>
+						<td><input type="text" placeholder="供应商" class="form-control" size="10%" name="para6[]" id="para6_{$key}" value="{$material.supplier}"></td>
+						<td><input type="text" placeholder="价格" class="form-control price" size="5%" name="para7[]" id="para7_{$key}" value="{$material.price}"></td>
+						<td><input type="text" placeholder="数量" oninput="calcprice()" class="form-control count" size="5%" name="para8[]" id="para8_{$key}" value="{$material.count}"></td>
+						<td> 
+						<a class="btn btn-danger btn-xs delete" href="javascript:void(0);">删除</a>
+						</td>				
+					</tr>
+					</volist>
+				</tbody>
+			</table>
+			
+		</div>	
+		<div class="modal-footer">
+			<span style="float:left">商品总价：</span><input type="text" readonly value="{$orderinfo.price}" class="form-control" style="width:150px;float:left;position:relative;top:-7px" name="price" id="price">
+			<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="button" id="sub"><strong>提交单据</strong></button>
+			
+		</div>
+	</form> 
+
+    <script>
+		function calcprice()
+		{
+			var sum=0;
+			$(".count").each(function(){
+				var t=$(this).val();
+				var n=$(this).parents().find(".price").val();
+				var a=t*n;
+				sum+=Number(a);
+			})
+			sum=sum.toFixed(2);
+			document.getElementById("price").value=sum;
+		}
+    </script>
+	
+	<script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+	<script src="js/plugins/layer/laydate/laydate.js"></script>
+    <script src="js/content.js?v=1.0.0"></script>
+
+	<script src="js/plugins/jeditable/jquery.jeditable.js"></script>
+    <script src="js/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="js/plugins/dataTables/dataTables.bootstrap.js"></script>
+	<script>
+		var table=$('#editable').dataTable();
+    </script>
+
+	<script>
+	    $("#sub").click(function(){
+           $("#format1").submit();
+		})
+	</script>
+
+
+    <!-- Chosen -->
+    <script src="js/plugins/chosen/chosen.jquery.js"></script>
+    <script src="js/demo/form-advanced-demo.js"></script>
+	
+	

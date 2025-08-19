@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+													<html>
+
+													<head>
+
+														<meta charset="utf-8">
+														<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+														<title>{$moduletitle}</title>
+
+														<link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+														<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+														<link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+														<link href="css/animate.css" rel="stylesheet">
+														<link href="css/style.css?v=4.1.0" rel="stylesheet">
+														<link rel="stylesheet" href="css/main.css">
+													</head>
+
+													<body class="gray-bg">
+														<div class="wrapper wrapper-content">
+															<div class="row">
+															
+															
+																
+																
+																
+																<div class="col-sm-12 animated">
+																	
+																	<form action="__URL__/index/token/{$token}/" method="post">
+																	<input name="classify" value="" type="hidden">
+																	<input id="classify" value="{$classify}" type="hidden">
+																	<div style="width:100%;margin-bottom:30px;margin-top:0px" class="input-group">
+																		<neq name="check" value="1">
+																		<div class="input-group col-sm-2 col-xs-12" style="float:left;padding-right:20px">
+																		<span class="input-group-addon">项目名称</span>
+																		<input type="" name="title" value="{$title}" class="form-control">
+																		</div>		
+																		</neq>
+																		
+				
+																		<neq name="check" value="1">
+																		<button class="btn btn-primary btn-sm" style="float:left;margin-right:10px" type="submit">查询</button>
+																		</neq>
+																		<button class="btn btn-warning btn-sm" style="float:left;margin-right:10px" onclick="location.href=location.href" type="submit"><img src="__PUBLIC__/Images/filetype/刷新.png" style="width:16px;margin-top:-3px;margin-left:-3px;margin-right:3px">刷新</button>
+																		
+																	</div>
+																	</form>
+								
+								
+																	<div class="row">
+																		<div class="col-sm-12">
+																			<div class="ibox float-e-margins">
+																				<div class="ibox-content">
+																					<div class="file-manager">
+																						<h5>文件夹</h5>
+																						<ul class="folder-list" style="padding: 0">
+																							<volist name="projects" id="project">
+																							<li><a href="__URL__/index/plmid/{$project.id}/tab/100"><i class="fa fa-folder"></i> {$project.title}</a>
+																							</li>
+																							</volist>
+																						</ul>
+																						<div class="clearfix"></div>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																	
+																</div>
+															</div>
+														</div>
+
+														<!-- 全局js -->
+														<script src="js/jquery.min.js?v=2.1.4"></script>
+														<script src="js/bootstrap.min.js?v=3.3.6"></script>
+
+														<!-- 自定义js -->
+														<script src="js/content.js?v=1.0.0"></script>
+														
+														<link rel="stylesheet" href="__PUBLIC__/lightbox/viewerjs/dist/viewer.css">
+														<script src="__PUBLIC__/lightbox/viewerjs/dist/viewer.js"></script>
+														<script>
+															window.addEventListener('DOMContentLoaded', function () {
+																var galley = document.getElementById('galley');
+																var viewer = new Viewer(galley, {
+																url: 'data-original',
+																navbar:false,
+															  });
+															});
+														</script>
+														
+														<script>
+															$(document).ready(function () {
+																$('.file-box').each(function () {
+																	//animationHover(this, 'pulse');
+																});
+															});
+														</script>
+
+														<script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+														<script>
+														  $('.delete').click(function () {
+															plmid=document.getElementById("plmid").value;
+															classify=document.getElementById("classify").value;
+															id=$(this).attr("title");		
+															swal({
+																title: "您确定删除吗",
+																text: "处理后将无法恢复操作，请谨慎操作！",
+																type: "warning",
+																showCancelButton: true,
+																confirmButtonColor: "#DD6B55",
+																confirmButtonText: "确定",
+																closeOnConfirm: false
+															}, function () {
+																//获取选中的checkbox
+																//发送请求命令			
+																var aj = $.ajax({
+																		url:'__URL__/ajaxcl',
+																		data:{  
+																			id : id
+																		},
+																		type:'post',  
+																		cache:false,  
+																		dataType:'json',  
+																		success:function(data) {
+																			if(data==1){
+																				swal("删除完成！", "请刷新查看结果。", "success");
+																				location.href="__URL__/index/plmid/"+plmid+"/classify/"+classify+"/";
+																			}					
+																			
+																		}  
+																});
+																
+															});
+														});
+														</script>
+
+													</body>
+
+													</html>

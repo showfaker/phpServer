@@ -1,0 +1,336 @@
+	<link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <!-- Data Tables -->
+    <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="css/plugins/chosen/chosen.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.css">
+	
+
+
+	<form id="format1" method="post" action="__URL__/insert" enctype="multipart/form-data" class="form-horizontal">    
+		<div class="modal-body" style="padding:0px;margin:0px">
+			<div class="form-group">
+				<div class="col-sm-16">
+					
+					<label class="col-sm-2 control-label">城市：</label>
+					<div class="col-sm-4">
+					    <select name="city" data-placeholder="选择城市" class="chosen-select" style="width:230px;" tabindex="2" onchange="func()">
+							<option value="">请选择城市</option>
+							<volist name="cities" id="citylist">
+							<option value="{$citylist.city}" hassubinfo="true">{$citylist.city}</option>
+							</volist>
+						</select>
+					</div>
+					<label class="col-sm-2 control-label">项目：</label>
+					<div class="col-sm-4">
+					    <select class="form-control" name="plmid" style="width:230px">
+							<option id="opt" value="">请选择项目</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="">
+				供应商查询：<input type="text" name="search" value=""> 
+				<a onclick="func_search()" href="javascript:void(0);" class="btn btn-primary btn-xs ">查询</a>
+				<!-- <form action="__URL__/index/token/{$token}/" enctype="multipart/form-data" class="form-horizontal">
+					<input type="hidden" name="tab" value="5">
+					供应商查询：<input type="text" name="search" value="{$search}"> <button class="btn btn-info btn-xs">查询</button>
+				</form>
+				 -->
+
+			</div>
+			<div style="height:300px;overflow-y:auto;overflow-x:hidden;">
+			<table class="table table-striped table-bordered table-hover " id="editable" >
+				<thead>
+					<tr>
+						<!-- <th width="15%">材料编号</th>
+						<th width="15%">材料名称</th>
+						<th width="6%">材料类别</th>
+						<th width="5%">规格型号</th>
+						<th width="5%">单位</th> -->
+						<th width="10%">供应商</th>
+						<th width="5%">定金金额</th>
+						<th width="10%">付款内容</th>
+						<!-- <th width="7%">近三次价格</th>
+						<th width="5%">历史价格</th> -->
+						<!-- <th width="5%">数量</th> -->
+						<th width="5%">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					
+					<tr id="table-row-0">					    
+						<td>
+						<!-- <input type="hidden" name="mid[]" id="mid_0"> -->
+						<!-- <input type="text" placeholder="材料编号" class="form-control" size="10%" name="para1[]" id="para1_0">
+						<a href="" onclick="find(this)" title="0" data-toggle="modal" data-target="#modal" data-backdrop="static"  target="dialog" class="btn btn-info btn-xs">查找</a> 
+						</td>
+						<td>
+						<input type="text" placeholder="材料名称" class="form-control" size="10%" name="para2[]" id="para2_0">
+						<a href="" onclick="find1(this)" title="0" data-toggle="modal" data-target="#modal" data-backdrop="static"  target="dialog" class="btn btn-info btn-xs">查找</a>
+						</td>
+						<td><input type="text" placeholder="材料类别" class="form-control" size="6%" name="para3[]" id="para3_0"></td>
+						<td><input type="text" placeholder="规格型号" class="form-control" size="6%" name="para4[]" id="para4_0"></td>
+						<td><input type="text" placeholder="单位" class="form-control" size="5%" name="para5[]" id="para5_0"></td>
+						<td> -->
+						<!-- <input type="text" placeholder="供应商" class="form-control" size="30%" name="para6[]" id="para6_0"> -->
+						<select name="suppliers"  class="form-control ">
+							<option value="" id="supplier">--请选择供应商--</option>
+							<volist name="supplier" id="supplierlist">
+							<option value="{$supplierlist.id}" hassubinfo="true">{$supplierlist.supplier}</option>
+							</volist>
+						</select>
+						</td>
+						<td><input type="text" placeholder="价格" class="form-control price" size="15%" name="para7" value="0" id="para7"></td>
+
+						<td><input type="text" placeholder="备注" class="form-control remake" size="60%" name="para8" value="" id="para8"></td>
+						<!--
+						<td><input type="text" placeholder="历史价格" class="form-control lowprice" size="5%" name="para9[]" value="0" id="para9_0"></td>
+						<td><input type="text" placeholder="数量" oninput="calcprice()" class="form-control count" size="5%" name="para10[]" value="0" id="para10_0"></td> -->                        
+						<td>						
+						<a class="btn btn-danger btn-xs delete" href="javascript:void(0);">删除</a>
+						</td>				
+					</tr>
+				</tbody>
+			</table>
+			</div>
+		</div>	
+		<div class="modal-footer">
+		
+			<!-- <span style="float:left">材料总价：</span><input type="text" readonly placeholder="总价自动计算" class="form-control" style="width:150px;float:left;position:relative;top:-7px" name="price" id="price"> -->
+			
+			<!--<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="button" id="sub"><strong>提交采购单</strong></button>-->
+			<a href="#" onclick="changeout(this)" class="btn btn-primary">确认订单</a>
+			
+			<a id="btnclick" href="" data-toggle="modal" data-target="#modal" data-backdrop="static"  target="dialog"  class="btn btn-primary hidden"></a>
+			
+			
+		</div>
+	</form>
+    <script src="js/jquery.min.js?v=2.1.4"></script>	
+    <!-- Chosen -->
+    <script src="js/plugins/chosen/chosen.jquery.js"></script>
+    <script src="js/demo/form-advanced-demo.js"></script>
+	<!-- jQuery Validation plugin javascript-->
+    <script src="js/plugins/validate/jquery.validate.min.js"></script>
+    <script src="js/plugins/validate/messages_zh.min.js"></script>
+
+    <script src="js/demo/form-validate-demo.js"></script>
+	<script>
+		var table=$('#editable').dataTable(
+		{
+		   iDisplayLength : 10000
+		}
+		);
+    </script>
+    <script>
+		var currentrow=1;
+        function fnClickAddRow() {
+            $('#editable').dataTable().fnAddData([
+			    '<input type="hidden" name="mid[]" id="mid_'+currentrow+'"><select name="para6[]" id="para6_'+currentrow+'" class="form-control" ><option value="">--请选择供应商--</option><volist name="supplier" id="supplierlist"><option value="{$supperlist.id}" hassubinfo="true">{$supplierlist.supplier}</option></volist></select>',
+                '<input type="text" placeholder="价格" class="form-control price" size="15%" name="para7[]" value="0" id="para7_'+currentrow+'">',
+				'<input type="text" placeholder="备注" class="form-control remake" size="60%" name="para8[]" value="" id="para8_'+currentrow+'">',
+				'<a class="btn btn-danger btn-xs delete" href="javascript:void(0);">删除</a>'
+				]);
+			currentrow++;
+			$('.delete').on('click', function(e) {
+				var table = $('#editable').DataTable();
+				table.row($(this).parents('tr')).remove().draw();
+			});
+        }
+    </script>
+
+	<!--<script>
+	    $("#sub").click(function(){
+           $("#format1").submit();
+		})
+	</script>-->
+    
+	<script>
+	function changeout(test){
+		var city=$("select[name='city']").val();
+		var plmid=$("select[name='plmid']").val();
+		// console.log($("select[name='suppliers']").val());
+		var supplier=$("select[name='suppliers']").val();
+		var price=$("#para7").val();
+		var remake=$("#para8").val();
+
+		// var mid=new Array();
+		// $("input[name='mid[]']").each(function(i,value){		
+		// 	mid[i]=$(this).val();
+		//   });
+		// var number=new Array();
+		// $("input[name='para1[]']").each(function(i,value){		
+		// 	number[i]=$(this).val();
+		//   });
+		// var name=new Array();
+		// $("input[name='para2[]']").each(function(i,value){
+		// 	name[i]=$(this).val();
+		//   });
+		// var brand=new Array();
+		// $("input[name='para3[]']").each(function(i,value){
+		// 	brand[i]=$(this).val();
+		//   });
+  //       var standard=new Array();
+		// $("input[name='para4[]']").each(function(i,value){
+		// 	standard[i]=$(this).val();
+		//   });
+  //       var unit=new Array();
+		// $("input[name='para5[]']").each(function(i,value){
+		// 	unit[i]=$(this).val();
+		//   });
+  //       var supplier=new Array(); 
+		// $("input[name='para6[]']").each(function(i,value){
+		// 	supplier[i]=$(this).val();
+		//   });
+  //       var price=new Array();
+		// $("input[name='para7[]']").each(function(i,value){
+		// 	price[i]=$(this).val();
+		//   });
+		// var threeprice=new Array();
+		// $("input[name='para8[]']").each(function(i,value){
+		// 	threeprice[i]=$(this).val();
+		//   });
+  //       var lowprice=new Array();
+		// $("input[name='para9[]']").each(function(i,value){
+		// 	lowprice[i]=$(this).val();
+		//   });		  
+  //       var count=new Array();
+		// $("input[name='para10[]']").each(function(i,value){
+		// 	count[i]=$(this).val();
+		//   });		
+		// var found=$("input[name='price']").val();
+		var aj = $.ajax({
+					url:'__URL__/ajaxinsert2',
+					data:{  
+						city:city,plmid:plmid,supplier:supplier,price:price,remark:remake
+					},
+					type:'post',  
+					cache:false,  
+					dataType:'json',  
+					success:function(data) {
+					// 	alert(data);
+					// console.log(data);
+					//     console.log(data);
+					//     alert(data);
+						if(data !=""){
+							// alert(data);
+							$("#btnclick").attr("href","__URL__/confirm2/id/"+data);
+							$("#btnclick").click();
+						}					
+						
+					}  
+				}); 
+	}
+	
+	</script>
+   
+	<script>
+	    $("select[name='city']").change(function(){
+		$("#opt").nextAll().remove();
+		var city=$(this).val();
+		var aj = $.ajax({
+				url:'__URL__/ajaxcity',
+				data:{  
+					city : city
+				},
+				type:'post',  
+				cache:false,  
+				dataType:'json',  
+				success:function(data) {
+					if(data!=null){
+						var code="";
+						for(var i=0;i<data.length;i++){
+						code+="<option value='"+data[i]['id']+"'>"+data[i]['title']+"</option>";
+						}
+						$("select[name='plmid']").append(code);
+					}					
+					
+				}  
+			});
+		
+		})
+	
+	</script>
+
+    <script>
+        function find(e){
+        var city=$("select[name='city']").val();
+        var number=$(e).prev().val();		
+		$(e).attr("href","__URL__/choice/key/"+e.title+"/city/"+city+"/number/"+number); 
+		}
+    	
+	</script>
+	<script>
+        function find1(e){
+        var city=$("select[name='city']").val();
+        var name=$(e).prev().val();		
+		$(e).attr("href","__URL__/choice/key/"+e.title+"/city/"+city+"/name/"+name); 
+		}
+    	
+	</script>
+<script>
+	function func(){
+		var city=$('select[name="city"]').val();
+		// alert(city);
+
+		$("#supplier").nextAll().remove();
+		var aj = $.ajax({
+				url:'__URL__/ajaxsupplier',
+				data:{  
+					city : city
+				},
+				type:'post',  
+				cache:false,  
+				dataType:'json',  
+				success:function(data) {
+					if(data!=null){
+						var code="";
+						for(var i=0;i<data.length;i++){
+						code+="<option value='"+data[i]['id']+"'>"+data[i]['supplier']+"</option>";
+						}
+						$("select[name='suppliers']").append(code);
+					}					
+					// console.log(data);
+				}  
+			});
+		
+
+	}
+
+</script>
+
+<script>
+	function func_search(){
+		var name=$('input[name="search"]').val();
+		// alert(city);
+
+		$("#supplier").nextAll().remove();
+		var aj = $.ajax({
+				url:'__URL__/ajaxsearch',
+				data:{  
+					name : name
+				},
+				type:'post',  
+				cache:false,  
+				dataType:'json',  
+				success:function(data) {
+					if(data!=null){
+						var code="";
+						for(var i=0;i<data.length;i++){
+						code+="<option value='"+data[i]['id']+"'>"+data[i]['supplier']+"</option>";
+						}
+						// $("select[name='suppliers']").children().remove();
+						$("select[name='suppliers']").append(code);
+					}					
+					// console.log(data);
+				}  
+			});
+		
+
+	}
+
+</script>

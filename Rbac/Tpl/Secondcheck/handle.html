@@ -1,0 +1,138 @@
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+	</button>
+	<h4 class="modal-title">项目基本信息登记表</h4>
+</div>
+<form method="post" action="__APP__/Secondcheck/handlesubmit/callbackType/closeCurrent/navTabId/Second" ENCTYPE="multipart/form-data" class="form-horizontal" onsubmit="return verify()">
+<div class="modal-body">
+	
+	<input type="hidden" value="{$orgdata.id}" name="id">
+	
+	<table class="drafttable" style="position:relative;top:28px;margin:0 auto;width:100%;margin-bottom:28px">
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px;width:40%">项目编号:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.number}" class="forminputlarge" name="number" disabled>
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">项目名称:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.title}" class="forminputlarge" name="title" disabled>
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">申报时间<font style="color:red">（只需填写此项，以下自动生成）</font>:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.predate0}" class="forminputlarge" name="predate0" onclick="takeit()">
+			</td>
+		</tr>
+		<volist name="nodes" id="node">
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">{$node.title}时间:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.predate1}" class="forminputlarge" name="predate1" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})">
+			</td>
+		</tr>
+		</volist>
+		<script>
+		var id="<?php echo $orgdata["id"];?>";
+		function takeit()
+		{
+			laydate({
+				istime: false,
+				istoday: false,
+				format: 'YYYY-MM-DD',
+				choose: function(value, date)
+				{
+					//alert('你选择的日期是：' + value + '\n获得的对象是' + JSON.stringify(date));
+					
+					var aj = $.ajax({
+						url:'__APP__/Secondcheck/time_auto',
+						data:{  
+							id:id,
+							date:value
+						},
+						type:'post',  
+						cache:false,  
+						dataType:'json',
+						success:function(data) {					
+							$("input[name='predate0']").val(data[0]);
+							$("input[name='predate1']").val(data[1]);
+							$("input[name='predate2']").val(data[2]);
+							$("input[name='predate3']").val(data[3]);
+							$("input[name='predate4']").val(data[4]);
+							$("input[name='predate5']").val(data[5]);
+							$("input[name='predate6']").val(data[6]);
+							$("input[name='predate6x']").val(data["6x"]);
+							$("input[name='predate7']").val(data[7]);
+							$("input[name='predate8']").val(data[8]);
+							$("input[name='predate9']").val(data[9]);
+							$("input[name='predate9x']").val(data["9x"]);
+						}  
+					});
+				
+				}
+			});
+		}
+		</script>
+		
+		
+		<eq name="approve" value="1">
+		<input type="hidden" value="1" class="forminputlarge" name="approve">
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px;color:red;">审核结果:</td>
+			<td class="normal" colspan="3">
+			<select class="form-control" name="result">
+				<option value="同意">同意</option>
+				<option value="退回">退回</option>
+			</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px;color:red;">审核意见:</td>
+			<td class="normal" colspan="3">
+			<textarea type="text" class="form-control" name="suggestion" id="suggestion"></textarea>
+			</td>
+		</tr>
+		</eq>
+	
+    </table>
+	
+	
+
+</div>
+<div class="modal-footer">
+	<neq name="check" value="1">
+	<button type="submit" class="btn btn-danger">提交档案</button>
+	</neq>
+	<button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+</div>
+</form>
+
+
+<script src="js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+<script>
+	$('input[type="file"]').prettyFile();
+</script>
+
+<script>
+	$(document).ready(function () {
+		$('.i-checks').iCheck({
+			checkboxClass: 'icheckbox_square-green',
+			radioClass: 'iradio_square-green',
+		});
+	});
+	function verify()
+	{
+		var value=document.getElementsByName("result")[0].value;
+		var suggestion=document.getElementById("suggestion").value;
+		if((value!="同意")&&(suggestion==""))
+		{
+			alert("拒绝流程时必须填写审核意见");
+			return false;
+		}
+	}
+</script>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">    
+	<link href="css/plugins/chosen/chosen.css" rel="stylesheet">
+	<link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.css">
+	<link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+	<link href="js/plugins/fancybox/jquery.fancybox.css" rel="stylesheet">
+</head>
+<style>
+.chosen-container{float:left;margin-right:10px}
+</style>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>商品明细表</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div style="margin-bottom:10px;">
+							<form action="__URL__/index/token/{$token}/tab/3/" method="post">
+							    <div style="width:100%;margin-bottom:10px" class="input-group">
+									<div class="input-group col-sm-2 col-xs-6" style="float:left;padding-right:20px">
+									<span class="input-group-addon">类别：</span>
+									<select name="brands" data-placeholder="选择类别" class="form-control" style="float:left;" tabindex="2" >
+										<option value="" >请选择类别</option>
+										<volist name="brand" id="brand">
+										<option <eq name="brands" value="$brand.name">selected</eq> value="{$brand.name}" hassubinfo="true">{$brand.name}</option>
+										</volist>
+									</select>
+									</div>
+									<div class="input-group col-sm-2 col-xs-6" style="float:left;padding-right:20px">
+									<span class="input-group-addon">供应商：</span><!--chosen-select-->
+									<select name="supply" data-placeholder="选择供应商" class="form-control" tabindex="2">
+										<option value="" id="opt_supply">请选择供应商</option>
+										<volist name="supplier" id="supplier">
+										<option <eq name="supply" value="$supplier.supplier">selected</eq> value="{$supplier.supplier}" hassubinfo="true">{$supplier.supplier}</option>
+										</volist>
+									</select>
+									</div>
+									<!--
+									<font style="margin-left:0%;float:left;position:relative;top:9px">编号：</font>
+									<select name="number" data-placeholder="选择编号" class="chosen-select" style="width:10%;" tabindex="2">
+										<option value="">请选择编号</option>
+										<volist name="malist" id="malists">
+										<option <eq name="number" value="$malists.number">selected</eq> value="{$malists.number}" hassubinfo="true">{$malists.number}</option>
+										</volist>
+									</select>
+									-->
+									<div class="input-group col-sm-2 col-xs-6" style="float:left;padding-right:20px">
+									<span class="input-group-addon">商品名称：</span>
+									<input type="text" name="name" value="{$name}" style="float:left;margin-right:10px;height:32px;" class="form-control">
+									</div>
+									<button class="btn btn-primary btn-sm" style="float:left;margin-right:10px" type="submit">查询</button>
+							    </div>
+							</form>
+                        </div>
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+								<tr>
+									<th width="5%">商品类别</th>
+									<th width="7%">供应商</th>
+									<th width="8%">商品名称</th>
+									<th width="6%">规格</th>
+									<th width="10%">功能</th>
+									<th width="5%">参数</th>
+									<th width="5%">单价</th>
+									<th width="5%">单位</th>
+									<th width="8%">售后承诺</th>
+									<th width="6%">咨询电话</th>
+									<th width="8%">外观图</th>
+									<th width="7%">状态</th>
+									<th width="14%">操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<volist name="list" id="listmenu">
+								<tr >
+									<td>{$listmenu.brand}</td>
+									<td>{$listmenu.supplier}</td>
+									<td>{$listmenu.name}</td>
+									<td>{$listmenu.standard}</td>
+									<td>{$listmenu.content}</td>
+									<td>{$listmenu.para}</td>
+									<td>{$listmenu.price}</td>
+									<td>{$listmenu.unit}</td>
+									<td>{$listmenu.service}</td>
+									<td>{$listmenu.tel}</td>
+									<td>
+									<neq name="listmenu.file1array" value="">
+										<volist name="listmenu.file1array" id="file1">
+										<neq name="file1" value="">
+										<a href="__PUBLIC__/Uploads/{$file1}" style="color:green" class="fancybox"><img src="__PUBLIC__/Uploads/{$file1}" style="height:20px"></a>
+										</neq>
+										</volist>
+									</neq>
+									</td>
+									<td>
+									<in name="listmenu.status" value="0,">
+									<span class="badge badge-grey">待审批</span>
+									</in>
+									<in name="listmenu.status" value="0.5">
+									<span class="badge badge-grey">审批中</span>
+									</in>
+									<eq name="listmenu.status" value="-1">
+									<span class="badge badge-danger">审批退回</span>
+									</eq>
+									<eq name="listmenu.status" value="1">
+									<span class="badge badge-primary">审批通过</span>
+									</eq>
+									</td>
+                                    <td>
+									<in name="listmenu.status" value="0">
+									<eq name="accessapprove" value="3">
+									<in name="_SESSION[role]" value="省公司专责">
+									<a class="btn btn-primary btn-xs approve1" title="{$listmenu.id}">商品审核通过</a>
+									<a class="btn btn-warning btn-xs approve2" title="{$listmenu.id}">商品审核退回</a>
+									</in>
+									</eq>
+									</in>
+									
+									<in name="listmenu.status" value="0.5">
+									<eq name="accessapprove" value="3">
+									<in name="_SESSION[dept]" value="省公司">
+									<in name="_SESSION[role]" value="省公司负责人">
+									<a class="btn btn-primary btn-xs finalapprove1" title="{$listmenu.id}">商品终审通过</a>
+									<a class="btn btn-warning btn-xs approve2" title="{$listmenu.id}">商品终审退回</a>
+									</in>
+									</in>
+									</eq>
+									</in>
+									
+									<eq name="_SESSION[account]" value="admin">
+										<a class="btn btn-danger btn-xs delete" title="{$listmenu.id}">删除</a>
+									</eq>	
+									</td>									
+								</tr> 
+								</volist>
+							</tbody>
+                        </table>
+						<div class="panelBar"><div class="pagination" targetType="navTab" totalCount="{$totalCount}" numPerPage="{$numPerPage}" pageNumShown="10" currentPage="{$currentPage}">{$page}</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	<div id="modal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-lg">
+		<div class="modal-content">
+		   <div class="modal-header">  
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
+                    <span aria-hidden="true">×</span>  
+                </button>  
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>  
+            </div>  
+            <div class="modal-body">  
+                <p>One fine body…</p>  
+            </div>  
+            <div class="modal-footer">  
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                <button type="button" class="btn btn-primary">Save</button>  
+            </div>  
+		</div>
+	  </div>
+	</div>
+	
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+	<!-- Chosen -->
+    <script src="js/plugins/chosen/chosen.jquery.js"></script>
+	<!--
+    <script src="js/demo/form-advanced-demo.js"></script>
+	-->
+	<script src="js/plugins/layer/laydate/laydate.js"></script>
+    <script src="js/content.js?v=1.0.0"></script>
+    <script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+	<script src="js/plugins/fancybox/jquery.fancybox.js"></script>
+	<script>
+        $(document).ready(function () {
+			$("#modal").on("hidden.bs.modal", function() {
+				$(this).removeData("bs.modal");
+			});
+			$('.fancybox').fancybox();
+        });
+    </script>
+    <script>
+	  $('.delete').click(function () {	
+        id=$(this).attr("title");		
+		swal({
+			title: "您确定要删除吗",
+			text: "删除后将无法恢复操作，请谨慎操作！",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			confirmButtonText: "确定",
+			closeOnConfirm: false
+		}, function () {
+			//获取选中的checkbox
+			//发送请求命令			
+			var aj = $.ajax({
+					url:'__URL__/foreverdelete2',
+					data:{  
+						id : id
+					},
+					type:'post',  
+					cache:false,  
+					dataType:'json',  
+					success:function(data) {
+                        if(data==1){
+							swal("删除成功！", "请刷新查看结果。", "success");
+							location.href=location.href;
+						}					
+						
+					}  
+			});
+			
+		});
+	});
+	</script>
+	<script>	
+	  $('.approve1').click(function () {	
+        id=$(this).attr("title");		
+		swal({
+			title: "审批操作",
+			text: "审批后将无法恢复操作，请谨慎操作！",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			confirmButtonText: "确定",
+			closeOnConfirm: false
+		}, function () {
+			var aj = $.ajax({
+				url:'__URL__/approvesubmit',
+				data:{
+					id : id,
+					result:"0.5"
+				},
+				type:'post',  
+				cache:false,  
+				dataType:'json',  
+				success:function(data) {					
+					swal("审批通过成功！", "请刷新查看结果。", "success");
+					location.href=location.href;
+				}  
+			});
+		});
+	});
+	</script>
+	<script>	
+	  $('.approve2').click(function () {	
+        id=$(this).attr("title");		
+		swal({
+			title: "审批操作",
+			text: "审批后将无法恢复操作，请谨慎操作！",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			confirmButtonText: "审批退回",
+			closeOnConfirm: false
+		}, function () {
+			var aj = $.ajax({
+				url:'__URL__/approvesubmit',
+				data:{
+					id : id,
+					result:"-1"
+				},
+				type:'post',  
+				cache:false,  
+				dataType:'json',  
+				success:function(data) {					
+					swal("审批退回成功！", "请刷新查看结果。", "success");
+					location.href=location.href;
+				}  
+			});
+		});
+	});
+	</script>
+	<script>	
+	  $('.finalapprove1').click(function () {	
+        id=$(this).attr("title");		
+		swal({
+			title: "审批操作",
+			text: "审批后将无法恢复操作，请谨慎操作！",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			confirmButtonText: "确定",
+			closeOnConfirm: false
+		}, function () {
+			var aj = $.ajax({
+				url:'__URL__/approvesubmit',
+				data:{
+					id : id,
+					result:"1"
+				},
+				type:'post',  
+				cache:false,  
+				dataType:'json',  
+				success:function(data) {					
+					swal("审批通过成功！", "请刷新查看结果。", "success");
+					location.href=location.href;
+				}  
+			});
+		});
+	});
+	</script>
+</body>
+</html>

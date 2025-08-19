@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>{$moduletitle}</title>
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.css">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-sm-12">
+						<volist name="plmdiscusses" id="plmdiscuss">
+							<div class="feed-element">
+								<a href="javascript:void(0)" class="pull-left">
+									<img alt="image" class="img-circle" src="img/a1.jpg">
+								</a>
+								<div class="media-body ">
+									<small class="pull-right text-navy"><?php echo date("Y-m-d H:i:s",$plmdiscuss[create_time]); ?></small>
+									<strong>{$plmdiscuss.user}</strong> 发布了一个动态<font style="color:blue;font-weight:bold">{$plmdiscuss.content}</font>
+									<br>
+									<small class="text-muted"><?php echo date("Y-m-d H:i:s",$plmdiscuss[create_time]); ?></small>
+									<div>
+									{$plmdiscuss.content}
+									</div>
+									<volist name="plmdiscuss.replys" id="reply">
+									<div class="well">
+										{$reply.user}于<?php echo date("Y-m-d H:i:s",$reply[create_time]); ?>回复：{$reply.content}
+										<a class="btn btn-danger btn-xs delete1 btn-outline" title="{$reply.id}" style="float:right">删除</a>
+									</div>
+									</volist>
+									<div class="actions pull-right">
+										<a class="btn btn-xs btn-white support" title="{$plmdiscuss.id}"><i class="fa fa-thumbs-up"></i> <span id="support{$plmdiscuss.id}">{$plmdiscuss.support}</span>赞 </a>
+										<a data-toggle="modal" data-target="#modal" data-backdrop="static" class="btn btn-xs btn-success hidden-xs" href="__APP__/Plmdiscuss/reply/id/{$plmdiscuss.id}"><i class="fa fa-pencil"></i> 回复</a>
+										<!--<a class="btn btn-xs btn-danger"><i class="fa fa-heart"></i> 收藏</a>-->
+									</div>
+								</div>
+							</div>
+						</volist>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 全局js -->
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+
+
+
+    <script>
+        $(document).ready(function () {
+            $('.file-box').each(function () {
+                animationHover(this, 'pulse');
+            });
+        });
+		$('.delete1').click(function () {
+			id=$(this).attr("title");
+			swal({
+				title: "您确定要删除吗",
+				text: "删除后将无法恢复操作，请谨慎操作！",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55",
+				cancelButtonText: "取消",
+				confirmButtonText: "确定",
+				closeOnConfirm: false
+			}, function () {
+				//获取选中的checkbox
+				//发送请求命令
+				var aj = $.ajax({
+					url:'__APP__/Plmdiscuss/foreverdelete',
+					data:{  
+						id : id
+					},
+					type:'post',  
+					cache:false,  
+					dataType:'json',  
+					success:function(data) {
+						swal("删除成功！", "请刷新查看结果。", "success");
+						location.href=location.href;
+					}  
+				});
+				
+			});
+		});
+		
+		var currentsupport=0;
+		$('.support').click(function () {
+			currentsupport=$(this).attr("title");		
+			var aj = $.ajax({
+				url:'__APP__/Plmdiscuss/support',
+				data:{  
+					id : currentsupport
+				},
+				type:'post',  
+				cache:false,  
+				dataType:'json',  
+				success:function(data) {
+					document.getElementById("support"+currentsupport).innerHTML=data;
+				}  
+			});
+		});
+    </script>
+
+</body>
+
+</html>

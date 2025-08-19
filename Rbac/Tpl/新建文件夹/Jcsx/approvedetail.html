@@ -1,0 +1,48 @@
+
+<link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/style.css?v=4.1.0" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+<link href="css/plugins/steps/jquery.steps.css" rel="stylesheet">
+
+
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+	</button>
+	<h4 class="modal-title">资料列表</h4>
+</div>
+<form method="post" action="__URL__/insert2/callbackType/closeCurrent/navTabId/Second" ENCTYPE="multipart/form-data" onsubmit="return iframeCallback(this, dialogAjaxDone)">
+<div class="modal-body" style="padding:10px"> 
+	<input type="hidden" value="{$orgdata.id}" name="id">
+	<div class="form-group" style="width:100%;line-height:20px;text-align:left">
+		<label>项目名称:{$orgdata['title']}</label>
+	</div>
+	<div class="form-group" style="text-align:left;line-height:20px">
+		<volist name="files" id="file">
+		
+										<neq name="file.filename" value="">
+										{$file.loadPerson} 于 {$file.loadtime} 上传 {$file.title}
+										
+										<volist name="file.filenamearray" id="val" key="xx" i="xx">
+										<neq name="val" value="">
+										[<a href="__URL__/filedown/filename/{$file[newnamearray][$xx-1]}/filerealname/{$val}" style="color:green">{$val}
+										</a>]</br>
+										</neq>
+										</volist>
+										
+										</neq>
+		</volist>
+	</div>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+</div>
+
+
+
+</form>
+
+

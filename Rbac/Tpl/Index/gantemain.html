@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>{$moduletitle}</title>
+	<!--
+	<link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+	-->
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/stylegantt.css?v=4.1.0" rel="stylesheet">
+	
+	
+	<link rel="stylesheet" href="__PUBLIC__/gantt/css/style1.css" />  
+	<link rel="stylesheet" href="css/main.css">
+	<style>
+		.fn-gantt .leftPanel
+		{
+			width:226px;
+		}
+		.fn-gantt .leftPanel .name
+		{
+			width:180px;
+		}
+		.fn-gantt .leftPanel .fn-label
+		{
+			width:180px;
+		}
+		.fn-gantt .leftPanel .desc 
+		{
+			width:45px;
+		}
+		.fn-gantt .leftPanel .desc .fn-label
+		{
+			width:45px;
+		}
+	</style>
+</head>
+
+<body class="gray-bg">
+
+	<input type="hidden" name="plmid" id="plmid" value="{$detail.id}">
+	<table class="table" style="display:none">
+		<thead>
+		<tr>
+		</tr>
+		</thead>
+		<?php 
+		function getBegintime($begintime,$currentfinishtime)
+		{
+			if($begintime!=0)
+			{
+				if(date('Y-m-d',$begintime) == date('Y-m-d',$currentfinishtime))
+				{
+					echo date('Y-m-d',$begintime);
+				}
+				else
+				{
+					echo date('Y-m-d',$begintime+24*60*60);
+				}
+			}
+		}
+		function getBegintimestr($begintime,$currentfinishtime)
+		{
+			if($begintime!=0)
+			{
+				if($begintime == $currentfinishtime)
+				{
+					echo $begintime;
+				}
+				else
+				{
+					echo date('Y-m-d',strtotime($begintime)+24*60*60);
+				}
+			}
+		}
+		?>
+		
+		
+		<tbody>
+			
+	
+			
+			
+			<volist name="scheduleworktypes" id="scheduleworktype" key="i">
+			<tr target="sid_obj">
+				<td class="l" id="{$scheduleworktype.worktype}"><font style="color:#4897FA">{$scheduleworktype.worktype}</font></td>
+			</tr>
+			<tr target="sid_obj" rel="{$listmenu['id']}">
+					<td class="{$scheduleworktype.worktype}_1" id="xxx">{$scheduleworktype.worktype}</td>
+					<td id="{$scheduleworktype.worktype}_{$scheduleworktype.worktype}_plantimebegin">{$scheduleworktype['plantimebegin']}</td>
+					<td id="{$scheduleworktype.worktype}_{$scheduleworktype.worktype}_plantimeend">{$scheduleworktype['plantimeend']}</td>
+			</tr>
+			<tr target="sid_obj" rel="{$listmenu['id']}">
+					<td class="{$scheduleworktype.worktype}_4" id="xxx">{$scheduleworktype.worktype}</td>
+					<td id="{$scheduleworktype.worktype}_{$scheduleworktype.worktype}_timebegin">{$scheduleworktype['timebegin']}</td>
+					<td id="{$scheduleworktype.worktype}_{$scheduleworktype.worktype}_timeend">{$scheduleworktype['timeend']}</td>
+					<td id="{$scheduleworktype.worktype}_{$scheduleworktype.worktype}_percent">{$realwork['percent']}</td>
+					<td id="{$scheduleworktype.worktype}_{$scheduleworktype.worktype}_daily">{$realwork['daily']}</td>
+			</tr>
+			
+			<volist name="scheduleworktype.schedules" id="schedule" key="j">
+			
+			<tr target="sid_obj">
+				<td class="l" id="{$schedule.subworktype}">---{$schedule.subworktype}</td>
+			</tr>
+			<tr target="sid_obj" rel="{$listmenu['id']}">
+					<td class="{$schedule.subworktype}_1" id="---">{$schedule.subworktype}</td>
+					<td id="{$schedule.subworktype}_{$schedule.subworktype}_plantimebegin">{$schedule['plantimebegin']}</td>
+					<td id="{$schedule.subworktype}_{$schedule.subworktype}_plantimeend">{$schedule['plantimeend']}</td>
+			</tr>
+			<tr target="sid_obj" rel="{$listmenu['id']}">
+					<td class="{$schedule.subworktype}_4" id="---">{$schedule.subworktype}</td>
+					<td id="{$schedule.subworktype}_{$schedule.subworktype}_timebegin">{$schedule['timebegin']}</td>
+					<td id="{$schedule.subworktype}_{$schedule.subworktype}_timeend">{$schedule['timeend']}</td>
+					<td id="{$schedule.subworktype}_{$schedule.subworktype}_percent">{$schedule['percent']}</td>
+					<td id="{$schedule.subworktype}_{$schedule.subworktype}_daily">{$schedule['daily']}</td>
+			</tr>
+			
+			</volist>
+			
+			</volist>
+			
+		</tbody>
+	</table>
+	
+	
+    <div class="wrapper wrapper-content animated">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+					<neq name="_SESSION[app]" value="1">
+                    <div style="background-color:white;height:28px;padding:2px 5px 2px 10px;border-top:4px solid #E7EAEC;border-left:1px solid #DDDDDD;border-right:1px solid #DDDDDD">
+                        <h4 style="font-family:微软雅黑">{$detail['title']} &nbsp;&nbsp;<font style="color:red;font-weight:bold">橙色为分部分项计划工期，蓝色为实际工期，红色提示实际工期超期</font>&nbsp;&nbsp;<font style="color:blue;font-weight:bold">甘特图内侧滚动为日期左右滑动，甘特图外侧滚动为上下滑动（周期不长则不需左右滑动）</font></h4>
+                    </div>
+					</neq>
+                    <div <neq name="_SESSION[app]" value="1">class="ibox-content"</neq>>
+                        <div class="" id="echarts-line-chart" <eq name="_SESSION[app]" value="1">style="width:5000px;margin:0 auto;"</eq> <neq name="_SESSION[app]" value="1">style="width:100%;margin:0 auto;"></neq>></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 全局js -->
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+
+    <!-- 自定义js -->
+    <script src="js/content.js?v=1.0.0"></script>
+	
+	<!--包中未包含jquery，你需要自行下载最新版的-->
+	<script src="__PUBLIC__/gantt/js/jquery.fn.gantt.js"></script>
+	<!--若为jquery1.9以上，还需要引入-->
+	<script src="__PUBLIC__/gantt/js/jquery-migrate-1.2.1.min.js"></script>
+	
+	
+	<script type="text/javascript">
+	$(function() {
+	
+		
+		var data=[];
+		var subdata=[];
+		var planarray=[];
+		var color="";
+		var plmid=document.getElementById("plmid").value;
+		$(".l").each(function(i){
+			var id=this.id;
+			subdata=[];
+			$("."+this.id+"_1").each(function(j){
+				var subworktype=$(this).html();
+				var subworktypeid=$(this).attr("id");
+				var timebeginstr=document.getElementById(id+"_"+subworktype+"_plantimebegin").innerHTML;
+				var timeendstr=document.getElementById(id+"_"+subworktype+"_plantimeend").innerHTML;
+				
+				timebegin = Date.parse(new Date(timebeginstr))-24*60*60*1000;
+				timeend = Date.parse(new Date(timeendstr))-24*60*60*1000;
+				
+				planarray['"'+subworktype+'"']=timeend;
+				console.log(subworktypeid.indexOf("---"));
+				if(-1!==subworktypeid.indexOf("---"))
+				color="ganttOrange";
+				else color="blue";
+				
+				var plan=subworktype + "(计划) : " +timebeginstr+" ~ "+timeendstr;
+				subdata[j]={
+					from:timebegin,   //起始时间，13位时间戳,这里不同于原版"/Date(1333411200000)/"  
+					to:timeend,     //终止时间，13位时间戳,这里不同于原版"/Date(1333411200000)/"  
+					desc:plan,       //描述  
+					label:subworktype,  //显示在进度条上的标签
+					dataObj:subworktype,
+					customClass:color
+				};
+			})
+			
+			
+			data[2*i]={
+				name: $(this).html(),
+				desc:"计划",
+				values:subdata
+			};
+			
+			//实际
+			subdatareal=[];
+			$("."+this.id+"_4").each(function(j){
+				var subworktype=$(this).html();
+				var timebeginstr=document.getElementById(id+"_"+subworktype+"_timebegin").innerHTML;
+				var timeendstr=document.getElementById(id+"_"+subworktype+"_timeend").innerHTML;
+				var percent=document.getElementById(id+"_"+subworktype+"_percent").innerHTML;
+				var daily=document.getElementById(id+"_"+subworktype+"_daily").innerHTML;
+				
+				timebegin = Date.parse(new Date(timebeginstr))-24*60*60*1000;
+				timeend = Date.parse(new Date(timeendstr))-24*60*60*1000;
+				
+				//if(j%2==0)color="ganttRed";
+				//else color="ganttBlue";
+				color="ganttBlue";
+				//if(timeend>planarray['"'+subworktype+'"'])
+				if((timeend>planarray['"'+subworktype+'"'])||(timebegin>planarray['"'+subworktype+'"']))
+				{
+					color="ganttRed";
+				}
+				if((timeend<timebegin))//timebegin和timeend都为空时，js报错
+				{
+					color="ganttWhite";
+				}
+				if(!isNaN(timebegin))
+				{
+					var plan=subworktype + "(实际完成) : " +percent+daily+"("+timebeginstr+" ~ "+timeendstr+")";
+					subdatareal[j]={
+						from:timebegin,   //起始时间，13位时间戳,这里不同于原版"/Date(1333411200000)/"  
+						to:timeend,     //终止时间，13位时间戳,这里不同于原版"/Date(1333411200000)/"  
+						desc:plan,       //描述  
+						label:subworktype,  //显示在进度条上的标签
+						dataObj:subworktype,
+						customClass:color
+					};
+				}
+			})
+			
+			data[2*i+1]={
+				name:"",
+				desc:"实际",
+				values:subdatareal
+			};
+		})
+		
+		$('#echarts-line-chart').gantt({
+			source: data,	//显示的数据，见下面分析
+			navigate: "buttons",	//显示成scroll还是buttons
+			months: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],	//月份显示的语言
+			dow: ["日", "一", "二", "三", "四", "五", "六"],	//星期显示的语言
+			scale: "days",	//默认显示的粒度
+			maxScale: "months",	//最大显示的粒度
+			minScale: "days",	//最小显示的粒度
+			itemsPerPage: 48,	//每页显示的数目
+			onItemClick: function(data) {
+				//进度条显示的单击事件,data参见source定义
+				//alert("Item clicked - show some details" + data);
+				$("#modal").modal({  
+					remote:"__APP__/Xmtj/subworkganteiframe/id/"+plmid+"/worktype/"+data,//可以填写一个url，会调用jquery load方法加载数据  
+					backdrop:"static",//指定一个静态背景，当用户点击背景处，modal界面不会消失  
+					keyboard:true//当按下esc键时，modal框消失  
+				});
+			},
+			onAddClick: function(dt, rowId) {	//图表空白处的单击事件
+				
+			},
+			onRender: function() {	//渲染时的事件
+				
+			}
+		});
+
+	});
+	</script>
+	
+	
+	
+	<div id="modal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-lg">
+		<div class="modal-content">
+		   <div class="modal-header">  
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
+                    <span aria-hidden="true">×</span>  
+                </button>  
+                <h4 class="modal-title" id="myModalLabel">正在加载</h4>  
+            </div>  
+            <div class="modal-body">  
+                <p>正在加载…</p>  
+            </div>  
+            <div class="modal-footer">  
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                <button type="button" class="btn btn-primary">Save</button>  
+            </div>  
+		</div>
+	  </div>
+	</div>
+	<script>
+        $(document).ready(function () {
+            //$('.dataTables-example').dataTable();
+            //var oTable = $('#editable').dataTable();
+			$("#modal").on("hidden.bs.modal", function() {
+				$(this).removeData("bs.modal");  
+			});
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,284 @@
+
+<link rel="shortcut icon" href="favicon.ico">
+<link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/style.css?v=4.1.0" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+<script type="text/javascript" >
+	function getrootpath() {
+		//获取当前网址，如： http://localhost:8080/ems/Pages/Basic/Person.jsp
+		var curWwwPath = window.document.location.href;
+		//获取主机地址之后的目录，如： /ems/Pages/Basic/Person.jsp
+		var pathName = window.document.location.pathname;
+		var pos = curWwwPath.indexOf(pathName);
+		//获取主机地址，如： http://localhost:8080
+		var localhostPath = curWwwPath.substring(0, pos);
+		//获取带"/"的项目名，如：/ems
+		var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
+		projectName = projectName.replace("/Rbac","");
+		return(localhostPath + projectName);
+	}
+	function selectGroupmulti(arg1,arg2){
+		var rootpath=getrootpath();
+		asyncbox.open({
+			id : "form",
+			title:'',
+			url :rootpath+'/Rbac/index.php?s=/Public/selectmulti/arg1/'+arg1+'/arg2/'+arg2,
+			width : 445,
+			height : 400,
+			//btnsbar : $.btn.ok,
+			callback : function(action){
+				if(action == 'close'){  
+					return;
+				}
+			}
+		});
+	}
+
+	function selectGroup(arg1,arg2){
+		var rootpath=getrootpath();
+		asyncbox.open({
+			id : "form",
+			title:'',
+			url :rootpath+'/Rbac/index.php?s=/Public/select/arg1/'+arg1+'/arg2/'+arg2,
+			width : 445,
+			height : 400,
+			//btnsbar : $.btn.ok,
+			callback : function(action){
+				if(action == 'close'){  
+					return;
+				}
+			}
+			});
+	}
+	function selectWorker(arg1,arg2){
+		var rootpath=getrootpath();
+		asyncbox.open({
+			id : "form",
+			title:'',
+			url :rootpath+'/Rbac/index.php?s=/Public/selectworker/arg1/'+arg1+'/arg2/'+arg2,
+			width : 445,
+			height : 400,
+			//btnsbar : $.btn.ok,
+			callback : function(action){
+				if(action == 'close'){  
+					return;
+				}
+			}
+			});
+	}
+</script>
+
+<div class="modal-header"  style="text-align: left;">
+	<button type="button" class="close" data-dismiss="modal">×</button>
+	<h4 class="modal-title">新增会议计划</h4>
+</div>
+<form method="post" action="__URL__/insert" class="form-horizontal">
+	<div class="modal-body">
+		<div class="form-group">
+			<label class="col-sm-3 control-label">所属项目<font style="color:red">*</font>：</label>
+			<div class="col-sm-8">
+				<select name="plmid" data-placeholder="选择项目" class="form-control" required>
+					<option value="">请选择项目</option>
+					<volist name="allprojects" id="project">
+						<option value="{$project.id}" hassubinfo="true">{$project.title}</option>
+					</volist>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">主项节点<font style="color:red">*</font>：</label>
+			<div class="col-sm-8">
+				<select name="group" data-placeholder="选择主项节点" class="form-control" required>
+					<option value="">请选主项节点</option>
+					<volist name="group" id="grouplist">
+						<option value="{$grouplist.title}" hassubinfo="true">{$grouplist.title}</option>
+					</volist>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">会议名称<font style="color:red">*</font>：</label>
+			<div class="col-sm-8">
+				<input class="form-control" type="text" name="title" size="60" required>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">会议分类<font style="color:red">*</font>：</label>
+			<div class="col-sm-8">
+				<select class="form-control"  name="type1" required>
+					<option value="">请选择会议分类</option>
+					<volist name="meetingset1" id="setlist1">
+						<option value="{$setlist1.name}">{$setlist1.name}</option>
+					</volist>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">会议属性<font style="color:red">*</font>：</label>
+			<div class="col-sm-8">
+				<select class="form-control"  name="type2" required>
+					<option value="">请选择会议属性</option>
+					<volist name="meetingset2" id="setlist2">
+						<option value="{$setlist2.name}">{$setlist2.name}</option>
+					</volist>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">会议级别<font style="color:red">*</font>：</label>
+			<div class="col-sm-8">
+				<select class="form-control"  name="type3" required>
+					<option value="">请选择会议级别</option>
+					<volist name="meetingset3" id="setlist3">
+						<option value="{$setlist3.name}">{$setlist3.name}</option>
+					</volist>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">会议模板：</label>
+			<div class="col-sm-8">
+				<select class="form-control"  name="type4" id="type4">
+					<option value="">请选择会议模板</option>
+					<volist name="meetingset4" id="setlist4">
+						<option value="{$setlist4.id}">{$setlist4.name}</option>
+					</volist>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">会议时间<font style="color:red">*</font>：</label>
+			<div class="col-sm-8">
+				<input type="text" class="form-control" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" autocomplete="off" value="{$timebegin}" name="timebegin" required >
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">会议目标：</label>
+			<div class="col-sm-8">
+				<input type="text" name="aim" class="form-control" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">记录人：</label>
+			<div class="col-sm-8">
+				<input type="text" id="current" name="current" class="form-control" readonly placeholder="点击获取人员" onclick="selectGroupmulti('current','recorder')">
+				<input type="hidden" id="recorder" name="recorder"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">参会人<font style="color:red">*</font>：</label>
+			<div class="col-sm-8">
+				<input type="text" id="check" name="check" class="form-control" readonly placeholder="点击获取人员" onclick="selectGroupmulti('check','attendee')" required>
+				<input type="hidden" id="attendee" name="attendee"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">议程：</label>
+			<div class="col-sm-8">
+				<textarea class="form-control" name="agenda" id="agenda" rows="12" cols="60" ></textarea>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-3 control-label">上会资料：</label>
+			<div class="col-sm-8">
+				<textarea class="form-control" name="materials" id="materials" rows="12" cols="60" ></textarea>
+			</div>
+		</div>
+		<div class="form-group">
+			<table class="table table-striped table-bordered table-hover " id="editable">
+				<thead>
+					<tr>
+						<th width="15%">商品名称</th>
+						<th width="6%">商品类别</th>
+						<th width="5%">规格</th>
+						<th width="5%">单位</th>
+						<th width="10%">供应商</th>
+						<th width="5%">价格</th>
+						<th width="5%">数量</th>
+						<th width="5%">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr id="table-row-0">
+						<td>
+							<input type="hidden" name="mid[]" id="mid_0"><input type="hidden" name="para1[]" id="para1_0">
+							<input type="text" placeholder="商品名称" class="form-control" size="10%" name="para2[]" id="para2_0" readonly>
+							<a href="" onclick="find1(this)" title="0" data-toggle="modal" data-target="#modal" data-backdrop="static"  target="dialog" class="btn btn-info btn-xs" style="margin-left:5px">查找</a>
+						</td>
+						<td>
+							<select name="para3[]" id="para3_0" class="form-control" style="width:130px;" disabled>
+								<option value="">请选择类别</option>
+								<volist name="leibie" id="llist">
+									<option value="{$llist.name}">{$llist.name}</option>
+								</volist>
+							</select>
+						</td>
+						<td>
+							<input type="text" placeholder="规格" class="form-control" size="6%" name="para4[]" id="para4_0" readonly>
+						</td>
+						<td>
+							<input type="text" placeholder="单位" class="form-control" size="5%" name="para5[]" id="para5_0" required="required" readonly>
+						</td>
+						<eq name="check_supplier" value="">
+							<td>
+								<input type="text" placeholder="供应商" class="form-control" size="10%" name="para6[]" id="para6_0" readonly>
+							</td>
+						</eq>
+						<neq name="check_supplier" value="">
+							<td>
+								<input type="text" placeholder="供应商" class="form-control" size="6%" name="para6[]" id="para6_0" value="{$check_supplier}" readonly>
+							</td>
+						</neq>
+						<td>
+							<input type="text" placeholder="价格" onkeyup="calcprice()" class="form-control price" size="5%" name="para7[]" value="0" id="para7_0" readonly>
+						</td>
+						<td>
+							<input type="text" placeholder="数量" oninput="calcprice()" class="form-control count" size="5%" name="para10[]" value="0" id="para10_0">
+						</td>                        
+						<td>						
+							<a class="btn btn-danger btn-xs delete" href="javascript:void(0);">删除</a>
+						</td>				
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<input type="hidden" name="releaser" value="<?php echo $_SESSION['loginUserName']?>">
+	<div class="modal-footer">
+		<button type="button" class="btn btn-sm btn-white pull-right m-t-n-xs" data-dismiss="modal" style="margin-left:10px">关闭</button>
+		<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit" id='submit'><strong>确定</strong>
+		</button>
+	</div>
+</form>
+<script>
+	$("#type4").change(function(){
+		$("#agenda").val("");
+		$("#materials").val("");
+		var id = $(this).val();
+		//查找会议模版
+		$.ajax({
+			url:'__URL__/find_meeting_mode',
+			data:{
+				id : id
+			},
+			type:'post',  
+			cache:false,  
+			dataType:'json',  
+			success:function(data) {
+				if(data.status == "OK"){
+					$("#attendee").val(data.data.attendee);
+					$("#check").val(data.data.attendee);
+					$("#agenda").val(data.data.agenda);
+					$("#materials").val(data.data.materials);
+				}else{
+					$("#attendee").val("");
+					$("#agenda").val("");
+					$("#check").val("");
+					$("#materials").val("");
+				}
+			}  
+		});
+	})
+</script>

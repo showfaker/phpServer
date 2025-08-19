@@ -1,0 +1,153 @@
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0">
+<link rel="shortcut icon" href="favicon.ico"> 
+<link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/style.css?v=4.1.0" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+<link href="css/plugins/chosen/chosen.css" rel="stylesheet">
+<link rel="stylesheet" href="__PUBLIC__/dwz/themes/css/core1.css">
+
+<link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<script src="js/jquery.min.js?v=2.1.4"></script>
+<script src="js/bootstrap.min.js?v=3.3.6"></script>
+<script src="js/plugins/jeditable/jquery.jeditable.js"></script>
+<script src="js/plugins/dataTables/jquery.dataTables.js"></script>
+<script src="js/plugins/dataTables/dataTables.bootstrap.js"></script>
+<script src="js/content.js?v=1.0.0"></script>
+<script src="js/plugins/layer/laydate/laydate.js"></script>
+<script src="js/plugins/iCheck/icheck.min.js"></script>
+<script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+    
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                   <div class="ibox-title">
+						<div style="text-align:left">
+						<a href="__URL__/jypg/" class="btn btn-white"><span>可研立项</span></a>
+						<a href="__URL__/jypg1/" class="btn btn-primary" style="margin-left:17px"><span>可研编制</span></a>
+						</div>
+                    </div>
+                    <div class="ibox-content">
+	
+					<form method="post" action="__APP__/Jypg1/insert/callbackType/closeCurrent/navTabId/Second" ENCTYPE="multipart/form-data" class="form-horizontal" onsubmit="return verify()">
+					<div class="modal-body">
+						
+						<input type="hidden" value="{$orgdata.id}" name="id" id="id">
+						<input type="hidden" value="可研评审报告待审批" name="design_status">
+						
+						<table class="drafttable" style="position:relative;margin:0 auto;width:100%;margin-bottom:28px">
+							<tr>
+								<td class="normal" style="font-weight:bold;height:45px;width:25%">项目编号:</td>
+								<td class="normal" colspan="3">
+								<input type="text" value="{$orgdata.number}" class="forminputlarge" name="number" required="" aria-required="true" disabled id="number">
+								</td>
+							</tr>
+							<tr>
+								<td class="normal" style="font-weight:bold;height:45px">项目名称:</td>
+								<td class="normal" colspan="3">
+								<select type="text" class="chosen-select forminputlarge" name="title" required="" aria-required="true" onchange="selectTurnToUrl(this)">
+									<option>选择项目</option>
+									<volist name="allprojects" id="project">
+										<option value="{$project.title}" url="{$project.id}" title="{$project.number}">{$project.title}</option>
+									</volist>
+								</select>
+								</td>
+							</tr>
+							
+							<script>
+								function selectTurnToUrl(obj)
+								{
+									var id = $(obj).find("option:selected").attr("url");
+									var number = $(obj).find("option:selected").attr("title");
+									document.getElementById("id").value=id;
+									document.getElementById("number").value=number;
+								}
+							</script>
+							
+							
+							
+							<tr>
+								<td class="normal" style="font-weight:bold;height:45px">可研评审报告:</td>
+								<td class="normal" colspan="3" style="line-height:25px">
+								<neq name="orgdata.programme2" value="">
+									<volist name="orgdata.programme2" id="programme2">
+									<neq name="programme2" value="">
+									 [ 
+									<a href="__URL__/filedown/filename/{$programme2}/filerealname/{$orgdata[programmefilename2][$key]}" style="color:green">{$orgdata[programmefilename2][$key]} 
+									</a>  ] </br>
+									</neq>
+									</volist>
+								</neq>
+								<input type="file" multiple="multiple" class="form-control" name="file2[]" style="width:100%">
+								</td>
+							</tr>
+							<eq name="approve" value="1">
+							<input type="hidden" value="1" class="forminputlarge" name="approve">
+							<tr>
+								<td class="normal" style="font-weight:bold;height:45px">审核结果:</td>
+								<td class="normal" colspan="3">
+								<select class="form-control" name="result" onchange="setdesign_status(this.value)">
+									<option value="同意">同意</option>
+									<option value="退回">退回</option>
+								</select>
+								</td>
+							</tr>
+							<tr>
+								<td class="normal" style="font-weight:bold;height:45px">审核意见:</td>
+								<td class="normal" colspan="3">
+								<textarea type="text" class="form-control" name="suggestion" id="suggestion"></textarea>
+								</td>
+							</tr>
+							</eq>	
+						</table>
+						
+						
+
+					</div>
+					<div class="modal-footer">
+						<neq name="check" value="1">
+						<button type="submit" class="btn btn-danger">提交档案</button>
+						</neq>
+					</div>
+					</form>
+
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>	
+	
+<!-- Chosen -->
+<script src="js/plugins/chosen/chosen.jquery.js"></script>
+<script src="js/demo/form-advanced-demo.js"></script>
+<!-- Prettyfile -->
+<script src="js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+<script>
+	$('input[type="file"]').prettyFile();
+</script>
+
+<script>
+	$(document).ready(function () {
+		$('.i-checks').iCheck({
+			checkboxClass: 'icheckbox_square-green',
+			radioClass: 'iradio_square-green',
+		});
+	});
+	function verify()
+	{
+		var value=document.getElementsByName("result")[0].value;
+		var suggestion=document.getElementById("suggestion").value;
+		if((value!="同意")&&(suggestion==""))
+		{
+			alert("拒绝流程时必须填写审核意见");
+			return false;
+		}
+	}
+</script>

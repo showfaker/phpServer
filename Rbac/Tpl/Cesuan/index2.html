@@ -1,0 +1,199 @@
+<div class="pageHeader" >
+	<form id="pagerForm" onsubmit="return navTabSearch(this);" action="__URL__/index/token/{$token}/" method="post">
+	<input type="hidden" name="pageNum" value="1" />
+	<input type="hidden" name="numPerPage" value="${model.numPerPage}" />
+	<input type="hidden" name="orderField" value="${param.orderField}" />
+	<input type="hidden" name="orderDirection" value="${param.orderDirection}" />
+	<div class="searchBar">
+		<ul class="searchContent">
+			<li style="width:170px">
+				<label style="width:50px">项目名称</label>
+				<input type="text" name="keyword" size="10" value="{$keyword}"/>
+			</li>
+			<neq name="yingxiaoyuan" value="1">
+			<li style="width:150px">
+				<label style="width:35px">电话</label>
+				<input type="text" name="city" value="{$city}" style="width:80px"/>
+			</li>
+			</neq>
+			<li style="width:205px">			
+				<label style="width:30px">时间</label>
+				<input type="text" value="{$timebegin}" class="date" name="timebegin" size="7">
+				<span class="limit">-</span>
+				<input type="text" value="{$timeend}" class="date" name="timeend" size="7">
+			</li>
+			<li style="width:125px">			
+				<label style="width:38px">营销员</label>
+				<input type="text" name="charge" style="width:49px" value="{$charge}"/>
+			</li>
+			<li style="width:145px">			
+				<label style="width:38px">途径</label>
+				<select name="way" class="">
+					<option value="">==全部==</option>
+					<option <eq name="way" value="电话营销">selected</eq> value="电话营销">电话营销</option>
+					<option <eq name="way" value="活动营销">selected</eq> value="活动营销">活动营销</option>
+					<!--
+					<option disabled <eq name="orgdata.way" value="渠道营销">selected</eq> value="渠道营销">渠道营销</option>-->
+					<in name="_SESSION[role]" value="营销界定部经理,界定营销员,总经理">
+					<option <eq name="way" value="渠道营销">selected</eq> value="渠道营销">渠道营销</option>
+					</in>
+					<option <eq name="way" value="网络营销">selected</eq> value="网络营销">网络营销</option>
+				</select>
+			</li>
+			<li>			
+				<label style="width:38px">活动</label>
+				<select name="activity" class="">
+					<option value="">====全部====</option>
+					<volist name="huodong" id="huodong">
+					<option <eq name="activity" value="$huodong.name">selected</eq> value="{$huodong.name}">{$huodong.name}</option>
+					</volist>
+				</select>
+			</li>
+			</ul>
+			<ul class="searchContent">
+			<li style="width:220px">
+				<label style="width:50px">备案状态</label>
+				<select name="type" class="">
+					<option value="">====全部====</option>
+					<option value="一次备案待审核" <eq name="type" value="一次备案待审核">selected</eq> >一次备案待审核</option>					
+					<option value="一次备案审核通过" <eq name="type" value="一次备案审核通过">selected</eq> >一次备案审核通过</option>
+					<option value="二次备案待审核" <eq name="type" value="二次备案待审核">selected</eq> >二次备案待审核</option>
+					<option value="二次备案审核通过" <eq name="type" value="二次备案审核通过">selected</eq> >二次备案审核通过</option>
+					<option value="一次备案审核退回" <eq name="type" value="一次备案审核退回">selected</eq> >一次备案审核退回</option>
+					<option value="二次备案审核退回" <eq name="type" value="二次备案审核退回">selected</eq> >二次备案审核退回</option>
+				</select>
+			</li>
+			<li style="width:210px">			
+				<label style="width:50px">客户状态</label>
+				<select name="clientstatus" class="">
+					<option value="">===全部===</option>
+					<option value="潜在客户" <eq name="clientstatus" value="潜在客户">selected</eq> >潜在客户</option>				
+					<option value="未接通" <eq name="clientstatus" value="未接通">selected</eq> >未接通</option>
+					<option value="意向客户" <eq name="clientstatus" value="意向客户">selected</eq> >意向客户</option>
+					<option value="预上门客户" <eq name="clientstatus" value="预上门客户">selected</eq> >预上门客户</option>
+					<option value="已上门客户" <eq name="clientstatus" value="已上门客户">selected</eq> >已上门客户</option>
+					<option value="签单客户" <eq name="clientstatus" value="签单客户">selected</eq> >签单客户</option>
+				</select>
+			</li>
+			<li style="width:220px">
+				<label style="width:113px">没有跟踪的单子</label>
+				<input type="text" name="day" size="8" value="{$day}"/> 天
+			</li>
+			<li style="width:210px">
+				<label style="width:38px">渠道</label>
+				<select name="waysub" class="">
+					<option value="">==全部==</option>
+					<option <eq name="waysub" value="设计师介绍客户">selected</eq> value="设计师介绍客户">设计师介绍客户</option>
+					<option <eq name="waysub" value="客户介绍客户">selected</eq> value="客户介绍客户">客户介绍客户</option>
+					<option <eq name="waysub" value="工程部回头客">selected</eq> value="工程部回头客">工程部回头客</option>
+					<option <eq name="waysub" value="其他">selected</eq> value="其他">其他</option>
+				</select>
+			</li>
+			<div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div>
+			
+			<a class="button" href="__URL__/draftfirst" title="客户备案" rel="deal_add" target="dialog" height="360" width="680" mask="true" style="float:left;position:relative;left:50px;text-align:right;"><span>客户备案</span></a>
+			
+			<neq name="yingxiaoyuan" value="1">
+			<a class="button" href="__URL__/find" title="搜索号码" rel="findproject" id="findproject" target="dialog" height="300" width="680" style="float:right;"><span>号码搜索</span></a>
+			</neq>
+		</ul>
+	</div>
+	</form>
+</div>
+
+
+<div class="pageContent">
+	<table class="table" width="100%" layoutH="110">
+		<thead>
+			<tr>
+				<th width="2%"><input type="checkbox" group="ids" class="checkboxCtrl"></th>
+				<th width="5%">客户姓名</th>				
+				<th width="11%">项目名称</th>
+				<th width="6%">电话</th>
+				<th width="8%">跟进时间</th>
+				<th width="5%">备案人员</th>
+				<th width="9%">途径</th>
+				<th width="9%">备案状态</th>
+				<th width="6%">单子状态</th>
+				<th width="9%">营销备案时间</th>
+				<!--<th width="11%">二次营销备案时间</th>-->
+				<th width="7%">设计师</th>
+				<!--<th width="5%">创建人</th>-->
+				<!--<th width="6%" align="center">审核阶段</th>-->
+				<th width="9%">单子状态操作</th>
+			</tr>
+		</thead>
+		<tbody>
+			<volist name="list" id="listmenu">
+			<tr >
+				<td class="checkTd" align="center"><input type="checkbox" name="" value="" id=""></td>
+				<td>{$listmenu['name']}</td>
+				<td>{$listmenu['address']}</td>
+				<td>{$listmenu['tel']}</td>
+				<td><?php 
+						if(($listmenu['last_time']!=0)&&($listmenu['last_time']!=9999999999)&&($listmenu['last_time']!=2147483647))
+						echo date('Y-m-d H:i',$listmenu['last_time']);?></td>
+				<td>{$listmenu['user']}</td>
+				<td>{$listmenu['way']}<neq name="listmenu.clientstatus" value="">({$listmenu['clientstatus']})</neq>
+				
+				<in name="listmenu.way" value="活动营销,活动专场客户">({$listmenu['activity']})</in>
+				<neq name="listmenu.introducer" value="">({$listmenu['introducer']})</neq>
+				<neq name="listmenu.introducermanager" value="">({$listmenu['introducermanager']})</neq>	
+				<neq name="listmenu.introducerother" value="">({$listmenu['introducerother']})</neq>
+				</td>
+				<in name="listmenu.approvestatus" value="一次备案待审核,二次备案待审核">
+				<td style="color:red">{$listmenu['approvestatus']}</td>
+				</in>
+				<notin name="listmenu.approvestatus" value="一次备案待审核,二次备案待审核">
+				<td style="color:blue">{$listmenu['approvestatus']}</td>
+				</notin>
+				<td style="color:blue">{$listmenu['design_status']}</td>
+				<td><?php 
+						if($listmenu['create_time']!=0)
+						echo date('Y-m-d H:i',$listmenu['create_time']);?></td>			
+				<td>{$listmenu['designer']}
+				<neq name="listmenu.designertel" value="">({$listmenu['designertel']})
+				</neq>
+				</td>		
+				<td>
+
+					<a href="__URL__/change/id/{$listmenu['id']}/navTabId/__MODULE__/currentPage/{$currentPage}" target="dialog" class="" mask="true" title="跟踪备注" width="680" height="370" style="color:blue">跟踪记录</a>
+
+				<!--
+				<in name="listmenu.approvestatus" value="二次备案审核通过,设计合同状态,施工合同状态,施工死单状态">
+					<a href="__URL__/change/id/{$listmenu['id']}/navTabId/__MODULE__" target="dialog" class="" title="转换状态" width="680" height="350" style="color:blue">转换状态</a>
+				</in>	
+				-->
+				<eq name="listmenu.approvestatus" value="一次备案审核通过">
+				| <a href="__URL__/draft/id/{$listmenu['id']}/navTabId/__MODULE__/currentPage/{$currentPage}" target="dialog" height="420" mask="true" width="680" class="" title="二次备案"  style="color:red">二次备案</a>
+				</eq>		
+				<eq name="listmenu.approvestatus" value="一次备案审核退回">
+				<a href="__URL__/draftfirst/id/{$listmenu['id']}/navTabId/__MODULE__" target="dialog" height="420" width="680" class="" mask="true" title="修改一次备案"  style="color:blue">修改</a> |
+				<!--
+				<a href="__URL__/foreverdelete/id/{$listmenu['id']}/navTabId/__MODULE__" target="ajaxTodo" class="" title="撤销"  style="color:red">撤销</a>
+				-->
+				</eq>		
+
+				<in name="listmenu.approvestatus" value="二次备案审核退回,设计部审核不通过">
+				<a href="__URL__/draft/id/{$listmenu['id']}/navTabId/__MODULE__" target="dialog" height="420" width="680" class="" mask="true" title="修改二次备案"  style="color:blue">修改</a> | 
+				<!--
+				<a href="__URL__/foreverdelete/id/{$listmenu['id']}/navTabId/__MODULE__" target="ajaxTodo" class="" title="撤销"  style="color:red">撤销</a>
+				-->
+				</in>	
+
+				</td>	
+
+
+				
+						
+			</tr>
+			</volist>
+		</tbody>
+	</table>
+	<div class="panelBar">
+		<div class="pages">
+			<span>共{$totalCount}条</span>
+		</div>
+		<div class="pagination" targetType="navTab" totalCount="{$totalCount}" numPerPage="{$numPerPage}" pageNumShown="10" currentPage="{$currentPage}"></div>
+	</div>
+</div>

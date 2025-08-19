@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+	<link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+	<link href="css/plugins/chosen/chosen.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.css">
+</head>
+<style>
+.chosen-container{float:left;margin-right:10px}
+</style>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                    </div>
+                    <div class="ibox-content">
+                        <div style="margin-bottom:10px;">
+							<form action="__URL__/index/token/{$token}/tab/1/" method="post">
+							    <div style="width:100%;">
+									<font style="margin-left:0%;float:left;position:relative;top:9px">供应商：</font>
+									<select name="gys" data-placeholder="选择供应商" class="chosen-select" style="width:15%;" tabindex="2">
+										<option value="">请选择供应商</option>
+										<volist name="supplier" id="supplier">
+										<option <eq name="gys" value="$supplier.supplier">selected</eq> value="{$supplier.supplier}" hassubinfo="true">{$supplier.supplier}</option>
+										</volist>
+									</select>
+									
+									<font style="margin-left:0%;float:left;position:relative;top:9px">付款时间：</font>
+									<input class="form-control layer-date" name="tjdate" value="{$tjdate}" onclick="laydate({istime: true, format: 'YYYY-MM-DD'})" style="width:140px;float:left;margin-right:10px">
+
+
+									<font style="margin-left:0%;float:left;position:relative;top:9px">申请人：</font>
+									<input type="text" name="sqr" value="{$sqr}" class="form-control" style="width:140px;float:left;margin-right:10px" >
+									<button class="btn btn-primary btn-sm" style="float:left;margin-right:10px" type="submit">查询</button>
+									<button class="btn btn-warning piliang" style="float:left;margin-right:10px" type="button">批量付款</button>
+									<font style="margin-left:2%;float:left;position:relative;top:12px">选择总计(元)：<b id="choice_total">0</b></font>
+							    </div>
+							</form>
+                        </div>
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+								<tr>
+									<th width="3%">订单号&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn-primary btn btn-xs" id="all_choice" flag="1">全选</button></th>
+									<th width="6%">供应商</th>	
+									<th width="3%">收款人</th>
+									<th width="3%">总计（元）</th>
+									<th width="3%">定金（元）</th>
+									<th width="3%">已付款（元）</th>
+									<th width="3%">申请人</th>
+									<th width="5%">付款时间</th>
+									<th width="4%">付款状态</th>
+									<th width="7%">操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<volist name="list" id="listmenu">
+								<tr>
+									<td>
+										<eq name="listmenu.see" value='0'>
+										<div style="width: 10px;height: 10px;background-color: red;border-radius: 20px;display: inline-block;"></div>
+										</eq>
+										&nbsp;&nbsp;{$listmenu.orderid}&nbsp;&nbsp;
+										<eq name="listmenu.status" value='0'><eq name='listmenu.dj_type' value="0"><eq name='quanxian' value="1"><input type="checkbox" name='arr[]' value="{$listmenu.id}"></eq></eq></eq>
+									</td>
+									<td>{$listmenu.supplier}</td>
+									<td>{$listmenu.bankuser}</td>
+									<td>{$listmenu.total}</td>
+									<td>{$listmenu.dj}</td>
+									<td>{$listmenu.pay}</td>
+									<td>{$listmenu.sqr}</td>
+									<td>{$listmenu.enddate}</td>
+									<eq name="listmenu.status" value="0">
+									<td style="color:red">未付款</td>
+									</eq>
+									<eq name="listmenu.status" value="13">
+									<td style="color:blue;">发起定金付款中</td>
+									</eq>
+									<eq name="listmenu.status" value="12">
+									<td style="color:blue">先付后补中</td>
+									</eq>
+									<eq name="listmenu.status" value="2">
+									<td style="color:blue">结款中</td>
+									</eq>
+									<eq name="listmenu.status" value="4">
+									<td style="color:blue">已付定金</td>
+									</eq>
+                                    <td>
+                                    <?php if(!($listmenu['dj_type'])): ?>
+									<eq name="limit" value="1">
+										<eq name="listmenu.status" value="0">
+										<eq name="listmenu.djstatus" value="1">
+										<a class="btn btn-info btn-xs delete see" title="{$listmenu['id']}">付定金</a>
+										</eq>									
+										<neq name="listmenu.djstatus" value="1">
+										<a href="__URL__/pay/id/{$listmenu['id']}" data-toggle="modal" data-target="#modal" target="dialog" class="btn btn-info btn-xs see">付款</a>
+										</neq>
+										</eq>
+
+										<in name="listmenu.status" value="2,4">
+										<a href="__URL__/pay/id/{$listmenu['id']}" data-toggle="modal" data-target="#modal" target="dialog" class="btn btn-info btn-xs see">付款</a>
+										</in>
+										<a href="__URL__/payx/id/{$listmenu['id']}" data-toggle="modal" data-target="#modal" target="dialog" class="btn btn-info btn-xs see">先付后补</a>
+										<a href="__URL__/yh2/id/{$listmenu['id']}" data-toggle="modal" data-target="#modal" target="dialog" class="btn btn-info btn-xs see">供应商返利</a>
+									</eq>
+
+									<?php else: ?>
+									<eq name="limit" value="1">
+										<eq name="listmenu.status" value="0">
+										<a class="btn btn-info btn-xs delete see" title="{$listmenu['id']}">支付发起定金</a>
+										</eq>
+										<eq name="listmenu.status" value="2">
+										<eq name='listmenu.addpay' value='1'>
+										<a class="btn btn-info btn-xs delete see" title="{$listmenu['id']}">支付增加定金</a>
+										</eq>
+										</eq>
+									</eq>
+									<?php endif; ?>
+									<a href="__URL__/edit1/id/{$listmenu['id']}" data-toggle="modal" data-target="#modal" target="dialog" class="btn btn-info btn-xs see">详情</a>
+									<eq name="listmenu.upload_quanxian" value="1">
+									<a href="__URL__/edit/id/{$listmenu['id']}" data-toggle="modal" data-target="#modal" target="dialog" class="btn btn-info btn-xs">上传</a>
+									</eq> 
+									<eq name="limit" value="1">
+									<eq name='listmenu.status' value='0'>
+									<a class="btn btn-danger btn-xs zuofei see" title="{$listmenu['id']}">作废</a>
+									</eq>
+									</eq>
+									</td>									
+								</tr>
+								</volist>
+							</tbody>
+                        </table>
+						<div class="panelBar"><div class="pagination" targetType="navTab" totalCount="{$totalCount}" numPerPage="{$numPerPage}" pageNumShown="10" currentPage="{$currentPage}">{$page}</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" name="role" value="{$dept}">
+	<div id="modal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" style="width:850px;height:600px">
+		<div class="modal-content">
+		   <div class="modal-header">  
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
+                    <span aria-hidden="true">×</span>  
+                </button>  
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>  
+            </div>  
+            <div class="modal-body">  
+                <p>One fine body…</p>  
+            </div>  
+            <div class="modal-footer">  
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                <button type="button" class="btn btn-primary">Save</button>  
+            </div>  
+		</div>
+	  </div>
+	</div>
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+	<script src="js/plugins/layer/laydate/laydate.js"></script>
+    <script src="js/content.js?v=1.0.0"></script>
+    <!-- Chosen -->
+    <script src="js/plugins/chosen/chosen.jquery.js"></script>
+    <script src="js/demo/form-advanced-demo.js"></script>
+	<script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+	
+	
+	<link rel="stylesheet" href="__PUBLIC__/lightbox/viewerjs/dist/viewer.css">
+	<script src="__PUBLIC__/lightbox/viewerjs/dist/viewer.js"></script>
+	
+	<script type="text/javascript" src="__PUBLIC__/lightbox/source/jquery.fancybox.js?v=2.1.5"></script>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/lightbox/source/jquery.fancybox.css?v=2.1.5" media="screen" />
+	<script type="text/javascript">
+		$('.fancybox').fancybox();
+	</script>
+	
+
+	<script>
+	  $('.delete').click(function () {	
+        var message=$(this).attr("title");			
+		swal({
+			title: "您确定要付定金吗",
+			text: "成功后将无法恢复操作，请谨慎操作！",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			cancelButtonText: "取消",
+			confirmButtonText: "确定",
+			closeOnConfirm: false
+		}, function () {
+			//获取选中的checkbox
+			//发送请求命令			
+			var aj = $.ajax({
+					url:'__URL__/payfor',
+					data:{  
+						message : message
+					},
+					type:'post',  
+					cache:false,  
+					dataType:'json',  
+					success:function(data) {
+                        if(data==1){
+							swal("付定金成功！", "请刷新查看结果。", "success");
+							var timmer=setTimeout(function(){
+								location.reload();
+							},600);
+							
+						}					
+						
+					}  
+			});
+			
+		});
+	});
+	
+	</script>
+	<script>
+	  $('.zuofei').click(function () {	
+        id=$(this).attr("title");		
+		swal({
+			title: "您确定要作废吗?",
+			text: "请谨慎操作！",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			cancelButtonText: "取消",
+			confirmButtonText: "确定",
+			closeOnConfirm: false
+		}, function () {
+			//获取选中的checkbox
+			//发送请求命令			
+			var aj = $.ajax({
+					url:'__URL__/zuofei',
+					data:{  
+						id : id
+					},
+					type:'post',  
+					cache:false,  
+					dataType:'json',  
+					success:function(data) {
+						if(data==1){
+							swal("作废成功！", "请刷新查看结果。", "success");
+							var timer=setTimeout(function(){
+								location.reload();
+							},600);
+						}
+					}  
+			});
+			
+		});
+	});
+	</script>
+
+
+	<script>
+	  $('.piliang').click(function () {
+	  	var input=$('input[type="checkbox"]:checked');
+	  	var arr= new Array();
+	  	input.each(function(i){
+	  		arr[i]=$(this).val();
+	  	});
+	  	var arrstr='';
+	  	for (var i = 0; i < arr.length; i++) {
+	  		arrstr=arrstr+arr[i]+',';
+	  	}
+		swal({
+			title: "您确定要一次结清所选订单吗?",
+			text: "操作后无法恢复,请谨慎操作！",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			cancelButtonText: "取消",
+			confirmButtonText: "确定",
+			closeOnConfirm: false
+		}, function () {
+			//获取选中的checkbox
+			//发送请求命令			
+			var aj = $.ajax({
+					url:'__URL__/allpay',
+					data:{  
+						arr : arrstr
+					},
+					type:'post',  
+					cache:false,  
+					dataType:'json',  
+					success:function(data) {
+						if(data==1){
+							swal("付款成功！", "请刷新查看结果。", "success");
+							var timer=setTimeout(function(){
+								location.href=location.href;
+							},1500);
+						}
+						if(data==2){
+							swal("付款失败！", "未选择单号,可能您不是财务人员呀。", "error");
+							var timer=setTimeout(function(){
+								location.href=location.href;
+							},1500);
+						}
+
+					}  
+			});
+			
+		});
+	});
+	</script>
+	<script>
+		var flag=1;
+		$('#all_choice').click(function(){
+			
+			if(flag==1){
+				var choice_total=parseFloat(0);
+				$('input[type="checkbox"]').prop('checked',true);
+				$('input[type="checkbox"]:checked').each(function(){
+					choice_total=choice_total+parseFloat($(this).parents('tr').find('td').eq(3).html());
+				});
+				$('#choice_total').html(choice_total);
+				flag=2;
+			}else{
+				$('input[type="checkbox"]').prop('checked',false);
+				$('#choice_total').html(0);
+				flag=1;
+			}
+			
+		});
+
+		
+	</script>
+	<script>
+		$('input[type="checkbox"]').click(function(){
+			var choice_total=parseFloat(0);
+			$('input[type="checkbox"]:checked').each(function(){
+					choice_total=choice_total+parseFloat($(this).parents('tr').find('td').eq(3).html());
+				});
+			$('#choice_total').html(choice_total);
+		});
+
+	</script>
+	<script>
+		$('.see').click(function(){
+			 var role=$('input[name="role"]').val();
+			 if(role=="财务部"){
+			 	$(this).parents('tr').find('div').hide();
+			 }
+			
+		});
+
+	</script>
+
+</body>
+</html>

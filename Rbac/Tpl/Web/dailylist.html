@@ -1,0 +1,314 @@
+﻿<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>施工日志</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__PUBLIC__/appsource/css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			*{touch-action:pan-y}
+			.mui-media {
+				font-size: 14px;
+			}
+			
+			.mui-table-view .mui-media-object {
+				max-width: initial;
+				width: 90px;
+				height: 70px;
+			}
+			
+			.meta-info {
+				position: absolute;
+				left: 115px;
+				right: 15px;
+				bottom: 8px;
+				color: #8f8f94;
+			}
+			
+			.meta-info .author,.meta-info .time{
+				display: inline-block;
+			}
+			
+			.meta-info .time{
+				float: right;
+			}
+			
+			.mui-table-view:before,
+			.mui-table-view:after {
+				height: 0;
+			}
+			
+			.mui-content>.mui-table-view:first-child {
+				margin-top: 1px;
+			}
+			
+			.banner {
+				height: 180px;
+				overflow: hidden;
+				position: relative;
+				background-position: center;
+				background-color: #ccc;
+			}
+			
+			.banner img {
+				width: 100%;
+				height: auto;
+			}
+			
+			.banner .title {
+				position: absolute;
+				left: 15px;
+				bottom: 15px;
+				width: 90%;
+				font-size: 16px;
+				font-weight: 400;
+				line-height: 21px;
+				color: white;
+				z-index: 11;
+			}
+			
+			.mui-table-view-cell:after{
+				left: 0px;
+			}
+			#pullDown, #pullUp {
+				background:#fff;
+				height:40px;
+				line-height:40px;
+				padding:5px 10px;
+				border-bottom:1px solid #ccc;
+				font-weight:bold;
+				font-size:14px;
+				color:#888;
+				text-align: center;
+			}
+		</style>
+		<link href="__PUBLIC__/appsource/css/mui.picker.css" rel="stylesheet" />
+		<link href="__PUBLIC__/appsource/css/mui.poppicker.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		
+		<div class="mui-content">
+		<div style="width:100%;height:40px;border-bottom:1px solid #ccc;position:fixed;z-index:999;background-color:#f0f0f0;top:0px;display:none">
+		<div style="width:70%;float:left;border-right:1px solid #ccc">
+			<div id='citychoice' class="ui-alert" style="font-size:13px;line-height:40px;text-align:center;color:#555">
+			选择项目
+			<img src="__PUBLIC__/appsource/images/arrow.png" style="width:12px">
+			</div>
+			
+		</div>
+		<div style="width:30%;float:left">
+			<div id='userchoice' class="ui-alert" style="font-size:13px;line-height:40px;text-align:center;color:#555">
+			选择专项
+			<img src="__PUBLIC__/appsource/images/arrow.png" style="width:12px">
+			</div>
+		</div>
+		</div>
+		<div id="wrapper" style="margin-top:0px">
+			<div id="scroller">
+				<div id="pullDown">
+					<span class="pullDownIcon"></span>
+					<span class="pullDownLabel">下拉刷新...</span>
+				</div>
+
+				<!--列表信息流 开始-->
+				<ul id="thelist" class="mui-table-view">
+				</ul>
+				<div id="pullUp">
+					<span class="pullUpIcon"></span>
+					<span class="pullUpLabel">上拉加载更多...</span>
+				</div>
+			</div>
+		</div>
+		
+		</div>
+			
+		
+		
+		<div style="height: 50px;line-height: 50px;padding: 5px;position:fixed;bottom:120px;right:40px;box-shadow:0 0 20px #ccc;background-color:white;border-radius:25px;z-index:1000">
+			<span id="refresh" class="mui-icon mui-icon-refreshempty mui-pull-right" style="font-size: 40px;"></span>
+		</div>
+		<div style="height: 50px;line-height: 50px;padding: 5px;position:fixed;bottom:50px;right:40px;box-shadow:0 0 20px #ccc;background-color:white;border-radius:25px;z-index:1000">
+			<span id="dailyadd" class="mui-icon mui-icon-plusempty mui-pull-right" style="font-size: 40px;"></span>
+		</div>
+		
+		
+		
+		<!-- 微信 JS-SDK 如果不需要兼容小程序，则无需引用此 JS 文件。 -->  
+		<script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>  
+		<!-- uni 的 SDK，必须引用。 -->  
+		<script type="text/javascript" src="//js.cdn.aliyun.dcloud.net.cn/dev/uni-app/uni.webview.0.1.52.js"></script>
+		<script src="__PUBLIC__/appsource/js/mui.min.js"></script>
+		<script src="__PUBLIC__/appsource/js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="__PUBLIC__/appsource/js/my.js"></script>
+		<script src="__PUBLIC__/appsource/js/mui.picker.js"></script>
+		<script src="__PUBLIC__/appsource/js/mui.poppicker.js"></script>
+		<script src="__PUBLIC__/appsource/js/select.js" type="text/javascript" charset="utf-8"></script>
+		<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/appsource/js/iscroll.js"></script>
+		<!-- <script type="text/javascript" src="__PUBLIC__/appsource/js/js.js"></script>  -->
+		<script type="text/javascript">
+
+			var account = "{$account}";
+			var offset = 0;
+			var limit = 30;
+			var currentNum = 0;
+			var list = document.getElementById("thelist");
+			var webid = null;
+			var city=null;
+			var user=null;
+			var worktype=null;
+			var page=1;
+			var plmid="{$plmid}";
+			document.getElementById('refresh').addEventListener('tap', function() {
+			    location.href=location.href;
+			});
+			document.getElementById('dailyadd').addEventListener('tap', function() {
+			    uni.navigateTo({
+					url: '/pages/web/index?page=dailyadd&params=/plmid/'+plmid+'/account/' + account
+				});
+			});
+			document.addEventListener('DOMContentLoaded', function () { 
+				setTimeout(loaded, 200); 
+			}, false);
+			document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+			
+			function loaded() {
+				getlist();
+				getproject();
+				getworktype();
+				pullDownEl = document.getElementById('pullDown');
+				pullDownOffset = pullDownEl.offsetHeight;
+				pullUpEl = document.getElementById('pullUp');
+				pullUpOffset = pullUpEl.offsetHeight;
+				myScroll = new iScroll('wrapper', {
+					useTransition: true,
+					topOffset: pullDownOffset,
+					onRefresh: function () {
+						if (pullDownEl.className.match('loading')) {
+							pullDownEl.className = '';
+							pullDownEl.querySelector('.pullDownLabel').innerHTML = '下拉刷新...';
+						} else if (pullUpEl.className.match('loading')) {
+							pullUpEl.className = '';
+							pullUpEl.querySelector('.pullUpLabel').innerHTML = '上拉加载更多...';
+						}
+					},
+					onScrollMove: function () {
+						if (this.y > 5 && !pullDownEl.className.match('flip')) {
+							pullDownEl.className = 'flip';
+							pullDownEl.querySelector('.pullDownLabel').innerHTML = '下拉刷新...';
+							this.minScrollY = 0;
+						} else if (this.y < 5 && pullDownEl.className.match('flip')) {
+							pullDownEl.className = '';
+							pullDownEl.querySelector('.pullDownLabel').innerHTML = '下拉刷新...';
+							this.minScrollY = -pullDownOffset;
+						} else if (this.y < (this.maxScrollY - 50) && !pullUpEl.className.match('flip')) {
+							pullUpEl.className = 'flip';
+							pullUpEl.querySelector('.pullUpLabel').innerHTML = '上拉加载更多...';
+							this.maxScrollY = this.maxScrollY;
+						} else if (this.y > (this.maxScrollY + 50) && pullUpEl.className.match('flip')) {
+							pullUpEl.className = '';
+							pullUpEl.querySelector('.pullUpLabel').innerHTML = '上拉加载更多...';
+							this.maxScrollY = pullUpOffset;
+						}
+						console.log("y"+this.y+"底部："+this.maxScrollY+"height"+pullUpOffset);
+					},
+					onScrollEnd: function () {
+						//alert(1)
+						if (pullDownEl.className.match('flip')) {
+							pullDownEl.className = 'loading';
+							pullDownEl.querySelector('.pullDownLabel').innerHTML = '加载中...';
+							pullDownAction();	// Execute custom function (ajax call?)
+						} else if (pullUpEl.className.match('flip')) {
+							pullUpEl.className = 'loading';
+							pullUpEl.querySelector('.pullUpLabel').innerHTML = '加载中...';
+							pullUpAction();	// Execute custom function (ajax call?)
+						}
+					}
+				});
+
+				setTimeout(function () { document.getElementById('wrapper').style.left = '0'; }, 800);
+			}
+			
+			/**
+			 *  刷新滚动区域的滚动条的位置（此方法在添加数据后调用）
+			 **/
+			function refreshScrollBar() {
+				console.log("刷新滚动条");
+				myScroll.refresh();
+			}
+			
+			function pullDownAction () {
+				refreshScrollBar();
+				console.log("下拉");
+				page = 1;
+				getlist();
+			}
+			
+			//初始化数据
+			function pullUpAction () {
+				console.log("上拉");
+				console.log("当前页数:"+page);
+				getlist();
+				refreshScrollBar();
+			}
+			
+			function getlist(){
+				// +"/plmid/"+plmid
+				mui.ajax("http://projectnandian.jiuze9.com/projecttest/Rbac/index.php/App/plmdaily1/account/"+account+"/plmid/"+plmid+"/webid/"+webid+"/user/"+user+"/city/"+city+"/worktype/"+worktype+"/page/"+page,{
+					dataType:'json',//服务器返回json格式数据
+					type:'post',//HTTP请求类型					
+					headers:{'Content-Type':'application/json'},	              
+					success:function(data){
+						var result = new Array();  
+						result = eval(data); 
+						aa="";
+						
+						if(page==1)
+						{
+							list.innerHTML="";
+						}
+						
+						for(x in result)   
+						{  
+						    aa += '<li class="mui-table-view-cell mui-media" name="icon" title="'+result[x]['id']+'">\
+										<a href="javascript:;">\
+					                        <div style="margin: 2px 0 2px 0;">'+result[x]['title']+'</div>\
+											<div style="margin: 2px 0 2px 0;font-size:12px;color: #666666;">环节：'+result[x]['subtitle']+'</div>\
+											<div style="margin: 2px 0 2px 0;font-size:12px;color: #666666;">百分比：'+result[x]['percent']+'</div>\
+											<div style="display: flex;font-size: 12px;">\
+												<div style="flex-grow: 4;color: #0F64BF;">日志：'+result[x]['content']+'</div>\
+											</div>\
+											<div style="display: flex;font-size: 12px;">\
+												<div style="flex-grow: 4;color: #0F64BF;">负责人：'+result[x]['user']+'('+result[x]['role']+')</div>\
+												<div style="flex-grow: 1;text-align: right;color: #666666;">'+result[x]['ctime']+'</div>\
+											</div>\
+										</a>\
+									</li>' 
+						}  
+					   
+						list.innerHTML+=(aa);
+						myScroll.refresh();
+						if(result){
+							page++;
+						}else{
+							pullUpEl.querySelector('.pullUpLabel').innerHTML = '数据已全部加载完毕';
+						}
+						
+						obj = document.getElementsByName("icon");
+						for(i=0;i<obj.length;i++){
+						    document.getElementsByName('icon')[i].addEventListener('tap', function() {
+								uni.navigateTo({
+									url: '/pages/web/index?page=dailydetail&params=/id/'+this.title+'/account/' + account
+								});
+							});
+						}
+						
+					},
+				});
+			}
+		</script>
+	</body>
+
+</html>

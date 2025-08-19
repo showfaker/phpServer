@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>{$moduletitle}</title>
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.7" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+    <div class="row">
+	
+	
+	
+		<div class="col-sm-4">
+			<div class="wrapper wrapper-content animated fadeInUp">
+				
+				<div class="ibox">
+					
+					<div class="ibox-content">
+
+						<div class="row m-b-sm m-t-sm">
+							<div class="col-md-11">
+							<form action="__URL__/index/token/{$token}/" method="post">
+								<!--
+								<ul class="tag-list" style="padding:0;position:relative;top:-5px">
+									<li><a href="__URL__/index/token/{$token}/projecttype/分布式光伏发电" <eq name="projecttype" value="分布式光伏发电">style="background-color:#eee"</eq> style="background-color:white"><i class="fa fa-tag"></i> 分布式光伏发电</a></li>
+									<li><a href="__URL__/index/token/{$token}/projecttype/集中式光伏发电" <eq name="projecttype" value="集中式光伏发电">style="background-color:#eee"</eq> style="background-color:white"><i class="fa fa-tag"></i> 集中式光伏发电</a></li>
+									<li><a href="__URL__/index/token/{$token}/projecttype/风力发电" <eq name="projecttype" value="风力发电">style="background-color:#eee"</eq> style="background-color:white"><i class="fa fa-tag"></i> 风力发电</a></li>
+								</ul>
+								-->
+								<div class="input-group">
+									
+									<input type="text" placeholder="请输入项目名称" name="address" value="{$address}" class="input-sm form-control"> <span class="input-group-btn"><button type="submit" class="btn btn-sm btn-primary"> 搜索</button> </span>
+									
+								</div>
+							</form>
+							</div>
+						</div>
+
+						<div class="project-list">
+
+							<table class="table table-hover">
+								<tbody>
+									<volist name="list" id="listmenu">
+									<tr  <eq name="listmenu.id" value="$plmid"> style="background-color:#eee"</eq>>
+										<td class="project-status">
+											<a href="__URL__/index/token/{$token}/address/{$address}/projecttype/{$projecttype}/plmid/{$listmenu.id}">
+											<div style="padding:10px;width:100%">
+											<span class="label label-primary">{$listmenu.design_status}</span>
+											</div>
+											</a>
+										</td>
+										<td class="project-title">
+											<a href="__URL__/index/token/{$token}/address/{$address}/projecttype/{$projecttype}/plmid/{$listmenu.id}">
+											<div>
+											{$listmenu.title}
+											<br/>
+											<small>创建于 <?php echo date("Y年m月d日",$listmenu[create_time]);?></small>
+											</div>
+											</a>
+										</td>
+										<!--
+										<td class="project-completion">
+												<small>进度： {$listmenu.image_progress}%</small>
+												<div class="progress progress-mini">
+													<div style="width: {$listmenu.image_progress}%;" class="progress-bar"></div>
+												</div>
+										</td>
+										-->
+										<!--
+										<td class="project-people">
+											<a href="projects.html"><img alt="image" class="img-circle" src="img/a3.jpg"></a>
+											<a href="projects.html"><img alt="image" class="img-circle" src="img/a1.jpg"></a>
+											<a href="projects.html"><img alt="image" class="img-circle" src="img/a2.jpg"></a>
+											<a href="projects.html"><img alt="image" class="img-circle" src="img/a4.jpg"></a>
+											<a href="projects.html"><img alt="image" class="img-circle" src="img/a5.jpg"></a>
+										</td>
+										-->
+									</tr>
+									</volist>
+									</tbody>
+								</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+        <div class="col-sm-8">
+            <div class="wrapper wrapper-content animated fadeInUp" style="margin-left:-40px;">
+                <div class="ibox">
+				
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="m-b-md">
+                                    <!--<a href="project_detail.html#" class="btn btn-white btn-xs pull-right">编辑项目</a>-->
+                                    <h2>{$plminfo.title}</h2>
+                                </div>
+                                <dl class="dl-horizontal">
+                                    <dt>状态：</dt>
+                                    <dd><span class="label label-primary">{$plminfo.design_status}</span>
+                                    </dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <dl class="dl-horizontal">
+									<dt>项目编号：</dt>
+                                    <dd>{$plminfo.number}</dd>
+									<dt>最后更新：</dt>
+                                    <dd>
+									<neq name="plminfo.last_time">
+									<?php echo date("Y年m月d日",$plminfo[last_time]);?>
+									</neq>
+									</dd>
+                                    <dt>创建于：</dt>
+                                    <dd><?php echo date("Y年m月d日",$plminfo[create_time]);?></dd>
+									<dt>合作模式：</dt>
+                                    <dd>
+										{$plminfo.invester}
+                                    </dd>
+                                </dl>
+                            </div>
+                            <div class="col-sm-4" id="cluster_info">
+                                <dl class="dl-horizontal">
+									
+									
+                                    <dt>开发部负责人：</dt>
+                                    <dd>{$plminfo.kaifa}</dd>
+                                    <dt>开发部职员：</dt>
+                                    <dd>{$plminfo.kaifauser}</dd>
+									<dt>商务部负责人：</dt>
+                                    <dd>{$plminfo.shangwu}</dd>
+                                    <dt>商务部职员：</dt>
+                                    <dd>{$plminfo.shangwuuser}</dd>
+                                </dl>
+                            </div>
+							
+							<div class="col-sm-4" id="cluster_info">
+                                <dl class="dl-horizontal">
+									<dt>工程部负责人：</dt>
+                                    <dd>{$plminfo.gongcheng}</dd>
+                                    <dt>工程部职员：</dt>
+                                    <dd>{$plminfo.gongchenguser}</dd>
+									<dt>采购部负责人：</dt>
+                                    <dd>{$plminfo.caigou}</dd>
+                                    <dt>采购部职员：</dt>
+                                    <dd>{$plminfo.caigouuser}</dd>
+                                    
+                                    <dt>设计部负责人：</dt>
+                                    <dd>{$plminfo.sheji}</dd>
+                                    <dt>设计部职员：</dt>
+                                    <dd>{$plminfo.shejiuser}</dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <dl class="dl-horizontal">
+                                    <dt>当前进度</dt>
+                                    <dd>
+                                        <div class="progress progress-striped active m-b-sm">
+                                            <div style="width: {$plminfo.image_progress}%;" class="progress-bar"></div>
+                                        </div>
+                                        <small>当前已完成项目总进度的 <strong>{$plminfo.image_progress}%</strong></small>
+                                    </dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <div class="row m-t-sm">
+                            <div class="col-sm-12">
+                                <div class="panel blank-panel">
+                                    <div class="panel-heading">
+                                        <div class="panel-options">
+                                            <ul class="nav nav-tabs">
+                                                <li class="active"><a href="project_detail.html#tab-1" data-toggle="tab">团队消息（{$plminfo.discusscount}）</a>
+                                                </li>
+												<!--
+                                                <li class=""><a href="project_detail.html#tab-2" data-toggle="tab">最后更新</a>
+                                                </li>
+												-->
+												<a data-toggle="modal" data-target="#modal" data-backdrop="static"  class="btn btn-primary btn-sm hidden-xs" href="__URL__/add/plmid/{$plmid}" style="float:right" >添加</a>
+                                             
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="panel-body">
+
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="tab-1">
+                                                <div class="feed-activity-list">
+													<volist name="plmdiscusses" id="plmdiscuss">
+                                                    <div class="feed-element">
+                                                        <a href="javascript:void(0)" class="pull-left">
+                                                            <img alt="image" class="img-circle" src="img/a1.jpg">
+                                                        </a>
+                                                        <div class="media-body ">
+                                                            <small class="pull-right text-navy"><?php echo date("Y-m-d H:i:s",$plmdiscuss[create_time]); ?></small>
+                                                            <strong>{$plmdiscuss.user}</strong> 发布了一个动态<font style="color:blue;font-weight:bold">{$plmdiscuss.title}</font>
+                                                            <br>
+                                                            <small class="text-muted"><?php echo date("Y-m-d H:i:s",$plmdiscuss[create_time]); ?></small>
+															<div>
+															    {$plmdiscuss.content}
+                                                                <neq name="plmdiscuss.atuser" value="">
+                                                                    <volist name="plmdiscuss.at" id="atlists">
+                                                                        <eq name="_SESSION['nickname']" value="$atlists">
+                                                                            <span class="badge badge-danger">@我</span>
+                                                                        </eq>
+                                                                        <neq name="_SESSION['nickname']" value="$atlists">
+                                                                            <span class="badge badge-info">@{$atlists}</span>
+                                                                        </neq>
+                                                                    </volist>
+                                                                </neq>
+															</div>
+															<volist name="plmdiscuss.replys" id="reply">
+                                                                <div class="well">
+                                                                    {$reply.user}于<?php echo date("Y-m-d H:i:s",$reply[create_time]); ?>回复：{$reply.content}
+                                                                    <neq name="reply.atuser" value="">
+                                                                        <volist name="reply.at" id="atlist">
+                                                                            <eq name="_SESSION['nickname']" value="$atlist">
+                                                                                <span class="badge badge-danger">@我</span>
+                                                                            </eq>
+                                                                            <neq name="_SESSION['nickname']" value="$atlist">
+                                                                                <span class="badge badge-info">@{$atlist}</span>
+                                                                            </neq>
+                                                                        </volist>
+                                                                    </neq>
+                                                                    <if condition="($_SESSION['nickname'] eq $plmdiscuss['user']) OR ($_SESSION['nickname'] eq $reply['user']) ">
+                                                                        <a class="btn btn-danger btn-xs delete btn-outline" title="{$reply.id}" style="float:right">删除</a>
+                                                                    </if>
+                                                                </div>
+															</volist>
+                                                            <div class="actions pull-right">
+                                                                <a class="btn btn-xs btn-white support" title="{$plmdiscuss.id}"><i class="fa fa-thumbs-up"></i> <span id="support{$plmdiscuss.id}">{$plmdiscuss.support}</span>赞 </a>
+																<a data-toggle="modal" data-target="#modal" data-backdrop="static" class="btn btn-xs btn-success hidden-xs" href="__URL__/reply/id/{$plmdiscuss.id}"><i class="fa fa-pencil"></i> 回复</a>
+                                                                <!--<a class="btn btn-xs btn-danger"><i class="fa fa-heart"></i> 收藏</a>-->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+													</volist>
+                                                </div>
+
+                                            </div>
+											
+											
+											
+                                            <div class="tab-pane" id="tab-2">
+
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>状态</th>
+                                                            <th>标题</th>
+                                                            <th>开始时间</th>
+                                                            <th>结束时间</th>
+                                                            <th>说明</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <span class="label label-primary"><i class="fa fa-check"></i> 已完成</span>
+                                                            </td>
+                                                            <td>
+                                                                文档在线预览功能
+                                                            </td>
+                                                            <td>
+                                                                11月7日 22:03
+                                                            </td>
+                                                            <td>
+                                                                11月7日 20:11
+                                                            </td>
+                                                            <td>
+                                                                <p class="small">
+                                                                    已经测试通过
+                                                                </p>
+                                                            </td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <span class="label label-primary"><i class="fa fa-check"></i> 解决中</span>
+                                                            </td>
+                                                            <td>
+                                                                会员登录
+                                                            </td>
+                                                            <td>
+                                                                11月7日 22:03
+                                                            </td>
+                                                            <td>
+                                                                11月7日 20:11
+                                                            </td>
+                                                            <td>
+                                                                <p class="small">
+                                                                    测试中
+                                                                </p>
+                                                            </td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <span class="label label-primary"><i class="fa fa-check"></i> 解决中</span>
+                                                            </td>
+                                                            <td>
+                                                                会员积分
+                                                            </td>
+                                                            <td>
+                                                                11月7日 22:03
+                                                            </td>
+                                                            <td>
+                                                                11月7日 20:11
+                                                            </td>
+                                                            <td>
+                                                                <p class="small">
+                                                                    未测试
+                                                                </p>
+                                                            </td>
+
+                                                        </tr>
+
+
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+	
+	
+	
+	<div id="modal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+			   <div class="modal-header">  
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">  
+						<span aria-hidden="true">×</span>  
+					</button>  
+					<h4 class="modal-title" id="myModalLabel">正在加载</h4>  
+				</div>  
+				<div class="modal-body">  
+					<p>正在加载…</p>  
+				</div>  
+				<div class="modal-footer">  
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+					<button type="button" class="btn btn-primary">Save</button>  
+				</div>  
+			</div>
+		</div>
+	</div>
+	
+	
+	
+    <!-- 全局js -->
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.7"></script>
+    <!-- 自定义js -->
+    <script src="js/content.js?v=1.0.0"></script>
+	<script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+	<link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <script>
+        $(document).ready(function () {
+
+            $('#loading-example-btn').click(function () {
+                btn = $(this);
+                simpleLoad(btn, true)
+
+                // Ajax example
+                //                $.ajax().always(function () {
+                //                    simpleLoad($(this), false)
+                //                });
+
+                simpleLoad(btn, false)
+            });
+        });
+
+        function simpleLoad(btn, state) {
+            if (state) {
+                btn.children().addClass('fa-spin');
+                btn.contents().last().replaceWith(" Loading");
+            } else {
+                setTimeout(function () {
+                    btn.children().removeClass('fa-spin');
+                    btn.contents().last().replaceWith(" Refresh");
+                }, 2000);
+            }
+        }
+		
+		
+		
+	$('.delete').click(function () {
+        id=$(this).attr("title");		
+		swal({
+			title: "您确定要删除吗",
+			text: "删除后将无法恢复操作，请谨慎操作！",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			cancelButtonText: "取消",
+			confirmButtonText: "确定",
+			closeOnConfirm: false
+		}, function () {
+			//获取选中的checkbox
+			//发送请求命令			
+			var aj = $.ajax({
+				url:'__URL__/foreverdelete',
+				data:{  
+					id : id
+				},
+				type:'post',  
+				cache:false,  
+				dataType:'json',  
+				success:function(data) {					
+					swal("删除成功！", "请刷新查看结果。", "success");
+					location.href=location.href;
+				}  
+			});
+			
+		});
+	});
+	
+	var currentsupport=0;
+	$('.support').click(function () {
+        currentsupport=$(this).attr("title");		
+		var aj = $.ajax({
+			url:'__URL__/support',
+			data:{  
+				id : currentsupport
+			},
+			type:'post',  
+			cache:false,  
+			dataType:'json',  
+			success:function(data) {
+				document.getElementById("support"+currentsupport).innerHTML=data;
+			}  
+		});
+	});
+    </script>
+</body>
+
+</html>

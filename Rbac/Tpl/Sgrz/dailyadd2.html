@@ -1,0 +1,549 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+<meta charset="utf-8" /> 
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" /> 
+<title>上传进度</title> 
+<link href="__PUBLIC__/appsource/css/mui.css" rel="stylesheet" /> 
+<script type="text/javascript" src="__PUBLIC__/appsource/js/common.js"></script>
+<link href="__PUBLIC__/appsource/css/mui.picker.css" rel="stylesheet" />
+<link href="__PUBLIC__/appsource/css/mui.poppicker.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/appsource/css/mui.picker.min.css" />
+<link rel="stylesheet" href="__PUBLIC__/appsource/css/common.css" type="text/css" charset="utf-8"/>
+<link href="css/plugins/chosen/chosen.css" rel="stylesheet">
+
+<link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/style.css?v=4.1.0" rel="stylesheet">
+<link rel="stylesheet" href="css/main1.css">
+<link rel="stylesheet" href="css/core1.css">
+<style>
+.normal{
+	font-size:14px;
+	height:80px;
+}
+</style>
+</head>
+<body> 
+<div class="mui-content mui-scroll mui-scroll-wrapper" style="overflow-y:hidden;background-color:white;padding-top:10px"> 
+<table style="height:auto;width:96%" class="drafttable"> 
+	<tr class="mui-table-view" style="margin-top:0px">
+		<td id="xuanzexiangmu" class="normal" style="width:25%">选择项目</td>
+		<td class="normal"><select class="chosen-select" name="xuanzexiangmu" style="background-color:transparent;color:#777;margin-left:10px;border:0px;width:70%" placeholder="点击选择"></select></td>
+	</tr>
+	<tr class="mui-table-view" style="border-top:1px solid #eee">
+		<td id="xuanzegongxu" class="normal">选择节点</td>
+		<td class="normal"><select class="chosen-select" name="xuanzegongxu" style="background-color:transparent;color:#777;margin-left:10px;border:0px;width:70%" placeholder="点击选择"></select></td>
+	</tr>
+	<tr class="mui-table-view" style="border-top:1px solid #eee;display:none">
+		<td class="normal">操作类型</td>
+		<td class="normal">
+		<select name="caozuoleixing" onchange="change_caozuoleixing(this)" id="caozuoleixing" style="background-color:transparent;color:#777;border:0px;width:70%;font-size:17px;line-height:16px;margin:0px;margin-left:3px" placeholder="点击选择">
+		<option value="进度汇报">进度汇报</option>
+		<option value="工作汇报">工作汇报</option>
+		</select>
+		</td>
+	</tr>
+	
+	<tr class="mui-table-view" style="border-top:1px solid #eee;display:none" id="benriyingdang_ul">
+		<td id="benriyingdang" class="normal">本日计划完成</td>
+		<td class="normal"><input name="benriyingdang" readonly style="background-color:transparent;color:#777;margin-left:10px;border:0px;width:60%"></td>
+	</tr>
+	<tr class="mui-table-view" style="border-top:1px solid #eee;display:none" id="wanchengchengdu_ul">
+		<td id="wanchengchengdu" class="normal">本日实际完成 </td>
+		<td class="normal"><select name="wanchengchengdu" readonly style="background-color:transparent;color:#777;margin-left:10px;border:0px;width:60%" placeholder="点击选择"></select></td>
+	</tr>
+	
+	<input type="hidden" name="type" value="2">
+	<tr class="mui-table-view" style="border-top:1px solid #eee;display:none" id="jihuashijian_ul">
+		<td id="jihuashijian" class="normal">计划时间</td>
+		<td class="normal"><input name="jihuashijian" readonly style="background-color:transparent;color:#777;margin-left:10px;border:0px;width:60%"></td>
+	</tr>
+	<tr class="mui-table-view" style="border-top:1px solid #eee;display:none" id="jihuashuliang_ul">
+		<td id="jihuashuliang" class="normal">计划数量</td>
+		<td class="normal"><input name="jihuashuliang" readonly style="background-color:transparent;color:#777;margin-left:10px;border:0px;width:60%"></td>
+	</tr>
+	<tr class="mui-table-view" style="border-top:1px solid #eee;display:none" id="daohuoshuliang_ul">
+		<td id="daohuoshuliang" class="normal">到货数量</td>
+		<td class="normal"><input name="daohuoshuliang" class="form-control" style="background-color:transparent;color:#777;padding-left:12px;width:60%" placeholder="请输入到货数量"></td>
+	</tr>
+	
+	<tr class="mui-table-view" style="border-top:1px solid #eee;display:none" id="shifouwancheng_ul">
+		<td id="shifouwancheng" class="normal">是否完成</td>
+		<td class="normal"><select name="shifouwancheng" readonly style="background-color:transparent;color:#777;margin-left:10px;border:0px;width:60%" placeholder="点击选择"></select></td>
+	</tr>
+	<script>
+		function change_caozuoleixing(obj)
+		{
+			if(obj.value=="进度汇报")
+			{
+				document.getElementById("benriyingdang_ul").style.display="";
+				document.getElementById("wanchengchengdu_ul").style.display="";
+			}
+			if(obj.value=="工作汇报")
+			{
+				document.getElementById("benriyingdang_ul").style.display="none";
+				document.getElementById("wanchengchengdu_ul").style.display="none";
+			}
+		}
+		var role="<?php echo $_SESSION[role];?>";
+		if((role=="监理人员")||(role=="施工专责"))
+		{
+			var index = document.getElementById("caozuoleixing").selectedIndex=1;
+			document.getElementById("benriyingdang_ul").style.display="none";
+			document.getElementById("wanchengchengdu_ul").style.display="none";
+		}
+	</script>
+	
+
+	
+	<tr style="height:6px"></tr>
+	<tr class="mui-table-view" onclick="document.getElementById('rizhi').focus()">
+			<td id="mudigang" class="normal">填写备注</br></br>如延期请填写延期原因</td>
+			<td class="normal" style="height:100px"><textarea name="rizhi" id="rizhi"  style="border:0px;position:relative;height:80px"></textarea></td>
+	</tr>
+	
+	<style>
+	.showimg{
+		margin: 10px 10px auto 10px;
+		float:left;
+	}
+	.add-tp{
+		width: 146px;
+		height: 46px;
+		padding:2px;
+		border:1px solid #ccc;
+		border-radius:3px;
+		float:left;
+		margin-right:5px;
+		margin-bottom:5px;
+	}
+	.add-tp img {
+		width: 40px;
+		height: 40px;
+		float:left;
+		border-radius:3px;
+	}
+	</style>
+	
+	<tr style="height:6px"></tr>
+	<tr class="mui-table-view">
+		<td id="huowuleixing" class="normal">附件上传 </td> 
+		<td class="normal" style="height:100px">
+		<div class="showimg" id="images" style="float:left;height:100px;overflow-y:auto;">
+			<a class="mui-icon mui-icon-plusempty" onclick="change()" style="padding:10px;border:1px dashed #ccc;border-radius:3px;float:left;z-index:99999">
+			</a>
+		</div>
+		</td>
+	</tr>
+	<input id="imgUpload" type="file" multiple style="filter:alpha(opacity=0);opacity:0;width: 0;height: 0;">
+	<tr style="height:6px"></tr>
+	<tr class="mui-table-view" style="margin-top:0px;position:relative;padding-top:6px;padding-bottom:10px">
+	
+	</tr>
+</table> 
+<!-- 
+<div id="submit_div" class="mui-content-padded" style="margin-left: 15px;margin-right: 15px;">
+	<div id='submit' style="background-color: #f89b48;border:0px;border-radius: 5px;height: 40px;line-height:40px;text-align: center;">
+		<a style="font-size: 17px;color: #ffffff;">确定上传</a>
+	</div>
+</div>
+	 -->
+<div class="modal-footer" style="background-color:white">
+	<div id="submit_div" class="mui-content-padded" style="margin-left: 15px;margin-right: 15px;">
+	<div id='submit' style="background-color: #f89b48;border:0px;border-radius: 5px;height: 40px;line-height:40px;text-align: center;">
+		<a style="font-size: 17px;color: #ffffff;">确定上传</a>
+	</div>
+</div>
+</div>	
+	
+	
+</div> 
+<div id='userResult' style="display:none"></div>
+<input id='plmid' style="display:none">
+
+<input id='worktypeid' style="display:none">
+
+
+<textarea id='imagebox1' style="display:none"></textarea>
+<textarea id='imagebox2' style="display:none"></textarea>
+<textarea id='imagebox3' style="display:none"></textarea>
+<textarea id='imagebox4' style="display:none"></textarea>
+<textarea id='imagebox5' style="display:none"></textarea>
+<textarea id='imagebox6' style="display:none"></textarea>
+<textarea id='imagebox7' style="display:none"></textarea>
+<textarea id='imagebox8' style="display:none"></textarea>
+<textarea id='imagebox9' style="display:none"></textarea>
+<textarea id='imagebox10' style="display:none"></textarea>
+<input id='audiobox' style="display:none">
+<!-- 微信 JS-SDK 如果不需要兼容小程序，则无需引用此 JS 文件。 -->  
+<script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>  
+<!-- uni 的 SDK，必须引用。 -->  
+<script type="text/javascript" src="//js.cdn.aliyun.dcloud.net.cn/dev/uni-app/uni.webview.0.1.52.js"></script>
+<script src="__PUBLIC__/appsource/js/mui.min.js"></script> 
+<script src="__PUBLIC__/appsource/js/mui.zoom.js"></script>
+<script src="__PUBLIC__/appsource/js/mui.previewimage.js"></script>
+<script src="__PUBLIC__/appsource/js/mui.picker.js"></script>
+<script src="__PUBLIC__/appsource/js/mui.poppicker.js"></script>
+<script src="__PUBLIC__/appsource/js/jquery-3.2.1.min.js"></script>
+<!-- Chosen -->
+<script src="js/plugins/chosen/chosen.jquery.js"></script>
+
+<script type="text/javascript">
+	var imgList = [];
+	var imgNameList = [];
+	mui.init();
+	var account = "{$_SESSION[account]}";
+	var mask = mui.createMask();
+	var currentindex=1;
+	var plmid="{$plmid}";
+	var moduletitle="{$moduletitle}";
+	
+	document.getElementById("submit").addEventListener("tap",function(){
+		var rizhi=$("#rizhi").val();
+		var plmid=document.getElementById("plmid").value;
+		var worktypeid=document.getElementById("worktypeid").value;
+		if((plmid==null)||(plmid==""))
+		{
+			mask.close();
+			mui.alert("请选择项目");
+			return;
+		}
+		if((worktypeid==null)||(worktypeid==""))
+		{
+			mask.close();
+			mui.alert("请选择节点");
+			return;
+		}
+		if((rizhi==null)||(rizhi==""))
+		{
+			//plus.nativeUI.closeWaiting();
+			//mask.close();
+			//mui.alert("请填写日志");
+			//return;
+			rizhi="无";
+		}
+		var imagedata1=document.getElementById("imagebox1").innerText;
+		var imagedata2=document.getElementById("imagebox2").innerText;
+		var imagedata3=document.getElementById("imagebox3").innerText;
+		var imagedata4=document.getElementById("imagebox4").innerText;
+		var imagedata5=document.getElementById("imagebox5").innerText;
+		var imagedata6=document.getElementById("imagebox6").innerText;
+		var imagedata7=document.getElementById("imagebox7").innerText;
+		var imagedata8=document.getElementById("imagebox8").innerText;
+		var imagedata9=document.getElementById("imagebox9").innerText;
+		var imagedata10=document.getElementById("imagebox10").innerText;
+		var audiodata=document.getElementById("audiobox").value;
+		var percent=document.getElementsByName("wanchengchengdu")[0].value;
+		var caozuoleixing=document.getElementById("caozuoleixing").value;
+		
+		if((rizhi=="无")&&((audiodata=="")||(audiodata==null)))
+		{
+			mask.close();
+			mui.alert("请填写备注");
+			return;
+		}
+		mask.show();
+		mui.toast("提交中...");
+		
+		var jihuashuliang=document.getElementsByName("jihuashuliang")[0].value;
+		var daohuoshuliang=document.getElementsByName("daohuoshuliang")[0].value;
+		mui.ajax("__APP__/Bproject/dailysubmit/plmid/"+plmid+"/moduletitle/"+moduletitle+"/caozuoleixing/"+caozuoleixing+"/rizhi/"+rizhi+"/worktypeid/"+worktypeid+"/jihuashuliang/"+jihuashuliang+"/daohuoshuliang/"+daohuoshuliang,{
+			dataType:'json',//服务器返回json格式数据
+			data:{
+				base641:imgList[0] ? imgList[0].data : "",
+				base642:imgList[1] ? imgList[1].data : "",
+				base643:imgList[2] ? imgList[2].data : "",
+				base644:imgList[3] ? imgList[3].data : "",
+				base645:imgList[4] ? imgList[4].data : "",
+				base646:imgList[5] ? imgList[5].data : "",
+				base647:imgList[6] ? imgList[6].data : "",
+				base648:imgList[7] ? imgList[7].data : "",
+				base649:imgList[8] ? imgList[8].data : "",
+				base6410:imgList[9] ? imgList[9].data : "",
+				imgNameList:imgNameList,
+				audio:audiodata,
+				percent:percent
+			},
+			type:'post',//HTTP请求类型
+			success:function(data){
+				mask.close();
+				var result = new Array();  
+				result = eval(data);
+				console.log(result);
+				if(result['result']=="操作成功")
+				{
+					mui.toast("操作成功");
+					parent.location.href=parent.location.href;
+				}else{
+					mui.alert(result['result']);
+				}
+			},
+			error: function(xhr, type, errorThrown) {  
+				mask.close();
+				mui.alert('服务器连接超时，请稍后再试');  
+			}
+		});
+	});
+	$(function() {				
+		var userPicker2 = new mui.PopPicker();
+		var userPicker1 = new mui.PopPicker();
+		//获取项目列表
+		mui.ajax("__APP__/Bproject/plmlist/webid/dailyadd",{
+				dataType:'json',//服务器返回json格式数据
+				type:'post',//HTTP请求类型					
+				headers:{'Content-Type':'application/json'},
+				success:function(data){
+					var list = new Array();  
+					list = eval(data);
+					var data=[];
+					var selectindex;
+					var store;
+					for (var index in list){
+						if(list[index] != null){
+							var content = list[index];
+							var body = {
+								"value":list[index]['id'],
+								"text":list[index]['title']
+							};
+							data.push(body);
+						}
+					}
+					
+					
+					$("select[name='xuanzexiangmu']").empty();
+					var code="<option value=''>选择项目</option>";
+					for(var i=0;i<data.length;i++){
+						code+="<option value='"+data[i]['value']+"'>"+data[i]['text']+"</option>";
+					}
+					$("select[name='xuanzexiangmu']").append(code);
+					$("select[name='xuanzexiangmu']").trigger("chosen:updated");
+					$("select[name='xuanzexiangmu']").chosen({search_contains:true});
+				
+					
+					//var userPicker = new mui.PopPicker();
+					//userPicker.setData(data);
+					//var showUserPickerButton = document.getElementById('xuanzexiangmu');
+					//var userResult = document.getElementById('userResult');
+					$("select[name='xuanzexiangmu']").change(function()
+					{
+							document.getElementById("plmid").value=this.value;
+							mui.ajax("__APP__/Bproject/worktypelist/plmid/"+this.value+"/moduletitle/"+moduletitle,{
+								dataType:'json',//服务器返回json格式数据
+								type:'post',//HTTP请求类型					
+								headers:{'Content-Type':'application/json'},	              
+								success:function(data){
+									var list = new Array();  
+									list = eval(data);
+									
+									var data2=[];
+									for (var index in list){
+										if(list[index] != null){
+											var content = list[index];
+											var body = {
+												"value":list[index]['id'],
+												"text":list[index]['title'],
+												"planpercent":list[index]['planpercent'],
+												"currentpercent":list[index]['currentpercent'],
+												"plantimeend":list[index]['plantimeend'],
+												"plancount":list[index]['plancount'],
+												"realcount":list[index]['realcount']
+											};
+											data2.push(body);
+										}
+									}
+									
+									document.getElementById("worktypeid").value=list[0]['id'];
+									document.getElementsByName("xuanzegongxu")[0].value=list[0]['title'];
+									document.getElementsByName("benriyingdang")[0].value=list[0]['planpercent'];
+									document.getElementsByName("wanchengchengdu")[0].value=list[0]['currentpercent'];
+									
+									var code2="<option value=''>选择工序</option>";
+									for(var i=0;i<data2.length;i++){
+										code2+="<option data-planpercent='"+data2[i]['planpercent']+"' data-currentpercent='"+data2[i]['currentpercent']+"' data-plantimeend='"+data2[i]['plantimeend']+"' data-plancount='"+data2[i]['plancount']+"' data-realcount='"+data2[i]['realcount']+"' value='"+data2[i]['value']+"'>"+data2[i]['text']+"</option>";
+									}
+									
+									$("select[name='xuanzegongxu']").empty();
+									$("select[name='xuanzegongxu']").append(code2);
+									$("select[name='xuanzegongxu']").trigger("chosen:updated");
+									$("select[name='xuanzegongxu']").chosen({search_contains:true});
+									$("select[name='xuanzegongxu']").change(function() {
+										
+										var dom=$(this).find("option:selected");
+										document.getElementById("worktypeid").value=this.value;
+										document.getElementsByName("xuanzegongxu")[0].value=this.text;
+										document.getElementsByName("benriyingdang")[0].value=dom.data("planpercent");
+										document.getElementsByName("wanchengchengdu")[0].value=dom.data("currentpercent");
+										document.getElementsByName("jihuashijian")[0].value=dom.data("plantimeend");
+										var plancount=0;
+										if((dom.data("plancount")!="undefined")&&(dom.data("plancount")!="")&&(dom.data("plancount")!=null))plancount=dom.data("plancount");
+										document.getElementsByName("jihuashuliang")[0].value=plancount;
+									
+										var realcount=0;
+										if((dom.data("realcount")!="undefined")&&(dom.data("realcount")!="")&&(dom.data("realcount")!=null))realcount=dom.data("realcount");
+										document.getElementsByName("daohuoshuliang")[0].value=realcount;
+										
+										
+								
+										if(plancount!=0)
+										{
+											document.getElementById("benriyingdang_ul").style.display="none";
+											document.getElementById("wanchengchengdu_ul").style.display="none";
+											document.getElementById("jihuashijian_ul").style.display="";
+											document.getElementById("jihuashuliang_ul").style.display="";
+											document.getElementById("daohuoshuliang_ul").style.display="";
+										}
+										else
+										{
+											document.getElementById("benriyingdang_ul").style.display="";
+											document.getElementById("wanchengchengdu_ul").style.display="";
+											document.getElementById("jihuashijian_ul").style.display="none";
+											document.getElementById("jihuashuliang_ul").style.display="none";
+											document.getElementById("daohuoshuliang_ul").style.display="none";
+										}
+										
+										
+										
+										var currentpercent=dom.data("currentpercent").replace("%","");
+										if(currentpercent=="")currentpercent=0;
+										var data3=[];
+										var body3 = {"value":"100%","text":"完成"};
+										data3.push(body3);
+										for(var ii=currentpercent;ii<=100;ii++)
+										{
+											var body3 = {"value":ii+"%","text":ii+"%"};
+											data3.push(body3);
+										}
+										
+										var code3="<option value=''>选择完成度</option>";
+										for(var i=0;i<data3.length;i++){
+											code3+="<option value='"+data3[i]['value']+"'>"+data3[i]['text']+"</option>";
+										}
+										
+										$("select[name='wanchengchengdu']").empty();
+										$("select[name='wanchengchengdu']").append(code3);
+										$("select[name='wanchengchengdu']").trigger("chosen:updated");
+										$("select[name='wanchengchengdu']").chosen({search_contains:true});
+										
+										
+										var code4="<option value=''>选择是否完成</option>";
+										code4+="<option value='否'>否</option>";
+										code4+="<option value='是'>是</option>";
+										$("select[name='shifouwancheng']").empty();
+										$("select[name='shifouwancheng']").append(code4);
+										$("select[name='shifouwancheng']").trigger("chosen:updated");
+										$("select[name='shifouwancheng']").chosen({search_contains:true});
+										
+										
+										
+										
+										
+									});
+								},
+							});
+							
+					});
+					
+				},
+			});
+		
+	})
+	
+	var picIndex=0;
+	function change() 
+	{
+		$("#imgUpload").trigger("click");
+	}
+	imgUpload = document.getElementById("imgUpload");
+	imgUpload.addEventListener("change", readFile, false);
+	function readFile() {
+		if((imgList.length + this.files.length) > 10){
+			mui.alert("最多上传10张照片");
+			return false;
+		}
+		handleFiles(this.files);
+	}
+	
+	function handleFiles(files) {
+		for (var i = 0; i < files.length; i++) {
+			var file = files[i];
+			var reader = new FileReader();
+            // 将文件加载进入
+            reader.readAsDataURL(file);
+            reader.onload = function (e) { 
+                // 转换完成输出该文件base64编码
+                //console.log(this.result);
+				imgList.push({"id" : name , "data" : this.result});
+				imgNameList.push(file["name"]);
+				console.log(imgList);
+				console.log(imgNameList);
+            }
+			
+			//var path = window.URL.createObjectURL(file);
+			$('#images').prepend('<div class="add-tp" title="'+file["name"]+'" id="dd' + picIndex + '">' +
+				'<img src="' + 'img/file2.png' + '"  onclick=DelPic("' + picIndex + '")><div style="padding:2px;width:100px;word-wrap:break-word;overflow-x:hidden;">'+file["name"]+'</div>' +
+				'</div>');
+			//appendFile(path,'dd' + picIndex);
+			picIndex += 1;
+		}
+	
+	}
+	
+	//删除图片  
+	function DelPic(imgId){
+		var btnArray = ['是', '否'];
+		mui.confirm('您确定删除吗?', '', btnArray, function(e) {
+			if(e.index == 0) {
+				$("#dd"+imgId).remove();
+				//const newList = imgList.filter(ele=>ele?.id != "d"+imgId);
+				const newList = imgList.splice(imgId,1);
+				imgList = newList;
+				const newNameList = imgNameList.splice(imgId,1);
+				imgNameList = newNameList;
+				
+				picIndex--;
+				console.log(newList);
+			}
+		})
+	}
+
+	function appendFile(path,name) {
+		var img = new Image();
+		img.src = path;
+		img.onload = function() {
+			var that = this;
+			var w = that.width,
+				h = that.height,
+				scale = w / h;
+			w = 480 || w;
+			h = w / scale;
+			var canvas = document.createElement('canvas');
+			var ctx = canvas.getContext('2d');
+			$(canvas).attr({
+				width: w,
+				height: h
+			});
+			ctx.drawImage(that, 0, 0, w, h);
+			var base64 = canvas.toDataURL('image/jpeg', 1 || 1); //1最清晰，越低越模糊。
+			imgList.push({"id" : name , "data" : base64});
+			console.log(imgList);
+		}
+	}
+	
+	function upload(index) {
+		var url = 'http://www./Service/ConsultationManager.ashx?action=getImage';
+		var dataType = 'json';
+		//发送数据  
+		var data = {
+			files1: f1, //base64数据
+			index: index
+		};
+		$.post(url, data, success, dataType);
+		console.log('photo finish');
+	}
+</script> 
+<script type="text/javascript" src="__PUBLIC__/appsource/js/immersed.js" ></script>
+</body>
+</html>

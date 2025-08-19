@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport"/>
+    
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="__PUBLIC__/dwz/themes/css/core1.css">
+</head>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>项目报警</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div style="margin-bottom:10px;">
+							<form action="__URL__/index/token/{$token}/" method="post">
+								
+							    <input type="hidden" value="{$tab}" name="tab">
+							    <div style="width:100%;margin-bottom:10px" class="input-group">
+									<div class="input-group col-sm-2 col-xs-6"  style="float:left;padding-right:10px">
+									<span class="input-group-addon">项目名称</span>
+									<input type="" name="title" value="{$title}" class="form-control">
+									</div>
+									
+									<div class="input-group col-sm-2 col-xs-6"  style="float:left;padding-right:10px">
+									<span class="input-group-addon">项目编号</span>
+									<input type="" name="number" value="{$number}" class="form-control">
+									</div>
+									<button class="btn btn-primary btn-sm" style="float:left;margin-right:10px" type="submit">查询</button>
+								</div>
+							</form>
+                        </div>
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+								<tr>			
+									<th width="16%">项目名称</th>
+									<th width="5%">项目编号</th>
+									<th width="7%">专项</th>
+									<th width="13%">计划周期</th>
+									<th width="7%">今日预计进度</th>
+									<th width="5%">当前进度</th>
+									<th width="5%">进度差</th>
+									<th width="8%" class="hidden-xs">报警发生时间</th>
+								</tr>
+							</thead>
+							<tbody>
+								<volist name="list" id="listmenu">
+								<tr >
+									<td>
+									<eq name="app" value="1">
+									<a href="__APP__/App/plmdetail/id/{$listmenu.plminfo.id}/app/1/tab/2">{$listmenu.plminfo.title}</a>
+									</eq>
+									<neq name="app" value="1">
+									<a href="__APP__/Xmtj/plmdetail/id/{$listmenu.plminfo.id}/tab/2">{$listmenu.plminfo.title}</a>
+									</neq>
+									</td>
+									<td style="word-break:break-all">{$listmenu['number']}</td>
+									<td>{$listmenu.worktype}</td>
+									<td>{$listmenu.plantimebegin} ~ {$listmenu.plantimeend}</td>
+									<td style="color:blue">{$listmenu.planpercent}</td>
+									<td style="color:blue">{$listmenu.realpercent}</td>
+									<td style="color:red">{$listmenu.d}</td>
+									<td class="hidden-xs"><?php 
+											if($listmenu['warning_time']!=0)
+											echo date('Y-m-d',$listmenu['warning_time']);?>
+									</td>						
+								</tr>
+								</volist>
+							</tbody>
+                        </table>
+						{$warningschedulescount}条
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	
+	<div id="modal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+		<div class="modal-content">
+		   <div class="modal-header">  
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">  
+                    <span aria-hidden="true">×</span>  
+                </button>  
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>  
+            </div>  
+            <div class="modal-body">  
+                <p>One fine body…</p>  
+            </div>  
+            <div class="modal-footer">  
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
+                <button type="button" class="btn btn-primary">Save</button>  
+            </div>  
+		</div>
+	  </div>
+	</div>
+	
+	
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+	<script src="js/plugins/layer/laydate/laydate.js"></script>
+	
+	<table style="display:none">
+		<tbody>
+		<volist name="allprojects" id="project" key="i">
+			<tr target="sid_obj">
+				<td class="addressvalue" id="{$project.id}">{$project.value}</td>
+			</tr>
+		</volist>
+		</tbody>
+	</table>
+	<script src="js/plugins/suggest/bootstrap-suggest.min.js"></script>
+	<script>
+		var dataarray=[];
+		$(".addressvalue").each(function(i){
+			dataarray[i]={
+				id:this.id,
+				word:$(this).html()
+			};
+		})
+		//data 数据中获取
+		var testdataBsSuggest = $("#address-search").bsSuggest({
+			indexId: 0, //每组数据的第几个数据，作为input输入框的 data-id，设为 -1 且 idField 为空则不设置此值
+			indexKey: 1, //data.value 的第几个数据，作为input输入框的内容
+			data: {
+				'value': dataarray
+			}
+		});
+		
+		$("input#address-search").on("onSetSelectValue", function (event, result) {
+			//console.log(result.id);
+		});
+	</script>
+</body>
+</html>

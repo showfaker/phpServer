@@ -1,0 +1,526 @@
+﻿<!doctype html>
+<html>
+
+	<head>
+		<title>成本信息</title>
+		<meta charset="utf-8">
+		<meta name="viewport"
+			content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__PUBLIC__/appsource/css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			.noBorder:after {
+				content: none !important;
+			}
+			html, body {
+			    margin: 0;
+				padding: 0;
+				height: 100%;
+				overflow: hidden;
+				-webkit-touch-callout: none;
+				-webkit-user-select: none;
+			}
+			.mui-content {
+				height: 100%;
+				overflow: auto;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="app" class="mui-content">
+		<div class="mui-content">
+			<form class="mui-input-group">
+				<div class="mui-input-row">
+					<label style="width: 50%;">建站数量<span style="color: red;"> *</span></label>
+					<div style="display: flex;align-items: center;">
+					<input type="number" v-model="f01" style="padding-left: 0;">
+					</div>
+					<div
+						style="position: absolute;right: 10px;top: 0; height: 100%;display: flex;align-items: center;color: #999;font-size: 14px;">
+						个
+					</div>
+				</div>
+				<div class="mui-input-row">
+					<label style="width: 50%;">里程收费标准<span style="color: red;"> *</span></label>
+					<div style="display: flex;align-items: center;">
+					<input type="number" v-model="f02" style="padding-left: 0;">
+					</div>
+					<div
+						style="position: absolute;right: 10px;top: 0; height: 100%;display: flex;align-items: center;color: #999;font-size: 14px;">
+						元/公里
+					</div>
+				</div>
+				<div class="mui-input-row">
+					<label style="width: 50%;">电费单价<span style="color: red;"> *</span></label>
+					<div style="display: flex;align-items: center;">
+					<input type="number" v-model="f03" style="padding-left: 0;">
+					</div>
+					<div
+						style="position: absolute;right: 10px;top: 0; height: 100%;display: flex;align-items: center;color: #999;font-size: 14px;">
+						元/kWh
+					</div>
+				</div>
+<!-- 				<div style="white-space:nowrap;padding: 10px 15px 0;color: #999;">电池使用年限</div>
+				<div class="mui-input-row noBorder">
+					<input type="number" disabled v-model="f04">
+					<div
+						style="position: absolute;right: 10px;top: 0; height: 100%;display: flex;align-items: center;color: #999;font-size: 14px;">
+						年
+					</div>
+				</div> -->
+				<div style="height: 15px;background: #f8f8f8;margin-bottom: 10px;"></div>
+				<div class="mui-input-row">
+					<label style="width: 50%;">管理人员</label>
+					<div style="display: flex;align-items: center;">
+					<input type="number" v-model="g01" style="padding-left: 0;">
+					</div>
+					<div
+						style="position: absolute;right: 10px;top: 0; height: 100%;display: flex;align-items: center;color: #999;font-size: 14px;">
+						人
+					</div>
+				</div>
+				<div class="mui-input-row" style="height: auto;">
+					<label style="width: 50%;">管理人员工资及福利费</label>
+					<div style="display: flex;align-items: center;width: 58px;">
+					<input type="number" v-model="g02" style="padding-left: 0;">
+					</div>
+					<div
+						style="position: absolute;right: 10px;top: 0; height: 100%;display: flex;align-items: center;color: #999;font-size: 14px;">
+						万元/年
+					</div>
+				</div>
+				<div class="mui-input-row">
+					<label style="width: 50%;">一般运营人员</label>
+					<div style="display: flex;align-items: center;">
+					<input type="number" v-model="g03" style="padding-left: 0;">
+					</div>
+					<div
+						style="position: absolute;right: 10px;top: 0; height: 100%;display: flex;align-items: center;color: #999;font-size: 14px;">
+						人
+					</div>
+				</div>
+				<div class="mui-input-row" style="height: auto;">
+					<label style="width: 50%;">一般运营人员工资及福利费</label>
+					<div style="display: flex;align-items: center;height: 58px;">
+					<input type="number" v-model="g04" style="padding-left: 0;">
+					</div>
+					<div
+						style="position: absolute;right: 10px;top: 0; height: 100%;display: flex;align-items: center;color: #999;font-size: 14px;">
+						万元/年
+					</div>
+				</div>
+<!-- 				<div style="white-space:nowrap;padding: 10px 15px 0;color: #999;">人员总投资</div>
+				<div class="mui-input-row noBorder">
+					<input type="number" disabled v-model="g05">
+					<div
+						style="position: absolute;right: 10px;top: 0; height: 100%;display: flex;align-items: center;color: #999;font-size: 14px;">
+						万元/年
+					</div>
+				</div> -->
+				<div style="height: 15px;background: #f8f8f8;margin-bottom: 10px;"></div>
+				<div class="mui-input-row">
+					<label style="width: 50%;">换电站设备<span style="color: red;"> *</span></label>
+					<div style="display: flex;align-items: center;">
+					<input type="number" v-model="h01" style="padding-left: 0;">
+					</div>
+					<div
+						style="position: absolute;right: 10px;top: 0; height: 100%;display: flex;align-items: center;color: #999;font-size: 14px;">
+						万元/站
+					</div>
+				</div>
+				<div class="mui-input-row">
+					<label style="width: 50%;">站上电池模块<span style="color: red;"> *</span></label>
+					<div style="display: flex;align-items: center;">
+					<input type="number" v-model="h02" style="padding-left: 0;">
+					</div>
+					<div
+						style="position: absolute;right: 10px;top: 0; height: 100%;display: flex;align-items: center;color: #999;font-size: 14px;">
+						万元/块
+					</div>
+				</div>
+				<div class="mui-input-row">
+					<label style="width: 50%;">车上电池模块<span style="color: red;"> *</span></label>
+					<div style="display: flex;align-items: center;">
+					<input type="number" v-model="h03" style="padding-left: 0;">
+					</div>
+					<div
+						style="position: absolute;right: 10px;top: 0; height: 100%;display: flex;align-items: center;color: #999;font-size: 14px;">
+						万元/块
+					</div>
+				</div>
+				<div class="mui-input-row">
+					<label style="width: 50%;">其他<span style="color: red;"> *</span></label>
+					<div style="display: flex;align-items: center;">
+					<input type="number" v-model="h04" style="padding-left: 0;">
+					</div>
+					<div
+						style="position: absolute;right: 10px;top: 0; height: 100%;display: flex;align-items: center;color: #999;font-size: 14px;">
+						万元/站
+					</div>
+				</div>
+				<div class="mui-input-row">
+					<label style="width: 50%;">一次性技术实施费<span style="color: red;"> *</span></label>
+					<div style="display: flex;align-items: center;">
+					<input type="number" v-model="h05" style="padding-left: 0;">
+					</div>
+					<div
+						style="position: absolute;right: 10px;top: 0; height: 100%;display: flex;align-items: center;color: #999;font-size: 14px;">
+						万元
+					</div>
+				</div>
+<!-- 				<div style="white-space:nowrap;padding: 10px 15px 0;color: #999;">设备投资总额</div>
+				<div class="mui-input-row noBorder">
+					<input type="number" disabled v-model="h06">
+					<div
+						style="position: absolute;right: 10px;top: 0; height: 100%;display: flex;align-items: center;color: #999;font-size: 14px;">
+						万元/站
+					</div>
+				</div> -->
+				<div style="height: 15px;background: #f8f8f8;margin-bottom: 10px;"></div>
+<!-- 				<div class="mui-input-row">
+					<label style="white-space:nowrap;color: #999;">折旧</label>
+					<input type="number" disabled v-model="i01">
+					<div
+						style="position: absolute;right: 10px;height: 100%;display: flex;align-items: center;color: #999;font-size: 14px;">
+						万元/年
+					</div>
+				</div> -->
+				<div class="mui-input-row">
+					<label style="width: 50%;">场地租赁费<span style="color: red;"> *</span></label>
+					<div style="display: flex;align-items: center;">
+					<input type="number" v-model="i02" style="padding-left: 0;">
+					</div>
+					<div
+						style="position: absolute;right: 10px;top: 0; height: 100%;display: flex;align-items: center;color: #999;font-size: 14px;">
+						万元/年
+					</div>
+				</div>
+<!-- 				<div class="mui-input-row">
+					<label style="white-space:nowrap;color: #999;">电费成本</label>
+					<input type="number" disabled v-model="i03">
+					<div
+						style="position: absolute;right: 10px;height: 100%;display: flex;align-items: center;color: #999;font-size: 14px;">
+						元/千瓦时
+					</div>
+				</div> -->
+				<div class="mui-input-row">
+					<label style="width: 50%; color: #999;">人工成本</label>
+					<div style="display: flex;align-items: center;">
+					<input type="number" disabled v-model="i04" style="padding-left: 0;">
+					</div>
+					<div
+						style="position: absolute;right: 10px;top: 0; height: 100%;display: flex;align-items: center;color: #999;font-size: 14px;">
+						万元/年
+					</div>
+				</div>
+				<div class="mui-input-row">
+					<label style="width: 50%;">设备维护费<span style="color: red;"> *</span></label>
+					<div style="display: flex;align-items: center;">
+					<input type="number" v-model="i05" style="padding-left: 0;">
+					</div>
+					<div
+						style="position: absolute;right: 10px;top: 0; height: 100%;display: flex;align-items: center;color: #999;font-size: 14px;">
+						万元/年
+					</div>
+				</div>
+				<div class="mui-input-row">
+					<label style="width: 50%;">运营促销成本<span style="color: red;"> *</span></label>
+					<div style="display: flex;align-items: center;">
+					<input type="number" v-model="i06" style="padding-left: 0;">
+					</div>
+					<div
+						style="position: absolute;right: 10px;top: 0; height: 100%;display: flex;align-items: center;color: #999;font-size: 14px;">
+						万元/年
+					</div>
+				</div>
+				<div class="mui-input-row">
+					<label style="width: 50%;">杂费<span style="color: red;"> *</span></label>
+					<div style="display: flex;align-items: center;">
+					<input type="number" v-model="i07" style="padding-left: 0;">
+					</div>
+					<div
+						style="position: absolute;right: 10px;top: 0; height: 100%;display: flex;align-items: center;color: #999;font-size: 14px;">
+						万元/年
+					</div>
+				</div>
+				<div class="mui-input-row">
+					<label style="width: 50%;">保险费<span style="color: red;"> *</span></label>
+					<div style="display: flex;align-items: center;">
+					<input type="number" v-model="i08" style="padding-left: 0;">
+					</div>
+					<div
+						style="position: absolute;right: 10px;top: 0; height: 100%;display: flex;align-items: center;color: #999;font-size: 14px;">
+						万元/年
+					</div>
+				</div>
+				<div class="mui-input-row">
+					<label style="width: 50%;">财务费用<span style="color: red;"> *</span></label>
+					<div style="display: flex;align-items: center;">
+					<input type="number" v-model="i09" style="padding-left: 0;">
+					</div>
+					<div
+						style="position: absolute;right: 10px;top: 0; height: 100%;display: flex;align-items: center;color: #999;font-size: 14px;">
+						万元/年
+					</div>
+				</div>
+				<div class="mui-input-row">
+					<label style="width: 50%;">平台使用费<span style="color: red;"> *</span></label>
+					<div style="display: flex;align-items: center;">
+					<input type="number" v-model="i10" style="padding-left: 0;">
+					</div>
+					<div
+						style="position: absolute;right: 10px;top: 0; height: 100%;display: flex;align-items: center;color: #999;font-size: 14px;">
+						万元/年
+					</div>
+				</div>
+			</form>
+			<div style="display: flex;justify-content: center;margin: 20px 0;">
+				<button type="button" class="mui-btn mui-btn-warning" style="width: 200px;" @click="submit">下一步</button>
+			</div>
+		</div>
+		</div>
+		<script src="__PUBLIC__/appsource/js/mui.min.js"></script>
+		<script src="__PUBLIC__/appsource/js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<!-- 微信 JS-SDK 如果不需要兼容小程序，则无需引用此 JS 文件。 -->  
+		<script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>  
+		<!-- uni 的 SDK，必须引用。 -->  
+		<script type="text/javascript" src="//js.cdn.aliyun.dcloud.net.cn/dev/uni-app/uni.webview.0.1.52.js"></script>
+		<script type="text/javascript">
+			document.addEventListener('UniAppJSBridgeReady', function() {
+			uni.getEnv(function(res) {
+				var vm = new Vue({
+					el: '.mui-content',
+					data: {
+						preInfo:{},
+						basicInfo: {},
+
+						f01: '',
+						f02: 0.31,
+						f03: 0.6068,
+						g01: '',
+						g02: '',
+						g03: '',
+						g04: '',
+						h01: 300,
+						h02: 4,
+						h03: 3,
+						h04: 75,
+						h05: 0,
+						i02: '',
+						i05: 0,
+						i06: 0,
+						i07: 0,
+						i08: 0,
+						i09: 0,
+						i10: 0,
+					},
+					computed: {
+						f04: function() {
+							let year=Math.ceil(Number(this.basicInfo.b01) / (Number(this.basicInfo.c08) *Number(this.basicInfo.c09) / 10000))
+							return year<this.basicInfo.b02?year:this.basicInfo.b02
+						},
+						g05: function() {
+							if ((this.g01||this.g01==0) && (this.g02||this.g02==0) && (this.g03||this.g03==0) && (this.g04||this.g04==0)) {
+								return ((Number(this.g01) * Number(this.g02)) + (Number(this.g03) * Number(
+									this.g04))).toFixed(2)
+							}
+							return ''
+						},
+						h06: function() {
+							if ((this.f01||this.f01==0) && (this.h01||this.h01==0) && (this.h02||this.h02==0) && (this.h03||this.h03==0) && (this.h04||this.h04==0) && (this.h05||this.h05==0)) {
+								return ((Number(this.f01) * (Number(this.h01) + Number(this.h04))) + (Number(
+									this.basicInfo.e04) * Number(this.h02)) + (Number(this.basicInfo
+									.c04) * Number(this.h03)) + Number(this.h05)).toFixed(2)
+							}
+							return ''
+						},
+						i01: function() {
+							if (this.h06||this.h06==0) {
+								return (Number(this.h06) * 0.95 / Number(this.f04)).toFixed(2)
+							}
+							return ''
+						},
+						i03: function() {
+							if (this.f03||this.h03==0) {
+								return ((Number(this.f03) * Number(this.basicInfo.c04) * Number(this
+									.basicInfo.c07) * Number(this.basicInfo.c08) * Number(this
+									.basicInfo.c09) / Number(this.basicInfo.e01) * 100 / 10000) + (
+									Number(this.basicInfo.e06) * Number(this.f03) * 365 * 24 / 10000
+								)).toFixed(2)
+							}
+							return ''
+						},
+						i04: function() {
+							return this.g05
+						}
+					},
+					watch: {
+						// 禁止小数点
+						f01(n, o) {
+							this.f01 = this.f01.replace(/\D/g, '')
+						}
+					},
+					created: function() {
+						let preInfo = JSON.parse(localStorage.getItem("preInfo"))
+						if (preInfo != null) {
+							this.preInfo = preInfo
+						}
+						let basicInfo = JSON.parse(localStorage.getItem("basicInfo"))
+						if (basicInfo != null) {
+							this.basicInfo = basicInfo
+						}
+						let costInfo = JSON.parse(localStorage.getItem("costInfo"))
+						if(costInfo!=null){
+							this.f01=costInfo.f01
+							this.f02=costInfo.f02
+							this.f03=costInfo.f03
+							this.g01=costInfo.g01
+							this.g02=costInfo.g02
+							this.g03=costInfo.g03
+							this.g04=costInfo.g04
+							this.h01=costInfo.h01
+							this.h02=costInfo.h02
+							this.h03=costInfo.h03
+							this.h04=costInfo.h04
+							this.h05=costInfo.h05
+							this.i02=costInfo.i02
+							this.i05=costInfo.i05
+							this.i06=costInfo.i06
+							this.i07=costInfo.i07
+							this.i08=costInfo.i08
+							this.i09=costInfo.i09
+							this.i10=costInfo.i10
+						}
+					},
+					methods: {
+						submit() {
+							if (this.f01==='') {
+								mui.toast('请输入建站数量');
+								return
+							}
+							if (this.f02==='') {
+								mui.toast('请输入里程收费标准');
+								return
+							}
+							if (this.f03==='') {
+								mui.toast('请输入电费单价');
+								return
+							}
+							if (this.h01==='') {
+								mui.toast('请输入换电站设备费用');
+								return
+							}
+							if (this.h02==='') {
+								mui.toast('请输入站上电池模块费用');
+								return
+							}
+							if (this.h03==='') {
+								mui.toast('请输入车上电池模块费用');
+								return
+							}
+							if (this.h04==='') {
+								mui.toast('请输入其他费用');
+								return
+							}
+							if (this.h05==='') {
+								mui.toast('请输入一次性技术实施费');
+								return
+							}
+							if (this.i02==='') {
+								mui.toast('请输入场地租赁费');
+								return
+							}
+							if (this.i05==='') {
+								mui.toast('请输入设备维护费');
+								return
+							}
+							if (this.i06==='') {
+								mui.toast('请输入运营促销成本');
+								return
+							}
+							if (this.i07==='') {
+								mui.toast('请输入杂费');
+								return
+							}
+							if (this.i08==='') {
+								mui.toast('请输入保险费');
+								return
+							}
+							if (this.i09==='') {
+								mui.toast('请输入财务费用');
+								return
+							}
+							if (this.i10==='') {
+								mui.toast('请输入平台使用费');
+								return
+							}
+							let costInfo = JSON.stringify({
+								f01: this.f01,
+								f02: this.f02,
+								f03: this.f03,
+								f04: this.f04,
+								g01: this.g01,
+								g02: this.g02,
+								g03: this.g03,
+								g04: this.g04,
+								g05: this.g05,
+								h01: this.h01,
+								h02: this.h02,
+								h03: this.h03,
+								h04: this.h04,
+								h05: this.h05,
+								h06: this.h06,
+								i01: this.i01,
+								i02: this.i02,
+								i03: this.i03,
+								i04: this.i04,
+								i05: this.i05,
+								i06: this.i06,
+								i07: this.i07,
+								i08: this.i08,
+								i09: this.i09,
+								i10: this.i10
+							})
+							localStorage.setItem("costInfo", costInfo)
+							uni.navigateTo({
+								url: '/pages/web/index?page=calc2_3'
+							});
+						},
+						back(){
+							let costInfo = JSON.stringify({
+								f01: this.f01,
+								f02: this.f02,
+								f03: this.f03,
+								f04: this.f04,
+								g01: this.g01,
+								g02: this.g02,
+								g03: this.g03,
+								g04: this.g04,
+								g05: this.g05,
+								h01: this.h01,
+								h02: this.h02,
+								h03: this.h03,
+								h04: this.h04,
+								h05: this.h05,
+								h06: this.h06,
+								i01: this.i01,
+								i02: this.i02,
+								i03: this.i03,
+								i04: this.i04,
+								i05: this.i05,
+								i06: this.i06,
+								i07: this.i07,
+								i08: this.i08,
+								i09: this.i09,
+								i10: this.i10
+							})
+							localStorage.setItem("costInfo", costInfo)
+						}
+					}
+				});
+			})
+			})
+		</script>
+	</body>
+
+</html>

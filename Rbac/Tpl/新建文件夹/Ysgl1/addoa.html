@@ -1,0 +1,144 @@
+
+<link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/style.css?v=4.1.0" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+	</button>
+	<h4 class="modal-title">项目信息登记</h4>
+</div>
+<form method="post" action="__URL__/insert/callbackType/closeCurrent/navTabId/Second" ENCTYPE="multipart/form-data" onsubmit="return iframeCallback(this, dialogAjaxDone)">
+<div class="modal-body" id="file-pretty"> 
+	<input type="hidden" value="{$orgdata.id}" name="id">
+	<div class="form-group">
+		<label style="float:left">项目名称</label>
+		<input type="text" placeholder="" class="form-control" readonly value="{$orgdata['title']}">
+	</div>
+	
+	
+	<div class="form-group">
+		<label style="width:100%;text-align:left">已上传初步设计文件</label>
+		<volist name="orgdata.illustrations" id="illustrations">
+		<neq name="illustrations" value="">
+		<a href="__URL__/filedown/filename/{$illustrations}/filerealname/{$orgdata[clientillustrations][$key]}" style="color:green">{$orgdata[clientillustrations][$key]}</a> 是否删除<input name="delx{$key}" id="delx{$key}" type="radio"/></br>
+		</neq>
+		</volist>
+	</div>
+	<div class="form-group">
+		<label style="width:100%;text-align:left">已上传初步设计评审报告</label>
+		<volist name="orgdata.drawings" id="drawings">
+		<neq name="drawings" value="">
+		<a href="__URL__/filedown/filename/{$drawings}/filerealname/{$orgdata[drawingsfilename][$key]}" style="color:green">{$orgdata[drawingsfilename][$key]}</a> 是否删除<input name="dely{$key}" id="dely{$key}" type="radio"/></br>
+		</neq>
+		</volist>
+		
+		
+		<volist name="orgdata.drawings3" id="drawings">
+		<neq name="drawings" value="">
+		<a href="__URL__/filedown/filename/{$drawings}/filerealname/{$orgdata[drawingsfilename][$key]}" style="color:green">{$orgdata[drawingsfilename][$key]}</a> 是否删除<input name="del3y{$key}" id="del3y{$key}" type="radio"/></br>
+		</neq>
+		</volist>
+		
+		<volist name="orgdata.drawings4" id="drawings">
+		<neq name="drawings" value="">
+		<a href="__URL__/filedown/filename/{$drawings}/filerealname/{$orgdata[drawingsfilename][$key]}" style="color:green">{$orgdata[drawingsfilename][$key]}</a> 是否删除<input name="del4y{$key}" id="del4y{$key}" type="radio"/></br>
+		</neq>
+		</volist>
+		
+		<volist name="orgdata.drawings5" id="drawings">
+		<neq name="drawings" value="">
+		<a href="__URL__/filedown/filename/{$drawings}/filerealname/{$orgdata[drawingsfilename][$key]}" style="color:green">{$orgdata[drawingsfilename][$key]}</a> 是否删除<input name="del5y{$key}" id="del5y{$key}" type="radio"/></br>
+		</neq>
+		</volist>
+		
+		<volist name="orgdata.drawings6" id="drawings">
+		<neq name="drawings" value="">
+		<a href="__URL__/filedown/filename/{$drawings}/filerealname/{$orgdata[drawingsfilename][$key]}" style="color:green">{$orgdata[drawingsfilename][$key]}</a> 是否删除<input name="del6y{$key}" id="del6y{$key}" type="radio"/></br>
+		</neq>
+		</volist>
+		
+		<volist name="orgdata.drawings7" id="drawings">
+		<neq name="drawings" value="">
+		<a href="__URL__/filedown/filename/{$drawings}/filerealname/{$orgdata[drawingsfilename][$key]}" style="color:green">{$orgdata[drawingsfilename][$key]}</a> 是否删除<input name="del7y{$key}" id="del7y{$key}" type="radio"/></br>
+		</neq>
+		</volist>
+		
+		<volist name="orgdata.drawings8" id="drawings">
+		<neq name="drawings" value="">
+		<a href="__URL__/filedown/filename/{$drawings}/filerealname/{$orgdata[drawingsfilename][$key]}" style="color:green">{$orgdata[drawingsfilename][$key]}</a> 是否删除<input name="del8y{$key}" id="del8y{$key}" type="radio"/></br>
+		</neq>
+		</volist>
+		
+		<volist name="orgdata.drawings9" id="drawings">
+		<neq name="drawings" value="">
+		<a href="__URL__/filedown/filename/{$drawings}/filerealname/{$orgdata[drawingsfilename][$key]}" style="color:green">{$orgdata[drawingsfilename][$key]}</a> 是否删除<input name="del9y{$key}" id="del9y{$key}" type="radio"/></br>
+		</neq>
+		</volist>
+	</div>
+	
+	
+	
+	<div class="form-group">
+		<label style="width:100%;text-align:left">初步设计文件</label>
+		<input type="file" multiple="multiple" class="form-control" name="file1[]" style="width:100%">
+	</div>
+	<div class="form-group">
+		<label style="width:100%;text-align:left">初步设计评审报告</label>
+		<input type="file" multiple="multiple" class="form-control" name="file2[]" style="width:100%">
+	</div>
+	<div class="form-group">
+		<label style="width:100%;text-align:left">初步设计金额</label>
+		<input type="text" placeholder="初步设计金额" name="designmoney" class="form-control" value="{$orgdata['designmoney']}">
+	</div>
+	<!--
+	<div class="form-group">
+		<label style="width:100%;text-align:left">施工图纸</label>
+		<input type="file" multiple="multiple" class="form-control" name="file3[]" style="width:100%">
+	</div>
+	-->
+	
+	<!--
+	<div class="form-group">
+		<label style="width:100%;text-align:left">空调设计方案</label>
+		<input type="file" multiple="multiple" class="form-control" name="file4[]" style="width:100%">
+	</div>
+	<div class="form-group">
+		<label style="width:100%;text-align:left">水电设计方案</label>
+		<input type="file" multiple="multiple" class="form-control" name="file5[]" style="width:100%">
+	</div>
+	<div class="form-group">
+		<label style="width:100%;text-align:left">给排水设计方案</label>
+		<input type="file" multiple="multiple" class="form-control" name="file6[]" style="width:100%">
+	</div>
+	<div class="form-group">
+		<label style="width:100%;text-align:left">消防设计方案</label>
+		<input type="file" multiple="multiple" class="form-control" name="file7[]" style="width:100%">
+	</div>
+	<div class="form-group">
+		<label style="width:100%;text-align:left">监控点位设计方案</label>
+		<input type="file" multiple="multiple" class="form-control" name="file8[]" style="width:100%">
+	</div>
+	<div class="form-group">
+		<label style="width:100%;text-align:left">效果图纸</label>
+		<input type="file" multiple="multiple" class="form-control" name="file9[]" style="width:100%">
+	</div>
+	-->
+</div>
+<div class="modal-footer">
+	<button type="submit" class="btn btn-danger">提交</button>
+	<button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+</div>
+
+
+
+</form>
+
+<!-- Prettyfile -->
+<script src="js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+<script>
+	$('input[type="file"]').prettyFile();
+</script>

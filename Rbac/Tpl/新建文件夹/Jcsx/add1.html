@@ -1,0 +1,145 @@
+
+<link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/style.css?v=4.1.0" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+	</button>
+	<h4 class="modal-title">上传资料</h4>
+</div>
+<form method="post" action="__URL__/insert1/callbackType/closeCurrent/navTabId/Second" ENCTYPE="multipart/form-data" onsubmit="return iframeCallback(this, dialogAjaxDone)">
+<div class="modal-body" id="file-pretty"> 
+	<input type="hidden" value="{$orgdata.id}" name="id">
+	<input type="hidden" value="{$tab}" name="tab">
+	<div class="form-group">
+		<label style="float:left">项目名称</label>
+		<input type="text" placeholder="" class="form-control" readonly value="{$orgdata['title']}">
+	</div>
+	<div class="form-group">
+		<label style="float:left">附件内容</label>
+		<select name="filetitle" class="form-control">
+			<option value="">请选择</option>
+			<eq name="tab" value="2">
+			<option value="平、顶、地平面布局确认">交付前期-平、顶、地平面布局确认</option>
+			<option value="结构设计（如有）">交付前期-结构设计（如有）</option>
+			<option value="装修全套图纸完成">交付前期-装修全套图纸完成</option>
+			<option value="机电图纸：水电">交付前期-机电图纸：水电</option>
+			<option value="机电图纸：燃气">交付前期-机电图纸：燃气</option>
+			<option value="机电图纸：消防">交付前期-机电图纸：消防</option>
+			<option value="机电图纸：通风空调">交付前期-机电图纸：通风空调</option>
+			<option value="机电图纸：加热设备">交付前期-机电图纸：加热设备</option>
+			<option value="机电图纸：泳池机电">交付前期-机电图纸：泳池机电</option>
+			<option value="内部图纸会审">交付前期-内部图纸会审</option>
+			<option value="甲方审图">交付前期-甲方审图</option>
+			<option value="第三方审图">交付前期-第三方审图</option>
+			<option value="招投标：空调设备">交付前期-招投标：空调设备</option>
+			<option value="招投标：空调风管">交付前期-招投标：空调风管</option>
+			<option value="招投标：空调人工">交付前期-招投标：空调人工</option>
+			<option value="招投标：锅炉加热设备">交付前期-招投标：锅炉加热设备</option>
+			<option value="招投标：结构">交付前期-招投标：结构</option>
+			<option value="招投标：集成吊顶">交付前期-招投标：集成吊顶</option>
+			<option value="招投标：泳池风管">交付前期-招投标：泳池风管</option>
+			<option value="招投标：泳池水处理">交付前期-招投标：泳池水处理</option>
+			<option value="招投标：防水施工">交付前期-招投标：防水施工</option>
+			<option value="招投标：地胶施工">交付前期-招投标：地胶施工</option>
+			</eq>
+			
+			<eq name="tab" value="3">
+			<option value="交付验房：燃气">进场交接，施工阶段-交付验房：燃气</option>
+			<option value="交付验房：消防">进场交接，施工阶段-交付验房：消防</option>
+			<option value="交付验房：通风空调">进场交接，施工阶段-交付验房：通风空调</option>
+			<option value="交付验房：加热设备">进场交接，施工阶段-交付验房：加热设备</option>
+			<option value="交付验房：泳池机电">进场交接，施工阶段-交付验房：泳池机电</option>
+			<option value="交付验房：泳池结构甲供或者自建">进场交接，施工阶段-交付验房：泳池结构甲供或者自建</option>
+			<option value="原装修拆除：墙体">进场交接，施工阶段-原装修拆除：墙体</option>
+			<option value="原装修拆除：水电">进场交接，施工阶段-原装修拆除：水电</option>
+			<option value="原装修拆除：吊顶">进场交接，施工阶段-原装修拆除：吊顶</option>
+			<option value="原装修拆除：饰面">进场交接，施工阶段-原装修拆除：饰面</option>
+			<option value="原装修拆除：地面">进场交接，施工阶段-原装修拆除：地面</option>
+			<option value="原装修拆除：空调">进场交接，施工阶段-原装修拆除：空调</option>
+			<option value="原装修拆除：燃气">进场交接，施工阶段-原装修拆除：燃气</option>
+			<option value="原装修拆除：消防">进场交接，施工阶段-原装修拆除：消防</option>
+			<option value="进场资料">进场交接，施工阶段-进场资料</option>
+			<option value="进场费用：装修管理费">进场交接，施工阶段-进场费用：装修管理费</option>
+			<option value="进场费用：垃圾费">进场交接，施工阶段-进场费用：垃圾费</option>
+			<option value="进场费用：保险费">进场交接，施工阶段-进场费用：保险费</option>
+			<option value="进场费用：水电费押金">进场交接，施工阶段-进场费用：水电费押金</option>
+			<option value="进场费用：装修押金">进场交接，施工阶段-进场费用：装修押金</option>
+			<option value="进场费用：消防泄水费">进场交接，施工阶段-进场费用：消防泄水费</option>
+			<option value="班组进场，甲方交底：上下货通道">进场交接，施工阶段-班组进场，甲方交底：上下货通道</option>
+			<option value="班组进场，甲方交底：材料堆场">进场交接，施工阶段-班组进场，甲方交底：材料堆场</option>
+			<option value="班组进场，甲方交底：垃圾堆场">进场交接，施工阶段-班组进场，甲方交底：垃圾堆场</option>
+			<option value="班组进场，甲方交底：临时水电接驳点">进场交接，施工阶段-班组进场，甲方交底：临时水电接驳点/抄表</option>
+			<option value="班组进场，甲方交底：装修手册">进场交接，施工阶段-班组进场，甲方交底：装修手册/工地管理规定</option>
+			<option value="班组进场，甲方交底：消防责任书">进场交接，施工阶段-班组进场，甲方交底：消防责任书</option>
+			<option value="公司设计施工交底：水电">进场交接，施工阶段-公司设计施工交底：水电</option>
+			<option value="公司设计施工交底：燃气">进场交接，施工阶段-公司设计施工交底：燃气</option>
+			<option value="公司设计施工交底：消防">进场交接，施工阶段-公司设计施工交底：消防</option>
+			<option value="公司设计施工交底：通风空调">进场交接，施工阶段-公司设计施工交底：通风空调</option>
+			<option value="公司设计施工交底：加热设备">进场交接，施工阶段-公司设计施工交底：加热设备</option>
+			<option value="公司设计施工交底：泳池机电">进场交接，施工阶段-公司设计施工交底：泳池机电</option>
+			<option value="公司设计施工交底：结构工程">进场交接，施工阶段-公司设计施工交底：结构工程</option>
+			</eq>
+			
+			<eq name="tab" value="4">
+			<option value="图纸">图纸</option>
+			</eq>
+			
+			<eq name="tab" value="5">
+			<option value="技术交底资料">技术交底资料</option>
+			</eq>
+			
+			<eq name="tab" value="6">
+			<option value="竣工图：装修工程">竣工图：装修工程</option>
+			<option value="竣工图：结构工程">竣工图：结构工程</option>
+			<option value="竣工图：给排水工程">竣工图：给排水工程</option>
+			<option value="竣工图：强电工程">竣工图：强电工程</option>
+			<option value="竣工图：监控、音响、弱电">竣工图：监控、音响、弱电</option>
+			<option value="竣工图：加热设备">竣工图：加热设备</option>
+			<option value="竣工图：暖通工程">竣工图：暖通工程</option>
+			<option value="竣工图：消防工程">竣工图：消防工程</option>
+			<option value="竣工图：泳池机电">竣工图：泳池机电</option>
+			<option value="装修工程">装修工程</option>
+			<option value="结构工程">结构工程</option>
+			<option value="给排水工程">给排水工程</option>
+			<option value="强电工程">强电工程</option>
+			<option value="监控、音响、弱电">监控、音响、弱电</option>
+			<option value="加热设备">加热设备</option>
+			<option value="暖通工程">暖通工程</option>
+			<option value="消防工程">消防工程</option>
+			<option value="泳池机电工程">泳池机电工程</option>
+			<option value="图纸资料交接">图纸资料交接</option>
+			</eq>
+		</select>
+	</div>
+	<div class="form-group">
+		<label style="width:100%;text-align:left">上传附件</label>
+		<input type="file" multiple="multiple" class="form-control" name="file1[]" style="width:100%">
+	</div>
+	<div class="form-group">
+		<label style="width:100%;text-align:left">费用</label>
+		<input type="text" placeholder="费用" name="money" class="form-control" value="">
+	</div>
+	<div class="form-group">
+		<label style="width:100%;text-align:left">备注</label>
+		<input type="text" placeholder="备注" name="remark" class="form-control" value="">
+	</div>
+</div>
+<div class="modal-footer">
+	<button type="submit" class="btn btn-danger">提交</button>
+	<button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+</div>
+
+
+
+</form>
+
+<!-- Prettyfile -->
+<script src="js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+<script>
+	$('input[type="file"]').prettyFile();
+</script>

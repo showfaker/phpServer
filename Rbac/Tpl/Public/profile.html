@@ -1,0 +1,59 @@
+<div class="page">
+	<div class="pageContent">
+	
+	<form method="post" action="__APP__/Myinfo/update/navTabId/__MODULE__/callbackType/closeCurrent" class="pageForm required-validate" enctype="multipart/form-data" onsubmit="return iframeCallback(this, dialogAjaxDone);">
+		<input type="hidden" name="id" value="{$vo.id}">
+		<div class="pageFormContent" layoutH="58" style="padding-left:20px;">		
+			<div class="unit" style="margin-top:15px;" >
+				<label style="width:90px;">姓名：</label>
+				<input type="text" class="required"  name="nickname" style="width:200px" value="{$vo.nickname}"/>
+			</div>
+			<!--
+			<div class="unit">
+				<label style="width:80px;">工号：</label>
+				<span style="position:relative;top:4px">{$vo.number}</span>
+			</div>
+			-->
+			<eq name="materialrole" value="1">
+			<div class="unit">
+				<label style="width:90px;">负责人：</label>
+				<input type="text" class=""  name="company" style="width:200px" value="{$vo.company}"/>
+			</div>
+			<div class="unit">
+				<label style="width:90px;">供货周期(天)：</label>
+				<input type="text" class=""  name="leadtime" style="width:200px" value="{$vo.leadtime}"/>
+			</div>
+			<div class="unit">
+				<label style="width:90px;">LOGO：</label>
+				<neq name="logo" value=""><img src="__PUBLIC__/Uploads/{$logo}" height="40"></neq>
+				<eq name="logo" value=""><img src="__PUBLIC__/dwz/images/noimage.gif" height="40"></eq>
+			</div>
+			<div class="unit">
+				<label style="width:90px;">上传LOGO：</label>
+				<input type="file" class=""  name="photo" style="width:200px" value="{$vo.tel}"/>
+			</div>
+			</eq>
+			<div class="unit">
+				<label style="width:90px;">电话：</label>
+				<input type="text" class=""  name="tel" style="width:200px" value="{$vo.tel}"/>
+			</div>			
+			<div class="unit">
+				<label style="width:90px;">邮箱：</label>
+				<input type="text" class=""  name="email" style="width:200px" value="{$vo.email}"/>
+			</div>		
+			<div class="unit">
+				<label style="width:90px;">备注：</label>
+				<textarea class=""  name="remark"  rows="2" cols="45" >{$vo.remark}</textarea>
+			</div>
+		</div>
+		
+		<div class="formBar">
+			<ul>
+				<li><div class="buttonActive"><div class="buttonContent"><button type="submit">修改资料</button></div></div></li>
+				<li><div class="button"><div class="buttonContent"><button type="button" class="close">取消</button></div></div></li>
+			</ul>
+		</div>
+	</form>
+	
+	</div>
+</div>

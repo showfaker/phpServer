@@ -1,0 +1,177 @@
+@-webkit-keyframes cir1 {
+  0% {
+    -webkit-transform: rotateY(0deg);
+  }
+  100% {
+    -webkit-transform: rotateY(-360deg);
+  }
+}
+@keyframes cir1 {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(-360deg);
+  }
+}
+@-webkit-keyframes cir2 {
+  0% {
+    -webkit-transform: rotateY(-120deg);
+  }
+  100% {
+    -webkit-transform: rotateY(-480deg);
+  }
+}
+@keyframes cir2 {
+  0% {
+    transform: rotateY(-120deg);
+  }
+  100% {
+    transform: rotateY(-480deg);
+  }
+}
+@-webkit-keyframes cir3 {
+  0% {
+    -webkit-transform: rotateY(-240deg);
+  }
+  100% {
+    -webkit-transform: rotateY(-600deg);
+  }
+}
+@keyframes cir3 {
+  0% {
+    transform: rotateY(-240deg);
+  }
+  100% {
+    transform: rotateY(-600deg);
+  }
+}
+@keyframes cir {
+  0% {
+    transform: rotateX(85deg) rotateZ(0deg);
+  }
+  100% {
+    transform: rotateX(85deg) rotateZ(-360deg);
+  }
+}
+@-webkit-keyframes cir {
+  0% {
+    -webkit-transform: rotateX(85deg) rotateZ(0deg);
+  }
+  100% {
+    -webkit-transform: rotateX(85deg) rotateZ(-360deg);
+  }
+}
+
+.u_p3d{
+    -webkit-transform-style: preserve-3d !important;
+    transform-style: preserve-3d !important;
+}
+
+.ui_base {
+    position: relative;
+   -webkit-perspective: 1000px;
+    -webkit-perspective-origin: 50% 0%;
+    perspective: 1000px;
+    perspective-origin: 50% 0%;
+}
+.base{
+	-webkit-transform: rotateX(85deg);
+    transform: rotateX(85deg);
+    position: relative;
+    width: 700px;
+    height: 700px;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    animation: cir 20s linear 0s infinite;
+}
+.ball_base {
+    -webkit-transform-origin: 450px 0px;
+    transform-origin: 450px 0px;
+    position: absolute;
+    top: 350px;
+    left: -100px;
+}
+.ball{
+	-webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+	width: 240px;
+}
+		
+.ball_c {
+   -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    position: absolute;
+    width: 1000px;
+    height: 1000px;
+    background: url(../images/dizuo.png) no-repeat;
+		background-size: 100%;
+   left: calc(50% - 500px);
+    bottom: -600px;
+    color: #fff;
+}
+
+.ball {
+    color: #fff;
+    opacity: 1;
+		padding: 0 20px 280px;
+		text-align:center;
+		cursor:pointer;
+}
+
+.ball_1 .ball {
+    transform: rotateY(10deg) rotateZ(10deg);
+    animation: cir1 20s linear 0s infinite;
+    -webkit-transition-delay: 1100ms !important;
+	transition-delay: 1100ms !important;
+	background: url(../images/chongdian.png) no-repeat;
+	background-size:100%;
+	background-position:bottom;
+	
+}
+.ball_2 .ball {
+    -webkit-animation: cir2 20s linear 0s infinite;
+		animation: cir2 20s linear 0s infinite;
+		-webkit-transition-delay: 700ms !important;
+	transition-delay: 700ms !important;
+	background: url(../images/huandian.png) no-repeat;
+	background-size:100%;
+	background-position:bottom;
+}
+.ball_3 .ball {
+    -webkit-animation: cir3 20s linear 0s infinite;
+	animation: cir3 20s linear 0s infinite;
+	-webkit-transition-delay: 300ms !important;
+	transition-delay: 300ms !important;
+	background: url(../images/disu.png) no-repeat;
+	background-size:100%;
+	background-position:bottom;
+}
+.ball1Select{
+	background: url(../images/chongdian_s.png) no-repeat !important;
+	background-size:100% !important;
+	background-position:bottom !important;
+}
+.ball2Select{
+	background: url(../images/huandian_s.png) no-repeat !important;
+	background-size:100% !important;
+	background-position:bottom !important;
+}
+.ball3Select{
+	background: url(../images/disu_s.png) no-repeat !important;
+	background-size:100% !important;
+	background-position:bottom !important;
+}
+
+.ball_1 {
+    -webkit-transform: rotateX(-90deg) rotateY(0deg) translateY(-70px);
+    transform: rotateX(-90deg) rotateY(0deg) translateY(-70px);
+}
+.ball_2 {
+    -webkit-transform: rotateX(-90deg) rotateY(120deg) translateY(-70px);
+    transform: rotateX(-90deg) rotateY(120deg) translateY(-70px);
+}
+.ball_3 {
+    -webkit-transform: rotateX(-90deg) rotateY(240deg) translateY(-70px);
+    transform: rotateX(-90deg) rotateY(240deg) translateY(-70px);
+}

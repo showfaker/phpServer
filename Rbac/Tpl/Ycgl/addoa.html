@@ -1,0 +1,63 @@
+	<link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    
+    <link href="css/plugins/chosen/chosen.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.css">
+	
+
+
+	<form id="format1" method="post" action="__URL__/suppliersub" enctype="multipart/form-data" class="form-horizontal">    
+		<div class="modal-body">		    
+			<div class="form-group">
+				<div class="col-sm-10">
+					<label class="col-sm-2 control-label">供应商：</label>
+					<div class="col-sm-4">
+					    <select name="gysid" data-placeholder="选择供应商" class="chosen-select" style="width:240px;" tabindex="2">
+							<option value="">请选择供应商</option>
+							<volist name="supplier" id="supplier">
+							<option value="{$supplier.id}" hassubinfo="true">{$supplier.supplier}</option>
+							</volist>
+						</select>
+					</div>
+				</div>
+				<div class="col-sm-10" style="margin-top:20px">
+					<label class="col-sm-2 control-label">异常原因：</label>
+					<div class="col-sm-4">
+					    <select name="cause" class="form-control" style="width:240px;">
+							<option value="">请选择原因</option>							
+							<option value="价格异常">价格异常</option>
+							<option value="材料异常">材料异常</option>
+							<option value="其他">其他</option>
+							</volist>
+						</select>
+					</div>
+				</div>
+				<div class="col-sm-10" style="margin-top:20px">
+					<label class="col-sm-2 control-label">异常备注：</label>
+					<div class="col-sm-6">
+					<textarea type="text" class="form-control" name="remark"></textarea>
+					</div>
+				</div>
+			</div>
+			
+			
+		</div>	
+		<div class="modal-footer">					
+			<button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="button" id="sub"><strong>提交处理单</strong>
+			</button>
+			
+		</div>
+	</form>
+    <script src="js/jquery.min.js?v=2.1.4"></script>	
+    <!-- Chosen -->
+    <script src="js/plugins/chosen/chosen.jquery.js"></script>
+    <script src="js/demo/form-advanced-demo.js"></script>
+
+	<script>
+	    $("#sub").click(function(){
+           $("#format1").submit();
+		})
+	</script>
+	

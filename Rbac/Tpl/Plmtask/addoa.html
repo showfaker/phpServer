@@ -1,0 +1,157 @@
+
+<link rel="shortcut icon" href="favicon.ico"> 
+<link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/style.css?v=4.1.0" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+	</button>
+	<h4 class="modal-title">项目验收</h4>
+</div>
+<form method="post" action="__APP__/Plmtask/insert/callbackType/closeCurrent/navTabId/Second/app/{$app}" ENCTYPE="multipart/form-data" onsubmit="return iframeCallback(this, dialogAjaxDone)">
+<div class="modal-body" id="file-pretty"> 
+	<input type="hidden" value="{$orgdata.id}" name="id">
+	<input type="hidden" value="{$step}" name="step">
+	<div class="form-group">
+		<label style="float:left">项目名称</label>
+		<input type="text" placeholder="" class="form-control" readonly value="{$orgdata['title']}">
+	</div>
+	
+	
+	
+	<eq name="step" value="1">
+	<table class="drafttable" style="position:relative;top:10px;margin:0 auto;width:100%;margin-bottom:28px">
+		<tr>
+			<td class="normal" style="font-weight:normal;height:45px;">项目编码</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.number}" class="forminputlarge" name="para1" aria-required="false" readonly>
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:normal;height:45px">项目名称</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.title}" class="forminputlarge" name="para2" aria-required="false" readonly>
+			</td>
+		</tr>
+		
+		<eq name="finish" value="">
+		<tr>
+			<td class="normal" style="font-weight:normal;height:45px">用电申请时间</td>
+			<td class="normal" colspan="3">
+			<neq name="orgdata.outplantime1" value="">
+			<input type="text" value="{$orgdata.outplantime1}" class="form-control layer-date forminputmedium" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" name="outplantime1" aria-required="false">
+			</neq>
+			<eq name="orgdata.outplantime1" value="">
+			<input type="text" value="{$orgdata.plantimebegin}" class="form-control layer-date forminputmedium" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" name="outplantime1" aria-required="false">
+			</eq>
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:normal;height:45px">供电方案答复单时间</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.outplantime2}" class="form-control layer-date forminputmedium" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" name="outplantime2" aria-required="false">
+			</td>
+		</tr>
+			
+		<tr>
+			<td class="normal" style="font-weight:normal;height:45px">停电计划时间</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.outplantime3}" class="form-control layer-date forminputmedium" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" name="outplantime3" aria-required="false">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:normal;height:45px">送电时间</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.outplantime4}" placeholder="不超过{$orgdata.sendelcplantimebegin}" class="form-control layer-date forminputmedium" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" name="outplantime4" aria-required="false">
+			</td>
+		</tr>
+		</eq>
+		
+		
+		
+		<eq name="finish" value="1">
+		<tr>
+			<td class="normal" style="font-weight:normal;height:45px">用电申请完成时间</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.outplantime1x}" class="form-control layer-date forminputmedium" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" name="outplantime1x" aria-required="false">
+			</td>
+		</tr>
+		</eq>
+		<eq name="finish" value="2">
+		<tr>
+			<td class="normal" style="font-weight:normal;height:45px">供电方案答复单完成时间</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.outplantime2x}" class="form-control layer-date forminputmedium" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" name="outplantime2x" aria-required="false">
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="normal" style="font-weight:normal;height:45px">供电方案答复单</td>
+			<td class="normal" colspan="3" style="line-height:25px">
+			<neq name="orgdata.outplantime2file" value="">
+				<volist name="orgdata.outplantime2file" id="outplantime2file">
+				<neq name="outplantime2file" value="">
+				 [ 
+				<a href="__URL__/filedown/filename/{$outplantime2file}/filerealname/{$orgdata[outplantime2filename][$key]}" style="color:green">{$orgdata[outplantime2filename][$key]} 
+				</a>  ] </br>
+				</neq>
+				</volist>
+			</neq>
+			<neq name="check" value="1">
+			<input type="file" multiple="multiple" class="form-control" name="file1[]" style="width:100%">
+			</neq>
+			</td>
+		</tr>
+		</eq>
+		<eq name="finish" value="3">
+		<tr>
+			<td class="normal" style="font-weight:normal;height:45px">停电完成时间</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.outplantime3x}" class="form-control layer-date forminputmedium" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" name="outplantime3x" aria-required="false">
+			</td>
+		</tr>
+		</eq>
+		<eq name="finish" value="4">
+		<tr>
+			<td class="normal" style="font-weight:normal;height:45px">送电完成时间</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.outplantime4x}" class="form-control layer-date forminputmedium" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" name="outplantime4x" aria-required="false">
+			</td>
+		</tr>
+		</eq>
+		
+
+    </table>
+	</eq>
+	
+	<eq name="step" value="2">
+	<div class="form-group">
+		<label style="width:100%;text-align:left">验收报告</label>
+		<input type="file" multiple="multiple" class="form-control" name="file1[]" style="width:100%">
+	</div>
+	<div class="form-group">
+		<label style="width:100%;text-align:left">验收照片</label>
+		<input type="file" multiple="multiple" class="form-control" name="file2[]" style="width:100%">
+	</div>
+	</eq>
+</div>
+<div class="modal-footer">
+	<neq name="check" value="1">
+	<button type="submit" class="btn btn-danger">提交</button>
+	</neq>
+	<button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+</div>
+
+
+
+</form>
+
+<!-- Prettyfile -->
+<script src="js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+<script>
+	$('input[type="file"]').prettyFile();
+</script>

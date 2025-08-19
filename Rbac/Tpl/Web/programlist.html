@@ -1,0 +1,184 @@
+﻿<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>项目列表</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="__PUBLIC__/appsource/css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			.mui-media {
+				font-size: 14px;
+			}
+			
+			.mui-table-view .mui-media-object {
+				max-width: initial;
+				width: 90px;
+				height: 70px;
+			}
+			
+			.meta-info {
+				position: absolute;
+				left: 115px;
+				right: 15px;
+				bottom: 8px;
+				color: #8f8f94;
+			}
+			
+			.meta-info .author,.meta-info .time{
+				display: inline-block;
+			}
+			
+			.meta-info .time{
+				float: right;
+			}
+			
+			.mui-table-view:before,
+			.mui-table-view:after {
+				height: 0;
+			}
+			
+			.mui-content>.mui-table-view:first-child {
+				margin-top: 1px;
+			}
+			
+			.banner {
+				height: 180px;
+				overflow: hidden;
+				position: relative;
+				background-position: center;
+				background-color: #ccc;
+			}
+			
+			.banner img {
+				width: 100%;
+				height: auto;
+			}
+			
+			.banner .title {
+				position: absolute;
+				left: 15px;
+				bottom: 15px;
+				width: 90%;
+				font-size: 16px;
+				font-weight: 400;
+				line-height: 21px;
+				color: white;
+				z-index: 11;
+			}
+			
+			.mui-table-view-cell:after{
+				left: 0px;
+			}
+		</style>
+		<link href="__PUBLIC__/appsource/css/mui.picker.css" rel="stylesheet" />
+		<link href="__PUBLIC__/appsource/css/mui.poppicker.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<div class="mui-content">
+			
+			<div style="width:100%;height:40px;border-bottom:1px solid #ccc;position:fixed;z-index:999;background-color:#f0f0f0;top:0px;">
+			<div style="width:50%;float:left;border-right:1px solid #ccc">
+				<div id='citychoice' class="ui-alert" style="font-size:13px;line-height:40px;text-align:center;color:#555">
+				选择城市
+				<img src="__PUBLIC__/appsource/images/arrow.png" style="width:12px">
+				</div>
+				
+			</div>
+			<div style="width:50%;float:left">
+				<div id='userchoice' class="ui-alert" style="font-size:13px;line-height:40px;text-align:center;color:#555">
+				选择人员
+				<img src="__PUBLIC__/appsource/images/arrow.png" style="width:12px">
+				</div>
+			</div>
+			</div>
+			<!--列表信息流 开始-->
+			<ul id="list" class="mui-table-view" style="margin-top:40px">
+				
+			</ul>
+			<!--列表信息流 结束-->
+			
+		</div>
+		<div style="height: 50px;line-height: 50px;padding: 5px;position:fixed;bottom:100px;right:40px;box-shadow:0 0 20px #ccc;background-color:white;border-radius:25px">
+		<span id="refresh" class="mui-icon mui-icon-refreshempty mui-pull-right" style="font-size: 40px;"></span>
+		</div>
+		<!-- 微信 JS-SDK 如果不需要兼容小程序，则无需引用此 JS 文件。 -->  
+		<script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>  
+		<!-- uni 的 SDK，必须引用。 -->  
+		<script type="text/javascript" src="//js.cdn.aliyun.dcloud.net.cn/dev/uni-app/uni.webview.0.1.52.js"></script>
+		<script src="__PUBLIC__/appsource/js/mui.min.js"></script>
+		<script src="__PUBLIC__/appsource/js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="__PUBLIC__/appsource/js/my.js"></script>
+		<script src="__PUBLIC__/appsource/js/mui.picker.js"></script>
+		<script src="__PUBLIC__/appsource/js/mui.poppicker.js"></script>
+		<script src="__PUBLIC__/appsource/js/select.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+			var account = "{$account}";
+			var offset = 0;
+			var limit = 30;
+			var currentNum = 0;
+			var list = document.getElementById("list");
+			var webid = "{$webid}";
+			var city= "{$city}" ? "{$city}" : null;
+			var user= null;
+			var projecttype = "{$projecttype}";
+			//document.addEventListener('UniAppJSBridgeReady', function() {
+				//uni.getEnv(function(res) {
+					document.getElementById('refresh').addEventListener('tap', function() {
+						location.href=location.href;
+					});
+					getlist();
+					getcity();
+					getuser();
+					function getlist(){
+						mui.ajax("http://projectnandian.jiuze9.com/projecttest/Rbac/index.php/App/plmlist/account/"+account+"/webid/"+webid+"/city/"+city+"/user/"+user+"/projecttype/"+projecttype,{
+							dataType:'json',//服务器返回json格式数据
+							type:'post',//HTTP请求类型					
+							headers:{'Content-Type':'application/json'},	              
+							success:function(data){
+								console.log("xxx");
+								var result = new Array();  
+								result = eval(data); 
+								aa="";
+								for(x in result)   
+								{  
+									aa += '<li class="mui-table-view-cell mui-media" name="icon" title="'+result[x]['id']+'">\
+												<a href="javascript:;" class="mui-slider-handle">\
+													<div style="margin: 2px 0 2px 0;">'+result[x]['title']+'</div>\
+													<div style="font-size: 12px;">\
+														<div style="flex-grow: 4;text-align: left;color: #666666;">'+result[x]['invester']+'</div>\
+														<div style="flex-grow: 4;text-align: left;color: #666666;">创建时间：'+result[x]['ctime']+'</div>\
+														<div style="flex-grow: 4;text-align: left;color: #666666;">创建人：'+result[x]['user']+'</div>\
+														<div style="flex-grow: 4;color: #0F64BF;font-weight:bold">状态：'+result[x]['design_status']+'</div>\
+														<div style="flex-grow: 4;text-align: left;color: #666666;">'+result[x]['next']+'</div>\
+														<div style="flex-grow: 4;text-align: left;color: #666666;">期限：'+result[x]['remind']+' | 是否超期：'+result[x]['remark']+'</div>\
+													</div>\
+												</a>\
+											</li>' 
+								}  
+							   
+								list.innerHTML=(aa);
+								obj = document.getElementsByName("icon");
+								for(i=0;i<obj.length;i++){
+									//合同报备详情
+									document.getElementsByName('icon')[i].addEventListener('tap', function() {
+										uni.navigateTo({
+											url: '/pages/web/index2?action=App&page=plmdetail&params=/id/'+this.title+'/account/'+account+'/webid/'+webid+'/city/'+city+'/viewid/项目详情/app/1'+'/projecttype/'+projecttype
+										});	
+									});
+								}
+							},
+						});
+					}
+				//})
+			//});
+			
+			
+			
+			
+		</script>
+	</body>
+
+</html>

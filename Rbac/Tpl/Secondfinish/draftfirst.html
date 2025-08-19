@@ -1,0 +1,315 @@
+
+<link rel="shortcut icon" href="favicon.ico"> 
+<link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/style.css?v=4.1.0" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+
+<eq name="_SESSION[app]" value="1">
+<meta name="viewport" content="user-scalable=no" />
+<link rel="stylesheet" href="__PUBLIC__/dwz/themes/css/core1.css">
+<style>
+.normal{
+    font-size:32px;
+}
+.modal-body{
+    font-size:32px;
+}
+.btn{
+    font-size:32px;
+}
+.modal-title{
+    font-size:32px;
+}
+input[type='radio']{
+    width:32px;
+    height: 32px;
+}
+.forminputlarge{
+   line-height:60px;
+   height:60px;
+   border:1px solid #ccc;
+   font-size:32px;
+}
+.form-control{
+   line-height:60px;
+   height:60px;
+   border:1px solid #ccc;
+   font-size:32px;
+}
+</style>
+</eq>
+<neq name="_SESSION[app]" value="1">    
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+	</button>
+	<h4 class="modal-title">项目基本信息登记表</h4>
+</div>
+</neq>
+<form method="post" action="__URL__/insert/callbackType/closeCurrent/navTabId/Second" ENCTYPE="multipart/form-data" class="form-horizontal" onsubmit="return verify()">
+<div class="modal-body">
+	
+	<input type="hidden" value="{$orgdata.id}" name="id">
+	
+	<table class="drafttable" style="position:relative;top:28px;margin:0 auto;width:100%;margin-bottom:28px">
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px;width:40%">项目编号:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.number}" class="forminputlarge" name="number" disabled>
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">项目名称:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.title}" class="forminputlarge" name="title" disabled>
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">立项时间:</td>
+			<td class="normal" colspan="1">
+			计划时间：{$orgdata.predate0}
+			</td>
+			<td class="normal" colspan="2">
+			<input type="text" value="<?php if($orgdata['submit_time']!=0)echo date('Y-m-d',$orgdata['submit_time']);?>" class="forminputlarge" name="submit_time" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">立项申请审核时间:</td>
+			<td class="normal" colspan="1">
+			计划时间：{$orgdata.predate1}
+			</td>
+			<td class="normal" colspan="2">
+			<input type="text" value="<?php if($orgdata['submit_approve_time']!=0)echo date('Y-m-d',$orgdata['submit_approve_time']);?>" class="forminputlarge" name="submit_approve_time" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">可研编制时间:</td>
+			<td class="normal" colspan="1">
+			计划时间：{$orgdata.predate2}
+			</td>
+			<td class="normal" colspan="2">
+			<input type="text" value="<?php if($orgdata['research_time']!=0)echo date('Y-m-d',$orgdata['research_time']);?>" class="forminputlarge" name="research_time" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">可研评审报告提交时间:</td>
+			<td class="normal" colspan="1">
+			计划时间：{$orgdata.predate3}
+			</td>
+			<td class="normal" colspan="2">
+			<input type="text" value="<?php if($orgdata['research_time1']!=0)echo date('Y-m-d',$orgdata['research_time1']);?>" class="forminputlarge" name="research_time1" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">可研评审报告审核时间:</td>
+			<td class="normal" colspan="1">
+			计划时间：{$orgdata.predate4}
+			</td>
+			<td class="normal" colspan="2">
+			<input type="text" value="<?php if($orgdata['research_approve_time']!=0)echo date('Y-m-d',$orgdata['research_approve_time']);?>" class="forminputlarge" name="research_approve_time" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})">
+			</td>
+		</tr>
+		<!-- <tr>
+			<td class="normal" style="font-weight:bold;height:45px">可研编制省公司审核时间</br>（只有地市投资大于200w才需要填写）:</td>
+			<td class="normal" colspan="1">
+			计划时间：{$orgdata.predate5}
+			</td>
+			<td class="normal" colspan="2">
+			<input type="text" value="<?php if($orgdata['research_approve_time1']!=0)echo date('Y-m-d',$orgdata['research_approve_time1']);?>" class="forminputlarge" name="research_approve_time1" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})">
+			</td>
+		</tr> -->
+		
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">提交综合计划复批文件时间:</td>
+			<td class="normal" colspan="1">
+			计划时间：{$orgdata.predate6x}
+			</td>
+			<td class="normal" colspan="2">
+			<input type="text" value="<?php if($orgdata['planfile_time']!=0)echo date('Y-m-d',$orgdata['planfile_time']);?>" class="forminputlarge" name="planfile_time" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})">
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">提交合作协议文件时间:</td>
+			<td class="normal" colspan="1">
+			计划时间：{$orgdata.predate6}
+			</td>
+			<td class="normal" colspan="2">
+			<input type="text" value="<?php if($orgdata['cooperate_time']!=0)echo date('Y-m-d',$orgdata['cooperate_time']);?>" class="forminputlarge" name="cooperate_time" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})">
+			</td>
+		</tr>
+		
+		<!-- <tr>
+			<td class="normal" style="font-weight:bold;height:45px">提交招标文件时间:</td>
+			<td class="normal" colspan="1">
+			计划时间：{$orgdata.predate7}
+			</td>
+			<td class="normal" colspan="2">
+			<input type="text" value="<?php if($orgdata['bid_time']!=0)echo date('Y-m-d',$orgdata['bid_time']);?>" class="forminputlarge" name="bid_time" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})">
+			</td>
+		</tr> -->
+		<!-- <tr>
+			<td class="normal" style="font-weight:bold;height:45px">提交合同时间:</td>
+			<td class="normal" colspan="1">
+			计划时间：{$orgdata.predate8}
+			</td>
+			<td class="normal" colspan="2">
+			<input type="text" value="<?php if($orgdata['contract_time']!=0)echo date('Y-m-d',$orgdata['contract_time']);?>" class="forminputlarge" name="contract_time" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})">
+			</td>
+		</tr> -->
+		<!-- <tr>
+			<td class="normal" style="font-weight:bold;height:45px">计划编制时间:</td>
+			<td class="normal" colspan="1">
+			计划时间：{$orgdata.predate9}
+			</td>
+			<td class="normal" colspan="2">
+			<input type="text" value="<?php if($orgdata['plan_time']!=0)echo date('Y-m-d',$orgdata['plan_time']);?>" class="forminputlarge" name="plan_time" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})">
+			</td>
+		</tr> -->
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">任务单派发时间:</td>
+			<td class="normal" colspan="1">
+			计划时间：{$orgdata.predate9x}
+			</td>
+			<td class="normal" colspan="2">
+			<input type="text" value="<?php if($orgdata['sendtask_time']!=0)echo date('Y-m-d',$orgdata['sendtask_time']);?>" class="forminputlarge" name="sendtask_time" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})">
+			</td>
+		</tr>
+		
+		
+		
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">联合验收时间:</td>
+			<td class="normal" colspan="1">
+			计划时间：{$orgdata.predate99}
+			</td>
+			<td class="normal" colspan="2">
+			<input type="text" value="<?php if($orgdata['finish_time0']!=0)echo date('Y-m-d',$orgdata['finish_time0']);?>" class="forminputlarge" name="finish_time0" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">竣工验收时间:</td>
+			<td class="normal" colspan="1">
+			计划时间：{$orgdata.predate100}
+			</td>
+			<td class="normal" colspan="2">
+			<input type="text" value="<?php if($orgdata['finish_time']!=0)echo date('Y-m-d',$orgdata['finish_time']);?>" class="forminputlarge" name="finish_time" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">项目验收时间:</td>
+			<td class="normal" colspan="1">
+			计划时间：{$orgdata.predate101}
+			</td>
+			<td class="normal" colspan="2">
+			<input type="text" value="<?php if($orgdata['finish_time1']!=0)echo date('Y-m-d',$orgdata['finish_time1']);?>" class="forminputlarge" name="finish_time1" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">项目投运时间:</td>
+			<td class="normal" colspan="1">
+			计划时间：{$orgdata.predate102}
+			</td>
+			<td class="normal" colspan="2">
+			<input type="text" value="<?php if($orgdata['activity_time']!=0)echo date('Y-m-d',$orgdata['activity_time']);?>" class="forminputlarge" name="activity_time" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})">
+			</td>
+		</tr>
+		
+		
+		
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">施工环节执行完成时间:</td>
+			<td class="normal" colspan="2">
+			
+				<volist name="orgdata.schedules" id="schedule">
+						<div>{$schedule.subworktype}（计划时间：{$schedule.plantimebegin}-{$schedule.plantimeend}）</br>
+						<input type="text" value="{$schedule.realtimebegin}" class="forminputmedium" name="worktimebegin{$schedule.id}" style="width:100px" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})">-
+						<input type="text" value="{$schedule.realtimeend}" class="forminputmedium" name="worktimeend{$schedule.id}" style="width:100px" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})"></div>
+				</volist>
+			
+			</td>
+		</tr>
+		
+		
+		
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">用电申请:</td>
+			<td class="normal" colspan="1">
+			计划时间：{$orgdata.outplantime1}
+			</td>
+			<td class="normal" colspan="2">
+			<input type="text" value="{$orgdata.outplantime1x}" class="forminputlarge" name="outplantime1x" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">供电方案答复:</td>
+			<td class="normal" colspan="1">
+			计划时间：{$orgdata.outplantime2}
+			</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.outplantime2x}" class="forminputlarge" name="outplantime2x" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">停电:</td>
+			<td class="normal" colspan="1">
+			计划时间：{$orgdata.outplantime3}
+			</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.outplantime3x}" class="forminputlarge" name="outplantime3x" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">送电:</td>
+			<td class="normal" colspan="1">
+			计划时间：{$orgdata.outplantime4}
+			</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.outplantime4x}" class="forminputlarge" name="outplantime4x" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})">
+			</td>
+		</tr>
+	
+    </table>
+	
+	
+
+</div>
+<div class="modal-footer">
+	<button type="submit" class="btn btn-danger">提交档案</button>
+	<button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+</div>
+</form>
+
+<eq name="_SESSION[app]" value="1">
+<script src="js/jquery.min.js?v=2.1.4"></script>
+<script src="js/plugins/iCheck/icheck.min.js"></script>
+<script src="js/plugins/layer/laydate/laydate.js"></script>
+</eq>
+
+<!-- Prettyfile -->
+<script src="js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+<script>
+	$('input[type="file"]').prettyFile();
+</script>
+
+<script>
+	$(document).ready(function () {
+		$('.i-checks').iCheck({
+			checkboxClass: 'icheckbox_square-green',
+			radioClass: 'iradio_square-green',
+		});
+	});
+	function verify()
+	{
+		var value=document.getElementsByName("result")[0].value;
+		var suggestion=document.getElementById("suggestion").value;
+		if((value!="同意")&&(suggestion==""))
+		{
+			alert("拒绝流程时必须填写审核意见");
+			return false;
+		}
+	}
+</script>

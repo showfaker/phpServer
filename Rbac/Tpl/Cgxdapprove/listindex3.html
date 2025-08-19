@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>H+ 后台主题UI框架 - 文件管理器</title>
+    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+	<link rel="stylesheet" href="css/main.css">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content">
+                        <div class="file-manager">
+							<!--
+                            <h5>显示：</h5>
+                            <a href="file_manager.html#" class="file-control active">所有</a>
+                            <a href="file_manager.html#" class="file-control">文档</a>
+                            <a href="file_manager.html#" class="file-control">视频</a>
+                            <a href="file_manager.html#" class="file-control">图片</a>
+                            <div class="hr-line-dashed"></div>
+							-->
+							<!--
+                            <button class="btn btn-primary btn-block">上传文件</button>
+                            <div class="hr-line-dashed"></div>
+							-->
+                            <h5>项目文件夹</h5>
+                            <ul class="folder-list" style="padding: 0">
+								<volist name="projects" id="project">
+                                <li><a href="__URL__/index/token/{$token}/tab/5/plmid/{$project.id}"><i class="fa fa-folder"></i>{$project.title}
+								<neq name="project.count" value="0">
+								<button  class="btn btn-danger btn-xs" style="color:#fff;border-radius:20px;float:right;">{$project.count}</button>
+								</neq>
+								
+								</a></li>
+								</volist>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-9 animated fadeInRight">
+                <div class="row">
+                    <div class="col-sm-12" id="galley">
+						<volist name="list" id="listmenu">
+                        <div class="file-box">
+                            <div class="file">
+                                
+                                    <span class="corner"></span>
+
+                                    <div class="image">
+                                        <img alt="image" class="img-responsive" src="__PUBLIC__/Uploads/{$listmenu.newname}">
+                                    </div>
+                                    <div class="file-name">
+                                        {$listmenu.title}
+                                        <br/>
+                                        <small>添加时间：<?php 
+											if($listmenu['ctime']!=0)
+											echo date('Y-m-d',$listmenu['ctime']);?>
+										</small>
+										<br/>
+										<a class="btn btn-danger btn-xs delete" title="{$listmenu.id}">处理</a>
+                                    </div>
+                                
+
+                            </div>
+                        </div>
+						</volist>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 全局js -->
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+
+    <!-- 自定义js -->
+    <script src="js/content.js?v=1.0.0"></script>
+	
+	<link rel="stylesheet" href="__PUBLIC__/lightbox/viewerjs/dist/viewer.css">
+	<script src="__PUBLIC__/lightbox/viewerjs/dist/viewer.js"></script>
+	<script>
+		window.addEventListener('DOMContentLoaded', function () {
+			var galley = document.getElementById('galley');
+			var viewer = new Viewer(galley, {
+			url: 'data-original',
+			navbar:false,
+		  });
+		});
+    </script>
+    
+    <script>
+        $(document).ready(function () {
+            $('.file-box').each(function () {
+                animationHover(this, 'pulse');
+            });
+        });
+    </script>
+
+    <script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+    <script>
+	  $('.delete').click(function () {	
+        id=$(this).attr("title");		
+		swal({
+			title: "您确定已处理吗",
+			text: "处理后将无法恢复操作，请谨慎操作！",
+			type: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#DD6B55",
+			confirmButtonText: "处理",
+			closeOnConfirm: false
+		}, function () {
+			//获取选中的checkbox
+			//发送请求命令			
+			var aj = $.ajax({
+					url:'__URL__/ajaxcl',
+					data:{  
+						id : id
+					},
+					type:'post',  
+					cache:false,  
+					dataType:'json',  
+					success:function(data) {
+                        if(data==1){
+							swal("处理完成！", "请刷新查看结果。", "success");
+							location.href=location.href;
+						}					
+						
+					}  
+			});
+			
+		});
+	});
+	</script>
+
+</body>
+
+</html>

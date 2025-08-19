@@ -1,0 +1,55 @@
+
+<link rel="shortcut icon" href="favicon.ico"> 
+<link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/style.css?v=4.1.0" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="__PUBLIC__/dwz/themes/css/core1.css">
+    
+<div class="modal-header">
+	<h4 class="modal-title">提示</h4>
+</div>
+<form method="post" id="postform" action="__URL__/insert/callbackType/closeCurrent/navTabId/Second" ENCTYPE="multipart/form-data" class="form-horizontal">
+<div class="modal-body" style="height:100px;overflow-y:scroll">
+	
+	<input type="hidden" value="{$orgdata.id}" name="id">
+	<input type="hidden" value="{$jypg}" name="jypg">
+	
+	<div style="position:relative;top:0px;margin:0 auto;width:100%;">
+		请选择项目
+	</div>	
+	
+	
+
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+</div>
+</form>
+<!-- Prettyfile -->
+<script src="js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+
+ <!-- 全局js -->
+<script src="js/jquery.min.js?v=2.1.4"></script>
+<script src="js/bootstrap.min.js?v=3.3.6"></script>
+
+<!-- 自定义js -->
+<script src="js/content.js?v=1.0.0"></script>
+
+<!-- jQuery Validation plugin javascript-->
+<script src="js/plugins/validate/jquery.validate.min.js"></script>
+<script src="js/plugins/validate/messages_zh.min.js"></script>
+
+<script src="js/demo/form-validate-demo.js"></script>
+
+
+
+<script>
+	$("#submitbutton").click(function(){
+		title=$('input[name=title]').val();
+		$("#postform").validate();
+		$("#postform").submit();
+	})
+</script>

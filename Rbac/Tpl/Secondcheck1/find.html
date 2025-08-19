@@ -1,0 +1,64 @@
+<script>
+function findproject(value)
+{
+	if(isNaN(value))
+	{
+		alert("号码必须为数字");
+		return false;
+	}
+	if(value.length!=11)
+	{
+		alert("号码必须为11位纯数字");
+		return false;
+	}
+	$.pdialog.reload("__URL__/find/tel/"+value+"/","","findproject");
+}
+</script>
+<div class="pageContent">
+
+	<div class="pageFormContent" layoutH="60" style="background-color:white"><!-- style="background-color:#EEF4F5" -->
+	<div class="" style="margin-left:0px;margin-bottom:40px">
+	<div style="position:relative;margin:0 auto;font-weight:bold;width:514px;">
+		<div class="unitBox" style="margin:5px;margin-top:5px;float:left;margin-left:30px"><!--width:88%;height:30px;font-size:15px;float:left;padding-left:5px-->
+					<input name="tel" id="tel" value="{$tel}" style="width:360px;height:20px;line-height:20px;font-size:15px;float:left;padding-left:5px" type="text"/>
+					<button style="cursor:pointer" class="btnfind" rel="xxx" onclick="findproject(document.getElementById('tel').value);">搜索号码</button>
+		</div>
+	</div>	
+	</div>
+	
+	<table class="table" width="100%" layoutH="130">
+		<thead  style="border-left:1px solid #D0D0D0;border-top:1px solid #D0D0D0;">
+			<tr>
+				
+				<th width="10%">客户姓名</th>				
+				<th width="32%">项目名称</th>
+				<th width="17%">电话</th>
+				<th width="21%">时间</th>
+				<th width="11%">备案人员</th>
+				<th width="11%">设计师</th>
+			</tr>
+		</thead>
+		<tbody  style="border-left:1px solid #D0D0D0;">
+			<volist name="list" id="listmenu">
+			<tr >
+				
+				<td>{$listmenu['name']}</td>
+				<td>{$listmenu['address']}</td>
+				<td>{$listmenu['tel']}</td>
+				<td>{$listmenu['time']}</td>
+				<td>{$listmenu['user']}</td>
+				<td>{$listmenu['designer']}</td>
+			</tr>
+			</volist>
+		</tbody>
+	</table>
+	
+	</div>
+	<div class="formBar">
+		<ul>
+			<li><div class="button"><div class="buttonContent"><button type="button" class="close">关闭</button></div></div></li>
+		</ul>
+	</div>
+</div>
+
+

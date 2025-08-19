@@ -1,0 +1,140 @@
+
+<link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/style.css?v=4.1.0" rel="stylesheet">
+<link href="js/ySelect/ySelect.css" rel="stylesheet">
+
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+	</button>
+	<h4 class="modal-title">节点</h4>
+</div>
+<form method="post" action="__URL__/insert/callbackType/closeCurrent/navTabId/Second" ENCTYPE="multipart/form-data" onsubmit="return iframeCallback(this, dialogAjaxDone)">
+<div class="modal-body"> 
+	<input type="hidden" value="2" name="type">
+	<input type="hidden" value="2" name="tab">
+	<input type="hidden" value="{$moduletitle}" name="classify">
+	<div class="form-group">
+		<label style="float:left">所属专项</label>
+		<select name="pid" class="form-control">
+			<volist name="worktypes" id="worktype">
+			<option value="{$worktype.id}">{$worktype.projecttype}-{$worktype.title}</option>
+			</volist>
+		</select>
+	</div>
+	<div class="form-group">
+		<label style="float:left">节点名称</label>
+		<input type="text" placeholder="" class="form-control" name="title">
+	</div>
+	
+	
+	
+	<div class="form-group">
+		<label style="float:left">节点属性</label>
+		<input type="text" placeholder="" class="form-control" name="attribute">
+	</div>
+	<!-- <div class="form-group">
+		<label style="float:left">职责岗位</label>
+		<select name="user" class="form-control">
+			<option value="施工单位">施工单位</option>
+			<option value="监理单位">监理单位</option>
+		</select>
+	</div> -->
+	<div class="form-group">
+		<label style="float:left">排序</label>
+		<input type="text" placeholder="" class="form-control" name="sort">
+	</div>
+	<div class="form-group">
+		<label style="float:left">依赖</label>
+		<input type="hidden" id="dependenceid" name="dependenceid" value="">
+		<select id='m2' class="demo1 form-control" multiple="multiple" style="font-weight:bold;height:35px;background-color:#F7F7F7;text-align:center;line-height:15px;width:100%">
+			<volist name="modules" id="module">
+			<optgroup label="{$module.classify}-{$module.title}">  
+				<volist name="module.nodes" id="node">
+				<option value="{$node.id}" <in name="node.id" value="$vo.dependenceid">selected</in>>{$node.title}</option>  
+				</volist>
+			</optgroup>  
+			</volist> 
+		</select>
+	</div>
+	
+	<div class="form-group">
+		<label style="float:left">自动完成</label>
+		<input type="hidden" id="autocompleteid" name="autocompleteid" value="">
+		<select id='m3' class="demo2 form-control" multiple="multiple" style="font-weight:bold;height:35px;background-color:#F7F7F7;text-align:center;line-height:15px;width:100%">
+			<volist name="modules" id="module">
+			<optgroup label="{$module.classify}-{$module.title}">  
+				<volist name="module.nodes" id="node">
+				<option value="{$node.id}" <in name="node.id" value="$vo.autocompleteid">selected</in>>{$node.title}</option>  
+				</volist>
+			</optgroup>  
+			</volist> 
+		</select>
+	</div>
+	
+	<div class="form-group">
+		<label style="float:left">工程量单位</label>
+		<input type="text" placeholder="" class="form-control" name="qualityunit">
+	</div>
+	<!-- <div class="form-group">
+		<label style="float:left">0~1MW所需工期(天)</label>
+		<input type="text" placeholder="" class="form-control" name="period1">
+	</div>
+	<div class="form-group">
+		<label style="float:left">1~2MW所需工期(天)</label>
+		<input type="text" placeholder="" class="form-control" name="period2">
+	</div> -->
+	<!--
+	<div class="form-group">
+		<label style="float:left">是否平行</label>
+		<select name="parallel" class="form-control">
+			<option value="否">否</option>
+			<option value="是">是</option>
+		</select>
+	</div>
+	-->
+</div>
+<div class="modal-footer">
+	<button type="submit" class="btn btn-danger" onclick="checksubmit()">提交</button>
+	<button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+</div>
+</form>
+
+
+<script>
+function checksubmit(){
+	let dependenceid = $("#m2").ySelectedValues(",");
+	$("#dependenceid").val(dependenceid);
+	
+	let autocompleteid = $("#m3").ySelectedValues(",");
+	$("#autocompleteid").val(autocompleteid);
+	
+	return true;
+}
+</script>
+<script>
+	$('.demo1').ySelect(
+		{
+			placeholder: '请先选择依赖专项',
+			searchText: '搜索',
+			showSearch: true,
+			numDisplayed: 30,
+			overflowText: '已选中 {n}项',
+			isCheck:false
+		}
+	);
+	
+	$('.demo2').ySelect(
+		{
+			placeholder: '请先选择依赖专项',
+			searchText: '搜索',
+			showSearch: true,
+			numDisplayed: 30,
+			overflowText: '已选中 {n}项',
+			isCheck:false
+		}
+	);
+</script>

@@ -1,0 +1,461 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title>Simpla Admin</title>
+		<load href="__PUBLIC__/js/prototype.js" />
+		<load href="__PUBLIC__/js/Ajax/ThinkAjax_old.js" />
+		<link rel="stylesheet" href="__PUBLIC__/css/reset.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="__PUBLIC__/css/classicdownstylemain.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="__PUBLIC__/css/invalid.css" type="text/css" media="screen" />	
+		
+		
+		<script type="text/javascript" src="__PUBLIC__/js/shortcut/jquery.js"></script>
+		<script type="text/javascript" src="__PUBLIC__/js/shortcut/interface.js"></script>
+
+		<link href="__PUBLIC__/css/shortcut/style.css" rel="stylesheet" type="text/css" />	
+
+		
+<script language="JavaScript">
+function showHideSearch()
+{
+	if (document.getElementById('searchM').style.display=='inline')
+	{
+		document.getElementById('searchM').style.display='none';
+		document.getElementById('searchInputName').focus();
+		document.getElementById('key').style.display='inline';
+	}
+	else
+	{
+		document.getElementById('searchM').style.display='inline';
+		document.getElementById('searchInputName').focus();
+		document.getElementById('key').style.display='none';
+	}
+}
+function science()
+{
+		ThinkAjax.send('__APP__'+'/Public/science','ajax=1',doChange);
+}
+function blue()
+{
+		ThinkAjax.send('__APP__'+'/Public/blue','ajax=1',doChange);
+}
+function normal()
+{
+		ThinkAjax.send('__APP__'+'/Public/normal','ajax=1',doChange);
+}
+function doChange(data,status)
+{
+	if (status==1)
+	{
+		parent.frames('frame_menu').location.reload()
+	}
+}	
+</script>
+</head>
+  
+	<body  onunload="parent.parent.document.getElementById('tianqi8_wetherinfo').style.display='block';">
+	
+	
+	
+	<script type="text/javascript">
+	/*parent.document.getElementById("talk").style.right="321px";*/
+	parent.parent.document.getElementById("tianqi8_wetherinfo").style.display="none";
+	parent.parent.parent.document.getElementById("tianqi8_wetherinfo").style.display="none";
+	ThinkAjax.send('__APP__'+'/Public/displayone','ajax=1');
+	</script>	
+
+
+
+	
+	
+	
+<div id="body-wrapper" style="position:absolute;left:0px;top:0px;height:720px;">
+<div id="main-content">
+<div class="clear"></div> <!-- End .clear -->
+			
+	<div class="content-box" style="background:#f5f5f5;top:3px;height:578px;"><!-- Start Content Box -->				
+		<div class="content-box-header">
+			<h3>Welcome</h3>
+<script type="text/javascript">
+document.getElementById("body-wrapper").style["width"]= (parseInt(window.screen.width)-33-232) + "px";
+</script>	
+<div id="main-content"><!-- Main Content Section with everything -->
+<script type="text/javascript">
+document.getElementById("main-content").style["width"]= (parseInt(window.screen.width)-33-232-240) + "px";
+</script>
+
+<!-- 			
+<div id="kuaijie" style="position:absolute;left:380px;top:48px;">		
+<div class="dock" id="dock">
+  <div class="dock-container">
+  <eq name="nopower" value="">
+	  <a class="dock-item" href="__APP__/Recvmail/index"><img src="__PUBLIC__/Images/icons/writemail1.png"/><span>收件箱(<font color="red">{$count}</font>)</span></a> 
+	  <a class="dock-item" href="__APP__/Myinfo/index"><img src="__PUBLIC__/Images/icons/role1.png"/><span>我的信息</span></a> 
+	  <a class="dock-item" href="__APP__/Form/add"><img src="__PUBLIC__/Images/icons/addnews1.png"/><span>发布新闻</span></a> 
+	  <a class="dock-item" href="__APP__/Workassignment/add"><img src="__PUBLIC__/Images/icons/overwork1.png"/><span>发布任务</span></a> 
+	  <a class="dock-item" href="__APP__/Workreport/add"><img src="__PUBLIC__/Images/icons/editnews1.png"/><span>填写日报</span></a> 
+	  <a class="dock-item" href="__APP__/Meetingbook/index"><img src="__PUBLIC__/Images/icons/addmeeting1.png"/><span>会议预订</span></a> 
+ 	  <a class="dock-item" href="__APP__/Timecard/index"><img src="__PUBLIC__/Images/icons/time_over1.png"/><span>网上刷卡</span></a>
+   </eq>	
+   <eq name="nopower" value="1">
+   	  <a class="dock-item"><img src="__PUBLIC__/Images/icons/writemail1.png"/><span>收件箱(<font color="red">{$count}</font>)</span></a> 
+	  <a class="dock-item"><img src="__PUBLIC__/Images/icons/role1.png"/><span>我的信息</span></a> 
+	  <a class="dock-item"><img src="__PUBLIC__/Images/icons/addnews1.png"/><span>发布新闻</span></a> 
+	  <a class="dock-item"><img src="__PUBLIC__/Images/icons/overwork1.png"/><span>发布任务</span></a> 
+	  <a class="dock-item"><img src="__PUBLIC__/Images/icons/editnews1.png"/><span>填写日报</span></a> 
+	  <a class="dock-item"><img src="__PUBLIC__/Images/icons/addmeeting1.png"/><span>会议预订</span></a> 
+ 	  <a class="dock-item"><img src="__PUBLIC__/Images/icons/time_over1.png"/><span>网上刷卡</span></a>
+   </eq>
+  </div>
+</div>
+</div> -->
+
+<div class="content-box-content1">
+<!--  
+<div id="line3" style="background:#ddd;position:absolute;left:20px;top:148px;height:1px">
+<script type="text/javascript">
+document.getElementById("line3").style["width"]= (parseInt(window.screen.width)-33-232-288) + "px";
+</script>
+</div>-->
+<img  src="__PUBLIC__/Images/main/news.png" width="64px" style="position:absolute;left:45px;top:80px;"></br>
+<p  style="position:absolute;left:50px;top:144px;" >新闻公告</p>
+<img  src="__PUBLIC__/Images/main/writemail.png" width="64px" style="position:absolute;left:45px;top:210px;"></br>
+<p  style="position:absolute;left:50px;top:272px;">未读邮件</p>
+<img  src="__PUBLIC__/Images/main/editst.png" width="64px" style="position:absolute;left:47px;top:342px;"></br>
+<p  style="position:absolute;left:50px;top:404px;">待办事项</p>
+
+<!-- 
+<hr width=30% size=1 color=#cccccc style="position:absolute;top:180px;FILTER: alpha(opacity=100,finishopacity=0,style=3)">
+<hr width=30% size=1 color=#cccccc style="position:absolute;top:310px;FILTER: alpha(opacity=100,finishopacity=0,style=3)">
+
+ -->
+
+<table style="background:transparent;">
+                    <thead>
+					<tr style="background:transparent">
+					    <th width="15%" style="background:transparent"></th>
+						<th width="55%" style="background:transparent"></th>
+                        <th width="11%" style="background:transparent"></th>
+                        <th width="19%" style="background:transparent"></th>
+				    </tr>
+                    </thead>
+         
+                    <tbody>
+                    <tr style="background:transparent"><td>&nbsp;</td></tr>
+                    <volist name="dataform" id="dataform">
+                    <tr style="background:transparent">
+                    <td></td>
+                    
+                    <td><a href="__APP__/Form/news/id/{$dataform['id']}">
+                    <neq name="dataform.title1" value="&nbsp;"> 
+                    <img width=14px src="__PUBLIC__/Images/main/ld.png" style="position:relative;top:2px">&nbsp;&nbsp;
+                    </neq>
+                    <font color="#8F5C10">{$dataform['title1']}</font></td>
+                    <td>{$dataform['user_id']}</td>
+				        <td>
+				        <?php 
+						if($dataform['create_time']!=0)
+						echo date('Y-m-d H:i:s',$dataform['create_time']);?>				
+				        </td> 
+                    </tr>
+                    </volist>
+                    <tr style="background:transparent"><td></td><td style="position:relative;top:2px;left:322px;"><a href="__APP__/Public/news"  target="_blank">&nbsp;</td></tr>
+                    </tbody>
+                    
+                    <tbody>
+                    <tr style="background:transparent"><td>&nbsp;</td></tr>
+                    <volist name="datamail" id="datamail">
+                    <tr style="background:transparent">
+                    <td></td>
+                    
+                    <td><a href="__APP__/Recvmail/index">
+                    <neq name="datamail.title1" value="&nbsp;"> 
+                    <img width=14px src="__PUBLIC__/Images/main/email.png" style="position:relative;top:3px">&nbsp;&nbsp;
+                    </neq>
+                    <font color="#199FC6">{$datamail['title1']}</font></td>
+                    <td>{$datamail['sender']}</td>
+				        <td>
+				        <?php 
+						if($datamail['create_time']!=0)
+						echo date('Y-m-d H:i:s',$datamail['create_time']);?>				
+				        </td> 
+                    </tr>
+                    </volist>
+                    <tr style="background:transparent"><td></td><td style="position:relative;top:2px;left:322px;"><a href="__APP__/Recvmail/index">&nbsp;</td></tr>
+                 
+                    </tbody>
+                    
+                    <tbody>
+                    <tr style="background:transparent"><td>&nbsp;</td></tr>
+                    <volist name="datasch" id="datasch">
+                    <tr style="background:transparent">
+                    <td></td>
+                    
+                    <td><a href="{$datasch['href']}">
+                    <neq name="datasch.title1" value="&nbsp;"> 
+                    <img width=14px src="__PUBLIC__/Images/main/sl.png" style="position:relative;top:2px">&nbsp;&nbsp;
+                    </neq>
+                    <font color="#F1A307">{$datasch['title1']}</font></td>
+                    <td>{$datasch['user_id']}</td>
+				        <td>
+				        <?php 
+						if($datasch['create_time']!=0)
+						echo date('Y-m-d H:i:s',$datasch['create_time']);?>				
+				        </td> 
+                    </tr>
+                    </volist>
+                    <tr style="background:transparent"><td></td><td style="position:relative;top:2px;left:322px;"><a href="__APP__/Schedule/index">&nbsp;</td></tr>
+                    
+                    </tbody>
+                
+                    
+              </table>      
+</div>
+</div> <!-- End #main-content -->		
+		
+		<div class="content-box" style="background:#f5f5f5;position:absolute;top:3px;height:134px;width:215px;right:0px;"><!-- background:#f5f5f5; -->
+		<div class="content-box-header"><h3>我的信息</h3>
+		<!-- <img src="__PUBLIC__/Images/main/line1.png" align="absbottom" style="position:absolute;top:0px;right:218px;width:7px;height:1024px"></img>
+	     -->
+	    <eq name="myimg" value="1"> 
+	    <img height="71px" width="58px" src="__PUBLIC__/../Rbac/Tpl/Public/Userimg/upload_pic/back.jpg" align="absbottom" style="position:absolute;top:48px;left:24px;">
+	    </eq>
+	    <a href="__PUBLIC__/../Rbac/Tpl/Public/Userimg/index.php">
+	   
+	    <eq name="sex" value="男">
+	    <!-- 
+	    <img id="btn_alert1" src="__PUBLIC__/Images/main/avatar_portal.png" align="absbottom" style="position:absolute;top:56px;left:30px;">
+	    -->
+	    <eq name="myimg" value="0">
+	    <img src="__PUBLIC__/Images/main/avatar_portal.png" align="absbottom" style="position:absolute;top:56px;left:26px;">
+	    <else/>
+	    <img src="__PUBLIC__/../Rbac/Tpl/Public/Userimg/upload_pic/{$_SESSION['number']}thumbnail_pic.jpg" onerror="this.src='__PUBLIC__/Images/main/avatar_portal.png'" align="absbottom" style="position:absolute;top:50px;left:26px;">
+	    </eq>
+	    
+	    </eq>
+	    <eq name="sex" value="女">
+	    <eq name="myimg" value="0">
+	    <img src="__PUBLIC__/Images/main/nv.png" align="absbottom" style="position:absolute;top:56px;left:26px;">
+	    <else/>
+	    <img src="__PUBLIC__/../Rbac/Tpl/Public/Userimg/upload_pic/{$_SESSION['number']}thumbnail_pic.jpg" onerror="this.src='__PUBLIC__/Images/main/nv.png'" align="absbottom" style="position:absolute;top:50px;left:26px;">
+	    </eq>
+	    </eq>
+	   
+	    </a>
+	    <p style="position:absolute;top:53px;left:104px;color:#4F93CA;">姓名：{$myinfo[name]}</p>
+	    <p style="position:absolute;top:73px;left:104px;color:#4F93CA;">部门：{$myinfo[dept]}</p>
+	    <p style="position:absolute;top:93px;left:104px;color:#4F93CA;">职位：{$myinfo[pos]}</p>	
+	    
+	    <!-- <img src="__PUBLIC__/Images/main/15.gif" align="absbottom" style="position:absolute;top:140px;left:30px;">
+	    <p style="position:absolute;top:139px;left:90px;color:#000000;"><a href="__APP__/Timecard/index/"><font color="#000000">网上刷卡<font/></a></p>
+		 
+	    <div style="position:absolute;top:200px;left:30px;font-weight:bold;font-size:14px">
+			<a class="shortcut-button" href="#" onClick="blue()"><span>
+			<img src="__PUBLIC__/Images/icons/blue.jpg" WIDTH="28" HEIGHT="28"  alt="蓝色经典皮肤" />
+				</span></a></div>
+				<div style="position:absolute;top:200px;left:90px;font-weight:bold;font-size:14px">
+		   	<a class="shortcut-button" href="#" onClick="science()"><span>
+			<img src="__PUBLIC__/Images/icons/science.jpg" WIDTH="28" HEIGHT="28"  alt="科技时代皮肤" /><br /></span></a>	 
+			
+		</div>
+					<div style="position:absolute;top:200px;left:140px;font-weight:bold;font-size:14px">
+		   	<a class="shortcut-button" href="#" onClick="normal()"><span>
+			<img src="__PUBLIC__/Images/icons/science.jpg" WIDTH="28" HEIGHT="28"  alt="科技时代皮肤" /><br /></span></a>	 
+			
+		</div>	-->
+		<div class="content-box" style="background:#f5f5f5;position:absolute;top:143px;height:434px;width:215px;right:0px;"><!-- background:#f5f5f5; -->
+		<div class="content-box-header"><h3>部门联系人</h3><a href="__APP__/User/indexfornote/">[通讯录<img src="__PUBLIC__/Images/classic/20130222102132486_easyicon_cn_16.png"></img>]</a>	
+	    <!-- <p style="width:200%;position:absolute;top:139px;left:0px;font-weight:bold;font-size:12px">部门联系人</p> -->
+		<!-- <a onClick="showHideSearch()" href="#"  style="position:absolute;top:241px;left:106px;"><img src="__PUBLIC__/Images/main/downarrow-1.png" width=21px height=21px></img>
+		</a> -->
+	<table style="background:transparent;position:absolute;top:35px;left:30px;width:200px;color:#828282">
+                    <tbody>
+                    <tr style="background:transparent"><td>&nbsp;</td></tr>
+                    <volist name="datauser" id="datauser">
+                    <tr style="background:transparent"> 
+                    <td>
+                   
+                    <img height="39px" width="33px" src="__PUBLIC__/../Rbac/Tpl/Public/Userimg/upload_pic/back.jpg" align="absbottom" style="position:relative;top:2px;left:-5px;">
+                    <!-- title="{$datauser['alt']}"  -->
+                    <img height="35px" width="29px" src="__PUBLIC__/../Rbac/Tpl/Public/Userimg/upload_pic/{$datauser['number']}thumbnail_pic.jpg" onerror="this.src='__PUBLIC__/Images/main/noimage_35.png'" align="top" style="position:relative;top:0px;left:-39px;"></img></td>
+                    <td style="position:relative;left:-33px;top:0px;float:left">
+                    {$datauser['nickname']}&nbsp;<a href="__APP__/Recvmail/add/name/{$datauser['nickname']},"><img src="__PUBLIC__/Images/main/hasread.gif" alt="写信"></img></a>
+                    </br>
+                    <?php 
+						if($datauser['time']!=0)
+						echo date('Y-m-d H:i:s',$datauser['time']);
+						else echo '&nbsp;'?>
+						</td>
+                    <!-- </tr>
+                    <tr style="background:transparent"> 
+                    <td>
+					<?php 
+						if($datauser['time']!=0)
+						echo date('Y-m-d H:i:s',$datauser['time']);
+						else echo '&nbsp;'?>			
+					</td>
+                    </tr> -->
+                    <tr style="background:transparent"><td>&nbsp;</td></tr>
+                    </volist>
+                    <!-- <tr style="background:transparent"><td></td><td style="position:relative;top:2px;left:22px;"><a href="__APP__/Public/news"  target="_blank"><img  src="__PUBLIC__/Images/main/23.gif"></img></td></tr> -->
+                    </tbody>
+              </table>      
+               <table style="background:transparent;position:absolute;top:580px;left:30px;width:200px;color:#828282">
+					<tfoot>
+						<tr>
+							<td colspan="6"><div class="pagination"><div class="panelBar"><div class="pagination" targetType="navTab" totalCount="{$totalCount}" numPerPage="{$numPerPage}" pageNumShown="10" currentPage="{$currentPage}">{$page}</div></div></div></td>
+						</tr>
+					</tfoot>
+				</table>    
+				
+
+				
+				<div  id="searchM" class=" none search cBoth" style="position:absolute;left:135px;width:100px;top:221px;display:none;">
+                     <table>
+					 <tfoot>
+						<tr>
+							<td colspan="6">
+                            <form method='post' action="__URL__/mypage">
+								<div class="bulk-actions align-right">		
+								    <span id="key"><input style="background:#E9FFE3" type="text" name="nickname" title="姓名" class="medium-input" ></span>
+									<input type="submit" class="tiny-input" value="查询" />								
+								</div>
+                            </form>            
+							</td>
+						</tr>
+					</tfoot>
+				</table> 
+                </div>
+				 	    
+				</div>
+
+		
+	</br></br>	
+	</div></div></div></div>
+<eq name="try" value=""></br></br></eq>
+<eq name="try" value="1">
+
+<div style="position:absolute;left:39px;">
+
+<script Language="JavaScript">
+function CheckForm()
+{
+   if(document.form1.REGISTER_FILE.value=="")
+   { alert("注册文件路径不能为空！");
+     return (false);
+   }
+
+   if(!document.form1.USER_READ.checked)
+   { alert("您必须同意软件使用条款，才能进行软件注册！");
+     return (false);
+   }
+   return (true);
+}
+function displayregister()
+{
+	var press=document.getElementById('press');
+	var register=document.getElementById('register');
+	if(register.style.display=='none')
+	{
+			register.style.display='block';
+			press.value='点击收回';
+	}
+	else if(register.style.display=='block')
+	{
+		register.style.display='none';
+		press.value='点击注册';
+	}
+	return;
+}
+</script>
+
+您好，您正在使用的是畅联OA办公系统V3.1.19试用版本，如注册正式产品<input type="button" id="press" value="点击注册" onclick="displayregister()">，我们将为您提供最优质的服务。
+软件注册前可运行<font color='red'>{$trytime}</font>天。
+</br></br>
+<div class="content-box1 column-icon" id="register" style="display:none">
+<div class="content-box-content2">
+<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;畅联办公系统</span>
+内部版本号：V3.1.19&nbsp;南京畅联软件科技版权所有&nbsp;
+<a href="http://www.changlian365.com" target="_blank">www.changlian365.com</a>&nbsp;机器码：{$machine}
+
+<hr>
+
+<table border="1" align="center"><!-- class="TableBlock" -->
+<form enctype="multipart/form-data" action="__APP__/Public/reg_trial_submit" method="post" name="form1" onsubmit="return CheckForm();">
+
+    <tr  style="background:#FAFAFA;">
+      <td colspan="2"><b>授权文件：</b><input type="file" name="REGISTER_FILE" size="30" class="BigInput"></td>
+      <!--  <td nowrap class="TableData">
+        <input type="file" name="REGISTER_FILE" size="30" class="BigInput"><br>
+                      试用用户，请选择授权文件，进行操作 </td>-->
+    </tr>
+    <tr  style="background:#FAFAFA;">
+      <td class="TableData" colspan=2>
+      	<b></br>软件使用条款：</b>
+      	<font color=red>以下条款极为重要，请务必认真阅读，如您不接受以下条款，则请不要进行该操作</font><br><br>
+        1，如果您已通过正规渠道购买了本软件，请勿进行此操作。<br>
+        2，请确认您通过正规销售渠道获取了授权文件，如果您确认没有问题，可以略过以下条款。<br>
+        3，当使用未经授权的方式操作时，软件内置的版权保护机制将自动启动，并自动进行以下保护：<br>
+		收集使用者的单位信息(但不包含软件功能模块中的任何数据信息)，所收集的信息将作为侵权证据。同时对系统特定功能锁定。<br>
+        4，您不得以任何目的，对软件进行破解、反编译、反向工程、代码抄袭、修改软件版权信息等操作。<br>
+        5，如使用未经授权的方式注册，或进行软件破解操作，由此产生的一切直接、间接、可能或必然的损失，均由使用者自行承担，<br>
+		并同时承担版权侵权的法律负责。<br>
+        <br>
+        <input type="checkbox" name="USER_READ" size="20"  id="USER_READ"><b>我已经阅读以上条款，并且完全理解和同意以上条款</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="注册" class="BigButtonA"><!-- <label for="USER_READ" style="cursor:hand"> -->
+      </td>
+    </tr>
+</form>
+</table>
+
+<!-- </div>
+</div>
+</div> -->
+</eq>
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+
+  <!--dock menu JS options -->
+<script type="text/javascript">
+	
+	$(document).ready(
+		function()
+		{
+			$('#dock').Fisheye(
+				{
+					maxWidth: 50,
+					items: 'a',
+					itemsText: 'span',
+					container: '.dock-container',
+					itemWidth: 40,
+					proximity: 90,
+					halign : 'center'
+				}
+			)
+		}
+	);
+
+</script>
+
+
+
+
+
+
+
+
+	</body>
+</html>

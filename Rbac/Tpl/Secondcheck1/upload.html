@@ -1,0 +1,31 @@
+
+<link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/style.css?v=4.1.0" rel="stylesheet">
+
+
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+	</button>
+	<h4 class="modal-title">项目导入</h4>
+</div>
+<form method="post" action="__URL__/getexcel/callbackType/closeCurrent/navTabId/Second" ENCTYPE="multipart/form-data" onsubmit="return iframeCallback(this, dialogAjaxDone)">
+<div class="modal-body"> 
+	<input type="hidden" value="1" name="type">
+	<div class="form-group">
+		<label style="float:left">EXCEL文件</label>
+		<input type="file" class="form-control" name="file" style="width:100%">
+	</div>
+	
+	<div class="form-group">
+		<a href="__PUBLIC__/template/projects.xls" target="_blank">EXCEL模板下载</a>
+	</div>
+</div>
+<div class="modal-footer">
+	<button type="submit" class="btn btn-danger">提交</button>
+	<button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+</div>
+</form>

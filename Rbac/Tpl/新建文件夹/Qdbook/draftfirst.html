@@ -1,0 +1,200 @@
+
+<link rel="shortcut icon" href="favicon.ico"> 
+<link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/style.css?v=4.1.0" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+<link href="css/plugins/chosen/chosen.css" rel="stylesheet">
+
+    
+<div class="modal-header">
+	<h4 class="modal-title">项目基本信息登记表</h4>
+</div>
+<form method="post" action="__URL__/insert/callbackType/closeCurrent/navTabId/Second" ENCTYPE="multipart/form-data" class="form-horizontal">
+<div class="modal-body">
+	
+	<input type="hidden" value="{$orgdata.id}" name="id" id="id">
+	<!--
+	<input type="hidden" value="待签订合同" name="design_status">
+	-->
+	<input type="hidden" value="报价合约洽谈阶段" name="design_status">
+	
+	<!--
+	<div style="position:relative;top:0px;margin:0 auto;font-weight:bold;width:100%;">
+			<label>编写人:</label>
+			<input type="text"
+			style="font-size:15px;font-weight:bold;color:#676767;position:relative;border:0px;border-bottom:1px solid #BBBBBB;background:white;height:25px" name="name" value="{$orgdata.name}" disabled>
+			<label style="position:relative;padding-left:60px;">编写日期:</label>
+			<input value="{$orgdata[time]}" type="text" style="position:relative;border:0px;border-bottom:1px solid #BBBBBB;height:25px;background:white;" name="time" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" autocomplete="off" disabled>
+	</div>	
+	-->
+	<table class="drafttable" style="position:relative;top:28px;margin:0 auto;width:100%;margin-bottom:28px">
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">项目编号:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.number}" class="forminputlarge" name="number" required="" aria-required="true" disabled id="number">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">项目名称:</td>
+			<td class="normal" colspan="3">
+			<select type="text" class="chosen-select forminputlarge" name="title" required="" aria-required="true" onchange="selectTurnToUrl(this)">
+				<option>选择项目</option>
+				<volist name="allprojects" id="project">
+					<option value="{$project.title}" url="{$project.id}" title="{$project.number}">{$project.title}</option>
+				</volist>
+			</select>
+			</td>
+		</tr>
+		
+		<script>
+			function selectTurnToUrl(obj)
+			{
+				var id = $(obj).find("option:selected").attr("url");
+				var number = $(obj).find("option:selected").attr("title");
+				document.getElementById("id").value=id;
+				document.getElementById("number").value=number;
+			}
+		</script>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">报价类型:</td>
+			<td class="normal i-checks" colspan="3">
+			概算（<input type="radio" value="概算" name="type" <eq name="orgdata.type" value="概算">checked</eq>>）  
+			预算（<input type="radio" value="预算" name="type" <eq name="orgdata.type" value="预算">checked</eq>>） 
+			合同报价（<input type="radio" value="合同报价" name="type" <eq name="orgdata.type" value="合同报价">checked</eq>>） 
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">报价日期:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.offertime}" class="forminputlarge" name="offertime" required="" aria-required="true" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" autocomplete="off">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">报价金额（元）:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.offermoney}" class="forminputlarge" name="offermoney" required="" aria-required="true">
+			</td>
+		</tr>
+		
+		<!--
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">投标日期:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.bidtime}" class="forminputlarge" name="bidtime" required="" aria-required="true" onclick="laydate({istime: false, format: 'YYYY-MM-DD'})" autocomplete="off">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">投标金额:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.bidmoney}" class="forminputlarge" name="bidmoney" required="" aria-required="true">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">合同签约状态:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.contract_status}" class="forminputlarge" name="contract_status" required="" aria-required="true">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">合同编号:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.contract_number}" class="forminputlarge" name="contract_number" required="" aria-required="true">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">工期:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.period}" class="forminputlarge" name="period" required="" aria-required="true">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">付款方式:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.paytype}" class="forminputlarge" name="paytype" required="" aria-required="true">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">合同主要工程量:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.mainquantities}" class="forminputlarge" name="mainquantities" required="" aria-required="true">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">单价:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.price}" class="forminputlarge" name="price" required="" aria-required="true">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">合同总价:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.total}" class="forminputlarge" name="total" required="" aria-required="true">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">质保期:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.qa}" class="forminputlarge" name="qa" required="" aria-required="true">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">质保金比例:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.qapercent}" class="forminputlarge" name="qapercent" required="" aria-required="true">
+			</td>
+		</tr>
+		-->
+	
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">报价文件:</td>
+			<td class="normal" colspan="3">
+			<input type="file" multiple="multiple" class="form-control" name="file1[]" style="width:100%">
+			</td>
+		</tr>
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">技术方案:</td>
+			<td class="normal" colspan="3">
+			<input type="file" multiple="multiple" class="form-control" name="file2[]" style="width:100%">
+			</td>
+		</tr>
+		<!--
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px">到期提醒时间设置:</td>
+			<td class="normal" colspan="3">
+			<input type="text" value="{$orgdata.intentiontime}" class="forminputsmall" name="intentiontime">天
+			</td>
+		</tr>
+		-->
+    </table>
+	
+	
+
+</div>
+<div class="modal-footer">
+	<neq name="check" value="1">
+	<button type="submit" class="btn btn-danger">确认提交</button>
+	</neq>
+	<button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+</div>
+</form>
+<!-- Chosen -->
+<script src="js/plugins/chosen/chosen.jquery.js"></script>
+<script src="js/demo/form-advanced-demo.js"></script>
+<!-- Prettyfile -->
+<script src="js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+<script>
+	$('input[type="file"]').prettyFile();
+</script>
+
+<script>
+	$(document).ready(function () {
+		$('.i-checks').iCheck({
+			checkboxClass: 'icheckbox_square-green',
+			radioClass: 'iradio_square-green',
+		});
+	});
+</script>

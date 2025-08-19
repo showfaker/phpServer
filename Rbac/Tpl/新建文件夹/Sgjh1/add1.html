@@ -1,0 +1,82 @@
+
+<link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+<link href="css/animate.css" rel="stylesheet">
+<link href="css/style.css?v=4.1.0" rel="stylesheet">
+<link rel="stylesheet" href="css/main.css">
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span>
+	</button>
+	<h4 class="modal-title">施工计划审核</h4>
+</div>
+<form method="post" action="__APP__/Sgjh/insert1/callbackType/closeCurrent/navTabId/Second" ENCTYPE="multipart/form-data" onsubmit="return iframeCallback(this, dialogAjaxDone)">
+<div class="modal-body" id="file-pretty"> 
+	<input type="hidden" value="{$orgdata.id}" name="id">
+	<div class="form-group">
+		<label style="float:left">项目名称</label>
+		<input type="text" placeholder="" class="form-control" readonly value="{$orgdata['title']}">
+	</div>
+	<table class="drafttable" style="position:relative;top:8px;margin:0 auto;width:100%;margin-bottom:28px;font-family:微软雅黑">
+		<tr>
+			<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6">专项</td>
+			<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6">节点</td>
+			<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6">计划开始时间</td>
+			<td class="normal" style="font-weight:bold;height:45px;background-color:#F5F5F6">计划完成时间</td>
+		</tr>
+		<volist name="orgdata.worktype" id="worktype">
+		<tr>
+			<eq name="worktype.block" value="1">
+			<td class="normal" rowspan="{$worktype.rowspan}" style="font-weight:bold;height:45px">{$worktype.pworktype}</td>
+			</eq>
+			<td class="normal" >
+			{$worktype.title}
+			</td>
+			<td class="normal" >
+			{$schedules[$key][plantimebegin]}
+			
+			<neq name="schedules[$key][plantimebegintmp]" value="">
+			<neq name="schedules[$key][plantimebegin]" value="$schedules[$key][plantimebegintmp]">
+			<font style="color:red"></br>变更为</br>{$schedules[$key][plantimebegintmp]}</font>
+			</neq>
+			</neq>
+			</td>
+			<td class="normal" >
+			{$schedules[$key][plantimeend]}
+			<neq name="schedules[$key][plantimeendtmp]" value="">
+			<neq name="schedules[$key][plantimeend]" value="$schedules[$key][plantimeendtmp]">
+			<font style="color:red"></br>变更为</br>{$schedules[$key][plantimeendtmp]}</font>
+			</neq>
+			</neq>
+			</td>
+		</tr>
+		</volist>
+	</table>
+	<div class="form-group">
+		<label style="float:left">审核结果</label>
+		<select name="result" class="form-control">
+			<option value="通过">通过</option>
+			<option value="退回">退回</option>
+		</select>
+	</div>
+	<div class="form-group">
+		<label style="float:left">审核备注</label>
+		<textarea name="suggestion" class="form-control">
+		</textarea>
+	</div>
+</div>
+<div class="modal-footer">
+	<button type="submit" class="btn btn-danger">提交</button>
+	<button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
+</div>
+
+
+
+</form>
+
+<!-- Prettyfile -->
+<script src="js/plugins/prettyfile/bootstrap-prettyfile.js"></script>
+<script>
+	$('input[type="file"]').prettyFile();
+</script>

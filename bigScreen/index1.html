@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>南电发电建设项目数据平台</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" /> 
+		<link rel="stylesheet" href="css/css.css">
+		<style type="text/css">
+			@font-face {
+				font-family: 'DS-Digital';
+				src: url(images/DS-DIGIB.TTF);
+			}
+
+			.hide {
+				opacity: 0;
+			}
+
+			.line1 {
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+			}
+
+			.statusCard {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				box-sizing: border-box;
+				text-align: center;
+			}
+
+			.statusCard1 {
+				width: 602px;
+				height: 498px;
+				background: url(images/statusCard1.png) no-repeat;
+				background-size: 100%;
+				padding: 50px 200px;
+			}
+
+			.statusCard2,
+			.statusCard3,
+			.statusCard4 {
+				width: 482px;
+				height: 388px;
+				padding: 50px 120px;
+			}
+
+			.statusCard2 {
+				background: url(images/statusCard2.png) no-repeat;
+				background-size: 100%;
+			}
+
+			.statusCard3 {
+				background: url(images/statusCard3.png) no-repeat;
+				background-size: 100%;
+			}
+
+			.statusCard4 {
+				background: url(images/statusCard4.png) no-repeat;
+				background-size: 100%;
+			}
+
+			.statusCard .title {
+				margin-top: 10px;
+				font-size: 45px;
+				font-weight: bold;
+			}
+
+			.statusCard .value {
+				font-size: 96px;
+				font-family: DS-Digital;
+				font-weight: bold;
+				color: #FFDE2C;
+			}
+
+			.statusCard1 .title {
+				font-size: 48px;
+			}
+
+			.statusCard1 .value {
+				font-size: 109px;
+			}
+
+			.table {
+				text-align: center;
+				position: relative;
+			}
+
+			.table .tableTitle {
+				height: 162px;
+				line-height: 162px;
+				background-size: 100%;
+				font-size: 60px;
+				color: #2ADCF6;
+			}
+
+			.table1 .tableTitle {
+				width: 810px;
+				background: url(images/kuang1.png) no-repeat;
+				background-size: 100%;
+			}
+
+			.table2 .tableTitle {
+				width: 1652px;
+				background: url(images/kuang2.png) no-repeat;
+				background-size: 100%;
+			}
+
+			.table .tableContent {
+				margin-top: 30px;
+				font-size: 36px;
+			}
+
+			.table .tableContent .row {
+				height: 105px;
+				margin-top: 6px;
+			}
+
+			.table .tableContent .row:nth-child(odd) {
+				background: rgba(74, 192, 202, .1);
+			}
+
+			.table .tableContent .row:nth-child(even) {
+				background: rgba(13, 51, 140, .3);
+			}
+
+			.table .tableContent .row:first-child {
+				background: rgba(247, 181, 0, .15);
+			}
+
+			.table .tableContent .data {
+				position: absolute;
+				width: 100%;
+				top: 186px;
+			}
+
+			.table .tableContent .data .dataRow {
+				height: 105px;
+				margin-top: 6px;
+				padding: 0 20px;
+				display: flex;
+				align-items: center;
+			}
+
+			.card {
+				padding: 76px;
+				box-sizing: border-box;
+			}
+
+			.card>.title {
+				font-size: 60px;
+				color: #60EEFA;
+				text-align: center;
+			}
+
+			.chart1 {
+				width: 1992px;
+				height: 942px;
+				background: url(images/kuang3.png) no-repeat;
+				background-size: 100%;
+			}
+
+			.chart2 {
+				width: 1311px;
+				height: 942px;
+				background: url(images/kuang4.png) no-repeat;
+				background-size: 100%;
+			}
+
+			.totCardBox {
+				width: 1302px;
+				position: absolute;
+				top: 210px;
+				right: 400px;
+				display: flex;
+				align-items: center;
+				justify-content: space-around;
+				flex-wrap: wrap;
+				z-index: 1;
+			}
+
+			.totCard {
+				width: 486px;
+				height: 304px;
+				margin: 67px 82.5px;
+				background: url(images/kuang5.png) no-repeat;
+				background-size: 100%;
+				text-align: center;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+			}
+
+			.totCard .title {
+				font-size: 46px;
+			}
+
+			.totCard .value {
+				font-size: 152px;
+				font-family: DS-Digital;
+				font-weight: bold;
+				color: #44D7B6;
+			}
+
+			.selectTotCard {
+				width: 571px;
+				height: 358px;
+				margin: 40px;
+				background: url(images/kuang6.png) no-repeat;
+				background-size: 100%;
+			}
+
+			.selectTotCard .title {
+				font-size: 53px;
+			}
+
+			.selectTotCard .value {
+				font-size: 177px;
+				color: #F9C400;
+			}
+
+			#map {
+				width: 2199px;
+				height: 2057px;
+				margin: 0 auto;
+				background: url(images/jiangsu.png) no-repeat;
+				background-size: 100%;
+				position: relative;
+				right: 220px;
+			}
+
+			#map>div {
+				position: absolute;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				cursor: pointer;
+			}
+
+			#map>div:hover .icon {
+				transform: scale(1.2);
+			}
+
+			#map>div .icon {
+				width: 140px;
+				height: 181px;
+				font-size: 72px;
+				transition: all .3s;
+				background: url(images/location3.png) no-repeat;
+				background-size: 100%;
+				display: flex;
+				justify-content: center;
+				padding-top: 30px;
+			}
+
+			#map>div .city {
+				font-size: 75px;
+				margin-top: 5px;
+			}
+
+			#map>div .selectIcon {
+				width: 173px;
+				height: 238px;
+				font-size: 72px;
+				background: url(images/location2.png) no-repeat;
+				background-size: 100%;
+				display: flex;
+				justify-content: center;
+				padding-top: 40px;
+			}
+
+			.buttonBox {
+				position: absolute;
+				bottom: 500px;
+				left: 500px;
+				font-size: 42px;
+			}
+
+			.buttonBox2 {
+				position: absolute;
+				bottom: 750px;
+				left: 550px;
+			}
+
+			.numCard {
+				border: 2px solid #030000;
+				border-radius: 50%;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				box-sizing: border-box;
+				text-align: center;
+				font-size: 36px;
+				padding: 0 20px;
+			}
+
+			.numCard .title {
+				margin-top: 10px;
+				font-size: 45px;
+			}
+
+			.numCard .value {
+				font-size: 91px;
+				font-family: DS-Digital;
+				font-weight: bold;
+			}
+
+			.numCard1 {
+				width: 382px;
+				height: 382px;
+				background: radial-gradient(circle, #01CFFE, #2769E9);
+			}
+
+			.numCard2 {
+				width: 361px;
+				height: 361px;
+				background: radial-gradient(circle, #D7CCFF, #8c70f8);
+			}
+
+			.numCard3 {
+				width: 270px;
+				height: 270px;
+				background: radial-gradient(circle, #01CFFE, #2769E9);
+			}
+
+			.numCard4 {
+				width: 273px;
+				height: 273px;
+				background: radial-gradient(circle, #15ED8A, #0DAC6D);
+			}
+
+			.numCard5 {
+				width: 322px;
+				height: 322px;
+				background: radial-gradient(circle, #FAB600, #F39700);
+			}
+
+			.numCard3 .title,
+			.numCard4 .title {
+				font-size: 36px;
+			}
+			
+			body{ zoom:0.311!important; }
+		</style>
+	</head>
+	<body style="font-size: 45.5px;color: #fff;margin: 0;background: #02072F;">
+		<div id="app" style="width: 11520px;height: 2880px;overflow: hidden; background: url(images/bg.jpg) no-repeat">
+			<div style="display: flex;justify-content: space-between; margin: 73px 144px 0;">
+				<div style="flex: 1;">
+					<div class="hide" style="display: flex; justify-content: space-between;align-items: center;">
+						<div class="statusCard statusCard1" style="padding-top:70px">
+							<div class="value">{{dispData.totNumOfItems}}</div>
+							<div class="title">项目总数</div>
+						</div>
+						<div class="statusCard statusCard2">
+							<div class="value">{{dispData.toBeConstructed}}</div>
+							<div class="title">待施工</div>
+						</div>
+						<div class="statusCard statusCard2">
+							<div class="value">{{dispData.underConstruction}}</div>
+							<div class="title">施工中</div>
+						</div>
+						<div class="statusCard statusCard2">
+							<div class="value">{{dispData.hysteresis}}</div>
+							<div class="title">待验收</div>
+						</div>
+						<div class="statusCard statusCard4">
+							<div class="value">{{dispData.completed}}</div>
+							<div class="title">已完成</div>
+						</div>
+					</div>
+					<div class="hide" style="display: flex;justify-content: space-between;margin-top: 63px;">
+						<div class="table table1">
+							<div class="tableTitle">建设周期最长TOP10</div>
+							<div class="tableContent">
+								<div v-for="(item,index) in [0,1,2,3,4,5,6,7]" :key="index" class="row"></div>
+								<div class="data">
+									<div class="dataRow">
+										<div style="width: 40%;">项目名称</div>
+										<div style="width: 30%;">区域</div>
+										<div style="width: 30%;">周期(天)</div>
+									</div>
+									<div class="dataRow" v-for="(item,index) in top10WithTheLongestConstructionPd"
+										:key="index">
+										<div style="width: 40%;">{{item.name}}</div>
+										<div style="width: 30%;">{{item.area}}</div>
+										<div style="width: 30%;">{{item.cycle}}</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="table table1">
+							<div class="tableTitle">建设周期最短TOP10</div>
+							<div class="tableContent">
+								<div v-for="(item,index) in [0,1,2,3,4,5,6,7]" :key="index" class="row"></div>
+								<div class="data">
+									<div class="dataRow">
+										<div style="width: 40%;">项目名称</div>
+										<div style="width: 30%;">区域</div>
+										<div style="width: 30%;">周期(天)</div>
+									</div>
+									<div class="dataRow" v-for="(item,index) in top10WithTheShortestConstructionPd"
+										:key="index">
+										<div style="width: 40%;">{{item.name}}</div>
+										<div style="width: 30%;">{{item.area}}</div>
+										<div style="width: 30%;">{{item.cycle}}</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="table table1">
+							<div class="tableTitle">装机容量最大TOP10</div>
+							<div class="tableContent">
+								<div v-for="(item,index) in [0,1,2,3,4,5,6,7]" :key="index" class="row"></div>
+								<div class="data">
+									<div class="dataRow">
+										<div style="width: 40%;">项目名称</div>
+										<div style="width: 30%;">区域</div>
+										<div style="width: 30%;">周期(天)</div>
+									</div>
+									<div class="dataRow" v-for="(item,index) in top10WithTheShortestPowerCycle"
+										:key="index">
+										<div style="width: 40%;">{{item.name}}</div>
+										<div style="width: 30%;">{{item.area}}</div>
+										<div style="width: 30%;">{{item.cycle}}</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="table table1">
+							<div class="tableTitle">装机容量最小TOP10</div>
+							<div class="tableContent">
+								<div v-for="(item,index) in [0,1,2,3,4,5,6,7]" :key="index" class="row"></div>
+								<div class="data">
+									<div class="dataRow">
+										<div style="width: 40%;">项目名称</div>
+										<div style="width: 30%;">区域</div>
+										<div style="width: 30%;">周期（天）</div>
+									</div>
+									<div class="dataRow" v-for="(item,index) in top10WithTheShortestPowerCycle"
+										:key="index">
+										<div style="width: 40%;">{{item.name}}</div>
+										<div style="width: 30%;">{{item.area}}</div>
+										<div style="width: 30%;">{{item.cycle}}</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div style="display: flex;justify-content: space-between;margin-top: 94px;">
+						<div class="card chart1">
+							<div class="title">省份项目数统计情况</div>
+							<div id="echart1" style="width: 100%;height: 100%;"></div>
+						</div>
+						<div class="card chart2">
+							<div class="title">项目类型饼图</div>
+							<div id="echart2" style="width: 100%;height: 100%;"></div>
+						</div>
+					</div>
+				</div>
+				<div
+					style="width: 3480px; padding:0 500px; margin-top: 245px;position: relative;background: url(images/bg1.png) no-repeat;background-size: 50%;background-position: right 30%;">
+					<div class="totCardBox hide">
+						<div class="totCard selectTotCard">
+							<div class="value">{{totNumOfItems}}</div>
+							<div class="title">项目总数</div>
+						</div>
+						<div class="totCard">
+							<div class="value">{{numOfSubstationProjects}}</div>
+							<div class="title">集中式项目数</div>
+						</div>
+						<div class="totCard">
+							<div class="value">{{numOfChargingStationItems}}</div>
+							<div class="title">分布式项目数</div>
+						</div>
+						<div class="totCard">
+							<div class="value">{{numOfLowspeedVehicles}}</div>
+							<div class="title">风力项目数</div>
+						</div>
+					</div>
+					<div class="hide" id="map">
+						<div style="top: 50px;left: 1050px;" @click="route('连云港')">
+							<div class="icon">{{dispData.numOfMapProjects.find(item=>{return item.city=='连云港市'}).value}}
+							</div>
+							<div class="city">连云港</div>
+						</div>
+						<div style="top: 120px;left: 500px;" @click="route('徐州')">
+							<div class="icon">{{dispData.numOfMapProjects.find(item=>{return item.city=='徐州市'}).value}}
+							</div>
+							<div class="city">徐州</div>
+						</div>
+						<div style="top: 350px;left: 800px;" @click="route('宿迁')">
+							<div class="icon">{{dispData.numOfMapProjects.find(item=>{return item.city=='宿迁市'}).value}}
+							</div>
+							<div class="city">宿迁</div>
+						</div>
+						<div style="top: 500px;left: 1000px;" @click="route('淮安')">
+							<div class="icon">{{dispData.numOfMapProjects.find(item=>{return item.city=='淮安市'}).value}}
+							</div>
+							<div class="city">淮安</div>
+						</div>
+						<div style="top: 550px;left: 1400px;" @click="route('盐城')">
+							<div class="icon">{{dispData.numOfMapProjects.find(item=>{return item.city=='盐城市'}).value}}
+							</div>
+							<div class="city">盐城</div>
+						</div>
+						<div style="top: 850px;left: 1180px;" @click="route('扬州')">
+							<div class="icon">{{dispData.numOfMapProjects.find(item=>{return item.city=='扬州市'}).value}}
+							</div>
+							<div class="city">扬州</div>
+						</div>
+						<div style="top: 1250px;left: 900px;" @click="route('南京')">
+							<div class="icon">{{dispData.numOfMapProjects.find(item=>{return item.city=='南京市'}).value}}
+							</div>
+							<div class="city">南京</div>
+						</div>
+						<div style="top: 1200px;left: 1150px;" @click="route('镇江')">
+							<div class="icon">{{dispData.numOfMapProjects.find(item=>{return item.city=='镇江市'}).value}}
+							</div>
+							<div class="city">镇江</div>
+						</div>
+						<div style="top: 1050px;left: 1400px;" @click="route('泰州')">
+							<div class="icon">{{dispData.numOfMapProjects.find(item=>{return item.city=='泰州市'}).value}}
+							</div>
+							<div class="city">泰州</div>
+						</div>
+						<div style="top: 1100px;left: 1700px;" @click="route('南通')">
+							<div class="icon">{{dispData.numOfMapProjects.find(item=>{return item.city=='南通市'}).value}}
+							</div>
+							<div class="city">南通</div>
+						</div>
+						<div style="top: 1400px;left: 1320px;" @click="route('常州')">
+							<div class="icon">{{dispData.numOfMapProjects.find(item=>{return item.city=='常州市'}).value}}
+							</div>
+							<div class="city">常州</div>
+						</div>
+						<div style="top: 1380px;left: 1530px;" @click="route('无锡')">
+							<div class="icon">{{dispData.numOfMapProjects.find(item=>{return item.city=='无锡市'}).value}}
+							</div>
+							<div class="city">无锡</div>
+						</div>
+						<div style="top: 1550px;left: 1680px;" @click="route('苏州')">
+							<div class="icon">
+								{{dispData.numOfMapProjects.find(item=>{return item.city=='苏州市'}).value}}
+							</div>
+							<div class="city">苏州</div>
+						</div>
+					</div>
+					<div class="buttonBox2 hide">
+						<div style="width: 634px;height: 305px;background-image: url(images/dizuo2.png);background-size: 100%;display: flex;justify-content: space-between;align-items: center;">
+						·	<div style="display: flex;margin-left: -340px;margin-top: 90px;">
+								<div style="display: flex;flex-direction: column;align-items: center;margin-top: 30px;margin-right: 0px;">
+									<div style="font-size: 60px;font-family: DS-Digital;font-weight: bold;color: #FFFFFF;">{{numOfSubstationProjects}}</div>
+									<div style="font-size: 36px;font-weight: bold;color: #2693F9;margin-top: 20px;">集中式项目总数</div>
+								</div>
+								<div @click="changeMode(1)" style="cursor:pointer;width: 167px;height: 142px;background-image: url(images/huandian_icon.png);background-repeat: no-repeat;background-size: 100%;"></div>
+							</div>
+							<div style="height: 700px;display: flex;flex-direction: column;justify-content: space-between;margin-top: 70px;margin-left: 20px;">
+								<div style="display: flex;flex-direction: column;align-items: center;">
+									<div style="font-size: 60px;font-family: DS-Digital;font-weight: bold;color: #EFB474;margin-bottom: 30px;">{{totNumOfItems}}</div>
+									<div style="width: 131px;height: 156px;background-image: url(images/xiangmuzongshu_icon.png);background-repeat: no-repeat;background-size: 100%;"></div>
+								</div>
+								<div style="display: flex;flex-direction: column;align-items: center;margin-left: 60px;">
+									<div @click="changeMode(0)" style="cursor:pointer;width: 210px;height: 170px;background-image: url(images/chongdian_icon.png);background-repeat: no-repeat;background-size: 100%;"></div>
+									<div style="font-size: 72px;font-family: DS-Digital;font-weight: bold;color: #FFFFFF;margin-top: 30px;">{{numOfChargingStationItems}}</div>
+									<div style="font-size: 36px;font-weight: bold;color: #2693F9;margin-top: 20px;">分布式项目总数</div>
+								</div>
+							</div>
+						·	<div style="display: flex;margin-right: -320px;margin-bottom: 90px;">
+								<div @click="changeMode(2)" style="cursor:pointer;width: 167px;height: 142px;background-image: url(images/disuche_icon.png);background-repeat: no-repeat;background-size: 100%;margin-top: 30px;"></div>
+								<div style="display: flex;flex-direction: column;align-items: center;margin-left: 0px;">
+									<div style="font-size: 60px;font-family: DS-Digital;font-weight: bold;color: #FFFFFF;">{{numOfLowspeedVehicles}}</div>
+									<div style="font-size: 36px;font-weight: bold;color: #2693F9;margin-top: 20px;">风力项目总数</div>
+								</div>
+							</div>
+						</div>
+					</div>
+<!-- 					<div class="buttonBox hide">
+						<div class="ui_base u_p3d">
+							<div class="ball_c"></div>
+							<div class="base u_p3d">
+								<div class="ball_base u_p3d ball_1">
+									<div :class="['ball',mode==0?'ball1Select':'']" @click="changeMode(0)">
+										<div>分布式</div>
+										<div style="white-space: nowrap;">项目总数{{numOfChargingStationItems}}</div>
+									</div>
+								</div>
+								<div class="ball_base u_p3d ball_2">
+									<div :class="['ball',mode==1?'ball2Select':'']" @click="changeMode(1)">
+										<div>集中式</div>
+										<div style="white-space: nowrap;">项目总数{{numOfSubstationProjects}}</div>
+									</div>
+								</div>
+								<div class="ball_base u_p3d ball_3">
+									<div :class="['ball',mode==2?'ball3Select':'']" @click="changeMode(2)">
+										<div>风力</div>
+										<div style="white-space: nowrap;">项目总数{{numOfLowspeedVehicles}}</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div> -->
+				</div>
+				<div style="flex: 1;">
+					<div class="hide"
+						style="display: flex;justify-content: space-between;align-items: center;margin-top: 116px;">
+						<div class="numCard numCard1">
+							<div>
+								<span class="value">{{dispData.numOfItemsInStg}}</span>个
+							</div>
+							<div class="title">进行中项目数</div>
+						</div>
+						<div class="numCard numCard1">
+							<div>
+								<span class="value">{{dispData.numOfProjectsInFeasibilityStdy}}</span>个
+							</div>
+							<div class="title">完成10%项目数</div>
+						</div>
+						<div class="numCard numCard1">
+							<div>
+								<span class="value">{{dispData.numOfProjectsInBidding}}</span>个
+							</div>
+							<div class="title">完成30%项目数</div>
+						</div>
+						<div class="numCard numCard1">
+							<div>
+								<span class="value">{{dispData.numOfProjectsUnderContract}}</span>个
+							</div>
+							<div class="title">完成50%项目数</div>
+						</div>
+						<div class="numCard numCard1">
+							<div>
+								<span class="value">{{dispData.numOfProjectsUnderConstruction}}</span>个
+							</div>
+							<div class="title">完成70%项目数</div>
+						</div>
+						<div class="numCard numCard1">
+							<div>
+								<span class="value">{{dispData.numOfItemsInAcceptance}}</span>个
+							</div>
+							<div class="title">完成90%项目数</div>
+						</div>
+						<div class="numCard numCard1">
+							<div>
+								<span class="value">{{dispData.numOfProjectsInOperation}}</span>个
+							</div>
+							<div class="title">完成项目数</div>
+						</div>
+					</div>
+					<div style="display: flex;justify-content: space-between;margin-top: 150px;">
+						<div class="card chart1">
+							<div class="title">各省份投资项目数</div>
+							<div id="echart3" style="width: 100%;height: 100%;"></div>
+						</div>
+						<div class="card chart2">
+							<div class="title">近6个月项目新建/完成情况</div>
+							<div id="echart4" style="width: 100%;height: 100%;"></div>
+						</div>
+					</div>
+					<div class="hide" style="display: flex;justify-content: space-between;margin-top: 130px;">
+						<div class="table table2">
+							<div class="tableTitle">最近新建项目Top10</div>
+							<div class="tableContent">
+								<div v-for="(item,index) in [0,1,2,3,4,5,6]" :key="index" class="row"></div>
+								<div class="data">
+									<div class="dataRow">
+										<div style="width: 55%;">项目名称</div>
+										<div style="width: 15%;">区域</div>
+										<div style="width: 15%;">开始时间</div>
+										<div style="width: 15%;">结束时间</div>
+									</div>
+									<div class="dataRow" v-for="(item,index) in top10NewlyBuiltProjects" :key="index">
+										<div style="width: 55%;">{{item.name}}</div>
+										<div style="width: 15%;">{{item.area}}</div>
+										<div style="width: 15%;">{{item.startTime}}</div>
+										<div style="width: 15%;">{{item.endTime}}</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="table table2">
+							<div class="tableTitle">最近完成项目Top10</div>
+							<div class="tableContent">
+								<div v-for="(item,index) in [0,1,2,3,4,5,6]" :key="index" class="row"></div>
+								<div class="data">
+									<div class="dataRow">
+										<div style="width: 55%;">项目名称</div>
+										<div style="width: 15%;">区域</div>
+										<div style="width: 15%;">开始时间</div>
+										<div style="width: 15%;">结束时间</div>
+									</div>
+									<div class="dataRow" v-for="(item,index) in top10RecentlyCompletedProjects"
+										:key="index">
+										<div style="width: 55%;">{{item.name}}</div>
+										<div style="width: 15%;">{{item.area}}</div>
+										<div style="width: 15%;">{{item.startTime}}</div>
+										<div style="width: 15%;">{{item.endTime}}</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/vue.js"></script>
+		<script src="js/echarts.min.js"></script>
+		<script src="js/data1.js"></script>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el: '#app',
+				data: {
+					// mode0:分布式,mode1:集中式,mode2:风力
+					mode: 0,
+					date: new Date(),
+					top10WithTheLongestConstructionPdFlag: true,
+					theLongestPowerCycleTop10Flag: true,
+					top10WithTheShortestConstructionPdFlag: true,
+					top10WithTheShortestPowerCycleFlag: true,
+					top10NewProjectsFlag: true,
+					top10ProjectsCompletedFlag: true,
+					totNumOfItems: '',
+					numOfChargingStationItems: '',
+					numOfSubstationProjects: '',
+					numOfLowspeedVehicles: ''
+				},
+				computed: {
+					dispData: function() {
+						if (this.mode == 0) {
+							return chaData
+						} else if (this.mode == 1) {
+							return repData
+						} else if (this.mode == 2) {
+							return lowData
+						}
+					},
+					// 建设周期最长Top10
+					top10WithTheLongestConstructionPd: function() {
+						if (this.dispData.top10WithTheLongestConstructionPd.length > 7) {
+							if (Date.parse(this.date) / 1000 % 10 == 0) {
+								this.top10WithTheLongestConstructionPdFlag = !this
+									.top10WithTheLongestConstructionPdFlag
+							}
+							if (this.top10WithTheLongestConstructionPdFlag) {
+								return this.dispData.top10WithTheLongestConstructionPd.slice(0, 7)
+							} else {
+								return this.dispData.top10WithTheLongestConstructionPd.slice(7)
+							}
+						} else {
+							return this.dispData.top10WithTheLongestConstructionPd
+						}
+					},
+					// 建设周期最短Top10
+					top10WithTheShortestConstructionPd: function() {
+						if (this.dispData.top10WithTheShortestConstructionPd.length > 7) {
+							if (Date.parse(this.date) / 1000 % 10 == 0) {
+								this.top10WithTheShortestConstructionPdFlag = !this
+									.top10WithTheShortestConstructionPdFlag
+							}
+							if (this.top10WithTheShortestConstructionPdFlag) {
+								return this.dispData.top10WithTheShortestConstructionPd.slice(0, 7)
+							} else {
+								return this.dispData.top10WithTheShortestConstructionPd.slice(7)
+							}
+						} else {
+							return this.dispData.top10WithTheShortestConstructionPd
+						}
+					},
+					// 接电周期最长Top10
+					theLongestPowerCycleTop10: function() {
+						if (this.dispData.theLongestPowerCycleTop10.length > 7) {
+							if (Date.parse(this.date) / 1000 % 10 == 0) {
+								this.theLongestPowerCycleTop10Flag = !this.theLongestPowerCycleTop10Flag
+							}
+							if (this.theLongestPowerCycleTop10Flag) {
+								return this.dispData.theLongestPowerCycleTop10.slice(0, 7)
+							} else {
+								return this.dispData.theLongestPowerCycleTop10.slice(7)
+							}
+						} else {
+							return this.dispData.theLongestPowerCycleTop10
+						}
+					},
+					// 接电周期最短Top10
+					top10WithTheShortestPowerCycle: function() {
+						if (this.dispData.top10WithTheShortestPowerCycle.length > 7) {
+							if (Date.parse(this.date) / 1000 % 10 == 0) {
+								this.top10WithTheShortestPowerCycleFlag = !this.top10WithTheShortestPowerCycleFlag
+							}
+							if (this.top10WithTheShortestPowerCycleFlag) {
+								return this.dispData.top10WithTheShortestPowerCycle.slice(0, 7)
+							} else {
+								return this.dispData.top10WithTheShortestPowerCycle.slice(7)
+							}
+						} else {
+							return this.dispData.top10WithTheShortestPowerCycle
+						}
+					},
+					// 最近新建项目Top10
+					top10NewlyBuiltProjects: function() {
+						if (this.dispData.top10NewlyBuiltProjects.length > 6) {
+							if (Date.parse(this.date) / 1000 % 10 == 0) {
+								this.top10NewProjectsFlag = !this.top10NewProjectsFlag
+							}
+							if (this.top10NewProjectsFlag) {
+								return this.dispData.top10NewlyBuiltProjects.slice(0, 6)
+							} else {
+								return this.dispData.top10NewlyBuiltProjects.slice(6)
+							}
+						} else {
+							return this.dispData.top10NewlyBuiltProjects
+						}
+					},
+					// 最近完成项目Top10
+					top10RecentlyCompletedProjects: function() {
+						if (this.dispData.top10RecentlyCompletedProjects.length > 6) {
+							if (Date.parse(this.date) / 1000 % 10 == 0) {
+								this.top10ProjectsCompletedFlag = !this.top10ProjectsCompletedFlag
+							}
+							if (this.top10ProjectsCompletedFlag) {
+								return this.dispData.top10RecentlyCompletedProjects.slice(0, 6)
+							} else {
+								return this.dispData.top10RecentlyCompletedProjects.slice(6)
+							}
+						} else {
+							return this.dispData.top10RecentlyCompletedProjects
+						}
+					}
+				},
+				beforeDestroy() {
+					if (this.timer) {
+						clearInterval(this.timer);
+					}
+				},
+				mounted() {
+					this.timer = setInterval(() => {
+						this.date = new Date();
+					}, 1000);
+
+					this.totNumOfItems = totNumOfItems
+					this.numOfChargingStationItems = numOfChargingStationItems
+					this.numOfSubstationProjects = numOfSubstationProjects
+					this.numOfLowspeedVehicles = numOfLowspeedVehicles
+					this.creatEcharts()
+
+					var elements = document.getElementsByClassName('hide')
+					Array.prototype.forEach.call(elements, function(element) {
+						element.style.opacity = 1
+					});
+				},
+				methods: {
+					route(city) {
+						window.location = `city.html?city=${city}`
+					},
+					changeMode(value) {
+						this.mode = value
+						this.creatEcharts()
+					},
+					creatEcharts() {
+						var chartDom = document.getElementById('echart1');
+						var myChart = echarts.init(chartDom);
+						var option;
+
+						option = {
+							color: ['#4154cd', '#ebc671', '#22afd3', '#8749f4'],
+							tooltip: {},
+							legend: {
+								right: 0,
+								top: 50,
+								itemGap: 50, //图例间隔默认10
+								itemWidth: 50, //图例宽度默认25
+								itemHeight: 20, //图例高度默认14
+								textStyle: {
+									color: '#fff',
+									fontSize: 30.22
+								}
+							},
+							grid: {
+								top: 200,
+								bottom: 150,
+								left: 60,
+								right: 60
+							},
+							xAxis: {
+								data: this.dispData.proportionOfProjectsIn13Cities.map(item => {
+									return item.city
+								}),
+								axisLabel: {
+									textStyle: {
+										color: "#fff",
+										fontSize: 30.22,
+									},
+									margin: 30,
+									rotate: 45
+								},
+								axisLine: {
+									lineStyle: {
+										color: '#4e5a82' //x轴轴线颜色
+									}
+								},
+								axisTick: {
+									lineStyle: {
+										color: '#4e5a82' //x轴刻度线颜色
+									},
+									length: 10 //x轴刻度线长度
+								},
+							},
+							yAxis: {
+								name: '个',
+								nameTextStyle: {
+									color: "#fff",
+									fontSize: 30,
+								},
+								nameGap: 70,
+								splitLine: {
+									lineStyle: {
+										color: ['#4e5a82'] //分割线颜色
+									}
+								},
+								axisLabel: {
+									textStyle: {
+										color: "#fff",
+										fontSize: 30.22,
+									}
+								},
+							},
+							series: [{
+								name: '项目总数',
+								type: 'bar',
+								barWidth: 50,
+								emphasis: {
+									focus: 'series',
+									blurScope: 'coordinateSystem'
+								},
+								data: this.dispData.proportionOfProjectsIn13Cities.map(item => {
+									return item.totNumOfItems
+								})
+							}, {
+								name: '待施工',
+								type: 'line',
+								barGap: "-100%",
+								symbolSize: 15,
+								lineStyle: {
+									width: 4
+								},
+								emphasis: {
+									focus: 'series',
+									blurScope: 'coordinateSystem'
+								},
+								data: this.dispData.proportionOfProjectsIn13Cities.map(item => {
+									return item.toBeConstructed
+								})
+							}, {
+								name: '施工中',
+								type: 'bar',
+								barGap: "-100%",
+								barWidth: 50,
+								emphasis: {
+									focus: 'series',
+									blurScope: 'coordinateSystem'
+								},
+								data: this.dispData.proportionOfProjectsIn13Cities.map(item => {
+									return item.underConstruction
+								})
+							}, {
+								name: '已完成',
+								type: 'bar',
+								barGap: "-100%",
+								barWidth: 50,
+								emphasis: {
+									focus: 'series',
+									blurScope: 'coordinateSystem'
+								},
+								data: this.dispData.proportionOfProjectsIn13Cities.map(item => {
+									return item.completed
+								})
+							}]
+						};
+
+						option && myChart.setOption(option);
+
+						var chartDom = document.getElementById('echart2');
+						var myChart = echarts.init(chartDom);
+						var option;
+
+						option = {
+							color: ['#286aea', '#1940d2', '#0d2b9c', '#4154cd', '#5141cd', '#2adcf6', '#ffc000',
+								'#ed6e6e', '#6eedaa'
+							],
+							tooltip: {
+								trigger: 'item'
+							},
+							legend: {
+								orient: 'vertical',
+								right: '0%',
+								top: '10%',
+								itemGap: 60, //图例间隔默认10
+								textStyle: {
+									color: '#fff',
+									fontSize: 36
+								},
+								formatter: name => {
+									let num = ''
+									let per = ''
+									num = this.dispData.stationClassification.find(item => {
+										return item.name == name
+									}).value
+									// per=(num/this.dispData.totStationClassification*100).toFixed(2)
+									// return `${name+num}个${per}%`;
+									return `${name+num}个`
+								}
+							},
+							series: [{
+								name: '场站分类',
+								type: 'pie',
+								radius: ['30%', '50%'],
+								center: ["20%", "45%"],
+								label: {
+									show: false,
+									position: "center",
+									formatter: '{b}{c}个 {d}%',
+									fontSize: 36,
+									color: '#fff'
+								},
+								emphasis: {
+									label: {
+										show: true,
+									}
+								},
+								data: this.dispData.stationClassification
+							}]
+						};
+
+						option && myChart.setOption(option);
+
+						var chartDom = document.getElementById('echart3');
+						var myChart = echarts.init(chartDom);
+						var option;
+
+						option = {
+							color: ['#17a7f3', '#8749f4', '#fed574', '#f39700'],
+							tooltip: {},
+							legend: {
+								// orient: 'vertical',
+								right: 0,
+								top: 30,
+								itemGap: 50, //图例间隔默认10
+								itemWidth: 50, //图例宽度默认25
+								itemHeight: 20, //图例高度默认14
+								textStyle: {
+									color: '#fff',
+									fontSize: 30.22
+								},
+								formatter: name => {
+									let num = ''
+									if (name == '地市自投资200万以内') {
+										num = this.dispData.totNumOfInvestProjectsIn13Cities.within2Million
+									} else if (name == '地市自投资200万以上') {
+										num = this.dispData.totNumOfInvestProjectsIn13Cities.moreThan2Million
+									} else if (name == '省公司投资200万以内') {
+										num = this.dispData.totNumOfInvestProjectsIn13Cities
+											.provincialCoWithin2Million
+									} else if (name == '省公司投资200万以上') {
+										num = this.dispData.totNumOfInvestProjectsIn13Cities
+											.provincialCoOvr2Million
+									}
+									return `\n${name}\n(共${num}个)`;
+								}
+							},
+							grid: {
+								top: 200,
+								bottom: 150,
+								left: 60,
+								right: 60
+							},
+							xAxis: {
+								data: this.dispData.numOfInvestProjectsIn13Cities.map(item => {
+									return item.city
+								}),
+								inverse: true,
+								axisLabel: {
+									textStyle: {
+										color: "#fff",
+										fontSize: 30.22,
+									},
+									margin: 30,
+									rotate: 45
+								},
+								axisLine: {
+									lineStyle: {
+										color: '#4e5a82' //x轴轴线颜色
+									}
+								},
+								axisTick: {
+									lineStyle: {
+										color: '#4e5a82' //x轴刻度线颜色
+									},
+									length: 10 //x轴刻度线长度
+								},
+							},
+							yAxis: {
+								name: '个',
+								nameTextStyle: {
+									color: "#fff",
+									fontSize: 30.22,
+								},
+								nameGap: 40,
+								splitLine: {
+									lineStyle: {
+										color: ['#4e5a82'] //分割线颜色
+									}
+								},
+								axisLabel: {
+									textStyle: {
+										color: "#fff",
+										fontSize: 30.22,
+									}
+								}
+							},
+							series: [{
+								name: '地市自投资200万以内',
+								type: 'bar',
+								barWidth: 50,
+								emphasis: {
+									focus: 'series',
+									blurScope: 'coordinateSystem'
+								},
+								data: this.dispData.numOfInvestProjectsIn13Cities.map(item => {
+									return item.within2Million
+								})
+							}, {
+								name: '地市自投资200万以上',
+								type: 'bar',
+								barGap: "-100%",
+								barWidth: 50,
+								emphasis: {
+									focus: 'series',
+									blurScope: 'coordinateSystem'
+								},
+								data: this.dispData.numOfInvestProjectsIn13Cities.map(item => {
+									return item.moreThan2Million
+								})
+							}, {
+								name: '省公司投资200万以内',
+								type: 'line',
+								symbolSize: 15,
+								lineStyle: {
+									width: 4
+								},
+								data: this.dispData.numOfInvestProjectsIn13Cities.map(item => {
+									return item.provincialCoWithin2Million
+								})
+							}, {
+								name: '省公司投资200万以上',
+								type: 'line',
+								symbolSize: 15,
+								lineStyle: {
+									width: 4
+								},
+								data: this.dispData.numOfInvestProjectsIn13Cities.map(item => {
+									return item.provincialCoOvr2Million
+								})
+							}]
+						};
+
+						option && myChart.setOption(option);
+
+						var chartDom = document.getElementById('echart4');
+						var myChart = echarts.init(chartDom);
+						var option;
+
+						option = {
+							color: ['#17a7f3', '#8749f4'],
+							tooltip: {},
+							legend: {
+								right: 0,
+								top: 50,
+								itemGap: 50, //图例间隔默认10
+								itemWidth: 50, //图例宽度默认25
+								itemHeight: 20, //图例高度默认14
+								textStyle: {
+									color: '#fff',
+									fontSize: 30.22
+								}
+							},
+							grid: {
+								top: 200,
+								bottom: 150,
+								left: 60,
+								right: 60
+							},
+							xAxis: {
+								data: this.dispData.projectStsInThePast6Months.map(item => {
+									return item.date
+								}),
+								axisLabel: {
+									textStyle: {
+										color: "#fff",
+										fontSize: 30.22,
+									},
+									margin: 30,
+									rotate: 45
+								},
+								axisLine: {
+									lineStyle: {
+										color: '#4e5a82' //x轴轴线颜色
+									}
+								},
+								axisTick: {
+									lineStyle: {
+										color: '#4e5a82' //x轴刻度线颜色
+									},
+									length: 10 //x轴刻度线长度
+								},
+							},
+							yAxis: {
+								name: '个',
+								nameTextStyle: {
+									color: "#fff",
+									fontSize: 30.22,
+								},
+								nameGap: 70,
+								splitLine: {
+									lineStyle: {
+										color: ['#4e5a82'] //分割线颜色
+									}
+								},
+								axisLabel: {
+									textStyle: {
+										color: "#fff",
+										fontSize: 30.22,
+									}
+								},
+							},
+							series: [{
+								name: '项目新建数',
+								type: 'bar',
+								emphasis: {
+									focus: 'series',
+									blurScope: 'coordinateSystem'
+								},
+								data: this.dispData.projectStsInThePast6Months.map(item => {
+									return item.numOfNewProjects
+								})
+							}, {
+								name: '项目完成数',
+								type: 'bar',
+								emphasis: {
+									focus: 'series',
+									blurScope: 'coordinateSystem'
+								},
+								data: this.dispData.projectStsInThePast6Months.map(item => {
+									return item.numOfProjectsCompleted
+								}),
+							}]
+						};
+
+						option && myChart.setOption(option);
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

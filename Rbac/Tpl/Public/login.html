@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<title>南电项目管理系统欢迎您</title>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/login/css/normalize.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/login/css/demo.css" />
+<!--必要样式-->
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/login/css/component.css" />
+<!--[if IE]>
+<script src="js/html5.js"></script>
+<![endif]-->
+
+<SCRIPT src="__PUBLIC__/login/jquery-1.7.2.min.js"></SCRIPT>
+<SCRIPT src="__PUBLIC__/login/jquery.color.js"></SCRIPT>
+
+<script type="text/javascript" src="__PUBLIC__/js/Jquery/JqueryAdapter.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/Ajax/ThinkAjax.js"></script>
+       
+<script type="text/javascript" src="__PUBLIC__/scripts/simpla.jquery.configuration.js"></script>
+<script type="text/javascript" src="__PUBLIC__/scripts/facebox.js"></script>
+<script type="text/javascript" src="__PUBLIC__/scripts/jquery.wysiwyg.js"></script>
+<script type="text/javascript" src="__PUBLIC__/scripts/jquery.datePicker.js"></script>
+<script type="text/javascript" src="__PUBLIC__/scripts/jquery.date.js"></script>
+<load href="__PUBLIC__/js/Form/CheckForm.js" />
+<!-- <load href="__PUBLIC__/js/common.js" /> -->
+<load href="__PUBLIC__/js/Util/ImageLoader.js" />
+
+<script language="JavaScript">
+<!--
+var URL = '__URL__';
+var APP	 =	 '__APP__';
+var PUBLIC = '__PUBLIC__';
+//ThinkAjax.image = [	 '__PUBLIC__/Images/loading2.gif', '__PUBLIC__/Images/ok.gif','__PUBLIC__/Images/update.gif' ]
+ImageLoader.add("__PUBLIC__/Images/bgline.gif","__PUBLIC__/Images/bgcolor.gif","__PUBLIC__/Images/titlebg.gif");
+ImageLoader.startLoad();
+//-->
+</script>
+
+ <script language="JavaScript">
+<!--
+var PUBLIC	 =	 '__PUBLIC__';
+//ThinkAjax.image = [	 '__PUBLIC__/Images/loading2.gif', '__PUBLIC__/Images/ok.gif','__PUBLIC__/Images/update.gif' ]
+ThinkAjax.updateTip	=	'登录中~';
+function loginHandle(data,status){
+if (status==1)
+{
+	//document.getElementById('result').style.display='block';
+	//document.getElementById('result').innerHTML	=	'<span style="color:blue"><img SRC="__PUBLIC__/Images/ok.gif" WIDTH="20" HEIGHT="20" BORDER="0" ALT="" align="absmiddle" > 登陆成功 3 秒后跳转~</span>';
+	document.getElementById('form1').reset();
+	window.location = '/projecttest/Rbac';
+}
+else
+{
+	alert(data);
+	//document.getElementById('result').style.display='block';
+    //document.getElementById("result").innerHTML  = data;
+}
+}
+function keydown(e){
+	var e = e || event;
+	if (e.keyCode==13)
+	{
+	ThinkAjax.sendForm('form1','__URL__/checkLogin/',loginHandle,'result');
+	}
+}
+function fleshVerify(type){ 
+var timenow = new Date().getTime();
+if (type)
+{
+document.getElementById('verifyImg').src= '__URL__/verify/adv/1/'+timenow;
+}else{
+document.getElementById('verifyImg').src= '__URL__/verify/'+timenow;
+}
+
+}
+//-->
+</script>
+<script language="JavaScript">
+function out(){ 
+if((self.frameElement.tagName=="IFRAME")||(self.frameElement.tagName=="FRAME")){
+	// 页面在iframe中时处理
+	 //alert("您的账号已在其他地方登出，请点击确定重新登录");
+	 parent.parent.location.href="__URL__/logout/";
+	}
+}
+</script>
+
+<script language="JavaScript"> 
+function doKeyDown() 
+{ 
+    if ( event.keyCode == 13) 
+    { 
+        document.getElementById("enter").click();
+    } 
+} 
+$(document).ready(function(){
+  setTimeout("fun1()",500);
+});
+
+function fun1()
+{	
+	document.getElementById("xx").value="";
+}
+</script> 
+<!--
+<style>
+	input:-webkit-autofill {
+		-webkit-box-shadow: 0 0 0px 1000px transparent inset ;
+		opacity:0.01;
+		filter:alpha(opacity=50);
+		box-shadow: 0 0 0px 1000px transparent inset !important;
+	}
+</style>
+-->
+</head>
+<body  onload="initload()" onkeydown="doKeyDown()">
+<script language="JavaScript">out();</script>
+		<div class="container demo-1">
+			<div class="content">
+				<div id="large-header" class="large-header">
+					<canvas id="demo-canvas"></canvas>
+					<div class="logo_box">
+						<h3 style="font-size:26px;font-weight:bold;width:450px;margin-left:-57px;letter-spacing:3px">南电项目管理系统</h3>
+						<form action="#" name="f" id="form1" method="post">
+							<div class="input_outer">
+								<span class="u_user"></span>
+								<input name="account" id="xx" class="text" style="color: #FFFFFF !important" type="text" placeholder="请输入账户">
+							</div>
+							<div class="input_outer">
+								<span class="us_uer"></span>
+								<input name="password" class="text" style="color: #FFFFFF !important; position:absolute; z-index:100;" type="password" placeholder="请输入密码" autocomplete="off">
+							</div>
+							<div class="mb2"><a class="act-but submit" href="javascript:;" style="color: #FFFFFF" onclick="ThinkAjax.sendForm('form1','__URL__/checkLogin/',loginHandle,'result');" id="enter">登录</a></div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div><!-- /container -->
+		<script src="__PUBLIC__/login/js/TweenLite.min.js"></script>
+		<script src="__PUBLIC__/login/js/EasePack.min.js"></script>
+		<script src="__PUBLIC__/login/js/rAF.js"></script>
+		<script src="__PUBLIC__/login/js/demo-1.js"></script>
+	</body>
+</html>

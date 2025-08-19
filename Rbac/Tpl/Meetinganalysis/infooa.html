@@ -1,0 +1,77 @@
+<include file="Public:iframe_top_dialog" />
+
+<div class="pageContent">
+	
+	<form method="post" action="__URL__/update" class="pageForm required-validate" onsubmit="return validateCallback(this, dialogAjaxDone)">
+		<div class="pageFormContent" layoutH="58">
+
+			<div class="form-group col-sm-10">
+				<label style="width:120px">所属项目：</label>
+				<input readonly="true" type="text" class="form-control" style="width:400px" value="{$vo.plm}">
+			</div>
+			<div class="form-group col-sm-10">
+				<label style="width:120px">会议名称：</label>
+				<input readonly="true" type="text" class="form-control" style="width:400px" value="{$vo.title}">
+			</div>
+			
+			<div class="form-group col-sm-10">
+				<label style="width:120px">重要程度：</label>
+				<input readonly="true" type="text" class="form-control" style="width:400px" value="{$vo.important}">
+				
+			</div>
+			<div class="form-group col-sm-10">
+				<label style="width:120px">委派时间：</label>
+				<input readonly="true" type="text" class="form-control" style="width:400px" value="<?php 
+						if($vo['create_time']!=0)
+						echo date('Y年m月d日 H:i:s',$vo['create_time']);?>">
+			</div>
+			<div class="form-group col-sm-10">
+				<label style="width:120px">完成期限：</label>
+				<input readonly="true" type="text" class="form-control" style="width:400px" value="{$vo.timebegin} ~ {$vo.timeend}">
+			</div>
+			<div class="form-group col-sm-10">
+				<label style="width:120px">是否完成：</label>
+				<font style="position:relative;top:4px;float:left">{$vo['status']|workStatus=$vo['id']}&nbsp;</font>
+			</div>
+			<div class="form-group col-sm-10">
+				<label style="width:120px">完成时间：</label>
+				<input readonly="true" type="text" class="form-control" style="width:400px" value="<?php 
+						if($vo['commit_time']!=0)
+						echo date('Y年m月d日 H:i:s',$vo['commit_time']);?>">
+			</div>
+			<div class="form-group col-sm-10">
+				<label style="width:120px">当前责任：</label>
+				<input readonly="true" type="text" class="form-control" style="width:400px" value="{$vo.current}">
+			</div>
+			<div class="form-group col-sm-10">
+				<label style="width:120px">经办人：</label>
+				<input readonly="true" type="text" class="form-control" style="width:400px" value="{$vo.user_id}">
+			</div>
+			<div class="form-group col-sm-10">
+				<label style="width:120px">查看人：</label>
+				<input readonly="true" type="text" class="form-control" style="width:400px" value="{$vo.check}">
+			</div>
+			<div class="form-group col-sm-10">
+				<label style="width:120px">处理意见：</label>
+				<textarea readonly type="text" class="form-control" rows="2" cols="48" style="width:400px">{$vo.view}</textarea>
+			</div>
+			<div class="form-group col-sm-10">
+				<label style="width:120px">会议内容：</label>
+				<textarea readonly type="text" class="form-control" rows="2" cols="48"  style="width:400px">{$vo.content}</textarea>
+			</div>
+			<div class="form-group col-sm-10">
+				<label style="width:120px">会议进程：</label>
+				<textarea readonly type="text" class="form-control" rows="5" cols="48"  style="width:400px">{$vo.process}</textarea>
+			</div>
+			
+			
+		</div>
+		<div>
+			<button type="button" class="btn btn-sm btn-white pull-right m-t-n-xs" data-dismiss="modal" style="margin-left:10px">关闭</button>
+		</div>
+	</form>
+	
+</div>
+
+
+<include file="Public:iframe_bottom_dialog" />
